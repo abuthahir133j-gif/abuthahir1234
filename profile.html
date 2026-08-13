@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile - One Tutor Language Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #1e293b;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .profile-page-container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 960px;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Top Nav Bar */
+        .profile-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 14px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bar-brand img {
+            height: 38px;
+            width: auto;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-back-map {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+            color: #1e1b4b;
+            font-weight: 800;
+            font-size: 14px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(234, 179, 8, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-back-map:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(234, 179, 8, 0.5);
+        }
+
+        .btn-logout {
+            padding: 10px 16px;
+            background: #fef2f2;
+            border: 1.5px solid #fca5a5;
+            color: #dc2626;
+            font-weight: 700;
+            font-size: 13px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
+
+        /* Main Profile Hero Card */
+        .profile-hero-card {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 28px;
+            padding: 36px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .hero-avatar-wrap {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .hero-avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid #facc15;
+            object-fit: cover;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-level-badge {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
+            border: 2px solid #facc15;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 12px;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-info-section {
+            flex: 1;
+        }
+
+        .hero-name {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .hero-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .hero-roll-pill {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            color: #b45309;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .hero-status-pill {
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+            color: #15803d;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .hero-bio {
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-icon {
+            font-size: 34px;
+            width: 54px;
+            height: 54px;
+            background: #f1f5f9;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .card-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        /* Badges & Achievements Section */
+        .section-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e1b4b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 16px;
+        }
+
+        .badge-box {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 16px 12px;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+
+        .badge-box.unlocked {
+            background: linear-gradient(145deg, #fef9c3 0%, #fef08a 100%);
+            border-color: #eab308;
+            box-shadow: 0 4px 14px rgba(234, 179, 8, 0.25);
+        }
+
+        .badge-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .badge-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .badge-status {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        .badge-box.unlocked .badge-status {
+            color: #15803d;
+        }
+
+        /* Settings Section Styling */
+        .settings-header {
+            margin-bottom: 24px;
+        }
+
+        .settings-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-subtitle {
+            font-size: 13px;
+            color: #64748b;
+            margin: 6px 0 0 0;
+            font-weight: 500;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .settings-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .settings-subcard {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 22px 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease;
+        }
+
+        .settings-subcard:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .settings-subcard-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .settings-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+        }
+
+        .settings-select:focus, .settings-select:hover {
+            border-color: #a855f7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+        }
+
+        /* Checkbox list */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .settings-checkbox {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .custom-checkbox {
+            height: 20px;
+            width: 20px;
+            background-color: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item:hover .custom-checkbox {
+            border-color: #a855f7;
+        }
+
+        .settings-checkbox:checked ~ .custom-checkbox {
+            background-color: #a855f7;
+            border-color: #a855f7;
+        }
+
+        .settings-checkbox:checked ~ .custom-checkbox::after {
+            content: "✓";
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .settings-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 18px 0 14px 0;
+        }
+
+        .settings-notif-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            padding: 4px 0;
+            transition: all 0.2s ease;
+        }
+
+        .settings-notif-link:hover .notif-link-text {
+            color: #7c3aed;
+        }
+
+        .notif-link-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notif-link-text {
+            font-size: 14px;
+            font-weight: 800;
+            color: #a855f7;
+        }
+
+        .notif-link-badge {
+            background: #ef4444;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .notif-link-arrow {
+            font-size: 18px;
+            font-weight: 800;
+            color: #a855f7;
+        }
+
+        /* About App Box */
+        .about-app-box {
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            padding: 16px 20px;
+        }
+
+        .about-app-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .about-app-meta {
+            font-size: 12.5px;
+            color: #64748b;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .about-app-meta:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Help & Support Buttons */
+        .support-btns-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 16px;
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .support-btn:hover {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #0f172a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .profile-hero-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-meta-row {
+                justify-content: center;
+            }
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-page-container">
+        <!-- Top Bar Navigation -->
+        <div class="profile-top-bar">
+            <div class="bar-brand">
+                <img src="Login/logo.png" alt="One Tutor Logo">
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="btn-back-map">
+                    <span>🗺️ Back to Map</span>
+                </a>
+                <button id="profile-logout-btn" class="btn-logout">Logout</button>
+            </div>
+        </div>
+
+        <!-- Student Hero Profile Card -->
+        <div class="profile-hero-card">
+            <div class="hero-avatar-wrap">
+                <img src="student_avatar.png" alt="Student Avatar" class="hero-avatar-img" id="profile-avatar-img">
+                <div class="hero-level-badge" id="hero-level-tag">Level 1</div>
+            </div>
+            <div class="hero-info-section">
+                <div class="hero-name-row">
+                    <h1 class="hero-name">Student Learner</h1>
+                    <button id="change-avatar-btn" class="btn-change-avatar">🎨 Change Avatar</button>
+                </div>
+                <div class="hero-meta-row">
+                    <span class="hero-roll-pill">Roll No: <strong id="roll-number-tag">STU-101</strong></span>
+                    <span class="hero-status-pill">● Active Student</span>
+                </div>
+                <p class="hero-bio">Exploring the interactive Language Lab world map. Mastering vocabulary, sentence building, and speaking skills!</p>
+            </div>
+        </div>
+
+        <!-- Progress Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="card-icon">⭐</div>
+                <div class="card-details">
+                    <div class="card-label">Total Stars</div>
+                    <div class="card-value" id="stat-stars">0 / 90</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-icon">🗺️</div>
+                <div class="card-details">
+                    <div class="card-label">Unlocked Levels</div>
+                    <div class="card-value" id="stat-levels">1 / 30</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-icon">🔥</div>
+                <div class="card-details">
+                    <div class="card-label">Learning Streak</div>
+                    <div class="card-value">5 Days</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-icon">🎯</div>
+                <div class="card-details">
+                    <div class="card-label">Accuracy Rate</div>
+                    <div class="card-value">94%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Badges & Achievements -->
+        <div class="section-card">
+            <h2 class="section-title">🏆 Realm Badges & Achievements</h2>
+            <div class="badges-grid">
+                <div class="badge-box unlocked">
+                    <div class="badge-icon">🌲</div>
+                    <div class="badge-name">Forest Realm</div>
+                    <div class="badge-status">Unlocked</div>
+                </div>
+                <div class="badge-box" id="badge-glacier">
+                    <div class="badge-icon">❄️</div>
+                    <div class="badge-name">Frozen Glacier</div>
+                    <div class="badge-status" id="status-glacier">Locked</div>
+                </div>
+                <div class="badge-box" id="badge-blossom">
+                    <div class="badge-icon">🌸</div>
+                    <div class="badge-name">Blossom Haven</div>
+                    <div class="badge-status" id="status-blossom">Locked</div>
+                </div>
+                <div class="badge-box" id="badge-bay">
+                    <div class="badge-icon">🌊</div>
+                    <div class="badge-name">Tropical Bay</div>
+                    <div class="badge-status" id="status-bay">Locked</div>
+                </div>
+                <div class="badge-box" id="badge-sands">
+                    <div class="badge-icon">🏜️</div>
+                    <div class="badge-name">Golden Sands</div>
+                    <div class="badge-status" id="status-sands">Locked</div>
+                </div>
+                <div class="badge-box" id="badge-peak">
+                    <div class="badge-icon">🌋</div>
+                    <div class="badge-name">Dragon Peak</div>
+                    <div class="badge-status" id="status-peak">Locked</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="section-card settings-section">
+            <div class="settings-header">
+                <h2 class="settings-title">⚙️ Settings</h2>
+                <p class="settings-subtitle">Customize application language, notification preferences, view system information, and access support.</p>
+            </div>
+
+            <div class="settings-grid">
+                <!-- Left Column -->
+                <div class="settings-col">
+                    <!-- Language Card -->
+                    <div class="settings-subcard">
+                        <h3 class="settings-subcard-title">🌏 Language</h3>
+                        <label class="settings-label" for="app-language-select">Application Interface Language</label>
+                        <select id="app-language-select" class="settings-select">
+                            <option value="en-US" selected>English (US)</option>
+                            <option value="en-UK">English (UK)</option>
+                            <option value="es">Spanish (Español)</option>
+                            <option value="fr">French (Français)</option>
+                            <option value="de">German (Deutsch)</option>
+                            <option value="hi">Hindi (हिंदी)</option>
+                        </select>
+                    </div>
+
+                    <!-- Notification Preferences Card -->
+                    <div class="settings-subcard">
+                        <h3 class="settings-subcard-title">🔔 Notification Preferences</h3>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <span>Assignment &amp; Homework Reminders</span>
+                                <input type="checkbox" checked class="settings-checkbox">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-item">
+                                <span>Daily Scheduled Lesson Notifications</span>
+                                <input type="checkbox" checked class="settings-checkbox">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-item">
+                                <span>Quiz &amp; Exam Alerts</span>
+                                <input type="checkbox" checked class="settings-checkbox">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-item">
+                                <span>System Announcements</span>
+                                <input type="checkbox" checked class="settings-checkbox">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                        <div class="settings-divider"></div>
+                        <a href="notifications.html" class="settings-notif-link">
+                            <div class="notif-link-left">
+                                <span class="notif-link-text">View All Notifications</span>
+                                <span class="notif-link-badge" id="settings-notif-count">10</span>
+                            </div>
+                            <span class="notif-link-arrow">&rsaquo;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="settings-col">
+                    <!-- About Application Card -->
+                    <div class="settings-subcard">
+                        <h3 class="settings-subcard-title">ℹ️ About Application</h3>
+                        <div class="about-app-box">
+                            <div class="about-app-name">Language Lab Student Desktop</div>
+                            <div class="about-app-meta">Version v2.4.1 Enterprise</div>
+                            <div class="about-app-meta">Build #8842-PROD</div>
+                            <div class="about-app-meta">Electron Desktop Engine</div>
+                            <div class="about-app-meta">Auto Sync Active</div>
+                        </div>
+                    </div>
+
+                    <!-- Help & Support Card -->
+                    <div class="settings-subcard">
+                        <h3 class="settings-subcard-title">💬 Help &amp; Support</h3>
+                        <div class="support-btns-row">
+                            <button class="support-btn">
+                                <span>❓ Help Center</span>
+                            </button>
+                            <button class="support-btn">
+                                <span>✉️ Contact Support</span>
+                            </button>
+                            <button class="support-btn">
+                                <span>🐞 Report Bug</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Avatar Modal Popup -->
+    <div id="avatar-modal" class="modal-overlay hidden">
+        <div class="modal-card avatar-modal-card">
+            <button id="avatar-modal-close" class="close-btn">&times;</button>
+            <div class="avatar-modal-header">
+                <h2>🎨 Choose Your Student Avatar</h2>
+                <p>Select your favorite character avatar below</p>
+            </div>
+
+            <!-- Gender Tab Selection -->
+            <div class="avatar-tabs">
+                <button id="tab-boys" class="avatar-tab active">
+                    <span>👦 Boys </span>
+                </button>
+                <button id="tab-girls" class="avatar-tab tab-girl">
+                    <span>👧 Girls </span>
+                </button>
+            </div>
+
+            <!-- Avatar Grid Container -->
+            <div id="avatars-grid" class="avatars-grid"></div>
+
+            <!-- Modal Action Buttons -->
+            <div class="avatar-modal-actions">
+                <button id="cancel-avatar-btn" class="btn-secondary">Cancel</button>
+                <button id="save-avatar-btn" class="btn-primary">✓ Select & Save Avatar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avatar Picker Styles -->
+    <style>
+        .hero-name-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 6px;
+        }
+
+        .btn-change-avatar {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 13px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-change-avatar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(168, 85, 247, 0.45);
+        }
+
+        .avatar-modal-card {
+            max-width: 600px;
+            width: 92%;
+            padding: 28px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            border: 2px solid #e2e8f0;
+        }
+
+        .avatar-modal-header {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .avatar-modal-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .avatar-modal-header p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .avatar-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .avatar-tab {
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 800;
+            border: 2px solid #e2e8f0;
+            background: #f8fafc;
+            color: #64748b;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .avatar-tab.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-color: #3b82f6;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .avatar-tab.tab-girl.active {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            border-color: #ec4899;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        }
+
+        .avatars-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            max-height: 270px;
+            overflow-y: auto;
+            padding: 6px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 540px) {
+            .avatars-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .avatar-option-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 6px;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .avatar-option-card:hover {
+            transform: translateY(-2px);
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .avatar-option-card.selected {
+            border-color: #eab308;
+            background: #fefce8;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.35);
+            transform: scale(1.05);
+        }
+
+        .avatar-option-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-option-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1e293b;
+            text-align: center;
+        }
+
+        .avatar-modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+    </style>
+
+    <!-- Script to Load Live Profile Data & Manage Avatars -->
+    <script>
+        const AUTH_STORAGE_KEY = "language_lab_authenticated";
+        const STUDENT_KEY = "language_lab_student_id_v1";
+        const PROGRESS_KEY = "language_lab_level_progress_v1";
+        const AVATAR_KEY = "language_lab_selected_avatar_v1";
+
+        // 14 Boys & 14 Girls Avatar Presets from avatars/ folder
+        const AVATARS_BOYS = [
+            { id: 'b1', url: 'avatars/boy1.png' },
+            { id: 'b2', url: 'avatars/boy2.png' },
+            { id: 'b3', url: 'avatars/boy3.png' },
+            { id: 'b4', url: 'avatars/boy4.png' },
+            { id: 'b5', url: 'avatars/boy5.png' },
+            { id: 'b6', url: 'avatars/boy6.png' },
+            { id: 'b7', url: 'avatars/boy7.png' },
+            { id: 'b8', url: 'avatars/boy8.png' },
+            { id: 'b9', url: 'avatars/boy9.png' },
+            { id: 'b10', url: 'avatars/boy10.png' },
+            { id: 'b11', url: 'avatars/boy11.png' },
+            { id: 'b12', url: 'avatars/boy12.png' },
+            { id: 'b13', url: 'avatars/boy13.png' },
+            { id: 'b14', url: 'avatars/boy14.png' }
+        ];
+
+        const AVATARS_GIRLS = [
+            { id: 'g1', url: 'avatars/girl1.png' },
+            { id: 'g2', url: 'avatars/girl2.png' },
+            { id: 'g3', url: 'avatars/girl3.png' },
+            { id: 'g4', url: 'avatars/girl4.png' },
+            { id: 'g5', url: 'avatars/girl5.png' },
+            { id: 'g6', url: 'avatars/girl6.png' },
+            { id: 'g7', url: 'avatars/girl7.png' },
+            { id: 'g8', url: 'avatars/girl8.png' },
+            { id: 'g9', url: 'avatars/girl9.png' },
+            { id: 'g10', url: 'avatars/girl10.png' },
+            { id: 'g11', url: 'avatars/girl11.png' },
+            { id: 'g12', url: 'avatars/girl12.png' },
+            { id: 'g13', url: 'avatars/girl13.png' },
+            { id: 'g14', url: 'avatars/girl14.png' }
+        ];
+
+        let selectedAvatarUrl = localStorage.getItem(AVATAR_KEY) || 'student_avatar.png';
+        let currentTabGender = 'boys';
+        let tempSelectedUrl = selectedAvatarUrl;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
+            const savedStudent = localStorage.getItem(STUDENT_KEY);
+
+            if (!isAuthenticated || !savedStudent) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            document.getElementById("roll-number-tag").innerText = savedStudent.trim();
+
+            // Load initial avatar
+            const savedAvatar = localStorage.getItem(AVATAR_KEY);
+            if (savedAvatar) {
+                selectedAvatarUrl = savedAvatar;
+                tempSelectedUrl = savedAvatar;
+                document.getElementById("profile-avatar-img").src = savedAvatar;
+            }
+
+            // Load progress
+            try {
+                const savedProgress = localStorage.getItem(PROGRESS_KEY);
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    const unlockedLevel = progress.unlockedLevel || 1;
+                    
+                    let totalStars = 0;
+                    if (progress.stars) {
+                        Object.values(progress.stars).forEach(s => totalStars += s);
+                    }
+
+                    document.getElementById("hero-level-tag").innerText = `Level ${unlockedLevel}`;
+                    document.getElementById("stat-levels").innerText = `${unlockedLevel} / 30`;
+                    document.getElementById("stat-stars").innerText = `${totalStars} / 90`;
+
+                    if (unlockedLevel >= 7) unlockBadge("badge-glacier", "status-glacier");
+                    if (unlockedLevel >= 11) unlockBadge("badge-blossom", "status-blossom");
+                    if (unlockedLevel >= 16) unlockBadge("badge-bay", "status-bay");
+                    if (unlockedLevel >= 21) unlockBadge("badge-sands", "status-sands");
+                    if (unlockedLevel >= 26) unlockBadge("badge-peak", "status-peak");
+                }
+            } catch (e) {
+                console.error("Error loading progress:", e);
+            }
+
+            // Load Notifications Badge Count
+            try {
+                const storedNotifs = localStorage.getItem("language_lab_notifications_v1");
+                if (storedNotifs) {
+                    const notifs = JSON.parse(storedNotifs);
+                    const unreadCount = notifs.filter(n => n.unread).length;
+                    const badgeEl = document.getElementById("settings-notif-count");
+                    if (badgeEl) badgeEl.innerText = unreadCount;
+                }
+            } catch (e) {}
+
+            // Setup Change Avatar Modal Controls
+            setupAvatarPicker();
+
+            // Logout
+            document.getElementById("profile-logout-btn").addEventListener("click", () => {
+                localStorage.removeItem(AUTH_STORAGE_KEY);
+                localStorage.removeItem(STUDENT_KEY);
+                window.location.href = "login.html";
+            });
+        });
+
+        function unlockBadge(boxId, statusId) {
+            const box = document.getElementById(boxId);
+            const status = document.getElementById(statusId);
+            if (box) box.classList.add("unlocked");
+            if (status) status.innerText = "Unlocked";
+        }
+
+        // Avatar Picker Engine
+        function setupAvatarPicker() {
+            const avatarModal = document.getElementById("avatar-modal");
+            const changeBtn = document.getElementById("change-avatar-btn");
+            const closeBtn = document.getElementById("avatar-modal-close");
+            const cancelBtn = document.getElementById("cancel-avatar-btn");
+            const saveBtn = document.getElementById("save-avatar-btn");
+            const tabBoys = document.getElementById("tab-boys");
+            const tabGirls = document.getElementById("tab-girls");
+
+            changeBtn.addEventListener("click", () => {
+                tempSelectedUrl = selectedAvatarUrl;
+                avatarModal.classList.remove("hidden");
+                renderAvatarsGrid();
+            });
+
+            closeBtn.addEventListener("click", () => avatarModal.classList.add("hidden"));
+            cancelBtn.addEventListener("click", () => avatarModal.classList.add("hidden"));
+
+            tabBoys.addEventListener("click", () => {
+                currentTabGender = 'boys';
+                tabBoys.classList.add("active");
+                tabGirls.classList.remove("active");
+                renderAvatarsGrid();
+            });
+
+            tabGirls.addEventListener("click", () => {
+                currentTabGender = 'girls';
+                tabGirls.classList.add("active");
+                tabBoys.classList.remove("active");
+                renderAvatarsGrid();
+            });
+
+            saveBtn.addEventListener("click", () => {
+                selectedAvatarUrl = tempSelectedUrl;
+                localStorage.setItem(AVATAR_KEY, selectedAvatarUrl);
+                document.getElementById("profile-avatar-img").src = selectedAvatarUrl;
+                avatarModal.classList.add("hidden");
+            });
+        }
+
+        function renderAvatarsGrid() {
+            const grid = document.getElementById("avatars-grid");
+            grid.innerHTML = "";
+            const list = currentTabGender === 'boys' ? AVATARS_BOYS : AVATARS_GIRLS;
+
+            list.forEach(item => {
+                const card = document.createElement("div");
+                card.className = `avatar-option-card ${tempSelectedUrl === item.url ? 'selected' : ''}`;
+                card.innerHTML = `
+                    <img src="${item.url}" alt="Avatar" class="avatar-option-img">
+                `;
+
+                card.addEventListener("click", () => {
+                    tempSelectedUrl = item.url;
+                    document.querySelectorAll(".avatar-option-card").forEach(c => c.classList.remove("selected"));
+                    card.classList.add("selected");
+                });
+
+                grid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

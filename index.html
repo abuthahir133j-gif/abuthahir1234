@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Lab - World Level Map</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top Right Game HUD (Notifications, Profile & AI Helper) -->
+    <div id="top-right-hud" class="top-right-hud">
+        <!-- 1. Notification Bell Button -->
+        <div class="hud-btn-group">
+            <button id="hud-notif-btn" class="hud-circle-btn notif-btn" title="Notifications">
+                <svg class="notif-bell-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+                </svg>
+                <span class="notif-badge">12</span>
+            </button>
+            <div id="notif-dropdown" class="hud-dropdown-panel notif-dropdown hidden">
+                <div class="dropdown-header">
+                    <span>🔔 Notifications</span>
+                    <span class="badge-count">12 New</span>
+                </div>
+                <div class="dropdown-body">
+                    <div class="notif-item unread">
+                        <div class="notif-icon">🎯</div>
+                        <div class="notif-info">
+                            <div class="notif-title">Daily Challenge Active</div>
+                            <div class="notif-desc">Complete Level 2 with 3 stars to earn 50 XP!</div>
+                        </div>
+                        <button class="notif-delete-btn" title="Delete notification" onclick="deleteHUDNotification(event, 'n1')">✕</button>
+                    </div>
+                    <div class="notif-item unread">
+                        <div class="notif-icon">🏆</div>
+                        <div class="notif-info">
+                            <div class="notif-title">Badge Unlocked</div>
+                            <div class="notif-desc">Unlocked "Forest Realm Master" achievement!</div>
+                        </div>
+                        <button class="notif-delete-btn" title="Delete notification" onclick="deleteHUDNotification(event, 'n2')">✕</button>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-icon">⭐</div>
+                        <div class="notif-info">
+                            <div class="notif-title">Zone 1 Leaderboard</div>
+                            <div class="notif-desc">You are currently ranked #1 in your group.</div>
+                        </div>
+                        <button class="notif-delete-btn" title="Delete notification" onclick="deleteHUDNotification(event, 'n3')">✕</button>
+                    </div>
+                </div>
+                <div class="dropdown-footer">
+                    <a href="notifications.html" id="view-all-notif-btn" class="view-all-notif-btn">View All Notifications &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Profile Avatar Button with Wooden Dropdown Pill -->
+        <div class="hud-btn-group profile-group">
+            <button id="hud-profile-btn" class="hud-profile-trigger" title="Student Profile & Settings">
+                <div class="profile-avatar-circle">
+                    <img src="student_avatar.png" alt="Student Avatar" class="profile-avatar-img">
+                </div>
+                <div class="profile-wood-pill">
+                    <svg class="chevron-down-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div id="profile-dropdown" class="hud-dropdown-panel profile-dropdown options-dropdown hidden">
+                <a href="profile.html" class="profile-menu-item">
+                    <span class="menu-item-icon">👤</span>
+                    <span class="menu-item-label">Profile</span>
+                </a>
+                <div class="menu-divider"></div>
+                <button id="hud-logout-btn" class="profile-menu-item logout-item">
+                    <span class="menu-item-icon">🚪</span>
+                    <span class="menu-item-label">Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. AI Helper Mascot Button -->
+        <div class="hud-btn-group">
+            <button id="hud-robot-btn" class="hud-circle-btn robot-btn" title="One Tutor AI Assistant">
+                <img src="robot_avatar.png" alt="AI Helper" class="robot-avatar-img">
+            </button>
+            <div id="robot-dropdown" class="hud-dropdown-panel robot-dropdown hidden">
+                <div class="dropdown-header robot-header">
+                    <span>🤖 One Tutor Companion</span>
+                </div>
+                <div class="dropdown-body robot-body">
+                    <p>Hello! Welcome to your Language Lab world map. Click on any unlocked level node to start your lessons!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game">
+        <img id="map-bg" src="Dashboard/Background/season_world_map_4k_hd_v2.png" alt="World Map">
+
+        <!-- Forest Realm Falling Leaves Animation Container (Zone 1 Tree Portion) -->
+        <div id="forest-falling-leaves"></div>
+
+        <!-- Frozen Glacier Falling Snow Animation Container (Zone 2 Snowy Realm Portion) -->
+        <div id="glacier-falling-snow"></div>
+
+        <!-- Blossom Haven Falling Petals Animation Container (Zone 3 Cherry Blossom Portion) -->
+        <div id="blossom-falling-petals"></div>
+
+        <!-- Tropical Bay Waterfall Flow Animation Container (Zone 4 Waterfall Portion) -->
+        <div id="tropical-waterfall-flow"></div>
+
+        <!-- Golden Sands Desert Sandstorm Animation Container (Zone 5 Desert Portion) -->
+        <div id="desert-sand-effects"></div>
+
+        <!-- Dragon Peak Lava Flow, Smoke & Embers Animation Container (Zone 6 Volcanic Portion) -->
+        <div id="dragon-lava-effects"></div>
+
+        <!-- Dynamic Level Node Buttons Container -->
+        <div id="level-nodes"></div>
+    </div>
+
+    <!-- Level Start / Details Modal -->
+    <div id="level-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button id="modal-close" class="close-btn">&times;</button>
+            <div id="modal-zone-badge" class="zone-badge">Zone 1 • Forest Realm</div>
+            <h2 id="modal-level-title">Level 1: Gate of Beginnings</h2>
+            <p id="modal-level-desc">Master basic vocabulary and unlock the path through the ancient forest.</p>
+
+            <div class="modal-stars-container">
+                <div class="stars-label">Level Stars:</div>
+                <div class="modal-stars" id="modal-stars-display">
+                    <span class="star star-empty">★</span>
+                    <span class="star star-empty">★</span>
+                    <span class="star star-empty">★</span>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button id="play-level-btn" class="btn-primary">▶ Start Level</button>
+                <button id="sim-complete-btn" class="btn-secondary">⭐ Complete Level (Simulate 3 Stars)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Profile Details Modal -->
+    <div id="profile-details-modal" class="modal-overlay hidden">
+        <div class="modal-card profile-modal-card">
+            <button id="profile-modal-close" class="close-btn">&times;</button>
+            <div class="profile-modal-header">
+                <img src="student_avatar.png" alt="Student Profile" class="modal-avatar-img">
+                <div class="modal-user-meta">
+                    <h2 class="modal-user-name">Student Profile</h2>
+                    <p class="modal-roll-no">Roll Number: <span id="modal-student-id-tag" class="highlight-gold">STU-101</span></p>
+                </div>
+            </div>
+            
+            <div class="profile-modal-body">
+                <div class="profile-stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <div class="stat-title">Total Stars Earned</div>
+                        <div class="stat-value" id="modal-stat-stars">0 ⭐</div>
+                    </div>
+                </div>
+                
+                <div class="profile-stat-card">
+                    <div class="stat-icon">🗺️</div>
+                    <div class="stat-info">
+                        <div class="stat-title">Current Level Unlocked</div>
+                        <div class="stat-value" id="modal-stat-level">Level 1</div>
+                    </div>
+                </div>
+
+                <div class="profile-stat-card">
+                    <div class="stat-icon">🎓</div>
+                    <div class="stat-info">
+                        <div class="stat-title">Language Lab Status</div>
+                        <div class="stat-value text-green">Active Learner</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

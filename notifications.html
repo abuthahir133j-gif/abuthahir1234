@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Center - One Tutor Language Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #1e293b;
+            position: relative;
+            overflow-y: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        .notif-page-container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 960px;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Top Nav Bar (Light Theme) */
+        .notif-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 14px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bar-brand-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e1b4b;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .nav-btn-secondary {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        .nav-btn-secondary:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+            transform: translateY(-1px);
+        }
+
+        .btn-back-map {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+            color: #1e1b4b;
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(234, 179, 8, 0.3);
+        }
+
+        .btn-back-map:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(234, 179, 8, 0.4);
+            color: #1e1b4b;
+        }
+
+        .nav-btn-danger {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1.5px solid #fca5a5;
+        }
+
+        .nav-btn-danger:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
+
+        .student-profile-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            padding: 5px 14px 5px 5px;
+            border-radius: 30px;
+        }
+
+        .chip-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ca8a04;
+        }
+
+        .chip-roll {
+            font-size: 13px;
+            font-weight: 800;
+            color: #b45309;
+        }
+
+        /* Hero Panel (Light Theme Gradient) */
+        .hero-banner {
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            border-radius: 28px;
+            padding: 32px 36px;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: #ffffff;
+        }
+
+        .hero-title-group h1 {
+            margin: 0 0 6px 0;
+            font-size: 28px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+        }
+
+        .hero-title-group p {
+            margin: 0;
+            font-size: 14px;
+            color: #e0e7ff;
+        }
+
+        .hero-stats {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 18px;
+            padding: 14px 22px;
+            text-align: center;
+        }
+
+        .stat-badge .stat-num {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fef08a;
+            display: block;
+        }
+
+        .stat-badge .stat-lbl {
+            font-size: 11px;
+            color: #e0e7ff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Controls & Filter Bar (Light Theme) */
+        .controls-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 14px 22px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+        }
+
+        .filter-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-tab:hover {
+            color: #0f172a;
+            background: #e2e8f0;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            color: #ffffff;
+            border-color: #3730a3;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+        }
+
+        .batch-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            color: #334155;
+        }
+
+        .action-btn:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .action-btn-clear {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        .action-btn-clear:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
+
+        /* Notifications Feed (Light Theme) */
+        .notif-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+
+        .notif-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .notif-card:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .notif-card.unread {
+            background: #f5f3ff;
+            border-color: #c7d2fe;
+        }
+
+        .notif-card.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: #4f46e5;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .notif-content-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .notif-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .notif-card.unread .notif-icon-box {
+            background: #e0e7ff;
+            border-color: #c7d2fe;
+        }
+
+        .notif-body {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .notif-header-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notif-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .notif-cat-badge {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cat-challenge { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+        .cat-achievement { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+        .cat-system { background: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; }
+
+        .notif-card-desc {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.45;
+        }
+
+        .notif-time {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .notif-actions-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-action-btn {
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-mark-read {
+            background: #f1f5f9;
+            color: #334155;
+            border-color: #cbd5e1;
+        }
+
+        .btn-mark-read:hover {
+            background: #4f46e5;
+            color: #ffffff;
+            border-color: #4f46e5;
+        }
+
+        .btn-delete {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
+
+        /* Empty State */
+        .empty-notif-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: #ffffff;
+            border: 2px dashed #cbd5e1;
+            border-radius: 24px;
+            color: #64748b;
+        }
+
+        .empty-notif-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .empty-notif-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .empty-notif-desc {
+            font-size: 13px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notif-page-container">
+        <!-- Top Nav Bar -->
+        <div class="notif-top-bar">
+            <div class="bar-brand">
+                <span class="bar-brand-title">One Tutor Language Lab</span>
+            </div>
+            <div class="nav-actions">
+                <div class="student-profile-chip">
+                    <img id="nav-student-avatar" src="student_avatar.png" alt="Avatar" class="chip-avatar">
+                    <span id="nav-student-roll" class="chip-roll">Student</span>
+                </div>
+                <a href="index.html" class="nav-btn btn-back-map">
+                    <span>&larr; Map</span>
+                </a>
+                <a href="profile.html" class="nav-btn nav-btn-secondary">
+                    <span>Profile</span>
+                </a>
+                <button id="notif-logout-btn" class="nav-btn nav-btn-danger">
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hero Header -->
+        <div class="hero-banner">
+            <div class="hero-title-group">
+                <h1>🔔 Notification Center</h1>
+                <p>Track your challenges, unlock rewards, and view system updates.</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-badge">
+                    <span id="stat-total-count" class="stat-num">8</span>
+                    <span class="stat-lbl">Total</span>
+                </div>
+                <div class="stat-badge">
+                    <span id="stat-unread-count" class="stat-num">5</span>
+                    <span class="stat-lbl">Unread</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Control Bar -->
+        <div class="controls-bar">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Notifications</button>
+                <button class="filter-tab" data-filter="unread">Unread</button>
+                <button class="filter-tab" data-filter="challenge">Challenges</button>
+                <button class="filter-tab" data-filter="achievement">Achievements</button>
+                <button class="filter-tab" data-filter="system">System</button>
+            </div>
+            <div class="batch-actions">
+                <button id="mark-all-read-btn" class="action-btn">✓ Mark All Read</button>
+                <button id="clear-all-btn" class="action-btn action-btn-clear">🗑 Clear All</button>
+            </div>
+        </div>
+
+        <!-- Notifications Feed List -->
+        <div id="notif-feed-list" class="notif-list-container">
+            <!-- Populated dynamically by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const AUTH_STORAGE_KEY = "language_lab_authenticated";
+        const STUDENT_KEY = "language_lab_student_id_v1";
+        const AVATAR_KEY = "language_lab_selected_avatar_v1";
+        const NOTIF_STORAGE_KEY = "language_lab_notifications_v1";
+
+        // Initial Seed Notifications
+        const INITIAL_NOTIFICATIONS = [
+            {
+                id: 'n1',
+                icon: '🎯',
+                title: 'Daily Challenge Active',
+                desc: 'Complete Level 2 with 3 stars to earn 50 bonus XP!',
+                category: 'challenge',
+                time: '10 mins ago',
+                unread: true
+            },
+            {
+                id: 'n2',
+                icon: '🏆',
+                title: 'Badge Unlocked',
+                desc: 'Unlocked "Forest Realm Master" achievement badge!',
+                category: 'achievement',
+                time: '1 hour ago',
+                unread: true
+            },
+            {
+                id: 'n3',
+                icon: '⭐',
+                title: 'Zone 1 Leaderboard Update',
+                desc: 'You are currently ranked #1 among all language learners today.',
+                category: 'system',
+                time: '2 hours ago',
+                unread: true
+            },
+            {
+                id: 'n4',
+                icon: '🚀',
+                title: 'New Level Realm Available',
+                desc: 'Glacier Peak levels 7 to 10 have been unlocked for your group.',
+                category: 'system',
+                time: '5 hours ago',
+                unread: true
+            },
+            {
+                id: 'n5',
+                icon: '🎁',
+                title: 'Daily Streak Bonus',
+                desc: 'Claim your 100 XP login streak reward in your profile panel.',
+                category: 'challenge',
+                time: 'Yesterday',
+                unread: true
+            },
+            {
+                id: 'n6',
+                icon: '📚',
+                title: 'Vocabulary Quest Mastered',
+                desc: 'You successfully remembered 10 target vocabulary items in Level 3.',
+                category: 'challenge',
+                time: '2 days ago',
+                unread: false
+            },
+            {
+                id: 'n7',
+                icon: '🎖️',
+                title: 'Glacier Pioneer Badge',
+                desc: 'Reached Level 7 milestone in Language Lab adventure!',
+                category: 'achievement',
+                time: '3 days ago',
+                unread: false
+            },
+            {
+                id: 'n8',
+                icon: '⚡',
+                title: 'Speed Runner Reward',
+                desc: 'Completed Level 1 under 60 seconds with perfect accuracy.',
+                category: 'achievement',
+                time: '4 days ago',
+                unread: false
+            }
+        ];
+
+        let notifications = [];
+        let currentFilter = 'all';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Check auth
+            const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
+            const savedStudent = localStorage.getItem(STUDENT_KEY);
+
+            if (!isAuthenticated || !savedStudent) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            document.getElementById("nav-student-roll").innerText = savedStudent.trim();
+
+            const savedAvatar = localStorage.getItem(AVATAR_KEY);
+            if (savedAvatar) {
+                document.getElementById("nav-student-avatar").src = savedAvatar;
+            }
+
+            // Load notifications from localStorage or use initial seed
+            const storedNotifs = localStorage.getItem(NOTIF_STORAGE_KEY);
+            if (storedNotifs) {
+                try {
+                    notifications = JSON.parse(storedNotifs);
+                } catch (e) {
+                    notifications = [...INITIAL_NOTIFICATIONS];
+                }
+            } else {
+                notifications = [...INITIAL_NOTIFICATIONS];
+                saveNotifications();
+            }
+
+            // Setup Event Handlers
+            setupFilterTabs();
+            setupBatchActions();
+            renderNotifications();
+
+            // Logout listener
+            document.getElementById("notif-logout-btn").addEventListener("click", () => {
+                localStorage.removeItem(AUTH_STORAGE_KEY);
+                localStorage.removeItem(STUDENT_KEY);
+                window.location.href = "login.html";
+            });
+        });
+
+        function saveNotifications() {
+            localStorage.setItem(NOTIF_STORAGE_KEY, JSON.stringify(notifications));
+        }
+
+        function updateStats() {
+            const total = notifications.length;
+            const unread = notifications.filter(n => n.unread).length;
+
+            document.getElementById("stat-total-count").innerText = total;
+            document.getElementById("stat-unread-count").innerText = unread;
+        }
+
+        function setupFilterTabs() {
+            const tabs = document.querySelectorAll(".filter-tab");
+            tabs.forEach(tab => {
+                tab.addEventListener("click", () => {
+                    tabs.forEach(t => t.classList.remove("active"));
+                    tab.classList.add("active");
+                    currentFilter = tab.getAttribute("data-filter");
+                    renderNotifications();
+                });
+            });
+        }
+
+        function setupBatchActions() {
+            document.getElementById("mark-all-read-btn").addEventListener("click", () => {
+                notifications.forEach(n => n.unread = false);
+                saveNotifications();
+                renderNotifications();
+            });
+
+            document.getElementById("clear-all-btn").addEventListener("click", () => {
+                notifications = [];
+                saveNotifications();
+                renderNotifications();
+            });
+        }
+
+        function renderNotifications() {
+            updateStats();
+            const feedList = document.getElementById("notif-feed-list");
+            feedList.innerHTML = "";
+
+            let filtered = notifications;
+            if (currentFilter === 'unread') {
+                filtered = notifications.filter(n => n.unread);
+            } else if (currentFilter !== 'all') {
+                filtered = notifications.filter(n => n.category === currentFilter);
+            }
+
+            if (filtered.length === 0) {
+                feedList.innerHTML = `
+                    <div class="empty-notif-state">
+                        <div class="empty-notif-icon">🔔</div>
+                        <div class="empty-notif-title">No notifications found</div>
+                        <div class="empty-notif-desc">You are all caught up! Check back later for new challenges & achievements.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement("div");
+                card.className = `notif-card ${item.unread ? 'unread' : ''}`;
+
+                let catLabel = 'System';
+                if (item.category === 'challenge') catLabel = 'Challenge';
+                if (item.category === 'achievement') catLabel = 'Achievement';
+
+                card.innerHTML = `
+                    <div class="notif-content-left">
+                        <div class="notif-icon-box">${item.icon}</div>
+                        <div class="notif-body">
+                            <div class="notif-header-row">
+                                <span class="notif-card-title">${item.title}</span>
+                                <span class="notif-cat-badge cat-${item.category}">${catLabel}</span>
+                            </div>
+                            <div class="notif-card-desc">${item.desc}</div>
+                            <div class="notif-time">${item.time}</div>
+                        </div>
+                    </div>
+                    <div class="notif-actions-right">
+                        ${item.unread ? `<button class="card-action-btn btn-mark-read" onclick="toggleReadStatus('${item.id}')">Mark Read</button>` : ''}
+                        <button class="card-action-btn btn-delete" onclick="deleteNotification('${item.id}')">✕</button>
+                    </div>
+                `;
+
+                feedList.appendChild(card);
+            });
+        }
+
+        function toggleReadStatus(id) {
+            const notif = notifications.find(n => n.id === id);
+            if (notif) {
+                notif.unread = false;
+                saveNotifications();
+                renderNotifications();
+            }
+        }
+
+        function deleteNotification(id) {
+            notifications = notifications.filter(n => n.id !== id);
+            saveNotifications();
+            renderNotifications();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1472 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: #08090d;
+    color: #ffffff;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    user-select: none;
+    /* Hide scrollbar for Firefox, IE, Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Chrome, Safari, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Floating Top HUD Bar */
+#hud-bar {
+    position: fixed;
+    top: 14px;
+    left: 18px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(13, 16, 27, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 30px;
+    padding: 8px 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.hud-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.hud-item.title {
+    color: #ffe89e;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding-right: 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hud-item .icon {
+    font-size: 16px;
+}
+
+.hud-item .label {
+    color: #a0aec0;
+}
+
+.hud-item .value {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.progress-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-track {
+    width: 100px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff9e00, #70e000);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.stars-box {
+    padding-left: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffd700;
+}
+
+.hud-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.hud-btn:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+/* Game World Canvas Container */
+#game {
+    position: relative;
+    height: 100vh;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#map-bg {
+    height: 100vh;
+    width: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Dynamic Level Node Buttons Container */
+#level-nodes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.level-node-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto;
+}
+
+/* ==========================================
+   3D Golden Game Coin Level Button Styling
+   ========================================== */
+
+.level-node {
+    position: relative;
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: clamp(24px, 4.0vh, 36px);
+    color: #ffffff;
+    text-shadow: 0 2px 0 #b34700, 0 3px 5px rgba(0, 0, 0, 0.75);
+    outline: none;
+    user-select: none;
+    transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.18s ease;
+    
+    /* 1. Large round golden coin appearance with 2. bright yellow rim & 3. orange/dark-gold inner shading */
+    background: radial-gradient(circle at 35% 25%, #fff7ad 0%, #ffca28 35%, #ff9800 70%, #d45100 100%);
+    border: 5px solid #ffe600;
+    
+    /* 4. Strong 3D depth thickness, 8. soft ground drop shadow & 9. inner bevel rim */
+    box-shadow: 
+        0 7px 0 #b35900,                             /* 3D bottom depth thickness */
+        0 14px 24px rgba(0, 0, 0, 0.65),             /* Soft ground drop shadow */
+        inset 0 4px 4px rgba(255, 255, 255, 0.85),   /* Inner top bevel highlight */
+        inset 0 -5px 6px rgba(153, 51, 0, 0.65);     /* Inner bottom shading */
+}
+
+/* 5. Glossy highlight on upper-left area */
+.level-node::after {
+    content: '';
+    position: absolute;
+    top: 8%;
+    left: 14%;
+    width: 48%;
+    height: 38%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 50% 50% 40% 40%;
+    pointer-events: none;
+}
+
+/* 6. Centered level number / content */
+.level-node span {
+    position: relative;
+    z-index: 2;
+    line-height: 1;
+}
+
+/* 11. Hover State: Lift and Scale Coin */
+.level-node:hover:not(.locked) {
+    transform: translateY(-5px) scale(1.12);
+    box-shadow: 
+        0 10px 0 #b35900,
+        0 18px 28px rgba(0, 0, 0, 0.7),
+        inset 0 4px 5px rgba(255, 255, 255, 0.95),
+        inset 0 -5px 7px rgba(153, 51, 0, 0.7);
+    z-index: 20;
+}
+
+/* 12. Click Active State: Press Down Button Effect */
+.level-node:active:not(.locked) {
+    transform: translateY(2px) scale(1.02);
+    box-shadow: 
+        0 3px 0 #b35900,
+        0 5px 12px rgba(0, 0, 0, 0.6),
+        inset 0 2px 2px rgba(255, 255, 255, 0.7),
+        inset 0 -3px 4px rgba(153, 51, 0, 0.6);
+}
+
+/* Current / Unlocked Level Prominence */
+.level-node.current {
+    border-color: #ffffff;
+    box-shadow: 
+        0 7px 0 #b35900,
+        0 0 24px rgba(255, 230, 0, 0.95),
+        0 14px 24px rgba(0, 0, 0, 0.65),
+        inset 0 4px 4px rgba(255, 255, 255, 0.95),
+        inset 0 -5px 6px rgba(153, 51, 0, 0.65);
+}
+
+/* Custom Image Level Node Button */
+.level-node.has-custom-img {
+    width: 100px !important;
+    height: 100px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
+    overflow: visible;
+    position: relative;
+    display: block !important;
+}
+
+.level-node.has-custom-img::before,
+.level-node.has-custom-img::after {
+    display: none !important; /* Hide CSS pseudo-elements so PNG image displays cleanly */
+}
+
+.level-node-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.7));
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.lock-icon.locked-img-icon {
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    font-size: clamp(16px, 2.8vh, 26px);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+    pointer-events: none;
+}
+
+.level-locked-content .lock-icon {
+    font-size: clamp(13px, 2.2vh, 19px);
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.9));
+    line-height: 1;
+}
+
+/* Locked Level Style */
+.level-node.locked {
+    cursor: not-allowed;
+    filter: brightness(0.9);
+}
+
+.level-node.locked.shake {
+ 
+    animation: shake-locked 0.4s ease-in-out;
+}
+
+@keyframes shake-locked {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-2px); }
+    80% { transform: translateX(2px); }
+}
+
+/* Star Rating Pill under Node */
+.node-stars {
+    margin-top: 2px;
+    background: rgba(10, 14, 23, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    padding: 1px 5px;
+    display: flex;
+    gap: 1px;
+    font-size: 9px;
+    color: #ffd700;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.node-stars .star-off {
+    color: #475569;
+}
+
+/* Level Details Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(4, 6, 12, 0.75);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-card {
+    position: relative;
+    width: 90%;
+    max-width: 420px;
+    background: linear-gradient(145deg, rgba(20, 26, 44, 0.95), rgba(12, 16, 28, 0.98));
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    border-radius: 24px;
+    padding: 30px 26px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.15);
+    text-align: center;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.hidden .modal-card {
+    transform: scale(0.85);
+}
+
+.close-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #94a3b8;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: #ffffff;
+}
+
+.zone-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 20px;
+    color: #ffd700;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.modal-card h2 {
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+
+.modal-card p {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.modal-stars-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.stars-label {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-stars {
+    display: flex;
+    gap: 8px;
+    font-size: 26px;
+}
+
+.modal-stars .star {
+    color: #ffd700;
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+}
+
+.modal-stars .star-empty {
+    color: #334155;
+    filter: none;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff9e00 0%, #ff6000 100%);
+    border: none;
+    color: #ffffff;
+    padding: 13px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 158, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 158, 0, 0.6);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #cbd5e1;
+    padding: 11px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: #22c55e;
+    color: #ffffff;
+}
+
+/* ==========================================
+   Top Right Game HUD (3D Circular Badges & Dropdowns)
+   ========================================== */
+.top-right-hud {
+    position: fixed;
+    top: 18px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.hud-btn-group {
+    position: relative;
+}
+
+/* General Circular HUD Button Styling */
+.hud-circle-btn {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3.5px solid #ffda6a;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 3px 5px rgba(255, 255, 255, 0.6), 0 0 0 2px #b87314;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    outline: none;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+}
+
+.hud-circle-btn:hover {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.6), inset 0 3px 5px rgba(255, 255, 255, 0.8), 0 0 0 2px #f59e0b, 0 0 14px rgba(255, 215, 0, 0.5);
+}
+
+.hud-circle-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+/* 1. Notification Bell Button */
+.notif-btn {
+    background: linear-gradient(145deg, #5b21b6 0%, #3b0764 100%);
+    color: #ffffff;
+}
+
+.notif-bell-icon {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.notif-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 12px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    min-width: 20px;
+    text-align: center;
+}
+
+/* 2. Profile Trigger with Wooden Dropdown Pill */
+.hud-profile-trigger {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.profile-avatar-circle {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 3.5px solid #ffda6a;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 3px 5px rgba(255, 255, 255, 0.6), 0 0 0 2px #b87314;
+    overflow: hidden;
+    z-index: 2;
+    background: #fef08a;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-wood-pill {
+    margin-left: -16px;
+    height: 38px;
+    background: linear-gradient(180deg, #c67c33 0%, #8c4c15 100%);
+    border: 2.5px solid #5a300a;
+    border-radius: 0 18px 18px 0;
+    padding: 0 10px 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1.5px 0 rgba(255, 255, 255, 0.25);
+    transition: all 0.2s ease;
+}
+
+.chevron-down-icon {
+    width: 16px;
+    height: 16px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+    transition: transform 0.25s ease;
+}
+
+.hud-profile-trigger:hover .profile-avatar-circle {
+    transform: scale(1.05);
+    border-color: #ffe082;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.6), inset 0 3px 5px rgba(255, 255, 255, 0.8), 0 0 0 2px #f59e0b, 0 0 14px rgba(255, 215, 0, 0.5);
+}
+
+.hud-profile-trigger:hover .profile-wood-pill {
+    background: linear-gradient(180deg, #d98d41 0%, #9e561a 100%);
+}
+
+.hud-profile-trigger.active .chevron-down-icon {
+    transform: rotate(180deg);
+}
+
+/* 3. AI Helper Robot Button */
+.robot-btn {
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.robot-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dropdown Panels */
+.hud-dropdown-panel {
+    position: absolute;
+    top: 72px;
+    right: 0;
+    width: 310px;
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid #eab308;
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(234, 179, 8, 0.2);
+    overflow: hidden;
+    z-index: 1050;
+    transform-origin: top right;
+    animation: dropdownPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hud-dropdown-panel.hidden {
+    display: none !important;
+}
+
+@keyframes dropdownPop {
+    0% { opacity: 0; transform: scale(0.85) translateY(-10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Dropdown Content Styles */
+.dropdown-header {
+    background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%);
+    padding: 12px 16px;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fef08a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.badge-count {
+    background: #ef4444;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.dropdown-body {
+    padding: 12px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.notif-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 34px 10px 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.25s ease;
+}
+
+.notif-info {
+    flex: 1;
+}
+
+.notif-delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #94a3b8;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.notif-delete-btn:hover {
+    background: #ef4444;
+    color: #ffffff;
+    transform: scale(1.15);
+}
+
+.notif-item.unread {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(129, 140, 248, 0.4);
+}
+
+.notif-icon {
+    font-size: 20px;
+}
+
+.notif-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.notif-desc {
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.3;
+}
+
+.dropdown-footer {
+    padding: 10px 14px;
+    background: rgba(15, 23, 42, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.view-all-notif-btn {
+    width: 100%;
+    padding: 9px 14px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.view-all-notif-btn:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    color: #ffffff;
+}
+
+/* Profile Dropdown Specifics */
+.profile-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(30, 27, 75, 0.8), rgba(49, 46, 129, 0.8));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #facc15;
+    object-fit: cover;
+}
+
+.panel-name {
+    font-weight: 800;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.panel-roll-wrap {
+    font-size: 12px;
+    color: #cbd5e1;
+    margin-top: 2px;
+}
+
+.hud-roll-tag {
+    color: #facc15;
+    font-weight: 700;
+}
+
+.profile-panel-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 14px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+}
+
+.stat-val {
+    font-weight: 800;
+    font-size: 16px;
+    color: #facc15;
+}
+
+.stat-lbl {
+    font-size: 10px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* Profile Options Dropdown (2 Clean Menu Items) */
+.options-dropdown {
+    width: 180px;
+    padding: 8px;
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid #eab308;
+    border-radius: 16px;
+}
+
+.profile-menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.profile-menu-item:hover {
+    background: rgba(250, 204, 21, 0.18);
+    color: #facc15;
+}
+
+.profile-menu-item.logout-item:hover {
+    background: rgba(239, 68, 68, 0.22);
+    color: #f87171;
+}
+
+.menu-item-icon {
+    font-size: 18px;
+}
+
+.menu-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 4px 0;
+}
+
+/* Profile Details Modal Styling */
+.profile-modal-card {
+    max-width: 440px;
+    padding: 30px;
+    background: linear-gradient(150deg, rgba(16, 22, 38, 0.96), rgba(8, 12, 22, 0.98));
+    border: 2px solid rgba(250, 204, 21, 0.6);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(250, 204, 21, 0.25);
+    border-radius: 24px;
+}
+
+.profile-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.modal-avatar-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #facc15;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.modal-user-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.modal-roll-no {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.highlight-gold {
+    color: #facc15;
+    font-weight: 700;
+}
+
+.profile-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+}
+
+.stat-icon {
+    font-size: 26px;
+}
+
+.stat-title {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.text-green {
+    color: #4ade80;
+}
+
+/* Student Login Card */
+.login-card {
+    max-width: 440px;
+    padding: 36px 30px;
+    background: linear-gradient(150deg, rgba(16, 22, 38, 0.96), rgba(8, 12, 22, 0.98));
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 215, 0, 0.2);
+}
+
+.login-header .login-icon {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-header h2 {
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.input-group label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffd700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.login-btn:disabled {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #64748b !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ==========================================
+   Zone 1 Forest Realm - Falling Green Leaves Animation
+   ========================================== */
+#forest-falling-leaves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%; /* Scoped strictly to the Forest Realm Tree portion */
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.falling-leaf {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: leafFall linear infinite;
+}
+
+.falling-leaf svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes leafFall {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) rotate(0deg) scale(0.7);
+    }
+    12% {
+        opacity: 0.85;
+    }
+    30% {
+        transform: translateY(22vh) translateX(18px) rotate(60deg) scale(1);
+    }
+    55% {
+        transform: translateY(48vh) translateX(-16px) rotate(140deg) scale(0.9);
+    }
+    80% {
+        transform: translateY(72vh) translateX(22px) rotate(230deg) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(92vh) translateX(-12px) rotate(320deg) scale(0.65);
+    }
+}
+
+/* ==========================================
+   Zone 2 Frozen Glacier - Falling Snow Animation
+   ========================================== */
+#glacier-falling-snow {
+    position: absolute;
+    top: 0;
+    left: 21%;
+    width: 14.5%; /* Scoped strictly to the Frozen Glacier snowy portion */
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.falling-snowflake {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    color: #ffffff;
+    will-change: transform, opacity;
+    animation: snowFall linear infinite;
+}
+
+.falling-snowflake.dot {
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.95), 0 0 12px rgba(186, 230, 253, 0.85);
+}
+
+.falling-snowflake.icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 6px rgba(186, 230, 253, 0.9));
+}
+
+@keyframes snowFall {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) translateX(0) rotate(0deg) scale(0.6);
+    }
+    15% {
+        opacity: 0.95;
+    }
+    40% {
+        transform: translateY(35vh) translateX(14px) rotate(90deg) scale(1);
+    }
+    70% {
+        transform: translateY(65vh) translateX(-10px) rotate(180deg) scale(0.9);
+        opacity: 0.85;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(96vh) translateX(8px) rotate(270deg) scale(0.5);
+    }
+}
+
+/* ==========================================
+   Zone 3 Blossom Haven - Falling Petals Animation
+   ========================================== */
+#blossom-falling-petals {
+    position: absolute;
+    top: 0;
+    left: 35.5%;
+    width: 18.5%; /* Scoped strictly to Blossom Haven cherry blossom realm */
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.falling-petal {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: petalFall linear infinite;
+}
+
+.falling-petal svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 5px rgba(219, 39, 119, 0.35));
+}
+
+@keyframes petalFall {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px) translateX(0) rotate(0deg) rotateY(0deg) scale(0.7);
+    }
+    15% {
+        opacity: 0.9;
+    }
+    35% {
+        transform: translateY(28vh) translateX(22px) rotate(70deg) rotateY(120deg) scale(1);
+    }
+    60% {
+        transform: translateY(55vh) translateX(-18px) rotate(160deg) rotateY(240deg) scale(0.9);
+    }
+    85% {
+        transform: translateY(80vh) translateX(20px) rotate(250deg) rotateY(360deg) scale(0.95);
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(96vh) translateX(-10px) rotate(330deg) scale(0.6);
+    }
+}
+
+/* ==========================================
+   Zone 4 Tropical Bay - Waterfall & Water Flow Animation
+   ========================================== */
+#tropical-waterfall-flow {
+    position: absolute;
+    top: 0;
+    left: 54%;
+    width: 13.5%; /* Scoped strictly to Tropical Bay waterfall & lagoon region */
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.waterfall-streak {
+    position: absolute;
+    width: 3px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(224, 242, 254, 0.95), rgba(56, 189, 248, 0.85), rgba(255, 255, 255, 0));
+    border-radius: 3px;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: waterfallFlow linear infinite;
+    filter: drop-shadow(0 0 5px rgba(186, 230, 253, 0.9));
+}
+
+@keyframes waterfallFlow {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scaleY(0.7);
+    }
+    20% {
+        opacity: 0.95;
+    }
+    75% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(125px) scaleY(1.15);
+    }
+}
+
+.water-mist {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(186, 230, 253, 0.5) 50%, rgba(56, 189, 248, 0) 100%);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: mistFloat ease-in-out infinite;
+}
+
+@keyframes mistFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.6);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-18px) scale(1.35);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-35px) scale(1.85);
+    }
+}
+
+.water-sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 8px #ffffff, 0 0 16px #38bdf8;
+    opacity: 0;
+    animation: waterSparkle ease-in-out infinite;
+}
+
+@keyframes waterSparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.2);
+    }
+}
+
+/* ==========================================
+   Zone 6 Dragon Peak - Volcanic Smoke & Embers Animation
+   ========================================== */
+#dragon-lava-effects {
+    position: absolute;
+    top: 0;
+    left: 82%;
+    width: 18%; /* Scoped strictly to Dragon Peak Volcanic Realm */
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.lava-smoke {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(50, 20, 20, 0.75) 0%, rgba(255, 87, 34, 0.3) 45%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    filter: blur(4px);
+    will-change: transform, opacity;
+    animation: volcanicSmoke ease-out infinite;
+}
+
+@keyframes volcanicSmoke {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.6) rotate(0deg);
+    }
+    25% {
+        opacity: 0.7;
+    }
+    75% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-165px) scale(2.4) rotate(45deg);
+    }
+}
+
+.lava-ember {
+    position: absolute;
+    border-radius: 50%;
+    background: #ff7043;
+    box-shadow: 0 0 6px #ff3d00, 0 0 12px #ffc107;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: emberRise ease-in infinite;
+}
+
+@keyframes emberRise {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) scale(0.5);
+    }
+    20% {
+        opacity: 0.95;
+    }
+    80% {
+        opacity: 0.85;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-220px) translateX(25px) scale(1.3);
+    }
+}
+
+/* ==========================================
+   Zone 5 Golden Sands - Desert Sandstorm & Heat Animation
+   ========================================== */
+#desert-sand-effects {
+    position: absolute;
+    top: 0;
+    left: 67.5%;
+    width: 14.5%; /* Scoped strictly to Golden Sands Desert Realm */
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.sand-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fde047 0%, #eab308 60%, rgba(202, 138, 4, 0.4) 100%);
+    box-shadow: 0 0 4px rgba(250, 204, 21, 0.7);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: sandDrift linear infinite;
+}
+
+@keyframes sandDrift {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) scale(0.6);
+    }
+    15% {
+        opacity: 0.85;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(120px) translateX(90px) scale(1.1);
+    }
+}
+
+.sand-whisp {
+    position: absolute;
+    height: 3px;
+    border-radius: 10px;
+    background: linear-gradient(to right, rgba(254, 240, 138, 0), rgba(234, 179, 8, 0.65), rgba(254, 240, 138, 0));
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: sandWhispFloat ease-in-out infinite;
+    filter: blur(1px);
+}
+
+@keyframes sandWhispFloat {
+    0% {
+        opacity: 0;
+        transform: translateX(-40px) translateY(0) scaleX(0.5);
+    }
+    20% {
+        opacity: 0.75;
+    }
+    80% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(110px) translateY(45px) scaleX(1.4);
+    }
+}
+
+.heat-shimmer {
+    position: absolute;
+    border-radius: 50%;
+    background: #fef08a;
+    box-shadow: 0 0 6px #fde047, 0 0 12px #ca8a04;
+    opacity: 0;
+    animation: heatShimmerPulse ease-in-out infinite;
+}
+
+@keyframes heatShimmerPulse {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    50% {
+        opacity: 0.85;
+        transform: scale(1.25);
+    }
+}
