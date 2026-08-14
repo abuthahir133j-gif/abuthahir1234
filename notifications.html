@@ -526,8 +526,18 @@
     <script>
         const AUTH_STORAGE_KEY = "language_lab_authenticated";
         const STUDENT_KEY = "language_lab_student_id_v1";
+        const LAST_LOGIN_DATE_KEY = "language_lab_last_login_date_v1";
+        const APP_SESSION_KEY = "language_lab_app_session_v1";
         const AVATAR_KEY = "language_lab_selected_avatar_v1";
         const NOTIF_STORAGE_KEY = "language_lab_notifications_v1";
+
+        function getTodayDateString() {
+            const d = new Date();
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
 
         // Initial Seed Notifications
         const INITIAL_NOTIFICATIONS = [
@@ -535,7 +545,7 @@
                 id: 'n1',
                 icon: '🎯',
                 title: 'Daily Challenge Active',
-                desc: 'Complete Level 2 with 3 stars to earn 50 bonus XP!',
+                desc: 'Complete Level 2 with 1 star to earn 50 bonus XP!',
                 category: 'challenge',
                 time: '10 mins ago',
                 unread: true
@@ -612,8 +622,13 @@
             // Check auth
             const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
             const savedStudent = localStorage.getItem(STUDENT_KEY);
+            const lastLoginDate = localStorage.getItem(LAST_LOGIN_DATE_KEY);
+            const isAppSessionActive = sessionStorage.getItem(APP_SESSION_KEY) === "active";
+            const today = getTodayDateString();
 
-            if (!isAuthenticated || !savedStudent) {
+            if (!isAuthenticated || !savedStudent || !isAppSessionActive || lastLoginDate !== today) {
+                localStorage.removeItem(AUTH_STORAGE_KEY);
+                sessionStorage.removeItem(APP_SESSION_KEY);
                 window.location.href = "login.html";
                 return;
             }
@@ -646,7 +661,7 @@
             // Logout listener
             document.getElementById("notif-logout-btn").addEventListener("click", () => {
                 localStorage.removeItem(AUTH_STORAGE_KEY);
-                localStorage.removeItem(STUDENT_KEY);
+                sessionStorage.removeItem(APP_SESSION_KEY);
                 window.location.href = "login.html";
             });
         });

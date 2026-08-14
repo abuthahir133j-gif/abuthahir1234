@@ -9,44 +9,50 @@ const LEVEL_NODES = [
     { id: 3, zone: 1, zoneName: "Forest Realm", title: "Waterfall Crossing", desc: "Cross the wooden bridge over the rushing forest waterfall.", x: 12, y: 60, img: "Level/level 3.png" },
     { id: 4, zone: 1, zoneName: "Forest Realm", title: "Ancient Tree Sanctuary", desc: "Discover hidden words beneath the great ancient tree.", x: 15.9, y: 53, img: "Level/level 4.png" },
     { id: 5, zone: 1, zoneName: "Forest Realm", title: "Forest Village Outpost", desc: "Interact with villagers to learn foundational phrases.", x: 17.5, y: 40, img: "Level/level 5.png" },
-    { id: 6, zone: 1, zoneName: "Forest Realm", title: "Emerald Archway", desc: "Unlock the magical archway leading toward the snowy peaks.", x: 20.6, y: 38, img: "Level/level 6.png" },
+    { id: 6, zone: 1, zoneName: "Forest Realm", title: "Forest Village Outpost", desc: "Interact with villagers to learn foundational phrases.", x: 9.5, y: 28, img: "Level/goldboss.png" },
+    { id: 7, zone: 1, zoneName: "Forest Realm", title: "Emerald Archway", desc: "Unlock the magical archway leading toward the snowy peaks.", x: 20.6, y: 38, img: "Level/level 6.png" },
+    
     
 
     // Zone 2: Frozen Glacier (Levels 7-10)
-    { id: 7, zone: 2, zoneName: "Frozen Glacier", title: "Frostbite Bridge", desc: "Cross the icy stone bridge into the snowbound kingdom.", x: 23.5, y: 45.5, img: "Level/level 7.png" },
-    { id: 8, zone: 2, zoneName: "Frozen Glacier", title: "Crystal Cavern", desc: "Explore glowing blue ice crystals and master new terms.", x: 26.3, y: 56, img: "Level/level 8.png" },
-    { id: 9, zone: 2, zoneName: "Frozen Glacier", title: "Snowy Village Plaza", desc: "Solve challenges in the heart of the snow village.", x: 28.0, y: 70, img: "Level/level 9.png" },
-    { id: 10, zone: 2, zoneName: "Frozen Glacier", title: "Ice Citadel Gate", desc: "Conquer the frozen gate to reach the cherry blossom valley.", x: 31, y: 79, img: "Level/level 10.png" },
-// { id: 10, zone: 2, zoneName: "Frozen Glacier", title: "Ice Citadel Gate", desc: "Conquer the frozen gate to reach the cherry blossom valley.", x: 30.5, y: 62, img: "Level/iceboss.png" },
+    { id: 8, zone: 2, zoneName: "Frozen Glacier", title: "Frostbite Bridge", desc: "Cross the icy stone bridge into the snowbound kingdom.", x: 23.5, y: 45.5, img: "Level/level 7.png" },
+    { id: 9, zone: 2, zoneName: "Frozen Glacier", title: "Crystal Cavern", desc: "Explore glowing blue ice crystals and master new terms.", x: 26.3, y: 56, img: "Level/level 8.png" },
+    { id: 10, zone: 2, zoneName: "Frozen Glacier", title: "Snowy Village Plaza", desc: "Solve challenges in the heart of the snow village.", x: 28.0, y: 70, img: "Level/level 9.png" },
+    { id: 11, zone: 2, zoneName: "Frozen Glacier", title: "Ice Citadel Gate", desc: "Conquer the frozen gate to reach the cherry blossom valley.", x: 31, y: 79, img: "Level/level 10.png" },
+{ id: 12, zone: 2, zoneName: "Frozen Glacier", title: "Ice Citadel Gate", desc: "Conquer the frozen gate to reach the cherry blossom valley.", x: 30.7, y: 30, img: "Level/iceboss.png" },
 
     // Zone 3: Blossom Haven (Levels 11-15)
-    { id: 11, zone: 3, zoneName: "Blossom Haven", title: "Blossom Pathway", desc: "Walk through pink petals along the winding spring road.", x: 37, y: 87, img: "Level/level 11.png" },
-    { id: 12, zone: 3, zoneName: "Blossom Haven", title: "Windmill Fields", desc: "Solve grammar puzzles near the turning windmills.", x: 42.2, y: 80.2, img: "Level/level 12.png" },
-    { id: 13, zone: 3, zoneName: "Blossom Haven", title: "Spring Palace Gardens", desc: "Gather flower tokens in the royal palace gardens.", x: 44.9, y: 65, img: "Level/level 13.png" },
-    { id: 14, zone: 3, zoneName: "Blossom Haven", title: "Floating Island Vista", desc: "Look out over the valley from the enchanted floral cliff.", x: 48.6, y: 60, img: "Level/level 14.png" },
-    { id: 15, zone: 3, zoneName: "Blossom Haven", title: "Portal of Renewal", desc: "Unlock the glowing floral portal into tropical waters.", x: 52, y: 49.5, img: "Level/level 15.png" },
+    { id: 13, zone: 3, zoneName: "Blossom Haven", title: "Blossom Pathway", desc: "Walk through pink petals along the winding spring road.", x: 37, y: 87, img: "Level/level 11.png" },
+    { id: 14, zone: 3, zoneName: "Blossom Haven", title: "Windmill Fields", desc: "Solve grammar puzzles near the turning windmills.", x: 42.2, y: 80.2, img: "Level/level 12.png" },
+    { id: 15, zone: 3, zoneName: "Blossom Haven", title: "Spring Palace Gardens", desc: "Gather flower tokens in the royal palace gardens.", x: 44.9, y: 65, img: "Level/level 13.png" },
+    { id: 16, zone: 3, zoneName: "Blossom Haven", title: "Floating Island Vista", desc: "Look out over the valley from the enchanted floral cliff.", x: 48.6, y: 60, img: "Level/level 14.png" },
+    { id: 17, zone: 3, zoneName: "Blossom Haven", title: "Portal of Renewal", desc: "Unlock the glowing floral portal into tropical waters.", x: 52, y: 49.5, img: "Level/level 15.png" },
+     { id: 18, zone: 3, zoneName: "Blossom Haven", title: "Portal of Renewal", desc: "Unlock the glowing floral portal into tropical waters.", x: 49.5, y: 35, img: "Level/springboss.png" },
 
     // Zone 4: Tropical Bay (Levels 16-20)
-    { id: 16, zone: 4, zoneName: "Tropical Bay", title: "Azure Shoreline", desc: "Land on sunny shores and begin water-themed exercises.", x: 55.5, y: 33, img: "Level/level 16.png" },
-    { id: 17, zone: 4, zoneName: "Tropical Bay", title: "Waterfall Lagoon", desc: "Dive into vocabulary puzzles around the cascading lagoon.", x: 58.4, y: 50, img: "Level/level 17.png" },
-    { id: 18, zone: 4, zoneName: "Tropical Bay", title: "Sea Temple Ruins", desc: "Unlock ancient ruins submerged in crystal clear ocean water.", x: 61.8, y: 43, img: "Level/level 18.png" },
-    { id: 19, zone: 4, zoneName: "Tropical Bay", title: "Coral Pier", desc: "Master dialogue on the wooden pier connecting island huts.", x: 61.5, y: 58, img: "Level/level 19.png" },
-    { id: 20, zone: 4, zoneName: "Tropical Bay", title: "Desert Canyon Bridge", desc: "Cross the bridge connecting tropical waters to arid sands.", x: 63.8, y: 66.5, img: "Level/level 20.png" },
+    { id: 19, zone: 4, zoneName: "Tropical Bay", title: "Azure Shoreline", desc: "Land on sunny shores and begin water-themed exercises.", x: 55.5, y: 33, img: "Level/level 16.png" },
+    { id: 20, zone: 4, zoneName: "Tropical Bay", title: "Waterfall Lagoon", desc: "Dive into vocabulary puzzles around the cascading lagoon.", x: 58.4, y: 50, img: "Level/level 17.png" },
+    { id: 21, zone: 4, zoneName: "Tropical Bay", title: "Sea Temple Ruins", desc: "Unlock ancient ruins submerged in crystal clear ocean water.", x: 61.8, y: 43, img: "Level/level 18.png" },
+    { id: 22, zone: 4, zoneName: "Tropical Bay", title: "Coral Pier", desc: "Master dialogue on the wooden pier connecting island huts.", x: 61.5, y: 58, img: "Level/level 19.png" },
+    { id: 23, zone: 4, zoneName: "Tropical Bay", title: "Desert Canyon Bridge", desc: "Cross the bridge connecting tropical waters to arid sands.", x: 63.8, y: 66.5, img: "Level/level 20.png" },
+    { id: 24, zone: 4, zoneName: "Tropical Bay", title: "Desert Canyon Bridge", desc: "Cross the bridge connecting tropical waters to arid sands.", x: 63.8, y: 66.5, img: "Level/waterboss.png" },
 
     // Zone 5: Golden Sands (Levels 21-25)
-    { id: 21, zone: 5, zoneName: "Golden Sands", title: "Dune Oasis", desc: "Rest at the desert oasis while solving sentence building tasks.", x: 69.6, y: 74, img: "Level/level 21.png" },
-    { id: 22, zone: 5, zoneName: "Golden Sands", title: "Sunken Pyramid", desc: "Uncover hieroglyphic vocabulary inside the ancient pyramid.", x: 74.8, y: 72, img: "Level/level 22.png" },
-    { id: 23, zone: 5, zoneName: "Golden Sands", title: "Canyon Overlook", desc: "Navigate narrow desert cliff paths high above the canyon floor.", x: 79.2, y: 79, img: "Level/level 23.png" },
-    { id: 24, zone: 5, zoneName: "Golden Sands", title: "Red Rock Pass", desc: "Survive the scorching sun puzzles leading toward lava lands.", x: 79, y: 60, img: "Level/level 24.png" },
-    { id: 25, zone: 5, zoneName: "Golden Sands", title: "Gates of Obsidian", desc: "Unlock the heavy iron gates entering the volcanic realm.", x: 78.5, y: 44, img: "Level/level 25.png" },
+    { id: 25, zone: 5, zoneName: "Golden Sands", title: "Dune Oasis", desc: "Rest at the desert oasis while solving sentence building tasks.", x: 69.6, y: 74, img: "Level/level 21.png" },
+    { id: 26, zone: 5, zoneName: "Golden Sands", title: "Sunken Pyramid", desc: "Uncover hieroglyphic vocabulary inside the ancient pyramid.", x: 74.8, y: 72, img: "Level/level 22.png" },
+    { id: 27, zone: 5, zoneName: "Golden Sands", title: "Canyon Overlook", desc: "Navigate narrow desert cliff paths high above the canyon floor.", x: 79.2, y: 79, img: "Level/level 23.png" },
+    { id: 28, zone: 5, zoneName: "Golden Sands", title: "Red Rock Pass", desc: "Survive the scorching sun puzzles leading toward lava lands.", x: 79, y: 60, img: "Level/level 24.png" },
+    { id: 29, zone: 5, zoneName: "Golden Sands", title: "Gates of Obsidian", desc: "Unlock the heavy iron gates entering the volcanic realm.", x: 78.5, y: 44, img: "Level/level 25.png" },
+        { id: 30, zone: 5, zoneName: "Golden Sands", title: "Gates of Obsidian", desc: "Unlock the heavy iron gates entering the volcanic realm.", x: 75.5, y: 32, img: "Level/desertboss.png" },
+
 
     // Zone 6: Dragon Peak (Levels 26-30)
-    { id: 26, zone: 6, zoneName: "Dragon Peak", title: "Magma River", desc: "Cross stone stepping blocks over flowing rivers of lava.", x: 86.7, y: 48, img: "Level/level 26.png" },
-    { id: 27, zone: 6, zoneName: "Dragon Peak", title: "Brimstone Fortress", desc: "Infiltrate the dark stone fortress built into molten rock.", x: 83.7, y: 72, img: "Level/level 27.png" },
-    { id: 28, zone: 6, zoneName: "Dragon Peak", title: "Inferno Ridge", desc: "Ascend the steep volcanic ridge under glowing ember skies.", x: 89.5, y: 56, img: "Level/level 28.png" },
-    { id: 29, zone: 6, zoneName: "Dragon Peak", title: "Dragon's Staircase", desc: "Climb the winding staircase guarded by fiery gargoyles.", x: 96, y: 53, img: "Level/level 29.png" },
-    { id: 30, zone: 6, zoneName: "Dragon Peak", title: "Dragon Citadel Final Boss", desc: "Face the ultimate language challenge atop Dragon's Citadel!", x: 94.5, y: 40.5, img: "Level/level 30.png" },
-    { id: 31, zone: 6, zoneName: "Dragon Peak", title: "Dragon Citadel Final Boss", desc: "Face the ultimate language challenge atop Dragon's Citadel!", x: 97.5, y: 30.5, img: "Level/lava boss.png" }
+    { id: 31, zone: 6, zoneName: "Dragon Peak", title: "Magma River", desc: "Cross stone stepping blocks over flowing rivers of lava.", x: 86.7, y: 48, img: "Level/level 26.png" },
+    { id: 32, zone: 6, zoneName: "Dragon Peak", title: "Brimstone Fortress", desc: "Infiltrate the dark stone fortress built into molten rock.", x: 83.7, y: 72, img: "Level/level 27.png" },
+    { id: 33, zone: 6, zoneName: "Dragon Peak", title: "Inferno Ridge", desc: "Ascend the steep volcanic ridge under glowing ember skies.", x: 89.5, y: 56, img: "Level/level 28.png" },
+    { id: 34, zone: 6, zoneName: "Dragon Peak", title: "Dragon's Staircase", desc: "Climb the winding staircase guarded by fiery gargoyles.", x: 96, y: 53, img: "Level/level 29.png" },
+    { id: 35, zone: 6, zoneName: "Dragon Peak", title: "Dragon Citadel Final Boss", desc: "Face the ultimate language challenge atop Dragon's Citadel!", x: 94.5, y: 40.5, img: "Level/level 30.png" },
+    { id: 36, zone: 6, zoneName: "Dragon Peak", title: "Dragon Citadel Final Boss", desc: "Face the ultimate language challenge atop Dragon's Citadel!", x: 97.5, y: 30.5, img: "Level/lava boss.png" }
 ];
 
 // App State Management
@@ -64,11 +70,21 @@ let isDragging = false;
 
 const AUTH_STORAGE_KEY = "language_lab_authenticated";
 const STUDENT_KEY = "language_lab_student_id_v1";
+const LAST_LOGIN_DATE_KEY = "language_lab_last_login_date_v1";
+const APP_SESSION_KEY = "language_lab_app_session_v1";
 const NOTIF_STORAGE_KEY = "language_lab_notifications_v1";
 let currentStudentId = "";
 
+function getTodayDateString() {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 const INITIAL_NOTIFICATIONS = [
-    { id: 'n1', icon: '🎯', title: 'Daily Challenge Active', desc: 'Complete Level 2 with 3 stars to earn 50 XP!', category: 'challenge', time: '10 mins ago', unread: true },
+    { id: 'n1', icon: '🎯', title: 'Daily Challenge Active', desc: 'Complete Level 2 with 1 star to earn 50 XP!', category: 'challenge', time: '10 mins ago', unread: true },
     { id: 'n2', icon: '🏆', title: 'Badge Unlocked', desc: 'Unlocked "Forest Realm Master" achievement!', category: 'achievement', time: '1 hour ago', unread: true },
     { id: 'n3', icon: '⭐', title: 'Zone 1 Leaderboard', desc: 'You are currently ranked #1 in your group.', category: 'system', time: '2 hours ago', unread: false }
 ];
@@ -491,14 +507,35 @@ document.addEventListener("DOMContentLoaded", () => {
     
     document.getElementById("play-level-btn")?.addEventListener("click", () => {
         if (activeSelectedLevel) {
-            alert(`🎮 Starting ${activeSelectedLevel.title}!\n\n(Level gameplay engine active!)`);
+            const levelToPlay = activeSelectedLevel;
+            closeModal();
+            if (window.electronAPI?.openEngine) {
+                window.electronAPI.openEngine({
+                    id: levelToPlay.id,
+                    title: levelToPlay.title,
+                    zone: levelToPlay.zone,
+                    zoneName: levelToPlay.zoneName
+                });
+            } else {
+                // Fallback for direct browser preview
+                window.open(`language-lab-engine/dist/index.html?levelId=${levelToPlay.id}&title=${encodeURIComponent(levelToPlay.title)}`, '_blank');
+            }
         }
     });
 
+    if (window.electronAPI?.onLevelCompleted) {
+        window.electronAPI.onLevelCompleted((data) => {
+            if (data && data.levelId) {
+                completeLevel(data.levelId, data.stars || 1);
+            }
+        });
+    }
+
     document.getElementById("sim-complete-btn")?.addEventListener("click", () => {
         if (activeSelectedLevel) {
-            completeLevel(activeSelectedLevel.id, 3);
+            const levelId = activeSelectedLevel.id;
             closeModal();
+            completeLevel(levelId, 1);
         }
     });
 
@@ -512,8 +549,13 @@ document.addEventListener("DOMContentLoaded", () => {
 function initLoginState() {
     const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
     const savedStudent = localStorage.getItem(STUDENT_KEY);
+    const lastLoginDate = localStorage.getItem(LAST_LOGIN_DATE_KEY);
+    const isAppSessionActive = sessionStorage.getItem(APP_SESSION_KEY) === "active";
+    const today = getTodayDateString();
 
-    if (!isAuthenticated || !savedStudent) {
+    if (!isAuthenticated || !savedStudent || !isAppSessionActive || lastLoginDate !== today) {
+        localStorage.removeItem(AUTH_STORAGE_KEY);
+        sessionStorage.removeItem(APP_SESSION_KEY);
         window.location.href = "login.html";
         return;
     }
@@ -603,17 +645,21 @@ function setupHUDDropdowns() {
     // Logout Option Click
     logoutBtn?.addEventListener("click", () => {
         localStorage.removeItem(AUTH_STORAGE_KEY);
-        localStorage.removeItem(STUDENT_KEY);
+        sessionStorage.removeItem(APP_SESSION_KEY);
         window.location.href = "login.html";
     });
 
-    // Automatically show One Tutor Companion message for 2 seconds on initial load / login
-    if (robotDropdown) {
+    // Only show One Tutor Companion message if user just logged in or if user clicks the button
+    const justLoggedIn = sessionStorage.getItem("language_lab_just_logged_in") === "true";
+    if (justLoggedIn && robotDropdown) {
+        sessionStorage.removeItem("language_lab_just_logged_in");
         robotDropdown.classList.remove("hidden");
         autoHideTimer = setTimeout(() => {
             robotDropdown.classList.add("hidden");
             autoHideTimer = null;
         }, 2000);
+    } else if (robotDropdown) {
+        robotDropdown.classList.add("hidden");
     }
 }
 
@@ -708,20 +754,161 @@ function saveProgress() {
     }
 }
 
+// Boss Level Unlocking & Visual Engine
+const BOSS_LEVEL_IDS = [6, 12, 18, 24, 30, 36];
+
+function isBossLevel(levelId) {
+    return BOSS_LEVEL_IDS.includes(Number(levelId));
+}
+
+function getRequiredPrevLevels(bossId) {
+    const id = Number(bossId);
+    return [id - 5, id - 4, id - 3, id - 2, id - 1];
+}
+
+function isLevelUnlocked(levelId) {
+    const id = Number(levelId);
+    if (isBossLevel(id)) {
+        // Boss Level unlocks ONLY if all 5 previous levels are completed
+        const prevLevels = getRequiredPrevLevels(id);
+        const allPrevCompleted = prevLevels.every(prevId => 
+            prevId < userProgress.unlockedLevel || (userProgress.stars[prevId] && userProgress.stars[prevId] > 0)
+        );
+        return allPrevCompleted;
+    }
+    // Normal level unlocks if userProgress.unlockedLevel >= id
+    return userProgress.unlockedLevel >= id;
+}
+
+function showToast(message) {
+    let toast = document.getElementById("game-toast");
+    if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "game-toast";
+        toast.className = "game-toast hidden";
+        document.body.appendChild(toast);
+    }
+    toast.innerText = message;
+    toast.classList.remove("hidden");
+    toast.classList.add("show");
+
+    if (window.toastTimer) clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+        toast.classList.add("hidden");
+    }, 2800);
+}
+
+function triggerBossScreenShake() {
+    const gameContainer = document.getElementById("game") || document.body;
+    gameContainer.classList.remove("boss-shake-effect");
+    void gameContainer.offsetWidth; // force DOM reflow
+    gameContainer.classList.add("boss-shake-effect");
+    setTimeout(() => {
+        gameContainer.classList.remove("boss-shake-effect");
+    }, 650);
+}
+
+function triggerBossUnlockAnimation(bossId = 6) {
+    const bossBtn = document.querySelector(`.boss-level-node[data-level-id="${bossId}"]`);
+    if (bossBtn) {
+        const parentWrapper = bossBtn.closest(".level-node-wrapper");
+        if (parentWrapper) {
+            parentWrapper.classList.remove("emerging-from-hole");
+            void parentWrapper.offsetWidth; // force DOM reflow
+            parentWrapper.classList.add("emerging-from-hole");
+            setTimeout(() => triggerBossScreenShake(), 1250);
+            setTimeout(() => {
+                parentWrapper.classList.remove("emerging-from-hole");
+            }, 2600);
+            scrollToBossLevel(bossId);
+            return;
+        }
+    }
+    window.forceBossEmergeId = Number(bossId);
+    renderLevelNodes();
+    scrollToBossLevel(bossId);
+}
+window.triggerBossUnlockAnimation = triggerBossUnlockAnimation;
+
+function scrollToBossLevel(bossId) {
+    const bossBtn = document.querySelector(`.boss-level-node[data-level-id="${bossId}"]`);
+    if (bossBtn) {
+        const parentWrapper = bossBtn.closest(".level-node-wrapper");
+        if (parentWrapper) {
+            const nodeLeft = parentWrapper.offsetLeft;
+            const screenWidth = window.innerWidth;
+            window.scrollTo({
+                left: Math.max(0, nodeLeft - screenWidth / 2),
+                behavior: "smooth"
+            });
+        }
+    }
+}
+
 // Render Grounded Level Nodes
 function renderLevelNodes() {
     const container = document.getElementById("level-nodes");
     container.innerHTML = "";
 
     LEVEL_NODES.forEach((level) => {
-        const isCompleted = level.id < userProgress.unlockedLevel || userProgress.stars[level.id] > 0;
-        const isCurrent = level.id === userProgress.unlockedLevel;
-        const isLocked = level.id > userProgress.unlockedLevel;
+        const isBoss = isBossLevel(level.id);
+        const unlocked = isLevelUnlocked(level.id);
+        const isCompleted = level.id < userProgress.unlockedLevel || (userProgress.stars[level.id] && userProgress.stars[level.id] > 0);
+        const isCurrent = unlocked && !isCompleted;
+        const isLocked = !unlocked;
+
+        // Hide Boss level completely until all 5 preceding levels are completed
+        if (isBoss && isLocked) {
+            return;
+        }
 
         const wrapper = document.createElement("div");
         wrapper.className = "level-node-wrapper";
+        if (isBoss) wrapper.classList.add("boss-wrapper");
         wrapper.style.left = `${level.x}%`;
         wrapper.style.top = `${level.y}%`;
+
+        // Special Boss Black Hole Void Portal Structure
+        if (isBoss) {
+            const portal = document.createElement("div");
+            portal.className = "boss-black-hole-portal";
+            portal.innerHTML = `
+                <div class="black-hole-disc">
+                    <div class="black-hole-outer-ring"></div>
+                    <div class="black-hole-accretion-disk"></div>
+                    <div class="black-hole-vortex-swirl"></div>
+                    <div class="black-hole-event-horizon"></div>
+                    <div class="black-hole-core-singularity"></div>
+                    <div class="black-hole-dark-aura"></div>
+                </div>
+                <div class="black-hole-particles">
+                    <span class="void-particle p1"></span>
+                    <span class="void-particle p2"></span>
+                    <span class="void-particle p3"></span>
+                    <span class="void-particle p4"></span>
+                    <span class="void-particle p5"></span>
+                    <span class="void-particle p6"></span>
+                </div>
+                <div class="black-hole-shockwave-ring"></div>
+                <div class="black-hole-lightning-sparks">
+                    <span class="spark s1"></span>
+                    <span class="spark s2"></span>
+                    <span class="spark s3"></span>
+                </div>
+            `;
+            wrapper.appendChild(portal);
+
+            if (window.freshlyUnlockedBossId === level.id || window.forceBossEmergeId === level.id) {
+                wrapper.classList.add("emerging-from-hole");
+                setTimeout(() => triggerBossScreenShake(), 1250);
+                setTimeout(() => {
+                    wrapper.classList.remove("emerging-from-hole");
+                    if (window.freshlyUnlockedBossId === level.id) window.freshlyUnlockedBossId = null;
+                    if (window.forceBossEmergeId === level.id) window.forceBossEmergeId = null;
+                }, 2600);
+            }
+        }
 
         const btn = document.createElement("button");
         btn.dataset.levelId = level.id;
@@ -732,6 +919,11 @@ function renderLevelNodes() {
         else if (isCurrent) stateClass = "current";
 
         btn.className = `level-node zone-${level.zone} ${stateClass}`;
+        if (isBoss) {
+            btn.classList.add("boss-level-node");
+            if (isLocked) btn.classList.add("boss-locked");
+            else btn.classList.add("boss-unlocked");
+        }
 
         if (level.img) {
             btn.classList.add("has-custom-img");
@@ -747,37 +939,76 @@ function renderLevelNodes() {
 
             btn.appendChild(imgEl);
 
-            if (isLocked) {
+            if (isLocked && !isBoss) {
                 const lockSpan = document.createElement("span");
                 lockSpan.className = "lock-icon locked-img-icon";
                 lockSpan.textContent = "🔒";
                 btn.appendChild(lockSpan);
             }
         } else {
-            if (isLocked) {
+            if (isLocked && !isBoss) {
                 btn.innerHTML = `<span class="lock-icon">🔒</span>`;
             } else {
                 btn.innerHTML = `<span>${level.id}</span>`;
             }
         }
 
+        // Special Boss Overlays
+        if (isBoss) {
+            if (isLocked) {
+                const bossLockOverlay = document.createElement("div");
+                bossLockOverlay.className = "boss-lock-badge";
+                bossLockOverlay.innerHTML = `
+                    <span class="boss-lock-icon">🔒</span>
+                    <span class="boss-lock-label">BOSS LOCKED</span>
+                `;
+                btn.appendChild(bossLockOverlay);
+            } else if (!isCompleted) {
+                const bossCrownOverlay = document.createElement("div");
+                bossCrownOverlay.className = "boss-unlocked-badge";
+                bossCrownOverlay.innerHTML = `👑 BOSS`;
+                bossCrownOverlay.title = "Click to replay Black Hole Emergence!";
+                bossCrownOverlay.style.cursor = "pointer";
+                bossCrownOverlay.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    triggerBossUnlockAnimation(level.id);
+                });
+                wrapper.appendChild(bossCrownOverlay);
+            }
+        }
+
         // Click Handler
-        btn.addEventListener("click", () => handleNodeClick(level, isLocked, btn));
+        btn.addEventListener("click", () => handleNodeClick(level, isLocked, isBoss, btn));
 
         wrapper.appendChild(btn);
 
-        // Star indicator pill for completed or current levels with stars
-        const starsEarned = userProgress.stars[level.id] || 0;
-        if (isCompleted || starsEarned > 0) {
-            const starsPill = document.createElement("div");
-            starsPill.className = "node-stars";
-            let starsHtml = "";
-            for (let i = 1; i <= 3; i++) {
-                if (i <= starsEarned) starsHtml += `★`;
-                else starsHtml += `<span class="star-off">★</span>`;
-            }
-            starsPill.innerHTML = starsHtml;
-            wrapper.appendChild(starsPill);
+        // Premium Emerald & Gold Achievement Seal Overlay for Completed Levels
+        if (isCompleted) {
+            const sealBadge = document.createElement("div");
+            sealBadge.className = "completed-seal-badge";
+            sealBadge.title = "Level Mastered";
+            sealBadge.innerHTML = `
+                <svg viewBox="0 0 36 36" class="seal-svg">
+                    <defs>
+                        <radialGradient id="emeraldGrad-${level.id}" cx="35%" cy="35%" r="65%">
+                            <stop offset="0%" stop-color="#86efac"/>
+                            <stop offset="35%" stop-color="#22c55e"/>
+                            <stop offset="85%" stop-color="#15803d"/>
+                            <stop offset="100%" stop-color="#052e16"/>
+                        </radialGradient>
+                        <linearGradient id="goldBorder-${level.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fef08a"/>
+                            <stop offset="30%" stop-color="#eab308"/>
+                            <stop offset="70%" stop-color="#ca8a04"/>
+                            <stop offset="100%" stop-color="#713f12"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="18" cy="18" r="16" fill="url(#emeraldGrad-${level.id})" stroke="url(#goldBorder-${level.id})" stroke-width="2.5"/>
+                    <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+                    <path d="M11 18 L15.5 22.5 L25 13" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            `;
+            wrapper.appendChild(sealBadge);
         }
 
         container.appendChild(wrapper);
@@ -785,18 +1016,38 @@ function renderLevelNodes() {
 }
 
 // Handle Level Button Clicks
-function handleNodeClick(level, isLocked, btnElement) {
+function handleNodeClick(level, isLocked, isBoss, btnElement) {
     if (isDragging) return;
 
     if (isLocked) {
         // Shake animation for locked level
         btnElement.classList.add("shake");
         setTimeout(() => btnElement.classList.remove("shake"), 450);
+
+        if (isBoss) {
+            const startLvl = level.id - 5;
+            const endLvl = level.id - 1;
+            showToast(`🔒 Boss Level ${level.id} is Locked! Complete Levels ${startLvl}–${endLvl} first to unlock!`);
+        } else {
+            showToast(`🔒 Level ${level.id} is Locked! Complete previous levels first.`);
+        }
         return;
     }
 
     activeSelectedLevel = level;
-    openModal(level);
+
+    // Directly open engine when student clicks level node
+    if (window.electronAPI?.openEngine) {
+        window.electronAPI.openEngine({
+            id: level.id,
+            title: level.title,
+            zone: level.zone,
+            zoneName: level.zoneName
+        });
+    } else {
+        // Fallback for direct browser preview
+        window.open(`language-lab-engine/dist/index.html?levelId=${level.id}&title=${encodeURIComponent(level.title)}`, '_blank');
+    }
 }
 
 // Open Level Start Modal
@@ -810,7 +1061,7 @@ function openModal(level) {
     const starsEarned = userProgress.stars[level.id] || 0;
     const starsContainer = document.getElementById("modal-stars-display");
     let starsHtml = "";
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 1; i++) {
         if (i <= starsEarned) starsHtml += `<span class="star">★</span>`;
         else starsHtml += `<span class="star star-empty">★</span>`;
     }
@@ -827,7 +1078,12 @@ function closeModal() {
 }
 
 // Complete Level & Unlock Next Level
-function completeLevel(levelId, starsEarned = 3) {
+function completeLevel(levelId, starsEarned = 1) {
+    const prevBossStatuses = {};
+    BOSS_LEVEL_IDS.forEach(id => {
+        prevBossStatuses[id] = isLevelUnlocked(id);
+    });
+
     userProgress.stars[levelId] = Math.max(userProgress.stars[levelId] || 0, starsEarned);
 
     if (levelId === userProgress.unlockedLevel && userProgress.unlockedLevel < LEVEL_NODES.length) {
@@ -835,19 +1091,38 @@ function completeLevel(levelId, starsEarned = 3) {
     }
 
     saveProgress();
+
+    // Check if a Boss level was just unlocked
+    let newlyUnlockedBoss = null;
+    BOSS_LEVEL_IDS.forEach(id => {
+        if (!prevBossStatuses[id] && isLevelUnlocked(id)) {
+            newlyUnlockedBoss = id;
+        }
+    });
+
+    if (newlyUnlockedBoss) {
+        window.freshlyUnlockedBossId = newlyUnlockedBoss;
+        showToast(`🌌 Dimensional Black Hole Opened! Boss Level ${newlyUnlockedBoss} Emerges!`);
+    }
+
     renderLevelNodes();
     updateHUD();
 
-    // Scroll focus to new current level
-    scrollToCurrentLevel();
+    if (newlyUnlockedBoss) {
+        scrollToBossLevel(newlyUnlockedBoss);
+    } else {
+        scrollToCurrentLevel();
+    }
 }
 
 // Update Top HUD Display
 function updateHUD() {
-    const totalLevels = LEVEL_NODES.length;
+    const totalLevels = 30;
     
     let totalStars = 0;
-    Object.values(userProgress.stars).forEach(s => totalStars += s);
+    Object.values(userProgress.stars).forEach(s => {
+        if (s > 0) totalStars += 1;
+    });
 
     const progressTextEl = document.getElementById("hud-progress-text");
     if (progressTextEl) progressTextEl.innerText = `${userProgress.unlockedLevel} / ${totalLevels}`;
@@ -859,7 +1134,7 @@ function updateHUD() {
     }
 
     const starsTextEl = document.getElementById("hud-stars-text");
-    if (starsTextEl) starsTextEl.innerText = `${totalStars} / ${totalLevels * 3}`;
+    if (starsTextEl) starsTextEl.innerText = `${totalStars} / ${totalLevels}`;
 
     // Profile Dropdown & Modal Stats
     const statStarsEl = document.getElementById("hud-stat-stars") || document.getElementById("modal-stat-stars");
@@ -895,3 +1170,18 @@ function scrollToCurrentLevel() {
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const testBtn = document.getElementById("test-boss-anim-btn");
+    if (testBtn) {
+        testBtn.addEventListener("click", () => {
+            let targetBoss = BOSS_LEVEL_IDS.find(id => isLevelUnlocked(id)) || 6;
+            if (!isLevelUnlocked(targetBoss)) {
+                userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 6);
+                saveProgress();
+            }
+            triggerBossUnlockAnimation(targetBoss);
+            showToast(`🌌 Dimensional Black Hole Unleashed for Boss Level ${targetBoss}!`);
+        });
+    }
+});

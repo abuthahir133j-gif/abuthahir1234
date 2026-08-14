@@ -597,7 +597,7 @@
                 <div class="card-icon">⭐</div>
                 <div class="card-details">
                     <div class="card-label">Total Stars</div>
-                    <div class="card-value" id="stat-stars">0 / 90</div>
+                    <div class="card-value" id="stat-stars">0 / 30</div>
                 </div>
             </div>
 
@@ -946,8 +946,18 @@
     <script>
         const AUTH_STORAGE_KEY = "language_lab_authenticated";
         const STUDENT_KEY = "language_lab_student_id_v1";
+        const LAST_LOGIN_DATE_KEY = "language_lab_last_login_date_v1";
+        const APP_SESSION_KEY = "language_lab_app_session_v1";
         const PROGRESS_KEY = "language_lab_level_progress_v1";
         const AVATAR_KEY = "language_lab_selected_avatar_v1";
+
+        function getTodayDateString() {
+            const d = new Date();
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
 
         // 14 Boys & 14 Girls Avatar Presets from avatars/ folder
         const AVATARS_BOYS = [
@@ -991,8 +1001,13 @@
         document.addEventListener("DOMContentLoaded", () => {
             const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
             const savedStudent = localStorage.getItem(STUDENT_KEY);
+            const lastLoginDate = localStorage.getItem(LAST_LOGIN_DATE_KEY);
+            const isAppSessionActive = sessionStorage.getItem(APP_SESSION_KEY) === "active";
+            const today = getTodayDateString();
 
-            if (!isAuthenticated || !savedStudent) {
+            if (!isAuthenticated || !savedStudent || !isAppSessionActive || lastLoginDate !== today) {
+                localStorage.removeItem(AUTH_STORAGE_KEY);
+                sessionStorage.removeItem(APP_SESSION_KEY);
                 window.location.href = "login.html";
                 return;
             }
@@ -1016,12 +1031,14 @@
                     
                     let totalStars = 0;
                     if (progress.stars) {
-                        Object.values(progress.stars).forEach(s => totalStars += s);
+                        Object.values(progress.stars).forEach(s => {
+                            if (s > 0) totalStars += 1;
+                        });
                     }
 
                     document.getElementById("hero-level-tag").innerText = `Level ${unlockedLevel}`;
                     document.getElementById("stat-levels").innerText = `${unlockedLevel} / 30`;
-                    document.getElementById("stat-stars").innerText = `${totalStars} / 90`;
+                    document.getElementById("stat-stars").innerText = `${totalStars} / 30`;
 
                     if (unlockedLevel >= 7) unlockBadge("badge-glacier", "status-glacier");
                     if (unlockedLevel >= 11) unlockBadge("badge-blossom", "status-blossom");
@@ -1050,7 +1067,7 @@
             // Logout
             document.getElementById("profile-logout-btn").addEventListener("click", () => {
                 localStorage.removeItem(AUTH_STORAGE_KEY);
-                localStorage.removeItem(STUDENT_KEY);
+                sessionStorage.removeItem(APP_SESSION_KEY);
                 window.location.href = "login.html";
             });
         });
