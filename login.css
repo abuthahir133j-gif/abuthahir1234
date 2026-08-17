@@ -172,7 +172,36 @@ html, body {
 .card-subtitle {
     font-size: 13px;
     color: #64748b;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+/* Authentication Error Alert Banner */
+.auth-error-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1.5px solid #ef4444;
+    border-radius: 12px;
+    color: #b91c1c;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: left;
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.15);
+    animation: shakeError 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.auth-error-banner.hidden {
+    display: none;
+}
+
+@keyframes shakeError {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(3px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
 }
 
 /* Form Controls */
@@ -266,3 +295,84 @@ html, body {
         width: 100%;
     }
 }
+
+/* ==========================================
+   Bottom Left Live Connection Status Indicator (Online / Offline)
+   ========================================== */
+.connection-status-badge {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+}
+
+.connection-status-badge.online {
+    background: rgba(6, 78, 59, 0.85);
+    color: #a7f3d0;
+    border: 1.5px solid rgba(52, 211, 153, 0.6);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+}
+
+.connection-status-badge.offline {
+    background: rgba(127, 29, 29, 0.9);
+    color: #fecaca;
+    border: 1.5px solid rgba(248, 113, 113, 0.7);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+}
+
+.connection-status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+}
+
+.connection-status-badge.online .connection-status-dot {
+    background-color: #34d399;
+    box-shadow: 0 0 10px #34d399, 0 0 16px #10b981;
+    animation: statusPulseGreen 2s infinite ease-in-out;
+}
+
+.connection-status-badge.offline .connection-status-dot {
+    background-color: #ef4444;
+    box-shadow: 0 0 10px #ef4444, 0 0 16px #dc2626;
+    animation: statusPulseRed 1.2s infinite ease-in-out;
+}
+
+@keyframes statusPulseGreen {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: 0.7; }
+}
+
+@keyframes statusPulseRed {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.5; }
+}
+
+/* -- Server Settings Panel ------------------- */
+.server-settings-wrap { margin-top: 16px; text-align: center; }
+.server-toggle-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 12px; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: color 0.2s; }
+.server-toggle-btn:hover { color: rgba(255,255,255,0.9); }
+.server-panel { margin-top: 10px; background: rgba(0,0,0,0.2); border-radius: 10px; padding: 14px; text-align: left; }
+.server-panel.hidden { display: none; }
+.server-label { display: block; font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 6px; font-family: 'Outfit', sans-serif; }
+.server-input { width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #fff; font-size: 13px; font-family: 'Outfit', sans-serif; box-sizing: border-box; outline: none; }
+.server-input:focus { border-color: rgba(255,255,255,0.5); }
+.save-server-btn { margin-top: 8px; width: 100%; padding: 8px; border-radius: 8px; border: none; background: linear-gradient(135deg,#6366f1,#8b5cf6); color: #fff; font-size: 13px; font-family: 'Outfit', sans-serif; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+.save-server-btn:hover { opacity: 0.85; }
+.server-status-msg { display: block; margin-top: 6px; font-size: 12px; font-family: 'Outfit', sans-serif; min-height: 18px; }

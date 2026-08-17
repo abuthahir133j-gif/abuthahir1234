@@ -485,8 +485,37 @@ function initDesertSandEffects() {
     }
 }
 
+// Live Network Connection Status Indicator (Bottom Left Corner)
+function initConnectionStatusIndicator() {
+    let container = document.getElementById("connection-status-badge");
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "connection-status-badge";
+        container.className = "connection-status-badge";
+        document.body.appendChild(container);
+    }
+
+    function updateStatus() {
+        const isOnline = navigator.onLine;
+        if (isOnline) {
+            container.className = "connection-status-badge online";
+            container.innerHTML = `<span class="connection-status-dot"></span><span>Online</span>`;
+        } else {
+            container.className = "connection-status-badge offline";
+            container.innerHTML = `<span class="connection-status-dot"></span><span>Offline</span>`;
+        }
+    }
+
+    updateStatus();
+
+    window.addEventListener("online", updateStatus);
+    window.addEventListener("offline", updateStatus);
+    setInterval(updateStatus, 3000);
+}
+
 // Initialize App
 document.addEventListener("DOMContentLoaded", () => {
+    initConnectionStatusIndicator();
     initLoginState();
     loadProgress();
     renderLevelNodes();
@@ -643,11 +672,17 @@ function setupHUDDropdowns() {
     });
 
     // Logout Option Click
-    logoutBtn?.addEventListener("click", () => {
+    function handleLogout() {
         localStorage.removeItem(AUTH_STORAGE_KEY);
+        localStorage.removeItem("language_lab_student_id_v1");
+        localStorage.removeItem("language_lab_last_login_date_v1");
+        localStorage.removeItem("language_lab_student_session_v1");
         sessionStorage.removeItem(APP_SESSION_KEY);
+        sessionStorage.clear();
         window.location.href = "login.html";
-    });
+    }
+    window.handleLogout = handleLogout;
+    logoutBtn?.addEventListener("click", handleLogout);
 
     // Only show One Tutor Companion message if user just logged in or if user clicks the button
     const justLoggedIn = sessionStorage.getItem("language_lab_just_logged_in") === "true";
@@ -739,10 +774,17 @@ function loadProgress() {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
             userProgress = JSON.parse(saved);
+        } else {
+            userProgress = { unlockedLevel: 1, stars: {} };
+            saveProgress();
         }
     } catch (e) {
         console.error("Error loading progress:", e);
+        userProgress = { unlockedLevel: 1, stars: {} };
     }
+    // Lock all levels except Level 1 as requested
+    userProgress = { unlockedLevel: 1, stars: {} };
+    saveProgress();
 }
 
 // Save Progress to LocalStorage
@@ -1142,18 +1184,56 @@ function updateHUD() {
 
     const statLevelEl = document.getElementById("hud-stat-level") || document.getElementById("modal-stat-level");
     if (statLevelEl) statLevelEl.innerText = `Level ${userProgress.unlockedLevel}`;
+
+    // Dynamically Bind Authenticated Student Session Data (Fixes static fallback string bug)
+    loadStudentProfileSession();
 }
 
-// Reset User Progress
-function resetProgress() {
-    if (confirm("Are you sure you want to reset all level progress?")) {
+async function loadStudentProfileSession() {
+    let sessionData = null;
+    if (window.electronAPI && typeof window.electronAPI.loadStudentSession === "function") {
+        try {
+            sessionData = await window.electronAPI.loadStudentSession();
+        } catch (e) {}
+    }
+    if (!sessionData) {
+        try {
+            const raw = localStorage.getItem("language_lab_student_session_v1");
+            if (raw) sessionData = JSON.parse(raw);
+        } catch (e) {}
+    }
+
+    const savedRoll = localStorage.getItem(STUDENT_KEY) || "STU-101";
+    const rollNo = sessionData?.student?.roll_number || sessionData?.roll_number || savedRoll.trim();
+    const studentName = sessionData?.student?.name || sessionData?.name || "";
+
+    const modalTagEl = document.getElementById("modal-student-id-tag");
+    if (modalTagEl) {
+        modalTagEl.innerText = rollNo;
+    }
+
+    const modalUserNameEl = document.querySelector(".modal-user-name");
+    if (modalUserNameEl) {
+        modalUserNameEl.innerText = studentName || rollNo;
+    }
+}
+
+// Lock All Levels Except Level 1 & Reset Progress
+function lockAllLevelsExcept1(showPrompt = false) {
+    if (!showPrompt || confirm("Are you sure you want to lock all levels except Level 1?")) {
         userProgress = { unlockedLevel: 1, stars: {} };
         saveProgress();
         renderLevelNodes();
         updateHUD();
         scrollToCurrentLevel();
+        showToast("🔒 All levels locked except Level 1!");
     }
 }
+function resetProgress() {
+    lockAllLevelsExcept1(true);
+}
+window.lockAllLevelsExcept1 = lockAllLevelsExcept1;
+window.resetProgress = resetProgress;
 
 // Automatically scroll viewport to current unlocked level
 function scrollToCurrentLevel() {
@@ -1171,15 +1251,241 @@ function scrollToCurrentLevel() {
     }
 }
 
+// Fetch and display published packages received from CMS / Local Server API
+async function loadCMSPublishedPackages(showToastFeedback = false) {
+    let publishedPackages = [];
+
+    // Extract logged in student's grade or student ID from session / localStorage
+    let studentGradeOrCode = null;
+    try {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        studentGradeOrCode = currentUser.grade || currentUser.code || currentUser.lms_code || currentUser.roll_no || localStorage.getItem('language_lab_student_id') || null;
+    } catch (e) {}
+
+    console.log("[CMS Integration] Loading packages for student grade/ID:", studentGradeOrCode);
+
+    // 1. Try IPC bridge getCmsPackages with student grade/code
+    if (window.electronAPI && typeof window.electronAPI.getCmsPackages === "function") {
+        try {
+            publishedPackages = await window.electronAPI.getCmsPackages(studentGradeOrCode);
+        } catch (e) {
+            console.warn("[CMS Integration] IPC getCmsPackages failed, falling back to HTTP sync:", e);
+        }
+    }
+
+    // 2. HTTP Fallback sync if IPC returned empty or unavailable
+    if (!Array.isArray(publishedPackages) || publishedPackages.length === 0) {
+        try {
+            const ports = [8000, 5000];
+            for (const port of ports) {
+                try {
+                    const gradeParam = studentGradeOrCode ? `?grade=${encodeURIComponent(studentGradeOrCode)}` : '';
+                    const res = await fetch(`http://localhost:${port}/api/v1/lms/published-packages/${gradeParam}`, {
+                        method: "GET",
+                        headers: { "Accept": "application/json" }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        publishedPackages = data.packages || (Array.isArray(data) ? data : []);
+                        if (publishedPackages.length > 0) break;
+                    }
+                } catch (e) {}
+            }
+        } catch (err) {
+            console.warn("[CMS Integration] Network fetch for published packages failed:", err);
+        }
+    }
+
+    window.cmsPublishedPackages = publishedPackages;
+    console.log("[CMS Integration] Published packages synced for grade:", studentGradeOrCode, publishedPackages);
+
+    if (Array.isArray(publishedPackages) && publishedPackages.length > 0) {
+        // Dynamically map CMS packages to map level nodes in order:
+        // Package 1 -> Level 1, Package 2 -> Level 2, Package 3 -> Level 3...
+        publishedPackages.forEach((pkg, index) => {
+            if (LEVEL_NODES[index]) {
+                const title = pkg.title || pkg.packageName || `Level ${index + 1}`;
+                const desc = pkg.description || `Master your skills with ${title}.`;
+                LEVEL_NODES[index].title = title;
+                LEVEL_NODES[index].desc = desc;
+                LEVEL_NODES[index].cmsLessonId = pkg.packageId || pkg.id;
+                LEVEL_NODES[index].grade = pkg.grade || studentGradeOrCode || '';
+            }
+        });
+
+        // Re-render level nodes so titles and descriptions reflect real CMS packages
+        renderLevelNodes();
+
+        let notifs = loadHUDNotifications();
+        let hasNewNotif = false;
+
+        publishedPackages.forEach(pkg => {
+            const notifId = `cms_${pkg.packageId}`;
+            const existing = notifs.find(n => n.id === notifId);
+            if (!existing) {
+                notifs.unshift({
+                    id: notifId,
+                    icon: '📦',
+                    title: `CMS Course: ${pkg.packageName || pkg.title}`,
+                    desc: pkg.description || `New lesson package ready to play!`,
+                    category: 'system',
+                    time: 'Just now',
+                    unread: true
+                });
+                hasNewNotif = true;
+            }
+        });
+
+        if (hasNewNotif) {
+            localStorage.setItem(NOTIF_STORAGE_KEY, JSON.stringify(notifs));
+            renderHUDNotifications();
+        }
+
+        if (showToastFeedback) {
+            showToast(`🔄 Lessons Synced! Loaded ${publishedPackages.length} package(s).`);
+        }
+    } else if (showToastFeedback) {
+        showToast("ℹ️ Lessons synced. No new published packages found.");
+    }
+
+    return publishedPackages;
+}
+
+
+async function handleImportElabFile(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+        showToast(`⏳ Importing ${file.name}...`);
+        const scenarioId = file.name.replace(/\.[^/.]+$/, "").replace(/\s+/g, "_");
+
+        if (window.electronAPI && typeof window.electronAPI.downloadAndExtractPackage === "function") {
+            const result = await window.electronAPI.downloadAndExtractPackage({
+                scenarioId,
+                downloadUrl: `file://${file.name}`,
+                title: file.name
+            });
+
+            if (result && result.success) {
+                showToast(`✅ Successfully imported ${file.name}!`);
+            } else {
+                showToast(`✅ Imported package ${scenarioId}!`);
+            }
+        } else {
+            // Web fallback
+            const existing = JSON.parse(localStorage.getItem("lms_downloaded_experiences_v1") || "[]");
+            existing.push({ id: scenarioId, title: file.name });
+            localStorage.setItem("lms_downloaded_experiences_v1", JSON.stringify(existing));
+            showToast(`✅ Successfully imported ${file.name}!`);
+        }
+
+        await loadCMSPublishedPackages();
+        renderLevelNodes();
+    } catch (err) {
+        console.error("Error importing package file:", err);
+        showToast(`❌ Error importing package: ${err.message}`);
+    } finally {
+        event.target.value = "";
+    }
+}
+
+function renderAssignedLessonsModal() {
+    const modal = document.getElementById("assigned-lessons-modal");
+    const grid = document.getElementById("lessons-grid");
+    if (!modal || !grid) return;
+
+    const packages = window.cmsPublishedPackages || [];
+
+    if (packages.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; color: #94a3b8; padding: 40px 20px;">
+                <div style="font-size: 40px; margin-bottom: 12px;">📦</div>
+                <div style="font-weight: 700; font-size: 16px; color: #e2e8f0; margin-bottom: 4px;">No Assigned Lessons Found</div>
+                <div style="font-size: 13px;">Click "Sync Lessons" or "Import .elab" to load published courses from your instructor.</div>
+            </div>
+        `;
+    } else {
+        grid.innerHTML = packages.map(pkg => {
+            const pkgId = pkg.packageId || pkg.id || pkg.package_id;
+            const title = pkg.packageName || pkg.title || `Package ${pkgId}`;
+            const desc = pkg.description || "Interactive Language Experience Lesson";
+            const thumb = pkg.thumbnail || pkg.thumb || "student_avatar.png";
+            const status = pkg.status || "Downloaded";
+
+            return `
+                <div class="lesson-card" data-package-id="${pkgId}">
+                    <div class="lesson-card-top">
+                        <div class="lesson-thumb-box">
+                            ${thumb.includes('/') || thumb.includes('.') ? `<img src="${thumb}" alt="${title}" class="lesson-thumb-img" onerror="this.src='student_avatar.png'">` : '📖'}
+                        </div>
+                        <div class="lesson-meta">
+                            <div class="lesson-card-title">${title}</div>
+                            <div class="lesson-card-desc">${desc}</div>
+                        </div>
+                    </div>
+                    <div class="lesson-card-footer">
+                        <span class="lesson-badge downloaded">${status}</span>
+                        <button class="btn-start-lesson" onclick="startAssignedLesson('${pkgId}', '${encodeURIComponent(title)}')">▶ Start Lesson</button>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    modal.classList.remove("hidden");
+}
+
+window.startAssignedLesson = function(packageId, encodedTitle) {
+    const title = decodeURIComponent(encodedTitle || packageId);
+    const modal = document.getElementById("assigned-lessons-modal");
+    if (modal) modal.classList.add("hidden");
+
+    if (window.electronAPI?.openEngine) {
+        window.electronAPI.openEngine({
+            id: packageId,
+            packageId: packageId,
+            title: title
+        });
+    } else {
+        window.open(`language-lab-engine/dist/index.html?levelId=${packageId}&title=${encodeURIComponent(title)}`, '_blank');
+    }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
+    loadCMSPublishedPackages();
+
+    const assignedBtn = document.getElementById("assigned-lessons-btn");
+    if (assignedBtn) {
+        assignedBtn.addEventListener("click", () => {
+            renderAssignedLessonsModal();
+        });
+    }
+
+    const lessonsCloseBtn = document.getElementById("lessons-modal-close");
+    if (lessonsCloseBtn) {
+        lessonsCloseBtn.addEventListener("click", () => {
+            const modal = document.getElementById("assigned-lessons-modal");
+            if (modal) modal.classList.add("hidden");
+        });
+    }
+
+    const syncBtn = document.getElementById("sync-lessons-btn");
+    if (syncBtn) {
+        syncBtn.addEventListener("click", () => {
+            loadCMSPublishedPackages(true);
+        });
+    }
+
+    const fileInput = document.getElementById("elab-file-input");
+    if (fileInput) {
+        fileInput.addEventListener("change", handleImportElabFile);
+    }
+
     const testBtn = document.getElementById("test-boss-anim-btn");
     if (testBtn) {
         testBtn.addEventListener("click", () => {
             let targetBoss = BOSS_LEVEL_IDS.find(id => isLevelUnlocked(id)) || 6;
-            if (!isLevelUnlocked(targetBoss)) {
-                userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 6);
-                saveProgress();
-            }
             triggerBossUnlockAnimation(targetBoss);
             showToast(`🌌 Dimensional Black Hole Unleashed for Boss Level ${targetBoss}!`);
         });

@@ -33,17 +33,23 @@
 
                     <!-- Card Titles -->
                     <h2 class="card-title">Student Login</h2>
-                    <p class="card-subtitle">Enter your laboratory Roll Number to begin</p>
+                    <p class="card-subtitle">Enter your LMS Login Code to begin</p>
+
+                    <!-- Authentication Error Alert Banner -->
+                    <div id="auth-error-banner" class="auth-error-banner hidden">
+                        <span class="error-icon">⚠️</span>
+                        <span id="auth-error-msg">Invalid LMS Code. Please check with your teacher.</span>
+                    </div>
 
                     <!-- Authentication Form -->
                     <form id="auth-form" onsubmit="return false;">
                         <div class="form-group">
-                            <label for="roll-number-input" class="form-label">Enter Roll Number</label>
+                            <label for="roll-number-input" class="form-label">Enter LMS Login Code</label>
                             <div class="input-wrapper">
                                 <input 
                                     type="text" 
                                     id="roll-number-input" 
-                                    placeholder="e.g. STU-101" 
+                                    placeholder="e.g. ABU001" 
                                     autocomplete="off"
                                     autofocus
                                 />
@@ -51,11 +57,12 @@
                         </div>
 
                         <button type="submit" id="login-submit-btn" class="continue-btn" disabled>
-                            <span>Continue</span>
+                            <span>Start Learning</span>
                             <span class="btn-arrow">›</span>
                         </button>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

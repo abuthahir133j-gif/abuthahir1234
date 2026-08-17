@@ -121,6 +121,202 @@ body::-webkit-scrollbar {
     color: #ffffff;
 }
 
+/* Top Right HUD Action Buttons (Sync Lessons & Import .elab) */
+.top-right-hud .hud-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+    user-select: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hud-action-btn.lessons-btn {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    color: #ffffff;
+    border-color: #a78bfa;
+}
+
+.hud-action-btn.lessons-btn:hover {
+    background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(167, 139, 250, 0.4);
+}
+
+.hud-action-btn.sync-btn {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    color: #ffffff;
+    border-color: #38bdf8;
+}
+
+.hud-action-btn.sync-btn:hover {
+    background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(56, 189, 248, 0.4);
+}
+
+.hud-action-btn.import-btn {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: #ffffff;
+    border-color: #34d399;
+}
+
+.hud-action-btn.import-btn:hover {
+    background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(52, 211, 153, 0.4);
+}
+
+/* Assigned Lessons Modal & Card Grid */
+.assigned-lessons-card {
+    max-width: 880px !important;
+    width: 90% !important;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
+    border: 2px solid rgba(255, 215, 0, 0.3) !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+}
+
+.lessons-modal-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 12px;
+}
+
+.lessons-modal-header h2 {
+    color: #ffe89e;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.lessons-modal-header p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.lesson-card {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lesson-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+.lesson-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.lesson-thumb-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.lesson-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lesson-meta {
+    flex-grow: 1;
+}
+
+.lesson-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 4px;
+}
+
+.lesson-card-desc {
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+.lesson-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lesson-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.lesson-badge.downloaded {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    border: 1px solid #22c55e;
+}
+
+.lesson-badge.new {
+    background: rgba(234, 179, 8, 0.2);
+    color: #facc15;
+    border: 1px solid #eab308;
+}
+
+.btn-start-lesson {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+}
+
+.btn-start-lesson:hover {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    transform: scale(1.05);
+}
+
 /* Game World Canvas Container */
 #game {
     position: relative;
@@ -1993,4 +2189,72 @@ body::-webkit-scrollbar {
 .game-toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================
+   Bottom Left Live Connection Status Indicator (Online / Offline)
+   ========================================== */
+.connection-status-badge {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+}
+
+.connection-status-badge.online {
+    background: rgba(6, 78, 59, 0.85);
+    color: #a7f3d0;
+    border: 1.5px solid rgba(52, 211, 153, 0.6);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+}
+
+.connection-status-badge.offline {
+    background: rgba(127, 29, 29, 0.9);
+    color: #fecaca;
+    border: 1.5px solid rgba(248, 113, 113, 0.7);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+}
+
+.connection-status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+}
+
+.connection-status-badge.online .connection-status-dot {
+    background-color: #34d399;
+    box-shadow: 0 0 10px #34d399, 0 0 16px #10b981;
+    animation: statusPulseGreen 2s infinite ease-in-out;
+}
+
+.connection-status-badge.offline .connection-status-dot {
+    background-color: #ef4444;
+    box-shadow: 0 0 10px #ef4444, 0 0 16px #dc2626;
+    animation: statusPulseRed 1.2s infinite ease-in-out;
+}
+
+@keyframes statusPulseGreen {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: 0.7; }
+}
+
+@keyframes statusPulseRed {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.5; }
 }

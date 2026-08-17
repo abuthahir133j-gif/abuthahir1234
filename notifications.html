@@ -478,7 +478,7 @@
                 <a href="profile.html" class="nav-btn nav-btn-secondary">
                     <span>Profile</span>
                 </a>
-                <button id="notif-logout-btn" class="nav-btn nav-btn-danger">
+                <button id="notif-logout-btn" class="nav-btn nav-btn-danger" onclick="handleLogout()">
                     <span>Logout</span>
                 </button>
             </div>
@@ -618,7 +618,35 @@
         let notifications = [];
         let currentFilter = 'all';
 
+        function initConnectionStatusIndicator() {
+            let container = document.getElementById("connection-status-badge");
+            if (!container) {
+                container = document.createElement("div");
+                container.id = "connection-status-badge";
+                container.className = "connection-status-badge";
+                document.body.appendChild(container);
+            }
+
+            function updateStatus() {
+                const isOnline = navigator.onLine;
+                if (isOnline) {
+                    container.className = "connection-status-badge online";
+                    container.innerHTML = `<span class="connection-status-dot"></span><span>Online</span>`;
+                } else {
+                    container.className = "connection-status-badge offline";
+                    container.innerHTML = `<span class="connection-status-dot"></span><span>Offline</span>`;
+                }
+            }
+
+            updateStatus();
+
+            window.addEventListener("online", updateStatus);
+            window.addEventListener("offline", updateStatus);
+            setInterval(updateStatus, 3000);
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
+            initConnectionStatusIndicator();
             // Check auth
             const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
             const savedStudent = localStorage.getItem(STUDENT_KEY);
@@ -658,12 +686,20 @@
             setupBatchActions();
             renderNotifications();
 
+        function handleLogout() {
+            localStorage.removeItem(AUTH_STORAGE_KEY);
+            localStorage.removeItem("language_lab_student_id_v1");
+            localStorage.removeItem("language_lab_last_login_date_v1");
+            localStorage.removeItem("language_lab_student_session_v1");
+            sessionStorage.removeItem(APP_SESSION_KEY);
+            sessionStorage.clear();
+            window.location.href = "login.html";
+        }
+        window.handleLogout = handleLogout;
+
             // Logout listener
-            document.getElementById("notif-logout-btn").addEventListener("click", () => {
-                localStorage.removeItem(AUTH_STORAGE_KEY);
-                sessionStorage.removeItem(APP_SESSION_KEY);
-                window.location.href = "login.html";
-            });
+            const notifLogoutBtn = document.getElementById("notif-logout-btn");
+            if (notifLogoutBtn) notifLogoutBtn.addEventListener("click", handleLogout);
         });
 
         function saveNotifications() {

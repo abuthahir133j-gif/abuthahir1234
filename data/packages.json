@@ -1,0 +1,30 @@
+{
+  "packages": {
+    "PKG-ENG-101": {
+      "packageId": "PKG-ENG-101",
+      "packageName": "Advanced English Conversation (Updated)",
+      "description": "Updated description with new masterclass lessons.",
+      "status": "published",
+      "lessons": [
+        {
+          "lessonId": "L1",
+          "title": "Greeting & Introductions",
+          "duration": "15 mins"
+        },
+        {
+          "lessonId": "L2",
+          "title": "Business Negotiation Skills",
+          "duration": "20 mins"
+        },
+        {
+          "lessonId": "L3",
+          "title": "Public Speaking Techniques",
+          "duration": "25 mins"
+        }
+      ],
+      "metadata": {},
+      "createdAt": "2026-08-14T10:56:57.789Z",
+      "updatedAt": "2026-08-14T10:56:57.794Z"
+    }
+  }
+}

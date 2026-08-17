@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Language Lab - World Level Map</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/components/TravelBuddy/TravelBuddy.css">
 </head>
 <body>
 
     <!-- Top Right Game HUD (Notifications, Profile & AI Helper) -->
     <div id="top-right-hud" class="top-right-hud">
+
+
         <!-- 1. Notification Bell Button -->
         <div class="hud-btn-group">
             <button id="hud-notif-btn" class="hud-circle-btn notif-btn" title="Notifications">
@@ -73,7 +76,7 @@
                     <span class="menu-item-label">Profile</span>
                 </a>
                 <div class="menu-divider"></div>
-                <button id="hud-logout-btn" class="profile-menu-item logout-item">
+                <button id="hud-logout-btn" class="profile-menu-item logout-item" onclick="handleLogout()">
                     <span class="menu-item-icon">🚪</span>
                     <span class="menu-item-label">Logout</span>
                 </button>
@@ -185,6 +188,61 @@
             </div>
         </div>
     </div>
+
+    <!-- Assigned Lessons & Course Packages Modal -->
+    <div id="assigned-lessons-modal" class="modal-overlay hidden">
+        <div class="modal-card assigned-lessons-card">
+            <button id="lessons-modal-close" class="close-btn">&times;</button>
+            <div class="lessons-modal-header">
+                <h2>📚 Assigned Lessons & Course Packages</h2>
+                <p>Synced from CMS Backend • Ready to Start</p>
+            </div>
+            <div id="lessons-grid" class="lessons-grid">
+                <!-- Dynamically populated package cards -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Travel AI Buddy Modules -->
+    <script src="src/events/buddyEvents.js"></script>
+    <script src="src/components/TravelBuddy/buddy.config.js"></script>
+    <script src="src/components/TravelBuddy/BuddyAnimations.js"></script>
+    <script src="src/components/TravelBuddy/BuddyScene.js"></script>
+    <script src="src/components/TravelBuddy/BuddyController.js"></script>
+    <script src="src/ai/buddy/buddyContext.js"></script>
+    <script src="src/ai/buddy/weatherAdapter.js"></script>
+    <script src="src/ai/buddy/buddyObserver.js"></script>
+    <script src="src/ai/buddy/buddyPrompt.js"></script>
+    <script src="src/ai/buddy/buddyResponse.js"></script>
+    <script src="src/ai/buddy/buddyDecision.js"></script>
+    <script src="src/ai/buddy/buddyAI.js"></script>
+    <script src="src/voice/buddy/voiceConfig.js"></script>
+    <script src="src/voice/buddy/speechRecognition.js"></script>
+    <script src="src/voice/buddy/speechSynthesis.js"></script>
+    <script src="src/voice/buddy/voiceController.js"></script>
+    <script src="src/services/travel/travelDataCache.js"></script>
+    <script src="src/services/travel/travelDataNormalizer.js"></script>
+    <script src="src/services/travel/mock/travelMockData.js"></script>
+    <script src="src/services/travel/weatherService.js"></script>
+    <script src="src/services/travel/placesService.js"></script>
+    <script src="src/services/travel/mapsService.js"></script>
+    <script src="src/services/travel/routeService.js"></script>
+    <script src="src/services/travel/hotelsService.js"></script>
+    <script src="src/services/travel/flightsService.js"></script>
+    <script src="src/services/travel/travelDataService.js"></script>
+    <script src="src/character/buddy/BuddyAttention.js"></script>
+    <script src="src/character/buddy/BuddyExpressionController.js"></script>
+    <script src="src/character/buddy/BuddyEmotionEngine.js"></script>
+    <script src="src/character/buddy/BuddyGestureController.js"></script>
+    <script src="src/character/buddy/BuddyIdleController.js"></script>
+    <script src="src/character/buddy/BuddyActionSequencer.js"></script>
+    <script src="src/character/buddy/BuddyBehaviorEngine.js"></script>
+    <script src="src/memory/buddy/memoryStore.js"></script>
+    <script src="src/memory/buddy/userPreferences.js"></script>
+    <script src="src/memory/buddy/tripMemory.js"></script>
+    <script src="src/memory/buddy/conversationMemory.js"></script>
+    <script src="src/memory/buddy/buddyMemory.js"></script>
+    <script src="src/components/TravelBuddy/TravelBuddy.js"></script>
 
     <script src="game.js"></script>
 </body>

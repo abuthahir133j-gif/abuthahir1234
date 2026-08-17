@@ -13,5 +13,9 @@
   "type": "commonjs",
   "devDependencies": {
     "electron": "^43.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.19.0",
+    "better-sqlite3": "^13.0.3"
   }
 }

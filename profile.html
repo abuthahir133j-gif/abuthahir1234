@@ -568,7 +568,7 @@
                 <a href="index.html" class="btn-back-map">
                     <span>🗺️ Back to Map</span>
                 </a>
-                <button id="profile-logout-btn" class="btn-logout">Logout</button>
+                <button id="profile-logout-btn" class="btn-logout" onclick="handleLogout()">Logout</button>
             </div>
         </div>
 
@@ -626,9 +626,11 @@
             </div>
         </div>
 
+
+
         <!-- Zone Badges & Achievements -->
         <div class="section-card">
-            <h2 class="section-title">🏆 Realm Badges & Achievements</h2>
+            <h2 class="section-title">🏆 Realm Badges &amp; Achievements</h2>
             <div class="badges-grid">
                 <div class="badge-box unlocked">
                     <div class="badge-icon">🌲</div>
@@ -741,13 +743,13 @@
                     <div class="settings-subcard">
                         <h3 class="settings-subcard-title">💬 Help &amp; Support</h3>
                         <div class="support-btns-row">
-                            <button class="support-btn">
+                            <button id="help-center-btn" class="support-btn">
                                 <span>❓ Help Center</span>
                             </button>
-                            <button class="support-btn">
+                            <button id="contact-support-btn" class="support-btn">
                                 <span>✉️ Contact Support</span>
                             </button>
-                            <button class="support-btn">
+                            <button id="report-bug-btn" class="support-btn">
                                 <span>🐞 Report Bug</span>
                             </button>
                         </div>
@@ -784,6 +786,166 @@
                 <button id="cancel-avatar-btn" class="btn-secondary">Cancel</button>
                 <button id="save-avatar-btn" class="btn-primary">✓ Select & Save Avatar</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Help Center Modal Popup -->
+    <div id="help-center-modal" class="modal-overlay hidden">
+        <div class="modal-card support-modal-card">
+            <button id="help-center-modal-close" class="close-btn">&times;</button>
+            <div class="support-modal-header">
+                <h2>❓ Help Center &amp; Knowledge Base</h2>
+                <p>Find quick answers to common questions about Language Lab</p>
+            </div>
+            
+            <div class="faq-search-box">
+                <input type="text" id="faq-search-input" placeholder="🔍 Search Help articles..." class="support-input">
+            </div>
+
+            <div class="faq-accordion-list" id="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>🗺️ How do I unlock new level realms?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Complete all required lessons in your active realm with at least 1 star. Once finished, the next realm on the world map will automatically unlock for you!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>🎙️ How does Speech &amp; Audio recognition work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>When prompted during speaking activities, click the microphone button and allow browser microphone permissions. Speak clearly into your mic, and the engine will grade your pronunciation in real-time.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>⭐ How are stars and accuracy calculated?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Stars reflect your overall score in each module. Getting 80%+ accuracy awards 2 stars, and 95%+ awards all 3 gold stars. Accuracy rate tracks correct answers across all completed quizzes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>🎨 How do I change my avatar character?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Click the "🎨 Change Avatar" button at the top of your Profile page. Switch between Boy and Girl avatar collections, select your favorite, and click "Select &amp; Save Avatar".</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>🔔 How do I configure my notification preferences?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Under Profile Settings &gt; Notification Preferences, check or uncheck assignment reminders, lesson alerts, and announcements. You can also view all notifications by clicking "View All Notifications".</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="support-modal-actions" style="margin-top: 20px;">
+                <button id="help-center-close-btn" class="btn-secondary">Close Help Center</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Support Modal Popup -->
+    <div id="contact-support-modal" class="modal-overlay hidden">
+        <div class="modal-card support-modal-card">
+            <button id="contact-support-modal-close" class="close-btn">&times;</button>
+            <div class="support-modal-header">
+                <h2>✉️ Contact Support</h2>
+                <p>Have a question or need assistance? Send a message to our support team.</p>
+            </div>
+
+            <form id="contact-support-form" class="support-form">
+                <div id="support-form-alert" class="support-alert hidden"></div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="support-roll-no">Student Roll Number</label>
+                    <input type="text" id="support-roll-no" class="support-input" readonly>
+                </div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="support-category">Issue Category</label>
+                    <select id="support-category" class="support-select" required>
+                        <option value="technical">Technical Support / App Glitch</option>
+                        <option value="account">Account &amp; Login Issue</option>
+                        <option value="curriculum">Curriculum &amp; Lesson Content</option>
+                        <option value="other">General Inquiry / Other</option>
+                    </select>
+                </div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="support-subject">Subject</label>
+                    <input type="text" id="support-subject" placeholder="Brief summary of your inquiry" class="support-input" required>
+                </div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="support-message">Message / Details</label>
+                    <textarea id="support-message" rows="4" placeholder="Describe your issue or question in detail..." class="support-textarea" required></textarea>
+                </div>
+
+                <div class="support-modal-actions">
+                    <button type="button" id="contact-support-cancel-btn" class="btn-secondary">Cancel</button>
+                    <button type="submit" id="contact-support-submit-btn" class="btn-primary">📨 Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Report Bug Modal Popup -->
+    <div id="report-bug-modal" class="modal-overlay hidden">
+        <div class="modal-card support-modal-card">
+            <button id="report-bug-modal-close" class="close-btn">&times;</button>
+            <div class="support-modal-header">
+                <h2>🐞 Report Technical Bug</h2>
+                <p>Encountered a bug or error? Help us fix it by submitting details below.</p>
+            </div>
+
+            <form id="report-bug-form" class="support-form">
+                <div id="bug-form-alert" class="support-alert hidden"></div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="bug-title">Bug Summary / Title</label>
+                    <input type="text" id="bug-title" placeholder="e.g., Audio failed to play on Level 3" class="support-input" required>
+                </div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="bug-severity">Severity Level</label>
+                    <select id="bug-severity" class="support-select" required>
+                        <option value="low">Low - Minor visual issue</option>
+                        <option value="medium" selected>Medium - Feature partially broken</option>
+                        <option value="high">High - Blocks lesson progress</option>
+                        <option value="critical">Critical - App crash / freeze</option>
+                    </select>
+                </div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="bug-description">Detailed Description &amp; Steps to Reproduce</label>
+                    <textarea id="bug-description" rows="4" placeholder="What happened? What were you doing when the bug occurred?" class="support-textarea" required></textarea>
+                </div>
+
+                <div class="bug-env-pill">
+                    💻 System Environment: <strong>v2.4.1 Enterprise | Electron Desktop</strong>
+                </div>
+
+                <div class="support-modal-actions">
+                    <button type="button" id="report-bug-cancel-btn" class="btn-secondary">Cancel</button>
+                    <button type="submit" id="report-bug-submit-btn" class="btn-primary">🐞 Submit Bug Report</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -940,6 +1102,223 @@
             justify-content: flex-end;
             gap: 12px;
         }
+
+        /* Support Modals & Form Styling */
+        .support-modal-card {
+            max-width: 580px;
+            width: 92%;
+            padding: 28px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            border: 2px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .support-modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .support-modal-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .support-modal-header p {
+            font-size: 13.5px;
+            color: #64748b;
+        }
+
+        .support-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .support-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .support-form-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .support-input, .support-select, .support-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-family: inherit;
+            color: #0f172a;
+            background: #f8fafc;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .support-input:focus, .support-select:focus, .support-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .support-textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .support-alert {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .support-alert.success {
+            background: #dcfce7;
+            border: 1.5px solid #86efac;
+            color: #15803d;
+        }
+
+        .support-alert.error {
+            background: #fef2f2;
+            border: 1.5px solid #fca5a5;
+            color: #b91c1c;
+        }
+
+        .bug-env-pill {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .support-modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .btn-secondary {
+            padding: 10px 20px;
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            color: #475569;
+            font-size: 13.5px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border: none;
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+        }
+
+        /* FAQ Accordion Styling */
+        .faq-search-box {
+            margin-bottom: 16px;
+        }
+
+        .faq-accordion-list {
+            max-height: 320px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 4px;
+        }
+
+        .faq-item {
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            background: #f8fafc;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .faq-item.active {
+            border-color: #3b82f6;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-icon {
+            font-size: 16px;
+            font-weight: 800;
+            color: #64748b;
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+            color: #3b82f6;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 16px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 16px 14px 16px;
+        }
+
+        .faq-answer p {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.5;
+            margin: 0;
+        }
     </style>
 
     <!-- Script to Load Live Profile Data & Manage Avatars -->
@@ -998,7 +1377,35 @@
         let currentTabGender = 'boys';
         let tempSelectedUrl = selectedAvatarUrl;
 
-        document.addEventListener("DOMContentLoaded", () => {
+        function initConnectionStatusIndicator() {
+            let container = document.getElementById("connection-status-badge");
+            if (!container) {
+                container = document.createElement("div");
+                container.id = "connection-status-badge";
+                container.className = "connection-status-badge";
+                document.body.appendChild(container);
+            }
+
+            function updateStatus() {
+                const isOnline = navigator.onLine;
+                if (isOnline) {
+                    container.className = "connection-status-badge online";
+                    container.innerHTML = `<span class="connection-status-dot"></span><span>Online</span>`;
+                } else {
+                    container.className = "connection-status-badge offline";
+                    container.innerHTML = `<span class="connection-status-dot"></span><span>Offline</span>`;
+                }
+            }
+
+            updateStatus();
+
+            window.addEventListener("online", updateStatus);
+            window.addEventListener("offline", updateStatus);
+            setInterval(updateStatus, 3000);
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            initConnectionStatusIndicator();
             const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
             const savedStudent = localStorage.getItem(STUDENT_KEY);
             const lastLoginDate = localStorage.getItem(LAST_LOGIN_DATE_KEY);
@@ -1012,14 +1419,88 @@
                 return;
             }
 
-            document.getElementById("roll-number-tag").innerText = savedStudent.trim();
+            // Load Student Profile from Active Session
+            let sessionData = null;
+            if (window.electronAPI && typeof window.electronAPI.loadStudentSession === "function") {
+                try {
+                    sessionData = await window.electronAPI.loadStudentSession();
+                } catch (e) {}
+            }
+            if (!sessionData) {
+                try {
+                    const raw = localStorage.getItem("language_lab_student_session_v1");
+                    if (raw) sessionData = JSON.parse(raw);
+                } catch (e) {}
+            }
+
+            const rollNo = sessionData?.student?.roll_number || sessionData?.roll_number || savedStudent.trim();
+            const studentName = sessionData?.student?.name || sessionData?.name || "";
+
+            // Bind Roll Number & Name to Hero Card Header (Fixes static fallback string bug)
+            const rollTagEl = document.getElementById("roll-number-tag");
+            if (rollTagEl) rollTagEl.innerText = rollNo;
+
+            const heroNameEl = document.querySelector(".hero-name");
+            if (heroNameEl) {
+                heroNameEl.innerText = rollNo;
+            }
+
+            // Load & Bind CMS Ingested Packages to Assigned Lessons List
+            let assignedPackages = sessionData?.assigned_packages || sessionData?.assignedPackages || [];
+            if (window.electronAPI && typeof window.electronAPI.listLocalExperiences === "function") {
+                try {
+                    const localExp = await window.electronAPI.listLocalExperiences();
+                    if (localExp && localExp.length > 0) {
+                        localExp.forEach(exp => {
+                            if (!assignedPackages.some(p => (p.package_id || p.id) === exp.id)) {
+                                assignedPackages.push({
+                                    package_id: exp.id,
+                                    package_name: exp.id,
+                                    title: exp.id
+                                });
+                            }
+                        });
+                    }
+                } catch (e) {}
+            }
+
+            const staticMockContainer = document.getElementById("static-mock-lessons-container");
+            const dynamicContainer = document.getElementById("dynamic-assigned-packages-container");
+            const countBadge = document.getElementById("assigned-packages-count-badge");
+
+            if (assignedPackages && assignedPackages.length > 0) {
+                if (staticMockContainer) staticMockContainer.style.display = "none";
+                if (dynamicContainer) dynamicContainer.style.display = "grid";
+                if (countBadge) countBadge.innerText = `${assignedPackages.length} Assigned`;
+
+                if (dynamicContainer) {
+                    dynamicContainer.innerHTML = assignedPackages.map(pkg => {
+                        const pkgId = pkg.package_id || pkg.packageId || pkg.id || "package_custom";
+                        const pkgTitle = pkg.package_name || pkg.title || pkg.name || pkgId;
+                        const desc = pkg.description || "CMS Published .elab package lesson.";
+
+                        return `
+                            <div class="badge-box unlocked" style="text-align: left; padding: 20px; border-radius: 16px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
+                                <div style="font-size: 28px; margin-bottom: 10px;">📦</div>
+                                <div style="font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: 6px;">${pkgTitle}</div>
+                                <div style="font-size: 11.5px; font-family: monospace; color: #7c3aed; margin-bottom: 8px;">${pkgId}.elab</div>
+                                <div style="font-size: 12px; color: #64748b; margin-bottom: 14px;">${desc}</div>
+                                <button class="btn-back-map" style="padding: 6px 14px; font-size: 12px; border-radius: 8px; cursor: pointer;" onclick="launchCMSPackage('${pkgId}', '${encodeURIComponent(pkgTitle)}')">▶ Start / Resume</button>
+                            </div>
+                        `;
+                    }).join("");
+                }
+            } else {
+                if (countBadge) countBadge.innerText = "0 Assigned";
+            }
 
             // Load initial avatar
             const savedAvatar = localStorage.getItem(AVATAR_KEY);
             if (savedAvatar) {
                 selectedAvatarUrl = savedAvatar;
                 tempSelectedUrl = savedAvatar;
-                document.getElementById("profile-avatar-img").src = savedAvatar;
+                const avatarImg = document.getElementById("profile-avatar-img");
+                if (avatarImg) avatarImg.src = savedAvatar;
             }
 
             // Load progress
@@ -1036,9 +1517,12 @@
                         });
                     }
 
-                    document.getElementById("hero-level-tag").innerText = `Level ${unlockedLevel}`;
-                    document.getElementById("stat-levels").innerText = `${unlockedLevel} / 30`;
-                    document.getElementById("stat-stars").innerText = `${totalStars} / 30`;
+                    const heroLevelTag = document.getElementById("hero-level-tag");
+                    if (heroLevelTag) heroLevelTag.innerText = `Level ${unlockedLevel}`;
+                    const statLevels = document.getElementById("stat-levels");
+                    if (statLevels) statLevels.innerText = `${unlockedLevel} / 30`;
+                    const statStars = document.getElementById("stat-stars");
+                    if (statStars) statStars.innerText = `${totalStars} / 30`;
 
                     if (unlockedLevel >= 7) unlockBadge("badge-glacier", "status-glacier");
                     if (unlockedLevel >= 11) unlockBadge("badge-blossom", "status-blossom");
@@ -1064,20 +1548,20 @@
             // Setup Change Avatar Modal Controls
             setupAvatarPicker();
 
-            // Logout
-            document.getElementById("profile-logout-btn").addEventListener("click", () => {
-                localStorage.removeItem(AUTH_STORAGE_KEY);
-                sessionStorage.removeItem(APP_SESSION_KEY);
-                window.location.href = "login.html";
-            });
+            // Setup Help & Support Modals (Help Center, Contact Support, Report Bug)
+            setupSupportModals();
         });
 
-        function unlockBadge(boxId, statusId) {
-            const box = document.getElementById(boxId);
-            const status = document.getElementById(statusId);
-            if (box) box.classList.add("unlocked");
-            if (status) status.innerText = "Unlocked";
+        function handleLogout() {
+            localStorage.removeItem(AUTH_STORAGE_KEY);
+            localStorage.removeItem("language_lab_student_id_v1");
+            localStorage.removeItem("language_lab_last_login_date_v1");
+            localStorage.removeItem("language_lab_student_session_v1");
+            sessionStorage.removeItem(APP_SESSION_KEY);
+            sessionStorage.clear();
+            window.location.href = "login.html";
         }
+        window.handleLogout = handleLogout;
 
         // Avatar Picker Engine
         function setupAvatarPicker() {
@@ -1089,35 +1573,44 @@
             const tabBoys = document.getElementById("tab-boys");
             const tabGirls = document.getElementById("tab-girls");
 
-            changeBtn.addEventListener("click", () => {
-                tempSelectedUrl = selectedAvatarUrl;
-                avatarModal.classList.remove("hidden");
-                renderAvatarsGrid();
-            });
+            if (changeBtn) {
+                changeBtn.addEventListener("click", () => {
+                    tempSelectedUrl = selectedAvatarUrl;
+                    if (avatarModal) avatarModal.classList.remove("hidden");
+                    renderAvatarsGrid();
+                });
+            }
 
-            closeBtn.addEventListener("click", () => avatarModal.classList.add("hidden"));
-            cancelBtn.addEventListener("click", () => avatarModal.classList.add("hidden"));
+            if (closeBtn && avatarModal) closeBtn.addEventListener("click", () => avatarModal.classList.add("hidden"));
+            if (cancelBtn && avatarModal) cancelBtn.addEventListener("click", () => avatarModal.classList.add("hidden"));
 
-            tabBoys.addEventListener("click", () => {
-                currentTabGender = 'boys';
-                tabBoys.classList.add("active");
-                tabGirls.classList.remove("active");
-                renderAvatarsGrid();
-            });
+            if (tabBoys) {
+                tabBoys.addEventListener("click", () => {
+                    currentTabGender = 'boys';
+                    tabBoys.classList.add("active");
+                    if (tabGirls) tabGirls.classList.remove("active");
+                    renderAvatarsGrid();
+                });
+            }
 
-            tabGirls.addEventListener("click", () => {
-                currentTabGender = 'girls';
-                tabGirls.classList.add("active");
-                tabBoys.classList.remove("active");
-                renderAvatarsGrid();
-            });
+            if (tabGirls) {
+                tabGirls.addEventListener("click", () => {
+                    currentTabGender = 'girls';
+                    tabGirls.classList.add("active");
+                    if (tabBoys) tabBoys.classList.remove("active");
+                    renderAvatarsGrid();
+                });
+            }
 
-            saveBtn.addEventListener("click", () => {
-                selectedAvatarUrl = tempSelectedUrl;
-                localStorage.setItem(AVATAR_KEY, selectedAvatarUrl);
-                document.getElementById("profile-avatar-img").src = selectedAvatarUrl;
-                avatarModal.classList.add("hidden");
-            });
+            if (saveBtn) {
+                saveBtn.addEventListener("click", () => {
+                    selectedAvatarUrl = tempSelectedUrl;
+                    localStorage.setItem(AVATAR_KEY, selectedAvatarUrl);
+                    const avatarImg = document.getElementById("profile-avatar-img");
+                    if (avatarImg) avatarImg.src = selectedAvatarUrl;
+                    if (avatarModal) avatarModal.classList.add("hidden");
+                });
+            }
         }
 
         function renderAvatarsGrid() {
@@ -1140,6 +1633,206 @@
 
                 grid.appendChild(card);
             });
+        }
+
+        // Help & Support Modals Engine (Help Center, Contact Support, Report Bug)
+        function setupSupportModals() {
+            // Help Center Modal
+            const helpCenterModal = document.getElementById("help-center-modal");
+            const helpCenterBtn = document.getElementById("help-center-btn");
+            const helpCenterCloseBtn = document.getElementById("help-center-modal-close");
+            const helpCenterBottomCloseBtn = document.getElementById("help-center-close-btn");
+            const faqSearchInput = document.getElementById("faq-search-input");
+            const faqItems = document.querySelectorAll(".faq-item");
+
+            if (helpCenterBtn) {
+                helpCenterBtn.addEventListener("click", () => {
+                    helpCenterModal.classList.remove("hidden");
+                });
+            }
+            if (helpCenterCloseBtn) helpCenterCloseBtn.addEventListener("click", () => helpCenterModal.classList.add("hidden"));
+            if (helpCenterBottomCloseBtn) helpCenterBottomCloseBtn.addEventListener("click", () => helpCenterModal.classList.add("hidden"));
+
+            // FAQ Accordion toggles
+            faqItems.forEach(item => {
+                const questionBtn = item.querySelector(".faq-question");
+                if (questionBtn) {
+                    questionBtn.addEventListener("click", () => {
+                        const isActive = item.classList.contains("active");
+                        faqItems.forEach(i => i.classList.remove("active"));
+                        if (!isActive) item.classList.add("active");
+                    });
+                }
+            });
+
+            // FAQ Search Filter
+            if (faqSearchInput) {
+                faqSearchInput.addEventListener("input", (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    faqItems.forEach(item => {
+                        const text = item.innerText.toLowerCase();
+                        if (text.includes(query)) {
+                            item.style.display = "block";
+                        } else {
+                            item.style.display = "none";
+                        }
+                    });
+                });
+            }
+
+            // Contact Support Modal
+            const contactModal = document.getElementById("contact-support-modal");
+            const contactBtn = document.getElementById("contact-support-btn");
+            const contactCloseBtn = document.getElementById("contact-support-modal-close");
+            const contactCancelBtn = document.getElementById("contact-support-cancel-btn");
+            const contactForm = document.getElementById("contact-support-form");
+            const supportAlert = document.getElementById("support-form-alert");
+            const supportRollInput = document.getElementById("support-roll-no");
+
+            if (contactBtn) {
+                contactBtn.addEventListener("click", () => {
+                    const savedStudent = localStorage.getItem(STUDENT_KEY) || "STU-101";
+                    if (supportRollInput) supportRollInput.value = savedStudent.trim();
+                    if (supportAlert) {
+                        supportAlert.classList.add("hidden");
+                        supportAlert.className = "support-alert hidden";
+                    }
+                    contactModal.classList.remove("hidden");
+                });
+            }
+
+            if (contactCloseBtn) contactCloseBtn.addEventListener("click", () => contactModal.classList.add("hidden"));
+            if (contactCancelBtn) contactCancelBtn.addEventListener("click", () => contactModal.classList.add("hidden"));
+
+            if (contactForm) {
+                contactForm.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const subject = document.getElementById("support-subject").value.trim();
+                    const category = document.getElementById("support-category").value;
+                    const message = document.getElementById("support-message").value.trim();
+                    const rollNo = supportRollInput ? supportRollInput.value : "STU-101";
+
+                    if (!subject || !message) {
+                        showSupportAlert(supportAlert, "Please fill in all required fields.", "error");
+                        return;
+                    }
+
+                    const ticketId = "SUP-" + Math.floor(100000 + Math.random() * 900000);
+                    const ticket = {
+                        id: ticketId,
+                        rollNo,
+                        category,
+                        subject,
+                        message,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    try {
+                        const existingTickets = JSON.parse(localStorage.getItem("language_lab_support_tickets_v1") || "[]");
+                        existingTickets.push(ticket);
+                        localStorage.setItem("language_lab_support_tickets_v1", JSON.stringify(existingTickets));
+                    } catch (err) {}
+
+                    showSupportAlert(supportAlert, `✅ Support ticket submitted successfully! Ticket ID: <strong>#${ticketId}</strong>. Our team will contact you shortly.`, "success");
+                    contactForm.reset();
+                    if (supportRollInput) supportRollInput.value = rollNo;
+
+                    setTimeout(() => {
+                        contactModal.classList.add("hidden");
+                    }, 2500);
+                });
+            }
+
+            // Report Bug Modal
+            const bugModal = document.getElementById("report-bug-modal");
+            const bugBtn = document.getElementById("report-bug-btn");
+            const bugCloseBtn = document.getElementById("report-bug-modal-close");
+            const bugCancelBtn = document.getElementById("report-bug-cancel-btn");
+            const bugForm = document.getElementById("report-bug-form");
+            const bugAlert = document.getElementById("bug-form-alert");
+
+            if (bugBtn) {
+                bugBtn.addEventListener("click", () => {
+                    if (bugAlert) {
+                        bugAlert.classList.add("hidden");
+                        bugAlert.className = "support-alert hidden";
+                    }
+                    bugModal.classList.remove("hidden");
+                });
+            }
+
+            if (bugCloseBtn) bugCloseBtn.addEventListener("click", () => bugModal.classList.add("hidden"));
+            if (bugCancelBtn) bugCancelBtn.addEventListener("click", () => bugModal.classList.add("hidden"));
+
+            if (bugForm) {
+                bugForm.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const title = document.getElementById("bug-title").value.trim();
+                    const severity = document.getElementById("bug-severity").value;
+                    const description = document.getElementById("bug-description").value.trim();
+                    const savedStudent = localStorage.getItem(STUDENT_KEY) || "STU-101";
+
+                    if (!title || !description) {
+                        showSupportAlert(bugAlert, "Please fill in all required fields.", "error");
+                        return;
+                    }
+
+                    const bugId = "BUG-" + Math.floor(10000 + Math.random() * 90000);
+                    const bugReport = {
+                        id: bugId,
+                        rollNo: savedStudent.trim(),
+                        title,
+                        severity,
+                        description,
+                        userAgent: navigator.userAgent,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    try {
+                        const existingBugs = JSON.parse(localStorage.getItem("language_lab_bug_reports_v1") || "[]");
+                        existingBugs.push(bugReport);
+                        localStorage.setItem("language_lab_bug_reports_v1", JSON.stringify(existingBugs));
+                    } catch (err) {}
+
+                    showSupportAlert(bugAlert, `🐞 Bug report submitted successfully! Reference ID: <strong>#${bugId}</strong>. Thank you for reporting!`, "success");
+                    bugForm.reset();
+
+                    setTimeout(() => {
+                        bugModal.classList.add("hidden");
+                    }, 2500);
+                });
+            }
+
+            // Close modals when clicking outside modal-card on backdrop
+            [helpCenterModal, contactModal, bugModal].forEach(modal => {
+                if (modal) {
+                    modal.addEventListener("click", (e) => {
+                        if (e.target === modal) {
+                            modal.classList.add("hidden");
+                        }
+                    });
+                }
+            });
+        }
+
+        window.launchCMSPackage = function(packageId, encodedTitle) {
+            const title = decodeURIComponent(encodedTitle || packageId);
+            console.log(`[Launch] Opening CMS package ${packageId} (${title})...`);
+            if (window.electronAPI && typeof window.electronAPI.openEngine === "function") {
+                window.electronAPI.openEngine({
+                    id: packageId,
+                    title: title
+                });
+            } else {
+                window.location.href = `language-lab-engine/dist/index.html?levelId=${encodeURIComponent(packageId)}&title=${encodeURIComponent(title)}`;
+            }
+        };
+
+        function showSupportAlert(alertEl, msg, type) {
+            if (!alertEl) return;
+            alertEl.innerHTML = msg;
+            alertEl.className = `support-alert ${type}`;
+            alertEl.classList.remove("hidden");
         }
     </script>
 </body>
