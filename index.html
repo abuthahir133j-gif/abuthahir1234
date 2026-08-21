@@ -86,7 +86,7 @@
         <!-- 3. AI Helper Mascot Button -->
         <div class="hud-btn-group">
             <button id="hud-robot-btn" class="hud-circle-btn robot-btn" title="One Tutor AI Assistant">
-                <img src="robot_avatar.png" alt="AI Helper" class="robot-avatar-img">
+                <img src="AI/PNg.svg" alt="AI Helper" class="robot-avatar-img">
             </button>
             <div id="robot-dropdown" class="hud-dropdown-panel robot-dropdown hidden">
                 <div class="dropdown-header robot-header">
@@ -186,19 +186,44 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Assigned Lessons & Course Packages Modal -->
-    <div id="assigned-lessons-modal" class="modal-overlay hidden">
-        <div class="modal-card assigned-lessons-card">
-            <button id="lessons-modal-close" class="close-btn">&times;</button>
-            <div class="lessons-modal-header">
-                <h2>📚 Assigned Lessons & Course Packages</h2>
-                <p>Synced from CMS Backend • Ready to Start</p>
-            </div>
-            <div id="lessons-grid" class="lessons-grid">
-                <!-- Dynamically populated package cards -->
+            <!-- Step 6 Real-Time Browser Event Test Playground -->
+            <div style="margin-top: 24px; padding: 16px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px;">
+                <h3 style="color: #38BDF8; font-size: 14px; margin-bottom: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                    <span>⚡</span> Step 6 Browser Reaction Test Playground
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                    <!-- Tracked Hotel Card (Look on Hover) -->
+                    <div id="test-hotel-card" data-buddy-target="true" data-buddy-reaction="look" style="padding: 12px; background: rgba(30, 41, 59, 0.8); border: 1px solid #38BDF8; border-radius: 8px; cursor: pointer; transition: transform 0.2s;">
+                        <div style="font-weight: bold; color: #FFF; font-size: 12px;">🏨 Grand Luxury Resort</div>
+                        <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Hover to trigger Gaze Look</div>
+                    </div>
+
+                    <!-- Tracked Point Action Button -->
+                    <button id="test-point-btn" data-buddy-target="true" data-buddy-reaction="point" style="padding: 10px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
+                        👉 Point at View Details
+                    </button>
+
+                    <!-- Success Event Trigger -->
+                    <button id="test-success-btn" data-buddy-target="true" data-buddy-reaction="success" style="padding: 10px; background: linear-gradient(135deg, #10b981, #059669); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
+                        🎉 Test Success Reaction
+                    </button>
+
+                    <!-- Error Event Trigger -->
+                    <button id="test-error-btn" data-buddy-target="true" data-buddy-reaction="error" style="padding: 10px; background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
+                        ⚠️ Test Error Reaction
+                    </button>
+
+                    <!-- Momo AI Buddy Login Greeting Trigger -->
+                    <button id="test-momo-greeting-btn" onclick="if (window.buddyEvents) { window.buddyEvents.emit('LOGIN_SUCCESS', { type: 'LOGIN_SUCCESS', studentId: 'TEST_STUDENT' }); } else if (window.momoController) { window.momoController.triggerTestGreeting(); }" style="padding: 10px; background: linear-gradient(135deg, #ec4899, #be185d); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer; grid-column: span 2;">
+                        👋 [ TEST MOMO GREETING ]
+                    </button>
+
+                    <!-- Ignored Element (No Reaction) -->
+                    <div id="test-ignored-zone" data-buddy-ignore="true" style="padding: 12px; background: rgba(51, 65, 85, 0.5); border: 1px dashed #64748B; border-radius: 8px;">
+                        <div style="font-size: 11px; color: #94A3B8;">🚫 Ignored Zone (data-buddy-ignore)</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -206,6 +231,11 @@
     <!-- Travel AI Buddy Modules -->
     <script src="src/events/buddyEvents.js"></script>
     <script src="src/components/TravelBuddy/buddy.config.js"></script>
+    <script src="src/components/TravelBuddy/buddyRigConfig.js"></script>
+    <script src="src/components/TravelBuddy/BuddyRigController.js"></script>
+    <script src="src/components/TravelBuddy/BuddyAnimationState.js"></script>
+    <script src="src/components/TravelBuddy/BuddyTimeline.js"></script>
+    <script src="src/components/TravelBuddy/BuddyAnimationEngine.js"></script>
     <script src="src/components/TravelBuddy/BuddyAnimations.js"></script>
     <script src="src/components/TravelBuddy/BuddyScene.js"></script>
     <script src="src/components/TravelBuddy/BuddyController.js"></script>
@@ -219,6 +249,7 @@
     <script src="src/voice/buddy/voiceConfig.js"></script>
     <script src="src/voice/buddy/speechRecognition.js"></script>
     <script src="src/voice/buddy/speechSynthesis.js"></script>
+    <script src="src/voice/buddy/MomoSpeech.js"></script>
     <script src="src/voice/buddy/voiceController.js"></script>
     <script src="src/services/travel/travelDataCache.js"></script>
     <script src="src/services/travel/travelDataNormalizer.js"></script>
@@ -236,6 +267,18 @@
     <script src="src/character/buddy/BuddyGestureController.js"></script>
     <script src="src/character/buddy/BuddyIdleController.js"></script>
     <script src="src/character/buddy/BuddyActionSequencer.js"></script>
+    <script src="src/character/buddy/actions/TargetResolver.js"></script>
+    <script src="src/character/buddy/actions/PointPoseCalculator.js"></script>
+    <script src="src/character/buddy/actions/PointAction.js"></script>
+    <script src="src/character/buddy/actions/GreetingAction.js"></script>
+    <script src="src/character/buddy/actions/GazePoseCalculator.js"></script>
+    <script src="src/character/buddy/actions/GazeController.js"></script>
+    <script src="src/character/buddy/actions/FacePoseCalculator.js"></script>
+    <script src="src/character/buddy/actions/BuddyFaceController.js"></script>
+    <script src="src/character/buddy/reactions/BuddyReactionConfig.js"></script>
+    <script src="src/character/buddy/reactions/BuddyEventDetector.js"></script>
+    <script src="src/character/buddy/reactions/BuddyReactionManager.js"></script>
+    <script src="src/character/buddy/MomoController.js"></script>
     <script src="src/character/buddy/BuddyBehaviorEngine.js"></script>
     <script src="src/memory/buddy/memoryStore.js"></script>
     <script src="src/memory/buddy/userPreferences.js"></script>

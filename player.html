@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Lab - Experience Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- React 18 & Babel Standalone -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-dark: #070c18;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --accent-blue: #38bdf8;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphic Container */
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Top Header */
+        header.engine-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateX(-3px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .level-pill {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+        }
+
+        .grade-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 30px;
+        }
+
+        .header-title-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .stat-badge.xp {
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.3);
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .stat-badge.stars {
+            color: #f59e0b;
+        }
+
+        /* Activity Navigation Bar */
+        .activity-nav-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(15, 23, 42, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            overflow-x: auto;
+        }
+
+        .activity-tab {
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .activity-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .activity-tab.active {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(139, 92, 246, 0.2));
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+        }
+
+        /* Engine Body */
+        main.engine-body {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 20px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* Screen Stepper Tabs */
+        .screens-tab-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 8px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .screen-tab {
+            flex: 1;
+            min-width: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .screen-tab.active {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(139, 92, 246, 0.25));
+            color: #ffffff;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+        }
+
+        .screen-tab.completed {
+            color: #34d399;
+        }
+
+        .screen-num {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .screen-tab.active .screen-num {
+            background: var(--accent-blue);
+            color: #090d16;
+        }
+
+        .screen-tab.completed .screen-num {
+            background: #10b981;
+            color: #ffffff;
+        }
+
+        /* Screen Canvas Card */
+        .screen-card {
+            padding: 28px 32px;
+            min-height: 520px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .screen-header {
+            margin-bottom: 20px;
+        }
+
+        .screen-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .screen-main-title {
+            font-family: 'Poppins', 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        /* Canvas Layout Grid (Left / Right slots) */
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            align-items: center;
+            margin: 16px 0;
+        }
+
+        .canvas-full {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        /* Media Elements */
+        .media-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 380px;
+        }
+
+        .media-box img {
+            width: 100%;
+            height: auto;
+            max-height: 360px;
+            object-fit: contain;
+        }
+
+        .media-box video {
+            width: 100%;
+            height: auto;
+            max-height: 360px;
+            background: #000;
+        }
+
+        /* Dialogue Box (content.steps) */
+        .dialogue-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .dialogue-bubble {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .dialogue-bubble:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .speaker-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0284c7, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .speaker-name {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin-bottom: 3px;
+        }
+
+        .dialogue-text {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #f1f5f9;
+        }
+
+        .tts-btn {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-blue);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .tts-btn:hover {
+            background: var(--accent-blue);
+            color: #080d1a;
+        }
+
+        /* Quiz Element UI */
+        .quiz-element-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 22px;
+            margin: 14px 0;
+        }
+
+        .quiz-q-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 16px;
+            border-radius: 12px;
+            color: #f8fafc;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.selected-correct {
+            background: rgba(16, 185, 129, 0.25) !important;
+            border-color: #10b981 !important;
+            color: #34d399 !important;
+        }
+
+        .option-btn.selected-wrong {
+            background: rgba(244, 63, 94, 0.25) !important;
+            border-color: #f43f5e !important;
+            color: #fb7185 !important;
+        }
+
+        /* Reading Passage UI */
+        .passage-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 14px 0;
+        }
+
+        .passage-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #c084fc;
+            margin-bottom: 8px;
+        }
+
+        .passage-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #f1f5f9;
+        }
+
+        /* Sequence Ordering UI */
+        .sequence-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 14px 0;
+        }
+
+        .sequence-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        /* Word Search Grid UI */
+        .word-search-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 36px);
+            gap: 6px;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        .word-cell {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .word-cell:hover {
+            background: var(--accent-blue);
+            color: #080d1a;
+        }
+
+        .word-cell.selected {
+            background: #10b981;
+            color: white;
+        }
+
+        /* Dictation & Writing Area */
+        .input-area-box {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-family: inherit;
+            resize: vertical;
+            outline: none;
+        }
+
+        .input-area-box:focus {
+            border-color: var(--accent-blue);
+        }
+
+        /* Footer Nav Buttons */
+        .screen-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 18px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-btn.prev {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-btn.prev:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: #ffffff;
+            box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
+        }
+
+        .nav-btn.next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(37, 99, 235, 0.55);
+        }
+
+        .nav-btn.complete {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.45);
+        }
+
+        .nav-btn.complete:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 28px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Victory Screen */
+        .victory-container {
+            text-align: center;
+            padding: 36px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .victory-stars {
+            font-size: 52px;
+            letter-spacing: 12px;
+            color: #f59e0b;
+            text-shadow: 0 0 30px rgba(245, 158, 11, 0.6);
+        }
+
+        .victory-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 34px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #38bdf8, #a855f7, #f59e0b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .victory-subtitle {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 500px;
+        }
+
+        .rewards-row {
+            display: flex;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        .reward-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 14px 22px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .reward-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: #fbbf24;
+        }
+
+        .reward-lbl {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Resolve Local and CMS Media URLs
+        function resolveMediaUrl(rawUrl, packageId = '49') {
+            if (!rawUrl) return '';
+            if (rawUrl.startsWith('data:') || rawUrl.startsWith('blob:')) return rawUrl;
+            
+            const filename = rawUrl.split('/').pop().split('?')[0];
+            const isVideo = filename.endsWith('.mp4') || filename.endsWith('.webm') || filename.endsWith('.mov');
+            const isImage = filename.endsWith('.png') || filename.endsWith('.jpg') || filename.endsWith('.jpeg') || filename.endsWith('.webp') || filename.endsWith('.svg');
+            
+            if (isVideo) {
+                return `assets/packages/${packageId}/assets/video/${filename}`;
+            }
+            if (isImage) {
+                return `assets/packages/${packageId}/assets/images/${filename}`;
+            }
+            if (rawUrl.includes('/media/')) {
+                const mediaPath = rawUrl.substring(rawUrl.indexOf('/media/'));
+                return `http://10.29.224.31:8000${mediaPath}`;
+            }
+            return rawUrl;
+        }
+
+        function ExperienceEngineApp() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const levelIdParam = Number(urlParams.get('levelId')) || 1;
+            const packageIdParam = urlParams.get('packageId') || '49';
+            const titleParam = urlParams.get('title') || 'The Lost Picnic';
+
+            const [currentActivityIdx, setCurrentActivityIdx] = useState(0);
+            const [currentScreenIdx, setCurrentScreenIdx] = useState(0);
+            const [xp, setXp] = useState(50);
+            const [stars, setStars] = useState(1);
+            const [quizAnswers, setQuizAnswers] = useState({});
+            const [isCompleted, setIsCompleted] = useState(false);
+            const [experienceData, setExperienceData] = useState(null);
+            const [studentGrade, setStudentGrade] = useState('Grade 5');
+            const [studentName, setStudentName] = useState('Student');
+            const [userText, setUserText] = useState('');
+            const [selectedGridCells, setSelectedGridCells] = useState([]);
+
+            // Load Package Experience Directly
+            useEffect(() => {
+                async function loadExperience() {
+                    let currentUser = {};
+                    try {
+                        currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                    } catch (e) {}
+
+                    const grade = currentUser.grade || 'Grade 5';
+                    const name = currentUser.name || currentUser.username || 'Student';
+                    setStudentGrade(grade);
+                    setStudentName(name);
+
+                    // Attempt 1: Fetch via getPackageExperience IPC
+                    if (window.electronAPI && typeof window.electronAPI.getPackageExperience === 'function') {
+                        try {
+                            const res = await window.electronAPI.getPackageExperience(packageIdParam || '49');
+                            if (res && res.success && res.data && res.data.activities) {
+                                console.log('[Engine] Loaded genuine experience via getPackageExperience:', res.data.title);
+                                setExperienceData(res.data);
+                                return;
+                            }
+                        } catch (err) {
+                            console.warn('[Engine] getPackageExperience error:', err);
+                        }
+                    }
+
+                    // Attempt 2: Fetch via getCmsPackages IPC
+                    if (window.electronAPI && typeof window.electronAPI.getCmsPackages === 'function') {
+                        try {
+                            const packages = await window.electronAPI.getCmsPackages(grade || currentUser.code);
+                            if (Array.isArray(packages) && packages.length > 0) {
+                                // Match package or default to Level 1 package (The Lost Picnic)
+                                const matched = packages.find(p => String(p.packageId) === String(packageIdParam) || String(p.id) === String(packageIdParam)) || packages[0];
+                                const exp = matched.payload?.activities ? matched.payload : (matched.activities ? matched : null);
+                                if (exp && exp.activities) {
+                                    console.log('[Engine] Loaded genuine experience via getCmsPackages:', exp.title);
+                                    setExperienceData(exp);
+                                    return;
+                                }
+                            }
+                        } catch (err) {
+                            console.warn('[Engine] getCmsPackages error:', err);
+                        }
+                    }
+
+                    // Attempt 3: Direct local fetch from assets/packages/49/experience.json
+                    try {
+                        const localRes = await fetch(`assets/packages/${packageIdParam || '49'}/experience.json`);
+                        if (localRes.ok) {
+                            const localExp = await localRes.json();
+                            if (localExp && localExp.activities) {
+                                console.log('[Engine] Loaded genuine experience from assets folder:', localExp.title);
+                                setExperienceData(localExp);
+                                return;
+                            }
+                        }
+                    } catch (e) {}
+                }
+
+                loadExperience();
+            }, []);
+
+            // Audio Speech Synthesis Player
+            function playSpeech(text) {
+                if ('speechSynthesis' in window && text) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.rate = 0.95;
+                    utterance.pitch = 1.0;
+                    utterance.lang = 'en-US';
+                    window.speechSynthesis.speak(utterance);
+                }
+            }
+
+            const activities = experienceData?.activities || [];
+            const currentActivity = activities[currentActivityIdx] || activities[0] || null;
+            const screens = currentActivity?.screens || [];
+            const currentScreen = screens[currentScreenIdx] || screens[0] || null;
+            const screenContent = currentScreen?.content || {};
+            const screenElements = screenContent?.elements || [];
+            const screenSteps = screenContent?.steps || [];
+
+            function handleQuizSelect(elementId, optIdx, isCorrect) {
+                if (quizAnswers[elementId] !== undefined) return;
+                setQuizAnswers(prev => ({ ...prev, [elementId]: optIdx }));
+                if (isCorrect) {
+                    setXp(prev => prev + 50);
+                    playSpeech('Correct! Excellent job.');
+                } else {
+                    playSpeech('Try again!');
+                }
+            }
+
+            function handleNextScreen() {
+                if (currentScreenIdx < screens.length - 1) {
+                    setCurrentScreenIdx(currentScreenIdx + 1);
+                } else if (currentActivityIdx < activities.length - 1) {
+                    setCurrentActivityIdx(currentActivityIdx + 1);
+                    setCurrentScreenIdx(0);
+                } else {
+                    setIsCompleted(true);
+                    setStars(3);
+                    if (typeof confetti === 'function') {
+                        confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+                    }
+                }
+            }
+
+            function handlePrevScreen() {
+                if (currentScreenIdx > 0) {
+                    setCurrentScreenIdx(currentScreenIdx - 1);
+                } else if (currentActivityIdx > 0) {
+                    setCurrentActivityIdx(currentActivityIdx - 1);
+                    const prevScreens = activities[currentActivityIdx - 1]?.screens || [];
+                    setCurrentScreenIdx(Math.max(0, prevScreens.length - 1));
+                }
+            }
+
+            function handleExit() {
+                if (window.electronAPI && typeof window.electronAPI.closeEngine === 'function') {
+                    window.electronAPI.closeEngine();
+                } else {
+                    window.close();
+                }
+            }
+
+            function handleSaveAndReturn() {
+                if (window.electronAPI && typeof window.electronAPI.completeLevel === 'function') {
+                    window.electronAPI.completeLevel(levelIdParam, 3);
+                }
+                setTimeout(() => handleExit(), 300);
+            }
+
+            const lessonTitle = experienceData?.title || titleParam;
+            const gradeDisplay = experienceData?.grade || studentGrade;
+            const activePkgId = packageIdParam || '49';
+
+            return (
+                <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                    {/* Header */}
+                    <header className="engine-header">
+                        <div className="header-left">
+                            <button className="back-btn" onClick={handleExit}>
+                                <span>←</span> Back to Map
+                            </button>
+                            <span className="level-pill">Level {levelIdParam}</span>
+                            <span className="grade-badge">{gradeDisplay}</span>
+                            <div className="header-title-box">
+                                <h1 className="header-title">{lessonTitle}</h1>
+                                <span className="header-subtitle">CMS Package Player • Level {levelIdParam}</span>
+                            </div>
+                        </div>
+
+                        <div className="header-right">
+                            <div className="stat-badge xp">
+                                <span>⚡</span> {xp} XP
+                            </div>
+                            <div className="stat-badge stars">
+                                <span>⭐</span> {isCompleted ? '3/3 Stars' : `${stars}/3 Stars`}
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Activity Tabs Bar */}
+                    {activities.length > 0 && !isCompleted && (
+                        <nav className="activity-nav-bar">
+                            {activities.map((act, idx) => {
+                                const icons = ['🎧', '🎙️', '📖', '✍️', '🎬', '🧩'];
+                                return (
+                                    <button
+                                        key={idx}
+                                        className={`activity-tab ${currentActivityIdx === idx ? 'active' : ''}`}
+                                        onClick={() => {
+                                            setCurrentActivityIdx(idx);
+                                            setCurrentScreenIdx(0);
+                                        }}
+                                    >
+                                        <span>{icons[idx % icons.length]}</span>
+                                        <span>Activity {idx + 1}: {act.title || `Part ${idx + 1}`}</span>
+                                    </button>
+                                );
+                            })}
+                        </nav>
+                    )}
+
+                    {/* Main Canvas Body */}
+                    <main className="engine-body">
+                        {/* Screen Tabs Bar */}
+                        {screens.length > 0 && !isCompleted && (
+                            <div className="screens-tab-bar">
+                                {screens.map((scr, idx) => (
+                                    <button
+                                        key={idx}
+                                        className={`screen-tab ${currentScreenIdx === idx ? 'active' : ''} ${currentScreenIdx > idx ? 'completed' : ''}`}
+                                        onClick={() => setCurrentScreenIdx(idx)}
+                                    >
+                                        <span className="screen-num">{currentScreenIdx > idx ? '✓' : idx + 1}</span>
+                                        <span>{scr.title || `Screen ${idx + 1}`}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Screen Canvas Card */}
+                        <div className="glass-panel screen-card">
+                            {!isCompleted ? (
+                                <div>
+                                    <div className="screen-header">
+                                        <span className="screen-badge">
+                                            {currentActivity?.title || 'Lesson'} • Screen {currentScreenIdx + 1} of {screens.length || 1}
+                                        </span>
+                                        <h2 className="screen-main-title">
+                                            {currentScreen?.title || screenContent?.title || lessonTitle}
+                                        </h2>
+                                        {screenContent?.text && screenContent.text !== 'Welcome Screen Text' && (
+                                            <p style={{ color: '#cbd5e1', fontSize: '16px', marginTop: '4px' }}>{screenContent.text}</p>
+                                        )}
+                                    </div>
+
+                                    {/* Main Elements Canvas */}
+                                    <div className={screenElements.some(e => e.type === 'image' || e.type === 'video') ? "canvas-grid" : "canvas-full"}>
+                                        {/* Render Left/Center Elements */}
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                            {screenElements.map((el, elIdx) => {
+                                                const elId = el.id || `el-${elIdx}`;
+
+                                                // 1. HEADING ELEMENT
+                                                if (el.type === 'heading') {
+                                                    return (
+                                                        <h3 key={elIdx} style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff', fontFamily: 'Poppins' }}>
+                                                            {el.content?.text || ''}
+                                                        </h3>
+                                                    );
+                                                }
+
+                                                // 2. TEXT / PARAGRAPH ELEMENT
+                                                if (el.type === 'text' && el.content?.text) {
+                                                    return (
+                                                        <div key={elIdx} style={{ fontSize: '18px', lineHeight: 1.6, color: '#e2e8f0', background: 'rgba(255,255,255,0.03)', padding: '14px 18px', borderRadius: '12px', borderLeft: '4px solid #38bdf8' }}>
+                                                            {el.content.text}
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // 3. READING PASSAGE ELEMENT
+                                                if (el.type === 'reading_passage') {
+                                                    const p = el.content || {};
+                                                    return (
+                                                        <div key={elIdx} className="passage-box">
+                                                            <div className="passage-title">📖 {p.title || 'Reading Passage'}</div>
+                                                            <div className="passage-text">{p.passage}</div>
+                                                            <button className="tts-btn" onClick={() => playSpeech(p.passage)}>
+                                                                <span>🔊</span> Read Aloud
+                                                            </button>
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // 4. QUIZ ELEMENT
+                                                if (el.type === 'quiz' || el.content?.question) {
+                                                    const q = el.content || {};
+                                                    const questionText = q.question || 'Select the correct answer:';
+                                                    const rawOptions = q.options || [];
+                                                    const options = rawOptions.map(o => (typeof o === 'object' ? o.text : o)).filter(Boolean);
+                                                    const correctIdx = q.correctAnswerIndex !== undefined ? q.correctAnswerIndex : 0;
+                                                    const selected = quizAnswers[elId];
+
+                                                    return (
+                                                        <div key={elIdx} className="quiz-element-box">
+                                                            <div className="quiz-q-title">
+                                                                <span>🎯</span> {questionText}
+                                                            </div>
+                                                            <div className="options-grid">
+                                                                {options.map((optText, optIdx) => {
+                                                                    let optClass = '';
+                                                                    if (selected !== undefined) {
+                                                                        if (optIdx === correctIdx) optClass = 'selected-correct';
+                                                                        else if (optIdx === selected) optClass = 'selected-wrong';
+                                                                    }
+                                                                    return (
+                                                                        <button
+                                                                            key={optIdx}
+                                                                            className={`option-btn ${optClass}`}
+                                                                            disabled={selected !== undefined}
+                                                                            onClick={() => handleQuizSelect(elId, optIdx, optIdx === correctIdx)}
+                                                                        >
+                                                                            <span>{String.fromCharCode(65 + optIdx)}.</span> {optText}
+                                                                        </button>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // 5. SEQUENCE ORDERING ELEMENT
+                                                if (el.type === 'sequence') {
+                                                    const items = el.content?.items || [];
+                                                    return (
+                                                        <div key={elIdx} className="sequence-box">
+                                                            <div className="quiz-q-title">
+                                                                <span>🔢</span> {el.content?.question || 'Arrange the items in correct order:'}
+                                                            </div>
+                                                            {items.map((item, i) => (
+                                                                <div key={i} className="sequence-item">
+                                                                    <span style={{ color: '#38bdf8', fontWeight: 800 }}>Step {i + 1}:</span>
+                                                                    <span>{item}</span>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // 6. VOICE RECORDER / PRONUNCIATION
+                                                if (el.type === 'voice_recorder' || el.type === 'pronunciation') {
+                                                    const promptText = el.content?.prompt || el.content?.word || 'Practice speaking this phrase.';
+                                                    return (
+                                                        <div key={elIdx} className="quiz-element-box" style={{ textAlign: 'center' }}>
+                                                            <div className="quiz-q-title" style={{ justifyContent: 'center' }}>
+                                                                <span>🎙️</span> {promptText}
+                                                            </div>
+                                                            {el.content?.phonetic && (
+                                                                <div style={{ color: '#94a3b8', fontSize: '15px', marginBottom: '12px' }}>{el.content.phonetic}</div>
+                                                            )}
+                                                            <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
+                                                                <button className="tts-btn" style={{ padding: '10px 20px', fontSize: '14px' }} onClick={() => playSpeech(promptText)}>
+                                                                    <span>🔊</span> Listen
+                                                                </button>
+                                                                <button
+                                                                    className="tts-btn"
+                                                                    style={{ padding: '10px 20px', fontSize: '14px', background: 'rgba(239, 68, 68, 0.2)', borderColor: '#ef4444', color: '#f87171' }}
+                                                                    onClick={() => alert('Recording audio... (Great pronunciation!)')}
+                                                                >
+                                                                    <span>🔴</span> Record Voice
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // 7. ROLE PLAY SCRIPT
+                                                if (el.type === 'role_play' && el.content?.script) {
+                                                    return (
+                                                        <div key={elIdx} className="dialogue-container">
+                                                            {el.content.script.map((line, lIdx) => (
+                                                                <div key={lIdx} className="dialogue-bubble">
+                                                                    <div className="speaker-avatar">{line.speaker || 'A'}</div>
+                                                                    <div style={{ flex: 1 }}>
+                                                                        <div className="speaker-name">Speaker {line.speaker}</div>
+                                                                        <div className="dialogue-text">"{line.text}"</div>
+                                                                        <button className="tts-btn" onClick={() => playSpeech(line.text)}>
+                                                                            <span>🔊</span> Listen
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // 8. WORD SEARCH GRID
+                                                if (el.type === 'word_search') {
+                                                    const words = el.content?.words || ['PICNIC', 'BASKET', 'GARDEN'];
+                                                    const sampleGrid = [
+                                                        ['P', 'I', 'C', 'N', 'I', 'C', 'A', 'B'],
+                                                        ['G', 'A', 'R', 'D', 'E', 'N', 'C', 'D'],
+                                                        ['B', 'A', 'S', 'K', 'E', 'T', 'E', 'F'],
+                                                        ['L', 'I', 'S', 'T', 'E', 'N', 'G', 'H'],
+                                                        ['C', 'L', 'U', 'E', 'S', 'T', 'U', 'D'],
+                                                        ['F', 'O', 'U', 'N', 'D', 'X', 'Y', 'Z'],
+                                                        ['T', 'E', 'A', 'C', 'H', 'E', 'R', 'W'],
+                                                        ['S', 'C', 'H', 'O', 'O', 'L', 'Q', 'R']
+                                                    ];
+
+                                                    return (
+                                                        <div key={elIdx} className="quiz-element-box">
+                                                            <div className="quiz-q-title">
+                                                                <span>🔍</span> {el.content?.question || 'Find the hidden words in the grid:'}
+                                                            </div>
+                                                            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+                                                                {words.map((w, wi) => (
+                                                                    <span key={wi} style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', padding: '4px 10px', borderRadius: '12px', fontWeight: 800, fontSize: '12px' }}>
+                                                                        ✓ {w}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                            <div className="word-search-grid">
+                                                                {sampleGrid.flat().map((letter, cellIdx) => (
+                                                                    <div
+                                                                        key={cellIdx}
+                                                                        className={`word-cell ${selectedGridCells.includes(cellIdx) ? 'selected' : ''}`}
+                                                                        onClick={() => {
+                                                                            setSelectedGridCells(prev => 
+                                                                                prev.includes(cellIdx) ? prev.filter(c => c !== cellIdx) : [...prev, cellIdx]
+                                                                            );
+                                                                        }}
+                                                                    >
+                                                                        {letter}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // 9. WRITING PROMPT / DICTATION INPUT
+                                                if (el.type === 'writing_prompt' || el.type === 'dictation') {
+                                                    return (
+                                                        <div key={elIdx} className="quiz-element-box">
+                                                            <div className="quiz-q-title">
+                                                                <span>✍️</span> {el.content?.prompt || el.content?.question || 'Write your response below:'}
+                                                            </div>
+                                                            <textarea
+                                                                className="input-area-box"
+                                                                rows="4"
+                                                                placeholder={el.content?.placeholder || "Type here..."}
+                                                                value={userText}
+                                                                onChange={(e) => setUserText(e.target.value)}
+                                                            />
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
+                                                                <span style={{ fontSize: '12px', color: '#94a3b8' }}>
+                                                                    Word count: {userText.trim() ? userText.trim().split(/\s+/).length : 0}
+                                                                </span>
+                                                                <button className="tts-btn" onClick={() => { playSpeech(userText || 'Great submission!'); alert('Response submitted!'); }}>
+                                                                    <span>💾</span> Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+
+                                                return null;
+                                            })}
+                                        </div>
+
+                                        {/* Render Right Media Slot (Image / Video) */}
+                                        {screenElements.map((el, elIdx) => {
+                                            if (el.type === 'image' || el.content?.media_type === 'IMAGE') {
+                                                const imgUrl = resolveMediaUrl(el.content?.url || screenContent.media_url, activePkgId);
+                                                return (
+                                                    <div key={elIdx} className="media-box">
+                                                        <img src={imgUrl} alt="Lesson Media Graphic" onError={(e) => { e.target.src = 'assets/packages/49/assets/images/0a119570d00e4523a0a4ccca12b5427c.png'; }} />
+                                                    </div>
+                                                );
+                                            }
+
+                                            if (el.type === 'video' || el.content?.media_type === 'VIDEO') {
+                                                const vidUrl = resolveMediaUrl(el.content?.url || screenContent.media_url, activePkgId);
+                                                return (
+                                                    <div key={elIdx} className="media-box">
+                                                        <video src={vidUrl} controls autoPlay muted loop />
+                                                    </div>
+                                                );
+                                            }
+                                            return null;
+                                        })}
+                                    </div>
+
+                                    {/* Navigation Footer */}
+                                    <div className="screen-footer">
+                                        <button
+                                            className="nav-btn prev"
+                                            disabled={currentActivityIdx === 0 && currentScreenIdx === 0}
+                                            onClick={handlePrevScreen}
+                                            style={{ opacity: (currentActivityIdx === 0 && currentScreenIdx === 0) ? 0.4 : 1, cursor: (currentActivityIdx === 0 && currentScreenIdx === 0) ? 'not-allowed' : 'pointer' }}
+                                        >
+                                            ← Previous
+                                        </button>
+
+                                        <button className="nav-btn next" onClick={handleNextScreen}>
+                                            {(currentActivityIdx === activities.length - 1 && currentScreenIdx === screens.length - 1) ? 'Complete Experience 🎉' : 'Next Step →'}
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                /* Victory Mastery Screen */
+                                <div className="victory-container">
+                                    <div className="victory-stars">★★★</div>
+                                    <h2 className="victory-title">The Lost Picnic Mastered!</h2>
+                                    <p className="victory-subtitle">
+                                        Outstanding work, <strong>{studentName}</strong>! You have completed all 5 interactive activities in <strong>"{lessonTitle}"</strong> for <strong>{gradeDisplay}</strong>.
+                                    </p>
+
+                                    <div className="rewards-row">
+                                        <div className="reward-card">
+                                            <span className="reward-val">+150</span>
+                                            <span className="reward-lbl">XP Earned</span>
+                                        </div>
+                                        <div className="reward-card">
+                                            <span className="reward-val">3 ★</span>
+                                            <span className="reward-lbl">Stars Unlocked</span>
+                                        </div>
+                                        <div className="reward-card">
+                                            <span className="reward-val">100%</span>
+                                            <span className="reward-lbl">Mastery</span>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        className="nav-btn complete"
+                                        style={{ fontSize: '16px', padding: '16px 36px', marginTop: '16px' }}
+                                        onClick={handleSaveAndReturn}
+                                    >
+                                        <span>🎉</span> Save Progress & Return to World Map
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ExperienceEngineApp />);
+    </script>
+</body>
+</html>

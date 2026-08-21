@@ -11,10 +11,17 @@
             speaking: false
         },
 
+        // Fixed Character Configuration (Locked)
+        character: {
+            asset: 'AI/png.svg',
+            allowCharacterSwap: false,
+            locked: true
+        },
+
         // Character Rendering Asset
         asset: {
             type: 'svg',
-            path: 'AI/idle.svg',
+            path: 'AI/png.svg',
             fallbackPlaceholder: '🤖'
         },
 
@@ -29,8 +36,8 @@
 
         // Developer Debug Panel
         debug: {
-            enabled: true,
-            autoMount: true,
+            enabled: false,
+            autoMount: false,
             startMinimized: false
         },
 

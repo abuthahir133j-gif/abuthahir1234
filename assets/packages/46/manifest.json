@@ -1,0 +1,26 @@
+{
+  "package_name": "asses",
+  "experience_id": 188,
+  "experience_title": "asses",
+  "version": "6",
+  "build_number": 1,
+  "created_at": "2026-08-11T05:02:07.748653+00:00",
+  "published_by": "superadmin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 6816,
+      "checksum": "5d768996b46be58981e9f603204ad0b4e80b25c45e21275ec21b4efe594dca89"
+    },
+    {
+      "path": "metadata.json",
+      "size": 231,
+      "checksum": "2469911d51037225fee65d1aac49aba3a86f5657f4379d5cfecbefe46bde8d67"
+    }
+  ],
+  "checksums": {
+    "experience_json": "5d768996b46be58981e9f603204ad0b4e80b25c45e21275ec21b4efe594dca89",
+    "metadata_json": "2469911d51037225fee65d1aac49aba3a86f5657f4379d5cfecbefe46bde8d67"
+  }
+}

@@ -57,6 +57,13 @@
             this.currentTarget = targetKey;
             this.currentPriority = priority;
 
+            // If global.travelBuddy with GazeController is available, leverage Step 4 Gaze System directly
+            if (global.travelBuddy && typeof global.travelBuddy.lookAt === 'function') {
+                global.travelBuddy.lookAt(targetKey, { priority, holdDuration: duration });
+                this.notify(targetKey);
+                return true;
+            }
+
             // Compute offset values based on target
             let targetOffset = { x: 0, y: 0, headRotate: 0 };
             switch (targetKey) {
@@ -94,19 +101,36 @@
         applyGazeToScene(offset) {
             if (!this.scene || !this.scene.characterElement) return;
 
-            const head = this.scene.characterElement.querySelector('#head');
-            const face = this.scene.characterElement.querySelector('#face-features');
-
-            if (head) {
-                head.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                head.style.transform = offset.headRotate !== 0
-                    ? `rotate(${offset.headRotate}deg) translateY(${offset.y}px)`
-                    : `translateY(${offset.y}px)`;
+            // Check if rig is available on scene
+            if (this.scene.rig) {
+                this.scene.rig.setTransform('head', { rotation: offset.headRotate || 0, y: offset.y || 0 });
+                this.scene.rig.setTransform('leftEye', { x: offset.x || 0, y: offset.y || 0 });
+                this.scene.rig.setTransform('rightEye', { x: offset.x || 0, y: offset.y || 0 });
+                return;
             }
 
-            if (face) {
-                face.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                face.style.transform = `translate(${offset.x}px, ${offset.y}px)`;
+            const head = this.scene.characterElement.querySelector('#buddy-head') || this.scene.characterElement.querySelector('#head');
+            const face = this.scene.characterElement.querySelector('#buddy-face-features') || this.scene.characterElement.querySelector('#face-features');
+
+            if (head || face) {
+                if (head) {
+                    head.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    head.style.transform = offset.headRotate !== 0
+                        ? `rotate(${offset.headRotate}deg) translateY(${offset.y}px)`
+                        : `translateY(${offset.y}px)`;
+                }
+                if (face) {
+                    face.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    face.style.transform = `translate(${offset.x}px, ${offset.y}px)`;
+                }
+            } else {
+                // Fallback for flat character rigs or raster images: smooth subtle tilt and translate
+                const canvas = this.scene.characterElement.querySelector('svg') || this.scene.characterElement;
+                if (canvas) {
+                    canvas.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    const rot = offset.headRotate || (offset.x * 0.8);
+                    canvas.style.transform = `rotate(${rot}deg) translate(${offset.x}px, ${offset.y}px)`;
+                }
             }
         }
 

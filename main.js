@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs'); // Explicit Node.js core filesystem module import
 const { app, BrowserWindow, ipcMain } = require('electron');
-const cmsDatabase = require('./cmsDatabase');
 
 // Allow Electron's net module (Chromium) to connect to localhost without TLS/CORS issues
 app.commandLine.appendSwitch('allow-insecure-localhost');
@@ -33,93 +32,32 @@ function createMainWindow() {
 }
 
 async function openEngine(packageData) {
-    const packageId = typeof packageData === 'object' ? (packageData?.id || packageData?.packageId || packageData?.scenarioId || 1) : packageData;
-    const packageTitle = typeof packageData === 'object' ? (packageData?.title || packageId) : packageId;
+    let packageId = typeof packageData === 'object' ? (packageData?.packageId || packageData?.id || packageData?.scenarioId || 1) : packageData;
+    let packageTitle = typeof packageData === 'object' ? (packageData?.title || packageId) : packageId;
+
+    // Resolve actual lesson from SQLite for Level 1 or given level
+    try {
+        const { getLessonsForGrade } = require("./src/main/db/sqlite");
+        const lessons = getLessonsForGrade();
+        if (Array.isArray(lessons) && lessons.length > 0) {
+            if (Number(packageId) === 1 || String(packageId) === '1') {
+                packageId = lessons[0]?.lesson_id || '49';
+                packageTitle = lessons[0]?.title || 'The Lost Picnic';
+            } else {
+                const found = lessons.find(l => String(l.lesson_id) === String(packageId));
+                if (found) {
+                    packageId = found.lesson_id;
+                    packageTitle = found.title;
+                }
+            }
+        }
+    } catch (e) {}
 
     try {
-        console.log('[Main Process] Attempting to open engine for package:', packageId);
+        console.log('[Main Process] Attempting to open engine for package:', packageId, 'Title:', packageTitle);
 
-        // 1. Resolve target package directory path
-        const baseDir = path.join(app.getPath('userData'), 'experiences', String(packageId));
-        console.log('[Main Process] Checking path:', baseDir);
-
-        // 2. Recursive search helper for index.html
-        function findIndexHtml(dir) {
-          if (!dir || !fs.existsSync(dir)) return null;
-
-          try {
-            const files = fs.readdirSync(dir);
-            
-            // First pass: look for index.html directly in current directory
-            for (const file of files) {
-              if (file.toLowerCase() === 'index.html') {
-                return path.join(dir, file);
-              }
-            }
-
-            // Second pass: recursively check all subdirectories
-            for (const file of files) {
-              const fullPath = path.join(dir, file);
-              try {
-                if (fs.statSync(fullPath).isDirectory()) {
-                  const found = findIndexHtml(fullPath);
-                  if (found) return found;
-                }
-              } catch (e) {
-                console.warn('[Main Process] Directory stat error:', e.message);
-              }
-            }
-          } catch (err) {
-            console.error('[Main Process] Error scanning directory:', err.message);
-          }
-
-          return null;
-        }
-
-        let indexPath = findIndexHtml(baseDir);
-
-        if (!indexPath) {
-            const samplesDir = path.join(__dirname, 'language-lab-engine', 'src', 'runtime', 'samples', String(packageId));
-            indexPath = findIndexHtml(samplesDir);
-        }
-
-        // 3. Fallback: If no index.html exists, check if package is JSON-driven (experience.json found)
-        if (!indexPath && fs.existsSync(baseDir)) {
-            const jsonPath = path.join(baseDir, 'experience.json');
-            if (fs.existsSync(jsonPath)) {
-                console.log('[Main Process] Package is JSON-driven (experience.json found). Checking LMS player template...');
-
-                const possibleTemplates = [
-                    path.join(__dirname, 'renderer', 'player.html'),
-                    path.join(__dirname, 'language-lab-engine', 'dist', 'index.html'),
-                    path.join(__dirname, 'language-lab-engine', 'index.html'),
-                    path.join(__dirname, 'index.html')
-                ];
-                
-                const appPlayerTemplate = possibleTemplates.find(p => fs.existsSync(p));
-                
-                if (appPlayerTemplate) {
-                    indexPath = appPlayerTemplate;
-                } else {
-                    console.error('[Main Process] Neither package index.html nor local player template was found!');
-                    return { success: false, error: 'No engine renderer found for experience.json' };
-                }
-            }
-        }
-
-        if (!indexPath) {
-            const defaultDist = path.join(__dirname, 'language-lab-engine', 'dist', 'index.html');
-            if (fs.existsSync(defaultDist)) {
-                indexPath = defaultDist;
-            }
-        }
-
-        console.log('[Main Process] Final Engine Target Path:', indexPath);
-
-        if (!indexPath) {
-            console.error('[Main Process] Could not find index.html inside package folder or player template.');
-            return { success: false, error: 'Target renderer path null' };
-        }
+        const indexPath = path.join(__dirname, 'player.html');
+        console.log('[Main Process] Engine Renderer Target:', indexPath);
 
         // 4. Launch Engine Window
         if (engineWindow && !engineWindow.isDestroyed()) {
@@ -191,24 +129,43 @@ app.whenReady().then(() => {
 
     ipcMain.handle('get-package-experience', async (event, packageId) => {
         try {
-            const experiencesDir = path.join(app.getPath('userData'), 'experiences');
-            let baseDir = path.join(experiencesDir, String(packageId || ''));
+            const requestedId = String(packageId || '49');
+            
+            // Check 1: assets/packages/<id>/experience.json
+            const localAssetsDir = path.join(__dirname, 'assets', 'packages', requestedId);
+            const localJsonPath = path.join(localAssetsDir, 'experience.json');
+            if (fs.existsSync(localJsonPath)) {
+                const data = JSON.parse(fs.readFileSync(localJsonPath, 'utf8'));
+                return { success: true, data, basePath: localAssetsDir };
+            }
 
-            // Handle string/id fallbacks
+            // Check 2: Check SQLite lessons table
+            const { getDb } = require('./src/main/db/sqlite');
+            const db = getDb();
+            const row = db.prepare('SELECT payload_json FROM lessons WHERE lesson_id = ? OR title LIKE ? LIMIT 1').get(requestedId, `%${requestedId}%`);
+            if (row && row.payload_json) {
+                const data = typeof row.payload_json === 'string' ? JSON.parse(row.payload_json) : row.payload_json;
+                if (data.activities) {
+                    return { success: true, data, basePath: localAssetsDir };
+                }
+            }
+
+            // Check 3: userData/experiences
+            const experiencesDir = path.join(app.getPath('userData'), 'experiences');
+            let baseDir = path.join(experiencesDir, requestedId);
             if (!fs.existsSync(baseDir) && fs.existsSync(experiencesDir)) {
                 const allDirs = fs.readdirSync(experiencesDir);
-                const match = allDirs.find(d => d === String(packageId) || d.startsWith(String(packageId)));
+                const match = allDirs.find(d => d === requestedId || d.startsWith(requestedId));
                 if (match) baseDir = path.join(experiencesDir, match);
             }
 
             const jsonPath = path.join(baseDir, 'experience.json');
-            if (!fs.existsSync(jsonPath)) {
-                return { success: false, error: `experience.json not found in ${baseDir}` };
+            if (fs.existsSync(jsonPath)) {
+                const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+                return { success: true, data, basePath: baseDir };
             }
 
-            const rawData = fs.readFileSync(jsonPath, 'utf8');
-            const jsonData = JSON.parse(rawData);
-            return { success: true, data: jsonData, basePath: baseDir };
+            return { success: false, error: `Package experience not found for id ${requestedId}` };
         } catch (err) {
             console.error('[Main Process] Error reading package experience:', err.message);
             return { success: false, error: err.message };
@@ -255,7 +212,13 @@ app.whenReady().then(() => {
 
             console.log(`[IPC get-cms-packages] Fetching packages for student grade: '${grade || 'ALL'}'`);
 
-            const lessons = getLessonsForGrade(grade);
+            let lessons = getLessonsForGrade(grade);
+            if (!Array.isArray(lessons) || lessons.length === 0) {
+                const { ensureDefaultDataPopulated } = require("./src/main/db/sqlite");
+                ensureDefaultDataPopulated();
+                lessons = getLessonsForGrade(grade);
+            }
+
             if (Array.isArray(lessons) && lessons.length > 0) {
                 // Arrange dynamically: Package 1 -> Level 1, Package 2 -> Level 2, Package 3 -> Level 3...
                 return lessons.map((l, idx) => {
@@ -266,7 +229,7 @@ app.whenReady().then(() => {
 
                     const levelNumber = idx + 1;
                     return {
-                        packageId: l.lesson_id || levelNumber,
+                        packageId: l.lesson_id || `PKG-${levelNumber}`,
                         id: l.lesson_id || levelNumber,
                         packageName: l.title,
                         title: l.title,
@@ -281,18 +244,7 @@ app.whenReady().then(() => {
                 });
             }
 
-            // Fallback to cmsDatabase if SQLite is empty
-            const cmsPkgs = cmsDatabase.getPublishedPackages() || [];
-            return cmsPkgs.map((pkg, idx) => {
-                const levelNumber = idx + 1;
-                return {
-                    ...pkg,
-                    levelId: levelNumber,
-                    levelIndex: levelNumber,
-                    level: levelNumber,
-                    description: pkg.description || `Level ${levelNumber}: ${pkg.packageName || pkg.title}`
-                };
-            });
+            return [];
         } catch (err) {
             console.error("[IPC] Error fetching published CMS packages:", err);
             return [];
@@ -300,109 +252,12 @@ app.whenReady().then(() => {
     });
 
 
-    // IPC handler for full package sync: queries GET /api/v1/lms/packages/, compares with local_packages.json, downloads & extracts into experiences/
+    // IPC handler for LMS package synchronization
     ipcMain.handle("sync-lms-packages", async (event, token) => {
         try {
-            const cmsBaseUrl = process.env.CMS_BASE_URL || "http://localhost:8000";
-            const manifestPath = path.join(app.getPath("userData"), "local_packages.json");
-            
-            let localManifest = { packages: {} };
-            if (fs.existsSync(manifestPath)) {
-                try {
-                    localManifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
-                } catch (e) {}
-            }
-
-            const httpModule = cmsBaseUrl.startsWith("https") ? require("https") : require("http");
-            const fetchPackagesUrl = `${cmsBaseUrl}/api/v1/lms/packages/`;
-
-            const remotePackages = await new Promise((resolve) => {
-                const req = httpModule.get(fetchPackagesUrl, {
-                    headers: token ? { "Authorization": `Bearer ${token}` } : {}
-                }, (res) => {
-                    let body = "";
-                    res.on("data", chunk => body += chunk.toString());
-                    res.on("end", () => {
-                        try {
-                            const parsed = JSON.parse(body);
-                            resolve(Array.isArray(parsed) ? parsed : (parsed.packages || []));
-                        } catch (e) {
-                            resolve([]);
-                        }
-                    });
-                });
-                req.on("error", () => resolve([]));
-            });
-
-            const experiencesDir = path.join(app.getPath("userData"), "experiences");
-            if (!fs.existsSync(experiencesDir)) fs.mkdirSync(experiencesDir, { recursive: true });
-
-            let updatedCount = 0;
-            const syncedPackages = [];
-
-            for (const pkg of remotePackages) {
-                const pkgId = String(pkg.id || pkg.package_id || pkg.packageId);
-                const version = pkg.version || "1.0.0";
-                const localRecord = localManifest.packages[pkgId];
-
-                // Check if new or version mismatch
-                if (!localRecord || localRecord.version !== version) {
-                    console.log(`[Package Sync] Downloading package ${pkgId} (version ${version})...`);
-                    const targetDir = path.join(experiencesDir, pkgId);
-                    if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
-
-                    // Create experience.json & metadata.json inside targetDir
-                    const experienceData = {
-                        id: pkgId,
-                        title: pkg.title || `Package ${pkgId}`,
-                        description: pkg.description || "",
-                        version: version,
-                        screens: [],
-                        updatedAt: new Date().toISOString()
-                    };
-                    fs.writeFileSync(path.join(targetDir, "experience.json"), JSON.stringify(experienceData, null, 2), "utf-8");
-
-                    const metadataContent = {
-                        title: pkg.title || `Package ${pkgId}`,
-                        description: pkg.description || "",
-                        version: version,
-                        checksum: pkg.checksum || "",
-                        size: pkg.size || 0,
-                        thumbnail: pkg.thumbnail || ""
-                    };
-                    fs.writeFileSync(path.join(targetDir, "metadata.json"), JSON.stringify(metadataContent, null, 2), "utf-8");
-
-                    const assetsDir = path.join(targetDir, "assets");
-                    if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
-
-                    localManifest.packages[pkgId] = {
-                        id: pkgId,
-                        title: pkg.title,
-                        description: pkg.description,
-                        version: version,
-                        thumbnail: pkg.thumbnail,
-                        syncedAt: new Date().toISOString()
-                    };
-                    updatedCount++;
-                }
-
-                syncedPackages.push({
-                    id: pkgId,
-                    title: pkg.title,
-                    description: pkg.description,
-                    version: version,
-                    thumbnail: pkg.thumbnail,
-                    status: "Downloaded"
-                });
-            }
-
-            fs.writeFileSync(manifestPath, JSON.stringify(localManifest, null, 2), "utf-8");
-
-            return {
-                success: true,
-                updatedCount,
-                packages: syncedPackages
-            };
+            const { syncWithCms } = require("./src/main/services/syncService");
+            const result = await syncWithCms();
+            return result;
         } catch (err) {
             console.error("[IPC Sync] Error syncing LMS packages:", err);
             return { success: false, error: err.message };
@@ -442,24 +297,18 @@ app.whenReady().then(() => {
     ipcMain.handle("list-local-experiences", async () => {
         try {
             const userDataDir = path.join(app.getPath("userData"), "experiences");
-            const samplesDir = path.join(__dirname, "language-lab-engine", "src", "runtime", "samples");
             const experiences = [];
 
-            const checkDir = (dir) => {
-                if (fs.existsSync(dir)) {
-                    const entries = fs.readdirSync(dir, { withFileTypes: true });
-                    for (const entry of entries) {
-                        if (entry.isDirectory()) {
-                            experiences.push({ id: entry.name, path: path.join(dir, entry.name) });
-                        } else if (entry.isFile() && entry.name.endsWith(".json") && entry.name !== "manifest.json") {
-                            experiences.push({ id: entry.name.replace(".json", ""), path: path.join(dir, entry.name) });
-                        }
+            if (fs.existsSync(userDataDir)) {
+                const entries = fs.readdirSync(userDataDir, { withFileTypes: true });
+                for (const entry of entries) {
+                    if (entry.isDirectory()) {
+                        experiences.push({ id: entry.name, path: path.join(userDataDir, entry.name) });
+                    } else if (entry.isFile() && entry.name.endsWith(".json") && entry.name !== "manifest.json") {
+                        experiences.push({ id: entry.name.replace(".json", ""), path: path.join(userDataDir, entry.name) });
                     }
                 }
-            };
-
-            checkDir(userDataDir);
-            checkDir(samplesDir);
+            }
 
             return experiences;
         } catch (err) {
@@ -481,77 +330,17 @@ app.whenReady().then(() => {
                 fs.mkdirSync(targetDir, { recursive: true });
             }
 
-            // Also ensure samples directory fallback exists
-            const samplesDir = path.join(__dirname, "language-lab-engine", "src", "runtime", "samples", scenarioId);
-            if (!fs.existsSync(samplesDir)) {
-                fs.mkdirSync(samplesDir, { recursive: true });
-            }
+            console.log(`[IPC Sync] Processing package ${scenarioId}...`);
 
-            console.log(`[IPC Sync] Downloading package ${scenarioId} from ${downloadUrl}...`);
-
-            // Use http/https or node fetch to download zip payload
-            const httpModule = downloadUrl.startsWith("https") ? require("https") : require("http");
-            const zipBuffer = await new Promise((resolve, reject) => {
-                httpModule.get(downloadUrl, (res) => {
-                    if (res.statusCode >= 400) {
-                        // Fallback dummy payload if server URL mock
-                        const dummyContent = JSON.stringify({
-                            id: scenarioId,
-                            title: title || scenarioId,
-                            type: "EXPERIENCE",
-                            extractedAt: new Date().toISOString()
-                        }, null, 2);
-                        return resolve(Buffer.from(dummyContent));
-                    }
-                    const chunks = [];
-                    res.on("data", chunk => chunks.push(chunk));
-                    res.on("end", () => resolve(Buffer.concat(chunks)));
-                    res.on("error", reject);
-                }).on("error", () => {
-                    // Fallback JSON payload if network endpoint mock
-                    const dummyContent = JSON.stringify({
-                        id: scenarioId,
-                        title: title || scenarioId,
-                        type: "EXPERIENCE",
-                        extractedAt: new Date().toISOString()
-                    }, null, 2);
-                    resolve(Buffer.from(dummyContent));
-                });
-            });
-
-            const tempZipPath = path.join(app.getPath("userData"), `${scenarioId}.zip`);
-            fs.writeFileSync(tempZipPath, zipBuffer);
-
-            // Attempt AdmZip extraction if available
-            try {
-                let AdmZip = null;
-                try {
-                    AdmZip = require("adm-zip");
-                } catch (e) {
-                    AdmZip = require(path.join(__dirname, "language-lab-engine", "node_modules", "adm-zip"));
-                }
-                const zip = new AdmZip(tempZipPath);
-                zip.extractAllTo(targetDir, true);
-                zip.extractAllTo(samplesDir, true);
-                console.log(`[IPC Sync] Extracted zip package ${scenarioId} to ${targetDir}`);
-            } catch (zipErr) {
-                console.warn(`[IPC Sync] Zip extraction notice (using json fallback): ${zipErr.message}`);
-                // Write experience manifest fallback JSON into target dir
-                const manifestPath = path.join(targetDir, "experience.json");
-                const sampleManifestPath = path.join(samplesDir, `${scenarioId}.json`);
-                const manifestData = JSON.stringify({
-                    id: scenarioId,
-                    title: title || scenarioId,
-                    scenarioId,
-                    downloadedAt: new Date().toISOString()
-                }, null, 2);
-                fs.writeFileSync(manifestPath, manifestData);
-                fs.writeFileSync(sampleManifestPath, manifestData);
-            }
-
-            if (fs.existsSync(tempZipPath)) {
-                fs.unlinkSync(tempZipPath);
-            }
+            // Write experience manifest fallback JSON into target dir
+            const manifestPath = path.join(targetDir, "experience.json");
+            const manifestData = JSON.stringify({
+                id: scenarioId,
+                title: title || scenarioId,
+                scenarioId,
+                downloadedAt: new Date().toISOString()
+            }, null, 2);
+            fs.writeFileSync(manifestPath, manifestData);
 
             return {
                 success: true,
@@ -607,18 +396,6 @@ app.whenReady().then(() => {
             if (fs.existsSync(jsonPath)) {
                 console.log(`[IPC] Reading package experience.json from userData: ${jsonPath}`);
                 return JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-            }
-
-            // 3. Fallback: Only if no CMS packages exist in database
-            const samplesDir = path.join(__dirname, "language-lab-engine", "src", "runtime", "samples");
-            if (fs.existsSync(samplesDir)) {
-                const files = fs.readdirSync(samplesDir);
-                const jsonFiles = files.filter(f => f.endsWith(".json") && f !== "manifest.json" && f !== "metadata.json");
-                if (jsonFiles.length > 0) {
-                    const targetFile = jsonFiles[0];
-                    console.log(`[IPC] Fallback reading local sample file: ${targetFile}`);
-                    return JSON.parse(fs.readFileSync(path.join(samplesDir, targetFile), "utf-8"));
-                }
             }
 
             return null;

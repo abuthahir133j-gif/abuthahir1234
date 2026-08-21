@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "188",
+  "title": "asses",
+  "description": "nbbvx",
+  "language": "English",
+  "grade": "Grade 4",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "197",
+      "title": "Assessment",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "assessment"
+      ],
+      "activityType": "ASSESSMENT",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "272",
+          "title": "screen 1",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "screen 1",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786424069558-zwpj1hyav",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "99px",
+                  "left": "28px",
+                  "minHeight": "273px",
+                  "blockWidth": "876px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": "subash"
+                    },
+                    {
+                      "text": "kannan"
+                    },
+                    {
+                      "text": "abuthahir"
+                    },
+                    {
+                      "text": "dhanais"
+                    }
+                  ],
+                  "question": "who is gay?",
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "subash",
+              "kannan",
+              "abuthahir",
+              "dhanais"
+            ],
+            "quiz_question": "who is gay?",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "274",
+          "title": "screen 2",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "screen 2",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786424211609-35rmfecrx",
+                "type": "drag_drop",
+                "styles": {
+                  "top": "24px",
+                  "left": "51px",
+                  "blockWidth": "883px"
+                },
+                "content": {
+                  "pairs": [
+                    {
+                      "id": "pair-1",
+                      "source": "Apple",
+                      "target": "Fruit"
+                    },
+                    {
+                      "id": "pair-2",
+                      "source": "Carrot",
+                      "target": "Vegetable"
+                    }
+                  ],
+                  "question": "Drag the correct words to their destinations."
+                }
+              },
+              {
+                "id": "block-1786424237688-phv5qsd5h",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "205px",
+                  "left": "60px",
+                  "minHeight": "128px",
+                  "blockWidth": "817px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "The quick brown [fox] jumps over the lazy [dog]."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "275",
+          "title": "screen 3",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "screen 3",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786424330040-eea2mw6vu",
+                "type": "true_false",
+                "styles": {
+                  "top": "14px",
+                  "left": "5px",
+                  "minHeight": "294px",
+                  "blockWidth": "920px"
+                },
+                "content": {
+                  "question": "Is this apple is blue?",
+                  "correctAnswer": false
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

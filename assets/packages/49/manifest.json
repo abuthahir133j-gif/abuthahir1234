@@ -1,0 +1,51 @@
+{
+  "package_name": "the-lost-picnic",
+  "experience_id": 118,
+  "experience_title": "The Lost Picnic",
+  "version": "1.0",
+  "build_number": 3,
+  "created_at": "2026-08-13T12:29:25.960409+00:00",
+  "published_by": "superadmin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 31836,
+      "checksum": "4b139f9e3e778e51d17cd8cff0c3f6f76ec373f68bd41ef01136799b3f885460"
+    },
+    {
+      "path": "metadata.json",
+      "size": 243,
+      "checksum": "4a40977d019b6748c05a755d08566524c6eda1bc7dc98ddf199632ed3a31039d"
+    },
+    {
+      "path": "assets/images/0a119570d00e4523a0a4ccca12b5427c.png",
+      "size": 1941480,
+      "checksum": "71396a120cca6b8f3827fcbf0edd2e9c6fcf934cc7513c7243420866a89193ac"
+    },
+    {
+      "path": "assets/video/b878dcae5bdf48f3ba2179f8670ae86e.mp4",
+      "size": 134725045,
+      "checksum": "f054adf44c0e0ec2f16436a42b299055e80bb5f4eb66c72ea797565f85dc18ee"
+    },
+    {
+      "path": "assets/images/abdad3f8e2824dc186cbbe693019da48.png",
+      "size": 7403432,
+      "checksum": "ed9f269783146dd7987c7270e673c75bc430b76bbca9f348c94180ac227185d8"
+    },
+    {
+      "path": "assets/images/5ce3283c12704eb7a492ed6e09992ad7.png",
+      "size": 2537989,
+      "checksum": "b10a215d2d52cdcd14da7b93707a8b7e4bcf46f304bfd2240e528dda337e7642"
+    },
+    {
+      "path": "assets/video/8f27f7a624d143299bce933a70cf5065.mp4",
+      "size": 134725045,
+      "checksum": "f054adf44c0e0ec2f16436a42b299055e80bb5f4eb66c72ea797565f85dc18ee"
+    }
+  ],
+  "checksums": {
+    "experience_json": "4b139f9e3e778e51d17cd8cff0c3f6f76ec373f68bd41ef01136799b3f885460",
+    "metadata_json": "4a40977d019b6748c05a755d08566524c6eda1bc7dc98ddf199632ed3a31039d"
+  }
+}

@@ -73,36 +73,117 @@
     transform: scale(0.96);
 }
 
-.buddy-svg-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    overflow: visible;
+/* Base Rigged Joints (Hierarchical Coordinate Space: 672 x 1024) */
+.buddy-svg-canvas #buddy-robot,
+.buddy-svg-canvas #robot {
+    transform-box: view-box;
+    transform-origin: 336px 570px;
 }
 
-/* Base Rigged Joints */
+.buddy-svg-canvas #buddy-head,
 .buddy-svg-canvas #head {
-    transform-origin: 300px 260px;
-    transition: transform 0.3s ease;
+    transform-box: view-box;
+    transform-origin: 336px 465px;
 }
 
+.buddy-svg-canvas #buddy-body,
 .buddy-svg-canvas #body {
-    transform-origin: 300px 375px;
-    transition: transform 0.3s ease;
+    transform-box: view-box;
+    transform-origin: 336px 570px;
 }
 
-.buddy-svg-canvas #left-arm {
-    transform-origin: 235px 295px;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+/* Left Arm Hierarchical Chain */
+.buddy-svg-canvas #buddy-left-arm,
+.buddy-svg-canvas #buddy-left-upper-arm {
+    transform-box: view-box;
+    transform-origin: 195px 520px;
 }
 
-.buddy-svg-canvas #right-arm {
-    transform-origin: 365px 295px;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+.buddy-svg-canvas #buddy-left-forearm {
+    transform-box: view-box;
+    transform-origin: 155px 625px;
 }
 
-.buddy-svg-canvas #face-features {
-    transition: opacity 0.2s ease;
+.buddy-svg-canvas #buddy-left-hand {
+    transform-box: view-box;
+    transform-origin: 145px 725px;
+}
+
+/* Right Arm Hierarchical Chain */
+.buddy-svg-canvas #buddy-right-arm,
+.buddy-svg-canvas #buddy-right-upper-arm {
+    transform-box: view-box;
+    transform-origin: 475px 520px;
+}
+
+.buddy-svg-canvas #buddy-right-forearm {
+    transform-box: view-box;
+    transform-origin: 515px 625px;
+}
+
+.buddy-svg-canvas #buddy-right-hand {
+    transform-box: view-box;
+    transform-origin: 525px 725px;
+}
+
+/* Left Leg Hierarchical Chain */
+.buddy-svg-canvas #buddy-left-leg,
+.buddy-svg-canvas #buddy-left-thigh {
+    transform-box: view-box;
+    transform-origin: 260px 680px;
+}
+
+.buddy-svg-canvas #buddy-left-foot {
+    transform-box: view-box;
+    transform-origin: 250px 780px;
+}
+
+/* Right Leg Hierarchical Chain */
+.buddy-svg-canvas #buddy-right-leg,
+.buddy-svg-canvas #buddy-right-thigh {
+    transform-box: view-box;
+    transform-origin: 410px 680px;
+}
+
+.buddy-svg-canvas #buddy-right-foot {
+    transform-box: view-box;
+    transform-origin: 420px 780px;
+}
+
+/* Facial Features */
+.buddy-svg-canvas #buddy-face-features {
+    transform-box: view-box;
+    transform-origin: 336px 325px;
+}
+
+.buddy-svg-canvas #buddy-left-eye {
+    transform-box: view-box;
+    transform-origin: 270px 325px;
+}
+
+.buddy-svg-canvas #buddy-right-eye {
+    transform-box: view-box;
+    transform-origin: 405px 325px;
+}
+
+.buddy-svg-canvas #buddy-mouth {
+    transform-box: view-box;
+    transform-origin: 336px 375px;
+}
+
+.buddy-svg-canvas #buddy-left-ear {
+    transform-origin: 217px 175px;
+    transition: transform 0.25s ease;
+}
+
+.buddy-svg-canvas #buddy-right-ear {
+    transform-origin: 383px 175px;
+    transition: transform 0.25s ease;
+}
+
+.buddy-svg-canvas #buddy-shadow {
+    transform-origin: 300px 542px;
+    transition: transform 0.25s ease;
 }
 
 /* ==========================================================================
@@ -369,25 +450,25 @@
    ========================================================================== */
 .buddy-speech-bubble {
     position: absolute;
-    bottom: calc(100% + 12px);
+    bottom: calc(100% + 14px);
     right: 0;
-    min-width: 140px;
-    max-width: 240px;
-    padding: 10px 14px;
-    background: rgba(14, 32, 50, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(75, 227, 255, 0.35);
-    border-radius: 14px;
+    min-width: 150px;
+    max-width: 280px;
+    padding: 12px 16px;
+    background: rgba(14, 32, 50, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(75, 227, 255, 0.45);
+    border-radius: 16px;
     color: #FFFFFF;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.45;
     text-align: center;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 16px rgba(0, 173, 238, 0.25);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 173, 238, 0.35);
     opacity: 0;
-    transform: translateY(10px) scale(0.9);
-    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateY(12px) scale(0.88);
+    transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
     z-index: 10000;
 }
@@ -395,6 +476,13 @@
 .buddy-speech-bubble.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.buddy-speech-bubble.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px) scale(0.88);
 }
 
 .buddy-speech-arrow {
@@ -403,9 +491,9 @@
     right: 32px;
     width: 12px;
     height: 12px;
-    background: rgba(14, 32, 50, 0.92);
-    border-right: 1px solid rgba(75, 227, 255, 0.35);
-    border-bottom: 1px solid rgba(75, 227, 255, 0.35);
+    background: rgba(14, 32, 50, 0.95);
+    border-right: 1.5px solid rgba(75, 227, 255, 0.45);
+    border-bottom: 1.5px solid rgba(75, 227, 255, 0.45);
     transform: rotate(45deg);
 }
 
@@ -739,3 +827,94 @@
         width: 250px;
     }
 }
+
+/* ==========================================================================
+   8. Controllable SVG Rig Joints & Parts (AI/png.svg)
+   ========================================================================== */
+#buddy-head,
+#buddy-left-arm,
+#buddy-left-upper-arm,
+#buddy-left-forearm,
+#buddy-left-hand,
+#buddy-right-arm,
+#buddy-right-upper-arm,
+#buddy-right-forearm,
+#buddy-right-hand,
+#buddy-left-leg,
+#buddy-left-thigh,
+#buddy-left-foot,
+#buddy-right-leg,
+#buddy-right-thigh,
+#buddy-right-foot,
+#buddy-body,
+#buddy-left-eye,
+#buddy-right-eye,
+#buddy-mouth {
+    transform-box: fill-box;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+
+#buddy-head {
+    transform-origin: 336px 465px;
+}
+
+#buddy-left-upper-arm,
+#buddy-left-arm {
+    transform-origin: 195px 520px;
+}
+
+#buddy-left-forearm {
+    transform-origin: 155px 625px;
+}
+
+#buddy-left-hand {
+    transform-origin: 145px 725px;
+}
+
+#buddy-right-upper-arm,
+#buddy-right-arm {
+    transform-origin: 475px 520px;
+}
+
+#buddy-right-forearm {
+    transform-origin: 515px 625px;
+}
+
+#buddy-right-hand {
+    transform-origin: 525px 725px;
+}
+
+#buddy-left-thigh,
+#buddy-left-leg {
+    transform-origin: 260px 680px;
+}
+
+#buddy-left-foot {
+    transform-origin: 250px 780px;
+}
+
+#buddy-right-thigh,
+#buddy-right-leg {
+    transform-origin: 410px 680px;
+}
+
+#buddy-right-foot {
+    transform-origin: 420px 780px;
+}
+
+#buddy-body {
+    transform-origin: 336px 570px;
+}
+
+#buddy-left-eye {
+    transform-origin: 270px 325px;
+}
+
+#buddy-right-eye {
+    transform-origin: 405px 325px;
+}
+
+#buddy-mouth {
+    transform-origin: 336px 375px;
+}
+

@@ -6,11 +6,22 @@
         ? global.BuddyAnimations
         : require('./BuddyAnimations');
 
+    const _BuddyRigController = (typeof global.BuddyRigController !== 'undefined')
+        ? global.BuddyRigController
+        : require('./BuddyRigController');
+
+    const _BuddyAnimationEngine = (typeof global.BuddyAnimationEngine !== 'undefined')
+        ? global.BuddyAnimationEngine
+        : (typeof require !== 'undefined' ? require('./BuddyAnimationEngine') : null);
+
     class BuddyScene {
         constructor(containerElement, config = {}, animationManager = null) {
             this.container = containerElement || document.body;
             this.config = config;
             this.animationManager = animationManager || new _BuddyAnimations(config);
+            this.rig = new _BuddyRigController(this);
+            this.animationEngine = _BuddyAnimationEngine ? new _BuddyAnimationEngine(this.rig) : null;
+            this.anim = this.animationEngine;
 
             this.rootElement = null;
             this.characterElement = null;
@@ -32,7 +43,7 @@
             await this.loadCharacterSvg();
             this.bindInteractions();
             this.isLoaded = true;
-            console.log('[TravelBuddy] Scene mounted successfully.');
+            console.log('[TravelBuddy] Scene mounted successfully with Rig Controller.');
         }
 
         createRootLayout() {
@@ -97,11 +108,11 @@
         }
 
         async loadCharacterSvg() {
-            const svgPath = this.config.asset?.path || 'AI/idle.svg';
+            const svgPath = this.config.character?.asset || this.config.asset?.path || 'AI/png.svg';
             try {
                 const response = await fetch(svgPath);
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status} loading ${svgPath}`);
+                    throw new Error(`Buddy asset not found: ${svgPath}`);
                 }
                 const svgContent = await response.text();
                 this.characterElement.innerHTML = svgContent;
@@ -111,54 +122,24 @@
                     this.svgElement.setAttribute('class', 'buddy-svg-canvas');
                     this.svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
                     
-                    this.faceGroup = this.svgElement.querySelector('#face-features');
-                    this.leftArm = this.svgElement.querySelector('#left-arm');
-                    this.rightArm = this.svgElement.querySelector('#right-arm');
-                    this.head = this.svgElement.querySelector('#head');
-                    this.body = this.svgElement.querySelector('#body');
+                    this.faceGroup = this.svgElement.querySelector('#buddy-face-features') || this.svgElement.querySelector('#face-features');
+                    this.leftArm = this.svgElement.querySelector('#buddy-left-arm') || this.svgElement.querySelector('#left-arm');
+                    this.rightArm = this.svgElement.querySelector('#buddy-right-arm') || this.svgElement.querySelector('#right-arm');
+                    this.head = this.svgElement.querySelector('#buddy-head') || this.svgElement.querySelector('#head');
+                    this.body = this.svgElement.querySelector('#buddy-body') || this.svgElement.querySelector('#body');
+
+                    if (this.rig) {
+                        this.rig.attachSvg(this.svgElement);
+                    }
                 }
             } catch (err) {
-                console.warn('[TravelBuddy] Failed to load character model from path, using embedded fallback:', err.message);
-                this.renderEmbeddedFallback();
+                console.error(`[TravelBuddy] ${err.message}`);
+                this.characterElement.innerHTML = `
+                    <div style="background: rgba(220, 38, 38, 0.9); color: #fff; padding: 10px; border-radius: 8px; font-size: 11px; text-align: center; border: 1px solid #f87171;">
+                        ⚠️ <strong>Buddy asset not found: ${svgPath}</strong>
+                    </div>
+                `;
             }
-        }
-
-        renderEmbeddedFallback() {
-            this.characterElement.innerHTML = `
-                <svg class="buddy-svg-canvas" viewBox="0 0 600 600" width="100%" height="100%">
-                  <defs>
-                    <linearGradient id="headBodyGloss" x1="25%" y1="0%" x2="75%" y2="100%">
-                      <stop offset="0%" stop-color="#FFFFFF"/>
-                      <stop offset="100%" stop-color="#C7D1E3"/>
-                    </linearGradient>
-                    <linearGradient id="cyanGlowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stop-color="#9EFAFF"/>
-                      <stop offset="100%" stop-color="#00ADEE"/>
-                    </linearGradient>
-                  </defs>
-                  <ellipse cx="300" cy="542" rx="85" ry="11" fill="#C5CEE0" opacity="0.4"/>
-                  <g id="robot" transform="translate(0, 10)">
-                    <g id="left-arm"><path d="M 235 295 C 190 325 180 415 212 445 C 235 465 260 445 265 390 C 270 340 255 290 235 295 Z" fill="url(#headBodyGloss)"/></g>
-                    <g id="right-arm"><path d="M 365 295 C 410 325 420 415 388 445 C 365 465 340 445 335 390 C 330 340 345 290 365 295 Z" fill="url(#headBodyGloss)"/></g>
-                    <g id="body"><path d="M 300 260 C 365 260 380 330 375 405 C 370 460 345 485 300 485 C 255 485 230 460 225 405 C 220 330 235 260 300 260 Z" fill="url(#headBodyGloss)"/></g>
-                    <g id="head">
-                      <path d="M 300 96 C 385 96 405 130 405 178 C 405 230 375 260 300 260 C 225 260 195 230 195 178 C 195 130 215 96 300 96 Z" fill="url(#headBodyGloss)"/>
-                      <rect x="224" y="128" width="152" height="100" rx="50" fill="#071322"/>
-                      <g id="face-features">
-                        <path d="M 252 176 L 284 176 A 16 15 0 0 0 252 176 Z" fill="url(#cyanGlowGrad)"/>
-                        <path d="M 316 176 L 348 176 A 16 15 0 0 0 316 176 Z" fill="url(#cyanGlowGrad)"/>
-                        <path d="M 292 186 C 292 196 308 196 308 186 Z" fill="url(#cyanGlowGrad)"/>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-            `;
-            this.svgElement = this.characterElement.querySelector('svg');
-            this.faceGroup = this.svgElement?.querySelector('#face-features');
-            this.leftArm = this.svgElement?.querySelector('#left-arm');
-            this.rightArm = this.svgElement?.querySelector('#right-arm');
-            this.head = this.svgElement?.querySelector('#head');
-            this.body = this.svgElement?.querySelector('#body');
         }
 
         bindInteractions() {
@@ -167,13 +148,16 @@
             this.characterElement.addEventListener('click', () => {
                 if (global.travelBuddy) {
                     if (typeof global.travelBuddy.play === 'function') {
-                        global.travelBuddy.play('wave');
+                        global.travelBuddy.play('wave', 2000);
                     } else if (typeof global.travelBuddy.playGesture === 'function') {
-                        global.travelBuddy.playGesture('wave');
+                        global.travelBuddy.playGesture('wave', 2000);
                     }
 
-                    if (typeof global.travelBuddy.say === 'function') {
-                        global.travelBuddy.say('Hi there! Ready for an adventure? 🌍', 2500);
+                    const message = "What can I do for you today?";
+                    if (global.momoSpeech && typeof global.momoSpeech.say === 'function') {
+                        global.momoSpeech.say(message, { emotion: 'happy', duration: 3200 });
+                    } else if (typeof global.travelBuddy.say === 'function') {
+                        global.travelBuddy.say(message, 3200);
                     }
                 }
             });
@@ -199,14 +183,41 @@
         }
 
         updateFacialExpression(emotion) {
-            if (!this.faceGroup) {
-                this.faceGroup = this.svgElement?.querySelector('#face-features');
-            }
-            if (!this.faceGroup) return;
+            // Apply facial reaction within the locked AI/png.svg character
+            if (!this.rig) return;
 
-            const preset = this.animationManager.getFaceFeatures(emotion);
-            if (preset) {
-                this.faceGroup.innerHTML = `${preset.leftEye}\n${preset.rightEye}\n${preset.mouth}`;
+            switch (emotion) {
+                case 'happy':
+                    this.rig.setTransform('leftEye', { scaleX: 1, scaleY: 0.7, y: -2 });
+                    this.rig.setTransform('rightEye', { scaleX: 1, scaleY: 0.7, y: -2 });
+                    this.rig.setTransform('mouth', { scaleX: 1.1, scaleY: 1.1, y: -1 });
+                    break;
+                case 'surprised':
+                    this.rig.setTransform('leftEye', { scaleX: 1.25, scaleY: 1.25, y: -3 });
+                    this.rig.setTransform('rightEye', { scaleX: 1.25, scaleY: 1.25, y: -3 });
+                    this.rig.setTransform('mouth', { scaleX: 0.9, scaleY: 1.3, y: 3 });
+                    break;
+                case 'thinking':
+                    this.rig.setTransform('leftEye', { scaleX: 0.9, scaleY: 0.9, x: -6, y: -5 });
+                    this.rig.setTransform('rightEye', { scaleX: 1.1, scaleY: 1.1, x: -4, y: -5 });
+                    this.rig.setTransform('mouth', { scaleX: 0.9, scaleY: 0.9, x: -3 });
+                    break;
+                case 'excited':
+                    this.rig.setTransform('leftEye', { scaleX: 1.2, scaleY: 1.2, y: -4 });
+                    this.rig.setTransform('rightEye', { scaleX: 1.2, scaleY: 1.2, y: -4 });
+                    this.rig.setTransform('mouth', { scaleX: 1.2, scaleY: 1.2, y: 0 });
+                    break;
+                case 'sad':
+                case 'worried':
+                    this.rig.setTransform('leftEye', { scaleX: 0.9, scaleY: 0.8, y: 4 });
+                    this.rig.setTransform('rightEye', { scaleX: 0.9, scaleY: 0.8, y: 4 });
+                    this.rig.setTransform('mouth', { scaleX: 0.8, scaleY: 0.8, y: 5 });
+                    break;
+                default: // neutral
+                    this.rig.resetPart('leftEye');
+                    this.rig.resetPart('rightEye');
+                    this.rig.resetPart('mouth');
+                    break;
             }
         }
 

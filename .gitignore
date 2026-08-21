@@ -3,4 +3,6 @@ node_modules/
 *.log
 *.db-shm
 *.db-wal
-
+data/temp_pkgs/
+*.zip
+*.mp4

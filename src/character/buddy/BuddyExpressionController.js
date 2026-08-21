@@ -46,19 +46,25 @@
                 return;
             }
 
-            // 2. Fetch face preset from animation manager or defaults
+            // 2. If rig is present, update facial expression on the locked character
+            if (this.scene.rig) {
+                this.scene.updateFacialExpression(this.currentEmotion);
+                return;
+            }
+
+            // 3. Fallback to face features if direct group present
             if (this.animations && typeof this.animations.getFaceFeatures === 'function') {
                 const preset = this.animations.getFaceFeatures(this.currentEmotion);
                 if (preset) {
-                    const faceGroup = this.scene.characterElement.querySelector('#face-features');
+                    const faceGroup = this.scene.characterElement.querySelector('#buddy-face-features') || this.scene.characterElement.querySelector('#face-features');
                     if (faceGroup) {
                         faceGroup.innerHTML = `${preset.leftEye}\n${preset.rightEye}\n${preset.mouth}`;
                     }
                 }
             }
 
-            // 3. Intensity Visual Scaling (glow effect on character visor)
-            const head = this.scene.characterElement.querySelector('#head');
+            // 3. Intensity Visual Scaling (glow effect on character visor / frame)
+            const head = this.scene.characterElement.querySelector('#head') || this.scene.characterElement.querySelector('svg') || this.scene.characterElement;
             if (head) {
                 const glowIntensity = Math.round(this.currentIntensity * 12);
                 head.style.filter = `drop-shadow(0 0 ${glowIntensity}px rgba(56, 189, 248, ${0.2 + this.currentIntensity * 0.4}))`;

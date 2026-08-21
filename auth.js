@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const timeoutPromise = new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('Connection timed out. Please try again.')), 3500)
+                setTimeout(() => reject(new Error('Connection timed out. Please try again.')), 10000)
             );
 
             const result = await Promise.race([loginPromise, timeoutPromise]);
@@ -174,6 +174,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("language_lab_student_session_v1", JSON.stringify(activeSession));
                 sessionStorage.setItem(APP_SESSION_KEY, "active");
                 sessionStorage.setItem("language_lab_just_logged_in", "true");
+                sessionStorage.setItem("language_lab_login_event", JSON.stringify({
+                    type: "LOGIN_SUCCESS",
+                    studentId: cleanCode
+                }));
+
+                if (window.buddyEvents && typeof window.buddyEvents.emit === "function") {
+                    window.buddyEvents.emit("LOGIN_SUCCESS", {
+                        type: "LOGIN_SUCCESS",
+                        studentId: cleanCode
+                    });
+                }
 
                 if (window.electronAPI && typeof window.electronAPI.saveStudentSession === "function") {
                     await window.electronAPI.saveStudentSession(activeSession);

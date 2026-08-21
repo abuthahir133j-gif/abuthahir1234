@@ -1433,16 +1433,22 @@
                 } catch (e) {}
             }
 
-            const rollNo = sessionData?.student?.roll_number || sessionData?.roll_number || savedStudent.trim();
-            const studentName = sessionData?.student?.name || sessionData?.name || "";
+            let currentUser = {};
+            try {
+                const rawUser = localStorage.getItem('currentUser');
+                if (rawUser) currentUser = JSON.parse(rawUser);
+            } catch (e) {}
 
-            // Bind Roll Number & Name to Hero Card Header (Fixes static fallback string bug)
+            const rollNo = sessionData?.student?.roll_number || sessionData?.roll_number || currentUser.roll_number || currentUser.code || savedStudent.trim();
+            const studentName = sessionData?.student?.name || sessionData?.name || currentUser.name || currentUser.student_name || "";
+
+            // Bind Roll Number & Name to Hero Card Header
             const rollTagEl = document.getElementById("roll-number-tag");
             if (rollTagEl) rollTagEl.innerText = rollNo;
 
             const heroNameEl = document.querySelector(".hero-name");
             if (heroNameEl) {
-                heroNameEl.innerText = rollNo;
+                heroNameEl.innerText = studentName || rollNo;
             }
 
             // Load & Bind CMS Ingested Packages to Assigned Lessons List
@@ -1824,7 +1830,7 @@
                     title: title
                 });
             } else {
-                window.location.href = `language-lab-engine/dist/index.html?levelId=${encodeURIComponent(packageId)}&title=${encodeURIComponent(title)}`;
+                console.log(`[Launch] CMS Package ${packageId} selected.`);
             }
         };
 

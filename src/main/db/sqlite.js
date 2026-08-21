@@ -18,9 +18,11 @@ function initDatabase(customPath) {
         dbPath = path.join(dataDir, 'language_lab.db');
     }
 
-    db = new Database(dbPath, { timeout: 7000 });
-    db.pragma('journal_mode = WAL');
-    db.pragma('busy_timeout = 7000');
+    db = new Database(dbPath, { timeout: 15000 });
+    try {
+        db.pragma('journal_mode = WAL');
+        db.pragma('busy_timeout = 15000');
+    } catch (e) {}
 
     // Create tables
     db.exec(`
@@ -73,7 +75,190 @@ function initDatabase(customPath) {
     }
 
     console.log(`[SQLite DB] Database initialized successfully at: ${dbPath}`);
+    
+    // Auto-populate lessons and users if empty
+    ensureDefaultDataPopulated();
+
     return db;
+}
+
+const DEFAULT_CMS_PACKAGES = [
+    {
+        lesson_id: "PKG-ENG-101",
+        title: "Grammar Basics & Daily Vocabulary",
+        type: "EXPERIENCE",
+        grade: "Class 7",
+        difficulty: "Beginner",
+        status: "APPROVED",
+        payload_json: {
+            packageId: "PKG-ENG-101",
+            packageName: "Grammar Basics & Daily Vocabulary",
+            title: "Grammar Basics & Daily Vocabulary",
+            description: "Foundational English grammar, nouns, verbs, and daily conversational vocabulary.",
+            grade: "Class 7",
+            status: "published",
+            lessons: [
+                { lessonId: "L1", title: "Greeting & Introductions", duration: "15 mins" },
+                { lessonId: "L2", title: "Nouns & Action Verbs", duration: "20 mins" },
+                { lessonId: "L3", title: "Daily Conversation Starters", duration: "25 mins" }
+            ]
+        }
+    },
+    {
+        lesson_id: "PKG-ENG-102",
+        title: "Advanced English Conversation & Dialogue",
+        type: "EXPERIENCE",
+        grade: "Class 7",
+        difficulty: "Intermediate",
+        status: "APPROVED",
+        payload_json: {
+            packageId: "PKG-ENG-102",
+            packageName: "Advanced English Conversation & Dialogue",
+            title: "Advanced English Conversation & Dialogue",
+            description: "Interactive dialogue practice, sentence formation, and real-world travel conversations.",
+            grade: "Class 7",
+            status: "published",
+            lessons: [
+                { lessonId: "L4", title: "Travel Dialogue & Asking Directions", duration: "20 mins" },
+                { lessonId: "L5", title: "Ordering Food & Polite Requests", duration: "25 mins" },
+                { lessonId: "L6", title: "Storytelling & Expressing Opinions", duration: "30 mins" }
+            ]
+        }
+    },
+    {
+        lesson_id: "PKG-ENG-103",
+        title: "Language Masterclass: Fluency & Phonetics",
+        type: "EXPERIENCE",
+        grade: "Class 7",
+        difficulty: "Advanced",
+        status: "APPROVED",
+        payload_json: {
+            packageId: "PKG-ENG-103",
+            packageName: "Language Masterclass: Fluency & Phonetics",
+            title: "Language Masterclass: Fluency & Phonetics",
+            description: "Master English phonetics, clear pronunciation, listening comprehension, and fluency drills.",
+            grade: "Class 7",
+            status: "published",
+            lessons: [
+                { lessonId: "L7", title: "Phonetics & Pronunciation Drills", duration: "20 mins" },
+                { lessonId: "L8", title: "Listening Comprehension & Accents", duration: "25 mins" },
+                { lessonId: "L9", title: "Public Speaking & Speech Mastery", duration: "35 mins" }
+            ]
+        }
+    },
+    {
+        lesson_id: "PKG-ENG-104",
+        title: "Travel English & Global Expressions",
+        type: "EXPERIENCE",
+        grade: "Class 7",
+        difficulty: "Intermediate",
+        status: "APPROVED",
+        payload_json: {
+            packageId: "PKG-ENG-104",
+            packageName: "Travel English & Global Expressions",
+            title: "Travel English & Global Expressions",
+            description: "Practical language skills for airport navigation, hotel bookings, and global travel scenarios.",
+            grade: "Class 7",
+            status: "published",
+            lessons: [
+                { lessonId: "L10", title: "Airport & Transport Phrases", duration: "20 mins" },
+                { lessonId: "L11", title: "Hotel & Accommodation Check-in", duration: "25 mins" },
+                { lessonId: "L12", title: "Emergency & Assistance Dialogues", duration: "20 mins" }
+            ]
+        }
+    },
+    {
+        lesson_id: "PKG-ENG-105",
+        title: "Creative Writing & Advanced Comprehension",
+        type: "EXPERIENCE",
+        grade: "Class 7",
+        difficulty: "Advanced",
+        status: "APPROVED",
+        payload_json: {
+            packageId: "PKG-ENG-105",
+            packageName: "Creative Writing & Advanced Comprehension",
+            title: "Creative Writing & Advanced Comprehension",
+            description: "Express creative thoughts, write descriptive paragraphs, and analyze engaging short stories.",
+            grade: "Class 7",
+            status: "published",
+            lessons: [
+                { lessonId: "L13", title: "Creative Storytelling & Descriptive Words", duration: "25 mins" },
+                { lessonId: "L14", title: "Essay Structure & Logic Flow", duration: "30 mins" },
+                { lessonId: "L15", title: "Grand Championship Quiz & Showcase", duration: "40 mins" }
+            ]
+        }
+    }
+];
+
+const DEFAULT_STUDENTS = [
+    { id: "1", username: "ABU001", lms_code: "ABU001", name: "Abuthahir", grade: "Class 7", section: "A", role: "student" },
+    { id: "2", username: "ARJ001", lms_code: "ARJ001", name: "Arjun", grade: "Class 7", section: "A", role: "student" },
+    { id: "3", username: "STU-101", lms_code: "STU-101", name: "Student STU-101", grade: "Class 7", section: "B", role: "student" },
+    { id: "4", username: "STU-102", lms_code: "STU-102", name: "Student STU-102", grade: "Class 7", section: "B", role: "student" },
+    { id: "5", username: "STU-103", lms_code: "STU-103", name: "Student STU-103", grade: "Class 7", section: "B", role: "student" },
+    { id: "6", username: "101", lms_code: "101", name: "Student 101", grade: "Class 7", section: "C", role: "student" },
+    { id: "7", username: "102", lms_code: "102", name: "Student 102", grade: "Class 7", section: "C", role: "student" },
+    { id: "8", username: "103", lms_code: "103", name: "Student 103", grade: "Class 7", section: "C", role: "student" },
+    { id: "9", username: "STUDENT1", lms_code: "STUDENT1", name: "Student One", grade: "Class 7", section: "A", role: "student" },
+    { id: "10", username: "DEMO", lms_code: "DEMO", name: "Demo Student", grade: "Class 7", section: "A", role: "student" },
+    { id: "11", username: "MAS002", lms_code: "MAS002", name: "Master Student 002", grade: "Class 7", section: "A", role: "student" }
+];
+
+function ensureDefaultDataPopulated() {
+    try {
+        const database = getDb();
+        
+        // 1. Check if lessons table is empty
+        const lessonCount = database.prepare("SELECT COUNT(*) as count FROM lessons").get()?.count || 0;
+        if (lessonCount === 0) {
+            console.log("[SQLite DB] Seeding default CMS packages into SQLite lessons table...");
+            
+            // Try loading from data/packages.json first if available
+            let loadedPackages = [];
+            try {
+                const pkgJsonPath = path.join(process.cwd(), 'data', 'packages.json');
+                if (fs.existsSync(pkgJsonPath)) {
+                    const raw = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'));
+                    if (raw && raw.packages) {
+                        loadedPackages = Object.values(raw.packages).map((p, idx) => ({
+                            lesson_id: p.packageId || `PKG-${idx + 1}`,
+                            title: p.packageName || p.title || `Package ${idx + 1}`,
+                            type: "EXPERIENCE",
+                            grade: p.grade || "Class 7",
+                            difficulty: p.difficulty || "Intermediate",
+                            status: "APPROVED",
+                            payload_json: p
+                        }));
+                    }
+                }
+            } catch (e) {}
+
+            const packagesToSeed = (loadedPackages.length > 0) ? loadedPackages : DEFAULT_CMS_PACKAGES;
+            upsertLessons(packagesToSeed);
+            console.log(`[SQLite DB] Successfully populated ${packagesToSeed.length} CMS packages into lessons table.`);
+        }
+
+        // 2. Check if users table is empty
+        const userCount = database.prepare("SELECT COUNT(*) as count FROM users").get()?.count || 0;
+        if (userCount === 0) {
+            console.log("[SQLite DB] Seeding default student users into SQLite users table...");
+            upsertUsers(DEFAULT_STUDENTS);
+        }
+    } catch (err) {
+        console.error("[SQLite DB] Error ensuring default data population:", err.message);
+    }
+}
+
+function ensureLessonsPopulated(customPackages = []) {
+    const database = getDb();
+    if (Array.isArray(customPackages) && customPackages.length > 0) {
+        upsertLessons(customPackages);
+        return;
+    }
+    const lessonCount = database.prepare("SELECT COUNT(*) as count FROM lessons").get()?.count || 0;
+    if (lessonCount === 0) {
+        ensureDefaultDataPopulated();
+    }
 }
 
 function getDb() {
@@ -173,6 +358,94 @@ function upsertLessons(lessons = []) {
 }
 
 /**
+ * Smart Upsert for synchronized CMS lesson packages:
+ * - Compares with existing records in SQLite
+ * - If not found -> INSERT (new)
+ * - If found and modified -> UPDATE (updated)
+ * - If found and identical -> SKIP (unchanged)
+ * @param {Array<Object>} lessons
+ * @returns {{ inserted: number, updated: number, skipped: number, total: number }}
+ */
+function syncUpsertLessons(lessons = []) {
+    const db = getDb();
+    let inserted = 0;
+    let updated = 0;
+    let skipped = 0;
+
+    const findStmt = db.prepare(`SELECT * FROM lessons WHERE lesson_id = ?`);
+    const insertStmt = db.prepare(`
+        INSERT INTO lessons (lesson_id, title, type, grade, difficulty, status, payload_json, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, COALESCE(?, CURRENT_TIMESTAMP))
+    `);
+    const updateStmt = db.prepare(`
+        UPDATE lessons
+        SET title = ?, type = ?, grade = ?, difficulty = ?, status = ?, payload_json = ?
+        WHERE lesson_id = ?
+    `);
+
+    const syncTransaction = db.transaction((list) => {
+        for (const item of list) {
+            const lessonId = String(item.lesson_id || item.id || item.package_id || item.packageId || '').trim();
+            if (!lessonId) continue;
+
+            const title = String(item.title || item.packageName || '').trim();
+            const type = String(item.type || item.lesson_type || 'EXPERIENCE');
+            const grade = String(item.grade || item.class || '');
+            const difficulty = String(item.difficulty || 'Intermediate');
+            const status = String(item.status || 'APPROVED').toUpperCase();
+            const payloadJson = typeof item.payload_json === 'object'
+                ? JSON.stringify(item.payload_json)
+                : (item.payload_json || (typeof item.payload === 'object' ? JSON.stringify(item.payload) : '{}'));
+
+            const existing = findStmt.get(lessonId);
+
+            if (!existing) {
+                // New Package -> INSERT
+                insertStmt.run(lessonId, title, type, grade, difficulty, status, payloadJson, item.created_at || null);
+                inserted++;
+            } else {
+                // Compare existing to check if modified
+                const hasChanged = existing.title !== title ||
+                                   existing.type !== type ||
+                                   existing.grade !== grade ||
+                                   existing.difficulty !== difficulty ||
+                                   existing.status !== status ||
+                                   existing.payload_json !== payloadJson;
+
+                if (hasChanged) {
+                    // Updated Package -> UPDATE
+                    updateStmt.run(title, type, grade, difficulty, status, payloadJson, lessonId);
+                    updated++;
+                } else {
+                    // Unchanged -> SKIP
+                    skipped++;
+                }
+            }
+        }
+    });
+
+    let attempts = 0;
+    while (attempts < 3) {
+        try {
+            syncTransaction(lessons);
+            break;
+        } catch (err) {
+            attempts++;
+            if (attempts >= 3) {
+                console.error('[SQLite DB] Transaction failed after 3 attempts:', err.message);
+                throw err;
+            }
+            const delay = attempts * 100;
+            const end = Date.now() + delay;
+            while (Date.now() < end) {} // busy wait short backoff
+        }
+    }
+
+    console.log(`[SQLite DB] Sync Results -> Inserted: ${inserted}, Updated: ${updated}, Skipped: ${skipped}, Total: ${lessons.length}`);
+    return { inserted, updated, skipped, total: lessons.length };
+}
+
+/**
  * Student Lesson Query by Grade:
  * Retrieve lessons matching student's grade or universal lessons
  * @param {string} [grade]
@@ -189,12 +462,16 @@ function getLessonsForStudent(grade) {
  * Insert or replace key-value metadata in sync_meta table
  */
 function updateSyncMeta(key, value) {
-    const database = getDb();
-    const stmt = database.prepare(`
-        INSERT OR REPLACE INTO sync_meta (key, value)
-        VALUES (?, ?)
-    `);
-    stmt.run(String(key), String(value));
+    try {
+        const database = getDb();
+        const stmt = database.prepare(`
+            INSERT OR REPLACE INTO sync_meta (key, value)
+            VALUES (?, ?)
+        `);
+        stmt.run(String(key), String(value));
+    } catch (e) {
+        console.warn(`[SQLite DB] Could not update sync_meta for ${key}:`, e.message);
+    }
 }
 
 function getSyncMeta(key) {
@@ -279,7 +556,7 @@ function normalizeGrade(gradeStr) {
 
 function getAllApprovedLessons() {
     const database = getDb();
-    const stmt = database.prepare(`SELECT * FROM lessons WHERE UPPER(status) IN ('APPROVED', 'PUBLISHED') ORDER BY rowid ASC`);
+    const stmt = database.prepare(`SELECT * FROM lessons WHERE UPPER(status) IN ('APPROVED', 'PUBLISHED') ORDER BY CASE WHEN title LIKE '%The Lost Picnic%' OR lesson_id = '49' THEN 0 ELSE 1 END, rowid ASC`);
     return stmt.all();
 }
 
@@ -294,7 +571,7 @@ function getLessonsForGrade(grade) {
     const normTarget = normalizeGrade(grade);
     if (!normTarget) return all;
 
-    const matched = all.filter(l => {
+    let matched = all.filter(l => {
         let pkg = {};
         try {
             pkg = typeof l.payload_json === 'string' ? JSON.parse(l.payload_json) : (l.payload_json || {});
@@ -324,7 +601,18 @@ function getLessonsForGrade(grade) {
         return false;
     });
 
-    return matched.length > 0 ? matched : all;
+    const resultList = matched.length > 0 ? matched : all;
+    // Always guarantee 'The Lost Picnic' is Level 1 at index 0
+    const picnicIdx = resultList.findIndex(l => (l.title && l.title.includes('The Lost Picnic')) || l.lesson_id === '49');
+    if (picnicIdx > 0) {
+        const [picnic] = resultList.splice(picnicIdx, 1);
+        resultList.unshift(picnic);
+    } else if (picnicIdx === -1) {
+        const picnic = all.find(l => (l.title && l.title.includes('The Lost Picnic')) || l.lesson_id === '49');
+        if (picnic) resultList.unshift(picnic);
+    }
+
+    return resultList;
 }
 
 module.exports = {
@@ -343,5 +631,10 @@ module.exports = {
     getUsersCount,
     getAllApprovedLessons,
     getLessonsForGrade,
-    normalizeGrade
+    normalizeGrade,
+    ensureDefaultDataPopulated,
+    ensureLessonsPopulated,
+    syncUpsertLessons,
+    DEFAULT_CMS_PACKAGES,
+    DEFAULT_STUDENTS
 };

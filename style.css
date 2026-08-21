@@ -1288,7 +1288,7 @@ body::-webkit-scrollbar {
     top: 0;
     left: 0;
     width: 20%; /* Scoped strictly to the Forest Realm Tree portion */
-    height: 100%;
+    height: 50%;
     pointer-events: none;
     overflow: hidden;
     z-index: 4;

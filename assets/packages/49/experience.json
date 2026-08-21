@@ -1,0 +1,1075 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "118",
+  "title": "The Lost Picnic",
+  "description": "On Picnic Day , the class discovers that the picnic basket is missing .Students finds them.",
+  "language": "English",
+  "grade": "Grade 5",
+  "subject": "General",
+  "estimatedDuration": 30,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "121",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 6,
+      "skills": [
+        "listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "172",
+          "title": "INtroduction",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Grade 5 Students are going for a picnic",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "INtroduction",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786008092731-3evvdkomk",
+                "slot": "right",
+                "type": "image",
+                "styles": {
+                  "top": "114px",
+                  "left": "25px",
+                  "minHeight": "348px",
+                  "blockWidth": "859px"
+                },
+                "content": {
+                  "url": "http://localhost:8000/media/media_library/0a119570d00e4523a0a4ccca12b5427c.png",
+                  "caption": "",
+                  "media_id": 49,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1786008136182-y6jw3fhgw",
+                "slot": "left",
+                "type": "heading",
+                "styles": {
+                  "top": "18px",
+                  "left": "361px",
+                  "color": "#1F2937",
+                  "fontSize": "32px",
+                  "alignment": "Center",
+                  "minHeight": "67px",
+                  "blockWidth": "289px",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Bold"
+                },
+                "content": {
+                  "tag": "H2",
+                  "text": "The Lost Picnic Basket"
+                }
+              },
+              {
+                "id": "block-1786008459759-v896vkdh1",
+                "slot": "left",
+                "type": "text",
+                "styles": {
+                  "top": "504px",
+                  "left": "0px",
+                  "color": "#334155",
+                  "fontSize": "36px",
+                  "alignment": "Left",
+                  "minHeight": "82px",
+                  "blockWidth": "746px",
+                  "fontFamily": "Inter",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Grade 5 Students are going for a picnic"
+                }
+              }
+            ],
+            "media_id": 49,
+            "alignment": "Center",
+            "media_url": "http://localhost:8000/media/media_library/0a119570d00e4523a0a4ccca12b5427c.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/0a119570d00e4523a0a4ccca12b5427c.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 49,
+              "type": "IMAGE",
+              "url": "assets/images/0a119570d00e4523a0a4ccca12b5427c.png",
+              "missing": false
+            },
+            {
+              "media_id": 49,
+              "type": "IMAGE",
+              "url": "assets/images/0a119570d00e4523a0a4ccca12b5427c.png",
+              "missing": false
+            }
+          ]
+        },
+        {
+          "id": "173",
+          "title": "LIsten & Watch",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Story time!!",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "LIsten & Watch",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786009012329-rprsgx2lz",
+                "slot": "right",
+                "type": "video",
+                "styles": {
+                  "top": "83px",
+                  "left": "0px",
+                  "minHeight": "431px"
+                },
+                "content": {
+                  "url": "http://localhost:8000/media/media_library/b878dcae5bdf48f3ba2179f8670ae86e.mp4",
+                  "media_id": 50,
+                  "media_type": "VIDEO"
+                }
+              },
+              {
+                "id": "block-1786009029848-6wmboubu9",
+                "slot": "left",
+                "type": "text",
+                "styles": {
+                  "top": "10px",
+                  "left": "8px",
+                  "color": "#334155",
+                  "fontSize": "22px",
+                  "alignment": "Left",
+                  "minHeight": "60px",
+                  "blockWidth": "314px",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Story time!!"
+                }
+              }
+            ],
+            "media_id": 50,
+            "alignment": "Center",
+            "media_url": "http://localhost:8000/media/media_library/b878dcae5bdf48f3ba2179f8670ae86e.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "video": "assets/video/b878dcae5bdf48f3ba2179f8670ae86e.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 50,
+              "type": "VIDEO",
+              "url": "assets/video/b878dcae5bdf48f3ba2179f8670ae86e.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 50,
+              "type": "VIDEO",
+              "url": "assets/video/b878dcae5bdf48f3ba2179f8670ae86e.mp4",
+              "missing": false
+            }
+          ]
+        },
+        {
+          "id": "174",
+          "title": "Check",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Check",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786009113794-fgalfkoyp",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "9px",
+                  "left": "0px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": "Library"
+                    },
+                    {
+                      "text": "Playground"
+                    },
+                    {
+                      "text": "garden"
+                    },
+                    {
+                      "text": "Bus"
+                    }
+                  ],
+                  "question": "Where was the last basket seen?",
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1786009169951-v1g0nzvkd",
+                "slot": "left",
+                "type": "sequence",
+                "styles": {
+                  "top": "285px",
+                  "left": "0px"
+                },
+                "content": {
+                  "items": [
+                    "Students prepare for the picnic ",
+                    "the basket goes missing",
+                    "The teacher asks for Help"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "Library",
+              "Playground",
+              "garden",
+              "Bus"
+            ],
+            "quiz_question": "Where was the last basket seen?",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "175",
+          "title": "Dictation",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Excellent! You Found the First Clue ",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Dictation",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786009384088-ivoyu2ypi",
+                "slot": "left",
+                "type": "text",
+                "styles": {
+                  "top": "173px",
+                  "left": "0px",
+                  "color": "#334155",
+                  "fontSize": "16px",
+                  "alignment": "Left",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Excellent! You Found the First Clue "
+                }
+              },
+              {
+                "id": "block-1786009468032-zgo2xnakf",
+                "slot": "left",
+                "type": "dictation",
+                "styles": {
+                  "top": "2px",
+                  "left": "0px"
+                },
+                "content": {
+                  "url": "",
+                  "question": "Listen and type what you hear."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "122",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "176",
+          "title": "Dialogue",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Dialogue",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786077932209-lcp9vzd99",
+                "slot": "left",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "226px",
+                  "left": "29px",
+                  "blockWidth": "897px"
+                },
+                "content": {
+                  "prompt": "I think the picnic basket is near the school garden"
+                }
+              },
+              {
+                "id": "block-1786077865442-xttlr5p79",
+                "slot": "left",
+                "type": "pronunciation",
+                "styles": {
+                  "top": "32px",
+                  "left": "51px",
+                  "minHeight": "115px",
+                  "blockWidth": "808px"
+                },
+                "content": {
+                  "word": "excuse me",
+                  "phonetic": "/həˈloʊ/"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "276",
+          "title": "g]]",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "g]]",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786624053931-x9ogpedjr",
+                "type": "role_play",
+                "styles": {
+                  "top": "20px",
+                  "left": "57px",
+                  "blockWidth": "862px"
+                },
+                "content": {
+                  "title": "Introduction",
+                  "prompt": "Introduce yourself.",
+                  "script": [
+                    {
+                      "text": "Hi! How are you?",
+                      "speaker": "A"
+                    },
+                    {
+                      "text": "Im good, thanks!",
+                      "speaker": "B"
+                    }
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "125",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "179",
+          "title": "Reading Passage",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Reading Passage",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786078143015-zr3mih9fl",
+                "slot": "right",
+                "type": "image",
+                "styles": {
+                  "top": "180px",
+                  "left": "29px",
+                  "minHeight": "346px",
+                  "blockWidth": "556px"
+                },
+                "content": {
+                  "url": "/media/media_library/abdad3f8e2824dc186cbbe693019da48.png",
+                  "caption": "",
+                  "media_id": 58,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1786083804565-j9pqid0pi",
+                "slot": "left",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "0px",
+                  "left": "0px",
+                  "minHeight": "141px"
+                },
+                "content": {
+                  "title": "A Helpful Clue ",
+                  "passage": " I saw a Small Puppy Pulling something towards the school garden .The seemed Hungry , not naughty t carefully...",
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1786082225636-bt4p59h0w",
+                "slot": "left",
+                "type": "word_search",
+                "styles": {
+                  "top": "562px",
+                  "left": "0px",
+                  "minHeight": "171px"
+                },
+                "content": {
+                  "words": [],
+                  "gridSize": 8,
+                  "question": "Find the hidden words in the grid.",
+                  "wordsRawText": ""
+                }
+              }
+            ],
+            "media_id": 58,
+            "alignment": "Center",
+            "media_url": "/media/media_library/abdad3f8e2824dc186cbbe693019da48.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/abdad3f8e2824dc186cbbe693019da48.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 58,
+              "type": "IMAGE",
+              "url": "assets/images/abdad3f8e2824dc186cbbe693019da48.png",
+              "missing": false
+            },
+            {
+              "media_id": 58,
+              "type": "IMAGE",
+              "url": "assets/images/abdad3f8e2824dc186cbbe693019da48.png",
+              "missing": false
+            }
+          ]
+        },
+        {
+          "id": "180",
+          "title": "check",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "check",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786079251369-99gow1o9q",
+                "type": "quiz",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": "Gardener"
+                    },
+                    {
+                      "text": "teacher "
+                    },
+                    {
+                      "text": "security"
+                    },
+                    {
+                      "text": "principal"
+                    }
+                  ],
+                  "question": "Who saw the puppy?",
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1786079302782-mhhexyci1",
+                "type": "match",
+                "styles": {
+                  "top": "250px",
+                  "left": "0px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "Garden",
+                    "basket"
+                  ],
+                  "rightItems": [
+                    "place with plants",
+                    "conatainer"
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "Gardener",
+              "teacher ",
+              "security",
+              "principal"
+            ],
+            "quiz_question": "Who saw the puppy?",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "181",
+          "title": "Challenge",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Challenge",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786079538150-khggqw8g9",
+                "slot": "left",
+                "type": "word_search",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "words": [
+                    "DASHBOARD",
+                    "STUDIO",
+                    "TEACHER"
+                  ],
+                  "gridSize": 10,
+                  "question": "Find the hidden words in the grid."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "126",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 5,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "182",
+          "title": "Writing Prompt",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Writing Prompt",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786079678544-09c5sczud",
+                "slot": "left",
+                "type": "heading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "color": "#1F2937",
+                  "fontSize": "32px",
+                  "alignment": "Center",
+                  "blockWidth": "890px",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Bold"
+                },
+                "content": {
+                  "tag": "H2",
+                  "text": "Write about the Adventure"
+                }
+              },
+              {
+                "id": "block-1786079689950-ni01cq79r",
+                "slot": "right",
+                "type": "image",
+                "styles": {
+                  "top": "150px",
+                  "left": "10px",
+                  "minHeight": "499px",
+                  "blockWidth": "889px"
+                },
+                "content": {
+                  "url": "/media/media_library/5ce3283c12704eb7a492ed6e09992ad7.png",
+                  "caption": "",
+                  "media_id": 57,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1786079691120-85fcwj691",
+                "slot": "left",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "707px",
+                  "left": "14px",
+                  "minHeight": "179px",
+                  "blockWidth": "875px"
+                },
+                "content": {
+                  "prompt": "Write the clues u found at the Garden",
+                  "minWords": 20,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": 57,
+            "alignment": "Center",
+            "media_url": "/media/media_library/5ce3283c12704eb7a492ed6e09992ad7.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/5ce3283c12704eb7a492ed6e09992ad7.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 57,
+              "type": "IMAGE",
+              "url": "assets/images/5ce3283c12704eb7a492ed6e09992ad7.png",
+              "missing": false
+            },
+            {
+              "media_id": 57,
+              "type": "IMAGE",
+              "url": "assets/images/5ce3283c12704eb7a492ed6e09992ad7.png",
+              "missing": false
+            }
+          ]
+        },
+        {
+          "id": "183",
+          "title": "Fill UPs",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Fill UPs",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786080404661-80pxlzk54",
+                "slot": "left",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "text": "the picnic basket found near the  [ garden].",
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "127",
+      "title": "Grammar",
+      "description": "",
+      "sequence": 5,
+      "estimatedDuration": 5,
+      "skills": [
+        "grammar"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "184",
+          "title": "screen 1",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "screen 1",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1786166774452-8t0b4n9ug",
+                "type": "video",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/8f27f7a624d143299bce933a70cf5065.mp4",
+                  "media_id": 61,
+                  "media_type": "VIDEO"
+                }
+              }
+            ],
+            "media_id": 61,
+            "alignment": "Center",
+            "media_url": "/media/media_library/8f27f7a624d143299bce933a70cf5065.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "video": "assets/video/8f27f7a624d143299bce933a70cf5065.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 61,
+              "type": "VIDEO",
+              "url": "assets/video/8f27f7a624d143299bce933a70cf5065.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 61,
+              "type": "VIDEO",
+              "url": "assets/video/8f27f7a624d143299bce933a70cf5065.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

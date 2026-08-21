@@ -1,3 +1,4 @@
+
 /**
  * Travel AI Buddy — Step 4: Proactive Observation Engine
  * 
