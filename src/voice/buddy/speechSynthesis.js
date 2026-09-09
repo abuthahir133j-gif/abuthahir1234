@@ -7,7 +7,7 @@
 (function (global) {
     const _voiceConfig = (typeof global.voiceConfig !== 'undefined')
         ? global.voiceConfig
-        : require('./voiceConfig');
+        : (typeof require !== 'undefined' ? require('./voiceConfig') : {});
 
     class BuddySpeechSynthesis {
         constructor(config = {}) {
@@ -53,7 +53,7 @@
         }
 
         /**
-         * Get best available voice matching language and child persona
+         * Get best available voice matching language and 5-year-old child persona
          * @param {string} [lang='en-US']
          * @returns {SpeechSynthesisVoice|null}
          */
@@ -68,21 +68,33 @@
                 if (match) return match;
             }
 
-            // 2. Child Persona: Look for female/child/youthful natural voices (e.g. Zira, Samantha, Jenny, Ivy, Google, Natural)
-            const childFriendlyVoice = this.cachedVoices.find(v => {
+            // 2. 5-Year-Old Child Persona: Check specialized child / kid / youthful voices
+            const primaryChildVoice = this.cachedVoices.find(v => {
                 const name = v.name.toLowerCase();
                 const vLang = v.lang.toLowerCase();
                 const isEnglish = vLang.includes('en') || vLang.includes('us') || vLang.includes('gb');
                 return isEnglish && (
                     name.includes('child') || name.includes('kid') || name.includes('junior') ||
-                    name.includes('zira') || name.includes('samantha') || name.includes('jenny') ||
-                    name.includes('ivy') || name.includes('victoria') || name.includes('google us') ||
-                    name.includes('natural')
+                    name.includes('ana') || name.includes('ivy') || name.includes('maisie') ||
+                    name.includes('noah')
                 );
             });
-            if (childFriendlyVoice) return childFriendlyVoice;
+            if (primaryChildVoice) return primaryChildVoice;
 
-            // 3. Fallback to any English voice
+            // 3. Fallback to bright, youthful natural voices (e.g. Jenny, Samantha, Zira, Aria, Google US)
+            const friendlyFemaleVoice = this.cachedVoices.find(v => {
+                const name = v.name.toLowerCase();
+                const vLang = v.lang.toLowerCase();
+                const isEnglish = vLang.includes('en') || vLang.includes('us') || vLang.includes('gb');
+                return isEnglish && (
+                    name.includes('zira') || name.includes('samantha') || name.includes('jenny') ||
+                    name.includes('aria') || name.includes('victoria') || name.includes('google us') ||
+                    name.includes('natural') || name.includes('female')
+                );
+            });
+            if (friendlyFemaleVoice) return friendlyFemaleVoice;
+
+            // 4. Fallback to any English voice
             const englishVoice = this.cachedVoices.find(v => v.lang.startsWith('en'));
             if (englishVoice) return englishVoice;
 
@@ -95,8 +107,8 @@
          */
         setPersona(persona = 'child') {
             if (persona === 'child') {
-                this.config.pitch = 1.40;
-                this.config.rate = 1.08;
+                this.config.pitch = 1.55; // 5-year-old child pitch
+                this.config.rate = 1.04;  // 5-year-old child pace
             } else if (persona === 'robot') {
                 this.config.pitch = 0.85;
                 this.config.rate = 0.95;

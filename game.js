@@ -52,17 +52,693 @@ const BOSS_NODES = [
     { id: "boss-1", bossIndex: 1, isBoss: true, zone: 1, zoneName: "Forest Realm", title: "Forest Guardian Boss", desc: "Face the ancient forest titan to prove your mastery of Zone 1!", x: 9.5, y: 28, img: "Level/goldboss.png", requiredLevels: [1, 2, 3, 4, 5] },
     { id: "boss-2", bossIndex: 2, isBoss: true, zone: 2, zoneName: "Frozen Glacier", title: "Frost Golem Boss", desc: "Battle the frozen colossus atop the glacial peaks of Zone 2!", x: 30.7, y: 30, img: "Level/iceboss.png", requiredLevels: [6, 7, 8, 9, 10] },
     { id: "boss-3", bossIndex: 3, isBoss: true, zone: 3, zoneName: "Blossom Haven", title: "Cherry Blossom Spirit Boss", desc: "Challenge the guardian of the sacred petals in Zone 3!", x: 49.5, y: 35, img: "Level/springboss.png", requiredLevels: [11, 12, 13, 14, 15] },
-    { id: "boss-4", bossIndex: 4, isBoss: true, zone: 4, zoneName: "Tropical Bay", title: "Kraken Leviathan Boss", desc: "Conquer the ruler of the ocean depths in Zone 4!", x: 63.8, y: 66.5, img: "Level/waterboss.png", requiredLevels: [16, 17, 18, 19, 20] },
+    { id: "boss-4", bossIndex: 4, isBoss: true, zone: 4, zoneName: "Tropical Bay", title: "Kraken Leviathan Boss", desc: "Conquer the ruler of the ocean depths in Zone 4!", x: 67.5, y: 37, img: "Level/waterboss.png", requiredLevels: [16, 17, 18, 19, 20] },
     { id: "boss-5", bossIndex: 5, isBoss: true, zone: 5, zoneName: "Golden Sands", title: "Pharaoh Sand Drake Boss", desc: "Defeat the ancient sand titan of the desert pyramid in Zone 5!", x: 75.5, y: 32, img: "Level/desertboss.png", requiredLevels: [21, 22, 23, 24, 25] },
     { id: "boss-6", bossIndex: 6, isBoss: true, zone: 6, zoneName: "Dragon Peak", title: "Infernal Dragon Lord Boss", desc: "Defeat the ultimate volcanic dragon atop Dragon Citadel!", x: 97.5, y: 30.5, img: "Level/lava boss.png", requiredLevels: [26, 27, 28, 29, 30] }
 ];
 
+// ==========================================
+// Level Experience Packages Configuration
+// ==========================================
+// Boss levels MUST open Assessent_v5
+// Remaining 8 packages open across regular levels from language-lab-engine/src/runtime/samples
+const BOSS_EXPERIENCE_PACKAGE = "Assessent_v5";
+const REGULAR_EXPERIENCE_PACKAGES = [
+    { id: "Hello!_This_Is_Me..._v1", title: "Hello! This Is Me" },
+    { id: "Things_I_Like_v6", title: "Things I Like" },
+    { id: "Meet_My_Friends_v8", title: "Meet My Friends" },
+    { id: "This_Is_My_Family_v7", title: "This Is My Family" },
+    { id: "Welcome_to_My_Classroom_v3", title: "Welcome to My Classroom" },
+    { id: "Where_Is_My_Pencil__v2", title: "Where Is My Pencil?" },
+    { id: "What's_in_My_School_Bag__v4", title: "What's in My School Bag?" },
+    { id: "Can_You_Help_Me__v1", title: "Can You Help Me?" }
+];
+
+function getLevelExperiencePackage(levelId, isBoss = false) {
+    const isBossLevel = Boolean(
+        isBoss || 
+        String(levelId).startsWith("boss-") || 
+        levelId === 30 || 
+        levelId === "30"
+    );
+    if (isBossLevel) {
+        return {
+            packageId: BOSS_EXPERIENCE_PACKAGE,
+            title: "Assessment Challenge",
+            isBoss: true
+        };
+    }
+    const num = parseInt(levelId, 10);
+    const validNum = (!isNaN(num) && num >= 1) ? num : 1;
+    const pkg = REGULAR_EXPERIENCE_PACKAGES[(validNum - 1) % REGULAR_EXPERIENCE_PACKAGES.length];
+    return {
+        packageId: pkg.id,
+        title: pkg.title,
+        isBoss: false
+    };
+}
+window.getLevelExperiencePackage = getLevelExperiencePackage;
+
 // App State Management
-const STORAGE_KEY = "language_lab_level_progress_v1";
+const STORAGE_KEY = "language_lab_level_progress_v2";
 let userProgress = {
     unlockedLevel: 1,
-    stars: {}
+    stars: {},
+    playedBossAnimations: {}
 };
+
+// AI Buddy Seasonal Avatar Evolution Configuration
+const BUDDY_SEASON_AVATARS = {
+    zone1: { zone: 1, name: "Forest Realm AI", asset: "AI/PNg.svg", title: "Forest AI Buddy", desc: "Classic companion for the Forest Realm." },
+    zone2: { zone: 2, name: "Frozen Glacier AI", asset: "AI/ICE BLUE ROBOT.svg", title: "Ice Blue AI Buddy", desc: "Evolved companion from completing Forest Realm Boss!" },
+    zone3: { zone: 3, name: "Blossom Haven AI", asset: "AI/PURPLE ROBOT.svg", title: "Purple AI Buddy", desc: "Evolved companion from completing Frozen Glacier Boss!" },
+    zone4: { zone: 4, name: "Tropical Bay AI", asset: "AI/GREEN.svg", title: "Green AI Buddy", desc: "Evolved companion from completing Blossom Haven Boss!" },
+    zone5: { zone: 5, name: "Golden Sands AI", asset: "AI/GOLD ROBOT.svg", title: "Gold AI Buddy", desc: "Evolved companion from completing Tropical Bay Boss!" },
+    zone6: { zone: 6, name: "Dragon Peak AI", asset: "AI/RED ROBOT.svg", title: "Red AI Buddy", desc: "Ultimate volcanic companion from Golden Sands Boss!" }
+};
+
+// ==========================================================================
+// AI-BUDDY SEASON EVOLUTION PUZZLE ASSEMBLY SYSTEM (6-PART JIGSAW)
+// ==========================================================================
+const ZONE_PUZZLE_CONFIG = {
+    1: {
+        zone: 1,
+        zoneName: "Forest Realm",
+        nextFormName: "Ice Blue AI-Buddy",
+        nextFormAsset: "AI/ICE BLUE ROBOT.svg",
+        themeColor: "#38bdf8",
+        bossId: "boss-1",
+        levels: [1, 2, 3, 4, 5],
+        desc: "Assemble all 6 pieces of the Ice Blue Guardian to evolve your AI-Buddy for Frozen Glacier!"
+    },
+    2: {
+        zone: 2,
+        zoneName: "Frozen Glacier",
+        nextFormName: "Purple Blossom AI-Buddy",
+        nextFormAsset: "AI/PURPLE ROBOT.svg",
+        themeColor: "#c084fc",
+        bossId: "boss-2",
+        levels: [6, 7, 8, 9, 10],
+        desc: "Assemble all 6 pieces of the Blossom Spirit to evolve your AI-Buddy for Blossom Haven!"
+    },
+    3: {
+        zone: 3,
+        zoneName: "Blossom Haven",
+        nextFormName: "Tropical Green AI-Buddy",
+        nextFormAsset: "AI/GREEN.svg",
+        themeColor: "#34d399",
+        bossId: "boss-3",
+        levels: [11, 12, 13, 14, 15],
+        desc: "Assemble all 6 pieces of the Ocean Explorer to evolve your AI-Buddy for Tropical Bay!"
+    },
+    4: {
+        zone: 4,
+        zoneName: "Tropical Bay",
+        nextFormName: "Golden Sands AI-Buddy",
+        nextFormAsset: "AI/GOLD ROBOT.svg",
+        themeColor: "#fbbf24",
+        bossId: "boss-4",
+        levels: [16, 17, 18, 19, 20],
+        desc: "Assemble all 6 pieces of the Pharaoh Titan to evolve your AI-Buddy for Golden Sands!"
+    },
+    5: {
+        zone: 5,
+        zoneName: "Golden Sands",
+        nextFormName: "Infernal Red AI-Buddy",
+        nextFormAsset: "AI/RED ROBOT.svg",
+        themeColor: "#f87171",
+        bossId: "boss-5",
+        levels: [21, 22, 23, 24, 25],
+        desc: "Assemble all 6 pieces of the Dragon Master to evolve your AI-Buddy for Dragon Peak!"
+    },
+    6: {
+        zone: 6,
+        zoneName: "Dragon Peak",
+        nextFormName: "Ultimate Grandmaster AI-Buddy",
+        nextFormAsset: "AI/RED ROBOT.svg",
+        themeColor: "#f59e0b",
+        bossId: "boss-6",
+        levels: [26, 27, 28, 29, 30],
+        desc: "Assemble all 6 pieces of the Infernal Dragon Lord to complete the ultimate language master collection!"
+    }
+};
+
+function isAllPartsCompleted(zoneNum = 1, progress = userProgress) {
+    if (!progress) return false;
+    const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
+    
+    // Boss level MUST be completed to unlock the final core part and assemble the robot!
+    const isBossDefeated = Boolean(progress.stars && progress.stars[config.bossId] && progress.stars[config.bossId] > 0);
+    if (!isBossDefeated) {
+        return false;
+    }
+
+    // All regular levels 1-5 must also be completed
+    let regularLevelsCompleted = 0;
+    if (progress.stars) {
+        config.levels.forEach(lvl => {
+            if ((progress.stars[lvl] && progress.stars[lvl] > 0) || 
+                (progress.stars[String(lvl)] && progress.stars[String(lvl)] > 0) || 
+                (Number(progress.unlockedLevel) > Number(lvl))) {
+                regularLevelsCompleted++;
+            }
+        });
+    }
+
+    if (regularLevelsCompleted < config.levels.length) {
+        return false;
+    }
+
+    return true;
+}
+
+function isZoneAllPartsUnlocked(zoneNum, progress = userProgress) {
+    if (!progress) return false;
+    return isAllPartsCompleted(zoneNum, progress);
+}
+
+function getBuddyAvatarForProgress(progress = userProgress) {
+    if (!progress) return "AI/PNg.svg";
+    
+    // Companion evolves into full robot form ONLY when Boss of that zone is defeated (ALL parts complete)!
+    if (isZoneAllPartsUnlocked(5, progress) && (progress.stars && progress.stars["boss-5"] > 0)) {
+        return "AI/RED ROBOT.svg";
+    }
+    if (isZoneAllPartsUnlocked(4, progress) && (progress.stars && progress.stars["boss-4"] > 0)) {
+        return "AI/GOLD ROBOT.svg";
+    }
+    if (isZoneAllPartsUnlocked(3, progress) && (progress.stars && progress.stars["boss-3"] > 0)) {
+        return "AI/GREEN.svg";
+    }
+    if (isZoneAllPartsUnlocked(2, progress) && (progress.stars && progress.stars["boss-2"] > 0)) {
+        return "AI/PURPLE ROBOT.svg";
+    }
+    if (isZoneAllPartsUnlocked(1, progress) && (progress.stars && progress.stars["boss-1"] > 0)) {
+        return "AI/ICE BLUE ROBOT.svg";
+    }
+    
+    // Zone 1 Default (while Boss 1 has not yet been defeated / Part 6 is still locked)
+    return "AI/PNg.svg";
+}
+
+function getBuddyAvatarInfo(progress = userProgress) {
+    const asset = getBuddyAvatarForProgress(progress);
+    for (const key of Object.keys(BUDDY_SEASON_AVATARS)) {
+        if (BUDDY_SEASON_AVATARS[key].asset === asset) {
+            return BUDDY_SEASON_AVATARS[key];
+        }
+    }
+    return BUDDY_SEASON_AVATARS.zone1;
+}
+
+function updateBuddyAvatar() {
+    const avatarAsset = getBuddyAvatarForProgress(userProgress);
+    const avatarInfo = getBuddyAvatarInfo(userProgress);
+
+    // 1. Update HUD Robot avatar button
+    const hudRobotImg = document.querySelector("#hud-robot-btn img") || document.getElementById("hud-robot-avatar-img");
+    if (hudRobotImg) {
+        if (hudRobotImg.getAttribute("src") !== avatarAsset) {
+            hudRobotImg.src = avatarAsset;
+        }
+    }
+
+    // 2. Update Robot dropdown companion info
+    const robotHeader = document.querySelector("#robot-dropdown .robot-header span");
+    if (robotHeader) {
+        robotHeader.innerText = `🤖 ${avatarInfo.title}`;
+    }
+    const robotBody = document.querySelector("#robot-dropdown .robot-body p");
+    if (robotBody) {
+        robotBody.innerText = `Hello! I am your ${avatarInfo.title}. ${avatarInfo.desc} Defeat realm bosses to evolve my form across all 6 zones!`;
+    }
+
+    // 3. Update TravelBuddy if mounted
+    if (window.travelBuddy && typeof window.travelBuddy.setCharacterAsset === "function") {
+        window.travelBuddy.setCharacterAsset(avatarAsset);
+    }
+}
+window.BUDDY_SEASON_AVATARS = BUDDY_SEASON_AVATARS;
+window.ZONE_PUZZLE_CONFIG = ZONE_PUZZLE_CONFIG;
+window.isZoneAllPartsUnlocked = isZoneAllPartsUnlocked;
+window.getBuddyAvatarForProgress = getBuddyAvatarForProgress;
+window.getBuddyAvatarInfo = getBuddyAvatarInfo;
+window.updateBuddyAvatar = updateBuddyAvatar;
+
+function getCurrentZonePuzzle(progress = userProgress) {
+    const unLvl = progress.unlockedLevel || 1;
+    if (unLvl <= 5 || (!progress.stars?.["boss-1"] || progress.stars["boss-1"] <= 0)) return ZONE_PUZZLE_CONFIG[1];
+    if (unLvl <= 10 || (!progress.stars?.["boss-2"] || progress.stars["boss-2"] <= 0)) return ZONE_PUZZLE_CONFIG[2];
+    if (unLvl <= 15 || (!progress.stars?.["boss-3"] || progress.stars["boss-3"] <= 0)) return ZONE_PUZZLE_CONFIG[3];
+    if (unLvl <= 20 || (!progress.stars?.["boss-4"] || progress.stars["boss-4"] <= 0)) return ZONE_PUZZLE_CONFIG[4];
+    if (unLvl <= 25 || (!progress.stars?.["boss-5"] || progress.stars["boss-5"] <= 0)) return ZONE_PUZZLE_CONFIG[5];
+    return ZONE_PUZZLE_CONFIG[6];
+}
+
+function getCompletedLevelsCountForZone(zoneNum, progress = userProgress) {
+    const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
+    let count = 0;
+    if (!progress || !progress.stars) return 0;
+    // Check regular levels (1 to 5)
+    config.levels.forEach(lvl => {
+        if ((progress.stars[lvl] && progress.stars[lvl] > 0) || 
+            (progress.stars[String(lvl)] && progress.stars[String(lvl)] > 0) || 
+            (Number(progress.unlockedLevel) > Number(lvl))) {
+            count++;
+        }
+    });
+    // Check boss level (6th part) - ONLY increments when boss is defeated!
+    if (progress.stars[config.bossId] && progress.stars[config.bossId] > 0) {
+        count++;
+    }
+    return Math.min(6, count);
+}
+
+function getZoneUnlockedPieces(zoneNum = 1, progress = userProgress) {
+    if (!progress) return [];
+    const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
+    progress.unlockedPieces = progress.unlockedPieces || {};
+
+    const unlocked = [];
+
+    // Regular levels 1-5 unlock parts 1-5
+    config.levels.forEach((lvl, idx) => {
+        const isLvlComplete = (progress.stars && progress.stars[lvl] > 0) || 
+                             (progress.stars && progress.stars[String(lvl)] > 0) || 
+                             (Number(progress.unlockedLevel) > Number(lvl));
+        if (isLvlComplete) {
+            unlocked.push(idx + 1);
+        }
+    });
+
+    // Part 6 (Final Part / Boss Core) ONLY unlocks when the boss level is completed!
+    const isBossDefeated = Boolean(progress.stars && progress.stars[config.bossId] && progress.stars[config.bossId] > 0);
+    if (isBossDefeated) {
+        unlocked.push(6);
+    }
+
+    progress.unlockedPieces[zoneNum] = unlocked;
+    return unlocked;
+}
+
+function getZonePuzzlePiecesStatus(zoneNum = 1, progress = userProgress) {
+    const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
+    const unlockedPieceIndices = getZoneUnlockedPieces(zoneNum, progress);
+    const pieces = [];
+    
+    for (let i = 1; i <= 6; i++) {
+        const isPieceUnlocked = unlockedPieceIndices.includes(i);
+        const isBossPiece = (i === 6);
+        pieces.push({
+            index: i,
+            levelId: isBossPiece ? config.bossId : config.levels[i - 1],
+            levelTitle: isBossPiece ? `${config.zoneName} Boss Core` : `Part ${i}`,
+            unlocked: isPieceUnlocked,
+            isBoss: isBossPiece
+        });
+    }
+
+    const unlockedCount = pieces.filter(p => p.unlocked).length;
+    return {
+        zone: zoneNum,
+        config: config,
+        pieces: pieces,
+        unlockedCount: unlockedCount,
+        totalCount: 6,
+        isComplete: isAllPartsCompleted(zoneNum, progress)
+    };
+}
+
+let activeAssemblyTimer = null;
+
+function renderBuddyPuzzleModal(targetZone = null, justUnlockedPieceIndex = null) {
+    const currentZoneConfig = targetZone ? (ZONE_PUZZLE_CONFIG[targetZone] || ZONE_PUZZLE_CONFIG[1]) : getCurrentZonePuzzle(userProgress);
+    const puzzleStatus = getZonePuzzlePiecesStatus(currentZoneConfig.zone, userProgress);
+    const allCompleted = isAllPartsCompleted(currentZoneConfig.zone, userProgress);
+    updateBuddyAvatar();
+
+    // Update Zone Tag Badge (e.g. ZONE 1 • FOREST REALM)
+    const zoneTagEl = document.getElementById("puzzle-zone-tag");
+    if (zoneTagEl) {
+        zoneTagEl.innerText = `ZONE ${currentZoneConfig.zone} • ${currentZoneConfig.zoneName.toUpperCase()}`;
+    }
+
+    // Update Header Elements
+    const titleEl = document.getElementById("puzzle-title");
+    if (titleEl) titleEl.innerText = currentZoneConfig.nextFormName;
+
+    const subtitleEl = document.getElementById("puzzle-subtitle");
+    if (subtitleEl) subtitleEl.innerText = currentZoneConfig.desc;
+
+    // Board styling & Background Blueprint
+    const boardEl = document.getElementById("puzzle-board");
+    const bgSilhouette = document.getElementById("puzzle-blueprint-bg");
+    if (bgSilhouette) {
+        bgSilhouette.style.backgroundImage = `url("${currentZoneConfig.nextFormAsset}")`;
+    }
+
+    // Render Slots (matching First Image design)
+    puzzleStatus.pieces.forEach(piece => {
+        const slotEl = document.querySelector(`.slot-${piece.index}`);
+        if (!slotEl) return;
+
+        const imgCropEl = slotEl.querySelector(".puzzle-piece-img-crop, .cr-piece-crop");
+        if (imgCropEl) {
+            imgCropEl.style.backgroundImage = `url("${currentZoneConfig.nextFormAsset}")`;
+        }
+
+        slotEl.classList.remove("locked", "unlocked", "just-unlocked", "highlighted", "piece-assembling");
+
+        const lvlTag = slotEl.querySelector(".slot-lvl-tag, .cr-lock-lvl");
+
+        if (piece.unlocked) {
+            slotEl.classList.add("unlocked");
+            if (justUnlockedPieceIndex === piece.index || (justUnlockedPieceIndex === null && puzzleStatus.unlockedCount === 1 && piece.unlocked)) {
+                slotEl.classList.add("just-unlocked", "highlighted");
+            }
+        } else {
+            slotEl.classList.add("locked");
+            if (lvlTag) {
+                lvlTag.innerText = piece.isBoss ? "Boss Core" : "Locked";
+            }
+        }
+    });
+
+    const bannerEl = document.getElementById("puzzle-evolution-banner");
+    const glowEl = document.getElementById("puzzle-fusion-glow");
+    const evoDescEl = document.getElementById("puzzle-evolution-desc");
+    const evoTitleEl = bannerEl?.querySelector(".evo-title");
+    const seamFlashEl = document.getElementById("puzzle-seam-flash");
+    const emoteOverlayEl = document.getElementById("puzzle-robot-emote-overlay");
+
+    if (allCompleted) {
+        // Check if assembly sequence was already played and persisted
+        const isAlreadyPlayed = Boolean(userProgress.assemblyPlayed && userProgress.assemblyPlayed[currentZoneConfig.zone]);
+        
+        if (isAlreadyPlayed) {
+            // STEP 5 / Final State directly: show complete robot without replaying
+            if (boardEl) {
+                boardEl.classList.remove("assembling", "robot-welcome-emote");
+                boardEl.classList.add("assembled", "idle-ready");
+            }
+            if (seamFlashEl) seamFlashEl.classList.remove("flash-active");
+            if (emoteOverlayEl) emoteOverlayEl.classList.add("hidden");
+            if (glowEl) glowEl.classList.add("hidden");
+            if (bannerEl) {
+                bannerEl.classList.remove("hidden");
+                if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
+                if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+            }
+        } else {
+            // Newly complete transition: Trigger cinematic assembly sequence
+            runCinematicAssemblySequence(currentZoneConfig, puzzleStatus);
+        }
+    } else {
+        // Not all completed: standard locked/unlocked grid view
+        if (boardEl) {
+            boardEl.classList.remove("assembled", "assembling", "idle-ready", "robot-welcome-emote");
+        }
+        if (bannerEl) bannerEl.classList.add("hidden");
+        if (glowEl) glowEl.classList.add("hidden");
+        if (seamFlashEl) seamFlashEl.classList.remove("flash-active");
+        if (emoteOverlayEl) emoteOverlayEl.classList.add("hidden");
+    }
+}
+
+// Cinematic Final Robot Assembly + Welcome Emote Sequence
+function runCinematicAssemblySequence(currentZoneConfig, puzzleStatus) {
+    const boardEl = document.getElementById("puzzle-board");
+    const bannerEl = document.getElementById("puzzle-evolution-banner");
+    const glowEl = document.getElementById("puzzle-fusion-glow");
+    const seamFlashEl = document.getElementById("puzzle-seam-flash");
+    const emoteOverlayEl = document.getElementById("puzzle-robot-emote-overlay");
+    const evoTitleEl = bannerEl?.querySelector(".evo-title");
+    const evoDescEl = document.getElementById("puzzle-evolution-desc");
+    const zoneNum = currentZoneConfig.zone;
+
+    if (!boardEl) return;
+
+    if (activeAssemblyTimer) {
+        clearTimeout(activeAssemblyTimer);
+        activeAssemblyTimer = null;
+    }
+
+    // Check persistence: if already played, display completed robot directly
+    if (userProgress.assemblyPlayed && userProgress.assemblyPlayed[zoneNum]) {
+        boardEl.classList.remove("assembling", "robot-welcome-emote");
+        boardEl.classList.add("assembled", "idle-ready");
+        document.querySelectorAll(".cr-slot, .puzzle-slot").forEach(s => s.classList.remove("piece-assembling", "highlighted", "just-unlocked"));
+        if (seamFlashEl) seamFlashEl.classList.remove("flash-active");
+        if (emoteOverlayEl) emoteOverlayEl.classList.add("hidden");
+        if (glowEl) glowEl.classList.add("hidden");
+        if (bannerEl) {
+            bannerEl.classList.remove("hidden");
+            if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
+            if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+        }
+        return;
+    }
+
+    // STEP 1 — PRE-ASSEMBLY (0ms to 650ms)
+    // Show existing Part 1–5 pieces in their cards exactly as they currently appear
+    boardEl.classList.remove("assembled", "assembling", "idle-ready", "robot-welcome-emote");
+    if (bannerEl) bannerEl.classList.add("hidden");
+    if (glowEl) glowEl.classList.add("hidden");
+    if (seamFlashEl) seamFlashEl.classList.remove("flash-active");
+    if (emoteOverlayEl) emoteOverlayEl.classList.add("hidden");
+
+    // STEP 2 — ASSEMBLY SEQUENCE
+    activeAssemblyTimer = setTimeout(() => {
+        boardEl.classList.add("assembling");
+        playAssemblyPowerUpSound();
+
+        // Staggered piece lift & convergence toward final coordinates
+        for (let i = 1; i <= 6; i++) {
+            const slotEl = document.querySelector(`.slot-${i}, .cr-slot-${i}`);
+            if (slotEl) {
+                slotEl.classList.add("piece-assembling");
+            }
+        }
+
+        // Mid-point magnetic snap impulse
+        setTimeout(() => {
+            playMagneticSnapSound();
+        }, 1100);
+
+        // Seam flash & magnetic snap connection
+        setTimeout(() => {
+            if (seamFlashEl) seamFlashEl.classList.add("flash-active");
+            playMagneticSnapSound();
+        }, 1700);
+
+        // STEP 3 — COMPLETE ROBOT (2200ms)
+        // Pieces visually connect into ONE complete robot. Gaps and card borders eliminated.
+        setTimeout(() => {
+            boardEl.classList.remove("assembling");
+            boardEl.classList.add("assembled");
+            for (let i = 1; i <= 6; i++) {
+                const slotEl = document.querySelector(`.slot-${i}, .cr-slot-${i}`);
+                if (slotEl) slotEl.classList.remove("piece-assembling");
+            }
+            if (glowEl) {
+                glowEl.classList.remove("hidden");
+            }
+
+            // STEP 4 — WELCOME EMOTE (Inspired by reference video)
+            // Character notices player, raises greeting arm, blooms glowing heart emote, celebratory bounce
+            setTimeout(() => {
+                boardEl.classList.add("robot-welcome-emote");
+                if (emoteOverlayEl) emoteOverlayEl.classList.remove("hidden");
+                playEvolutionTriumphSound();
+                if (typeof speakBuddy === "function") {
+                    speakBuddy(`✨ All parts connected! I am fully assembled! Welcome to the journey!`, "excited", 4500);
+                }
+
+                // STEP 5 — FINAL STATE (After welcome animation)
+                setTimeout(() => {
+                    boardEl.classList.remove("robot-welcome-emote");
+                    boardEl.classList.add("idle-ready");
+                    if (emoteOverlayEl) emoteOverlayEl.classList.add("hidden");
+
+                    if (bannerEl) {
+                        bannerEl.classList.remove("hidden");
+                        if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
+                        if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+                    }
+
+                    // Real data persistence in userProgress
+                    userProgress.assemblyPlayed = userProgress.assemblyPlayed || {};
+                    userProgress.assemblyPlayed[zoneNum] = true;
+                    if (typeof saveProgress === "function") {
+                        saveProgress();
+                    }
+                    updateBuddyAvatar();
+                }, 4200);
+            }, 400);
+
+        }, 2200);
+
+    }, 650);
+}
+
+// Web Audio synthesizer for shard socket sound
+function playPuzzleShardChime() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.18);
+        gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+    } catch (e) {}
+}
+
+// Web Audio: Power-up synth sound for piece lift
+function playAssemblyPowerUpSound() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(560, audioCtx.currentTime + 1.2);
+        gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.28, audioCtx.currentTime + 0.6);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.3);
+    } catch (e) {}
+}
+
+// Web Audio: High-tech magnetic snap click
+function playMagneticSnapSound() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(980, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(320, audioCtx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.14);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.14);
+    } catch (e) {}
+}
+
+// Web Audio: Joyful triumphant chord arpeggio
+function playEvolutionTriumphSound() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 arpeggio
+        notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.type = "sine";
+            const startTime = audioCtx.currentTime + idx * 0.14;
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.28, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.5);
+            osc.start(startTime);
+            osc.stop(startTime + 0.5);
+        });
+    } catch (e) {}
+}
+
+function openBuddyPuzzleModal(targetZone = null, justUnlockedPieceIndex = null) {
+    document.querySelectorAll(".hud-dropdown-panel").forEach(el => el.classList.add("hidden"));
+    document.querySelectorAll(".hud-profile-trigger").forEach(el => el.classList.remove("active"));
+    renderBuddyPuzzleModal(targetZone, justUnlockedPieceIndex);
+    const modal = document.getElementById("buddy-puzzle-modal");
+    if (modal) {
+        modal.classList.remove("hidden");
+        modal.style.display = "flex";
+    }
+    document.body.classList.add("puzzle-modal-open");
+    playPuzzleShardChime();
+}
+
+function closeBuddyPuzzleModal() {
+    const modal = document.getElementById("buddy-puzzle-modal");
+    if (modal) {
+        modal.classList.add("hidden");
+        modal.style.display = "none";
+    }
+    document.body.classList.remove("puzzle-modal-open");
+    // Remove transient just-unlocked/highlighted animation classes
+    document.querySelectorAll(".puzzle-slot, .cr-slot").forEach(el => el.classList.remove("just-unlocked", "highlighted", "piece-assembling"));
+    if (activeAssemblyTimer) {
+        clearTimeout(activeAssemblyTimer);
+        activeAssemblyTimer = null;
+    }
+    scrollToCurrentLevel();
+}
+
+// Acceptance Test & Diagnostic Helpers
+window.setPartCompleted = function(partNum, zoneNum = 1) {
+    userProgress = userProgress || { unlockedLevel: 1, stars: {}, playedBossAnimations: {}, unlockedPieces: {} };
+    userProgress.stars = userProgress.stars || {};
+    userProgress.unlockedPieces = userProgress.unlockedPieces || {};
+    userProgress.unlockedPieces[zoneNum] = userProgress.unlockedPieces[zoneNum] || [];
+
+    const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
+    const parts = Array.isArray(partNum) ? partNum : [partNum];
+    parts.forEach(p => {
+        const pNum = Number(p);
+        if (pNum >= 1 && pNum <= 5) {
+            userProgress.stars[pNum] = 3;
+            userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, pNum + 1);
+        } else if (pNum === 6 || p === 'boss' || p === config.bossId) {
+            // Unlocking the final part is completing the Boss Level!
+            userProgress.stars[config.bossId] = 3;
+            userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 6);
+        }
+    });
+
+    // Recompute unlocked pieces based on actual level completion
+    getZoneUnlockedPieces(zoneNum, userProgress);
+    saveProgress();
+    renderLevelNodes();
+    updateHUD();
+    updateBuddyAvatar();
+    openBuddyPuzzleModal(zoneNum);
+    return getZonePuzzlePiecesStatus(zoneNum, userProgress);
+};
+
+window.completePart = window.setPartCompleted;
+
+window.resetRobotAssembly = function(zoneNum = 1) {
+    if (userProgress.assemblyPlayed) {
+        delete userProgress.assemblyPlayed[zoneNum];
+        saveProgress();
+    }
+    renderBuddyPuzzleModal(zoneNum);
+};
+
+window.ZONE_PUZZLE_CONFIG = ZONE_PUZZLE_CONFIG;
+window.getCurrentZonePuzzle = getCurrentZonePuzzle;
+window.getZonePuzzlePiecesStatus = getZonePuzzlePiecesStatus;
+window.isAllPartsCompleted = isAllPartsCompleted;
+window.runCinematicAssemblySequence = runCinematicAssemblySequence;
+window.renderBuddyPuzzleModal = renderBuddyPuzzleModal;
+window.openBuddyPuzzleModal = openBuddyPuzzleModal;
+window.closeBuddyPuzzleModal = closeBuddyPuzzleModal;
 
 let activeSelectedLevel = null;
 let isMouseDown = false;
@@ -535,37 +1211,87 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("level-modal")?.addEventListener("click", (e) => {
         if (e.target.id === "level-modal") closeModal();
     });
+
+    document.getElementById("buddy-puzzle-close")?.addEventListener("click", closeBuddyPuzzleModal);
+    document.getElementById("buddy-puzzle-modal")?.addEventListener("click", (e) => {
+        if (e.target.id === "buddy-puzzle-modal") closeBuddyPuzzleModal();
+    });
     
     document.getElementById("play-level-btn")?.addEventListener("click", () => {
         if (activeSelectedLevel) {
             const levelToPlay = activeSelectedLevel;
+            const isBoss = isBossLevel(levelToPlay.id);
+            const pkgInfo = getLevelExperiencePackage(levelToPlay.id, isBoss);
             closeModal();
             if (window.electronAPI?.openEngine) {
                 window.electronAPI.openEngine({
                     id: levelToPlay.id,
-                    title: levelToPlay.title,
+                    levelId: levelToPlay.id,
+                    packageId: pkgInfo.packageId,
+                    title: levelToPlay.title || pkgInfo.title,
                     zone: levelToPlay.zone,
-                    zoneName: levelToPlay.zoneName
+                    zoneName: levelToPlay.zoneName,
+                    isBoss: pkgInfo.isBoss
                 });
             } else {
-                console.log(`[Game] Playing Level ${levelToPlay.id}: ${levelToPlay.title}`);
+                console.log(`[Game] Playing Level ${levelToPlay.id}: ${levelToPlay.title} (${pkgInfo.packageId})`);
             }
         }
     });
 
+    function checkAndHandlePendingLevelCompletion() {
+        const pending = localStorage.getItem("language_lab_pending_completion_level") || sessionStorage.getItem("language_lab_just_completed_level");
+        if (pending) {
+            localStorage.removeItem("language_lab_pending_completion_level");
+            sessionStorage.removeItem("language_lab_just_completed_level");
+            console.log("[Game] Found pending completed level signal:", pending);
+            completeLevel(pending, 3);
+            return true;
+        }
+        return false;
+    }
+    window.checkAndHandlePendingLevelCompletion = checkAndHandlePendingLevelCompletion;
+
     if (window.electronAPI?.onLevelCompleted) {
         window.electronAPI.onLevelCompleted((data) => {
             if (data && data.levelId) {
-                completeLevel(data.levelId, data.stars || 1);
+                completeLevel(data.levelId, data.stars || 3);
             }
         });
     }
+
+    // Real-time synchronization when returning focus to the map window
+    window.addEventListener("focus", () => {
+        if (!checkAndHandlePendingLevelCompletion()) {
+            loadProgress();
+            renderLevelNodes();
+            updateHUD();
+            checkAndTriggerPendingBossAnimations();
+        }
+    });
+
+    window.addEventListener("storage", (e) => {
+        if (e.key === STORAGE_KEY || e.key === "language_lab_pending_completion_level") {
+            if (!checkAndHandlePendingLevelCompletion()) {
+                loadProgress();
+                renderLevelNodes();
+                updateHUD();
+                checkAndTriggerPendingBossAnimations();
+            }
+        }
+    });
+
+    // Check on startup if user just returned from a completed level
+    checkAndHandlePendingLevelCompletion();
+
+    // Check if any Boss was newly unlocked (e.g. returning from completed Level 5)
+    checkAndTriggerPendingBossAnimations();
 
     document.getElementById("sim-complete-btn")?.addEventListener("click", () => {
         if (activeSelectedLevel) {
             const levelId = activeSelectedLevel.id;
             closeModal();
-            completeLevel(levelId, 1);
+            completeLevel(levelId, 3);
         }
     });
 
@@ -599,14 +1325,103 @@ function initLoginState() {
     if (modalStudentTag) modalStudentTag.innerText = currentStudentId;
 
     // Load custom selected student avatar if set
-    const savedAvatar = localStorage.getItem("language_lab_selected_avatar_v1");
-    if (savedAvatar) {
-        document.querySelectorAll(".profile-avatar-img, .panel-avatar").forEach(img => {
-            img.src = savedAvatar;
-        });
-    }
+    updateDashboardAvatar();
 
     setupHUDDropdowns();
+    setupSubpageNavigation();
+}
+
+// Real-Time Dashboard Avatar Synchronization
+function updateDashboardAvatar(newAvatarUrl) {
+    const avatar = newAvatarUrl || localStorage.getItem("language_lab_selected_avatar_v1") || 'avatars/boy1.png';
+    document.querySelectorAll(".profile-avatar-img, .panel-avatar, .modal-avatar-img, .profile-avatar-circle img").forEach(img => {
+        if (img && img.src !== avatar) {
+            img.src = avatar;
+        }
+    });
+}
+window.updateDashboardAvatar = updateDashboardAvatar;
+
+// High-Performance Desktop Game Subpage Navigation System
+let currentSubpageUrl = null;
+
+function openSubpage(url) {
+    const container = document.getElementById("subpage-view-container");
+    const frame = document.getElementById("subpage-view-frame");
+    if (!container || !frame) {
+        window.location.href = url;
+        return;
+    }
+
+    if (!frame.src || !frame.src.endsWith(url)) {
+        frame.src = url;
+        currentSubpageUrl = url;
+    } else {
+        // Subpage already resident in iframe: refresh its data instantly without reload
+        try {
+            if (frame.contentWindow && typeof frame.contentWindow.refreshProfileData === 'function') {
+                frame.contentWindow.refreshProfileData();
+            }
+        } catch (e) {}
+    }
+
+    container.classList.remove("hidden");
+    container.setAttribute("aria-hidden", "false");
+
+    // Pause heavy 3D buddy rendering loops while subpage is open to save 100% CPU/GPU
+    if (window.travelBuddy?.scene?.pause) {
+        window.travelBuddy.scene.pause();
+    }
+}
+window.openSubpage = openSubpage;
+
+function closeSubpage() {
+    const container = document.getElementById("subpage-view-container");
+    if (container) {
+        container.classList.add("hidden");
+        container.setAttribute("aria-hidden", "true");
+    }
+
+    // Instantly resume 3D buddy rendering without any initialization delay
+    if (window.travelBuddy?.scene?.resume) {
+        window.travelBuddy.scene.resume();
+    }
+
+    // Ultra-fast dynamic state sync (re-reads localStorage in < 2ms, zero full reloads)
+    updateDashboardAvatar();
+    loadProgress();
+    renderLevelNodes();
+    updateHUD();
+    renderHUDNotifications();
+}
+window.closeSubpage = closeSubpage;
+
+function setupSubpageNavigation() {
+    // Escape key closes subpage and returns to map immediately
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            const container = document.getElementById("subpage-view-container");
+            if (container && !container.classList.contains("hidden")) {
+                closeSubpage();
+            }
+        }
+    });
+
+    // Listen to storage events across frames for real-time avatar updates
+    window.addEventListener("storage", (e) => {
+        if (e.key === "language_lab_selected_avatar_v1") {
+            updateDashboardAvatar(e.newValue);
+        }
+    });
+
+    // Pre-warm Profile in subpage iframe after idle delay for instant 0ms open
+    setTimeout(() => {
+        const frame = document.getElementById("subpage-view-frame");
+        if (frame && !frame.src) {
+            frame.src = "profile.html";
+            currentSubpageUrl = "profile.html";
+        }
+    }, 1200);
 }
 
 // Top Right HUD Interactive Dropdowns Engine
@@ -624,6 +1439,10 @@ function setupHUDDropdowns() {
     const profileDetailsModal = document.getElementById("profile-details-modal");
     const profileModalClose = document.getElementById("profile-modal-close");
     const logoutBtn = document.getElementById("hud-logout-btn");
+
+    const openPuzzleFromDropdownBtn = document.getElementById("open-puzzle-from-dropdown-btn");
+    const hudPuzzleBtn = document.getElementById("hud-puzzle-btn");
+    const viewAllNotifBtn = document.getElementById("view-all-notif-btn");
 
     let autoHideTimer = null;
 
@@ -645,14 +1464,18 @@ function setupHUDDropdowns() {
         if (isHidden) notifDropdown.classList.remove("hidden");
     });
 
+    // Intercept profile button: open instantly in persistent shell without cold reload
     profileBtn?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isHidden = profileDropdown.classList.contains("hidden");
+        e.preventDefault();
         closeAllHUDDropdowns();
-        if (isHidden) {
-            profileDropdown.classList.remove("hidden");
-            profileBtn.classList.add("active");
-        }
+        openSubpage("profile.html");
+    });
+
+    // Intercept view all notifications button
+    viewAllNotifBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeAllHUDDropdowns();
+        openSubpage("notifications.html");
     });
 
     robotBtn?.addEventListener("click", (e) => {
@@ -661,15 +1484,40 @@ function setupHUDDropdowns() {
         closeAllHUDDropdowns();
         if (isHidden) {
             robotDropdown.classList.remove("hidden");
-            autoHideTimer = setTimeout(() => {
-                robotDropdown.classList.add("hidden");
-                autoHideTimer = null;
-            }, 2000);
         }
     });
 
+    // Handle mouse hovering to keep the robot message open if user wants to read or click
+    robotDropdown?.addEventListener("mouseenter", () => {
+        if (autoHideTimer) {
+            clearTimeout(autoHideTimer);
+            autoHideTimer = null;
+        }
+    });
+
+    // Wire up "View Evolution Puzzle" button to open in persistent shell
+    openPuzzleFromDropdownBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeAllHUDDropdowns();
+        openSubpage("evolution.html");
+    });
+
+    // Wire up top HUD puzzle icon button to open in persistent shell
+    hudPuzzleBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeAllHUDDropdowns();
+        openSubpage("evolution.html");
+    });
+
+    openProfileModalBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeAllHUDDropdowns();
+        if (profileDetailsModal) profileDetailsModal.classList.remove("hidden");
+    });
+
     document.addEventListener("click", (e) => {
-        if (!e.target.closest(".hud-btn-group")) {
+        if (!e.target.closest(".hud-btn-group, .modal-overlay, .modal-card")) {
             closeAllHUDDropdowns();
         }
     });
@@ -687,7 +1535,7 @@ function setupHUDDropdowns() {
     window.handleLogout = handleLogout;
     logoutBtn?.addEventListener("click", handleLogout);
 
-    // Only show One Tutor Companion message if user just logged in or if user clicks the button
+    // Only show One Tutor Companion message briefly if user just logged in
     const justLoggedIn = sessionStorage.getItem("language_lab_just_logged_in") === "true";
     if (justLoggedIn && robotDropdown) {
         sessionStorage.removeItem("language_lab_just_logged_in");
@@ -695,7 +1543,7 @@ function setupHUDDropdowns() {
         autoHideTimer = setTimeout(() => {
             robotDropdown.classList.add("hidden");
             autoHideTimer = null;
-        }, 2000);
+        }, 4000);
     } else if (robotDropdown) {
         robotDropdown.classList.add("hidden");
     }
@@ -732,7 +1580,7 @@ document.addEventListener("wheel", handleMouseWheel, { passive: false });
 // 2. Mouse Drag-to-Scroll Engine (Click & Drag map panning)
 window.addEventListener("mousedown", (e) => {
     // Only trigger on left mouse button, ignore interactive buttons and dropdowns
-    if (e.button !== 0 || e.target.closest(".modal-card, .hud-dropdown-panel, button, a, .hud-circle-btn, .hud-profile-trigger")) return;
+    if (e.button !== 0 || e.target.closest(".modal-card, .hud-dropdown-panel, button, a, .hud-circle-btn, .hud-profile-trigger, .top-right-hud")) return;
     
     isMouseDown = true;
     isDragging = false;
@@ -777,17 +1625,47 @@ function loadProgress() {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
             userProgress = JSON.parse(saved);
+            if (!userProgress.unlockedLevel || isNaN(Number(userProgress.unlockedLevel)) || userProgress.unlockedLevel < 1) {
+                userProgress.unlockedLevel = 1;
+            }
+            if (!userProgress.stars || typeof userProgress.stars !== "object") {
+                userProgress.stars = {};
+            }
+            if (!userProgress.playedBossAnimations || typeof userProgress.playedBossAnimations !== "object") {
+                userProgress.playedBossAnimations = {};
+            }
+            if (!userProgress.unlockedPieces || typeof userProgress.unlockedPieces !== "object") {
+                userProgress.unlockedPieces = {};
+            }
+            if (!userProgress.assemblyPlayed || typeof userProgress.assemblyPlayed !== "object") {
+                userProgress.assemblyPlayed = {};
+            }
+
+            // Sanitize: A zone boss must be defeated to unlock the next zone (Levels 6, 11, 16, 21, 26)
+            if (userProgress.unlockedLevel > 25 && (!userProgress.stars["boss-5"] || userProgress.stars["boss-5"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 25);
+            }
+            if (userProgress.unlockedLevel > 20 && (!userProgress.stars["boss-4"] || userProgress.stars["boss-4"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 20);
+            }
+            if (userProgress.unlockedLevel > 15 && (!userProgress.stars["boss-3"] || userProgress.stars["boss-3"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 15);
+            }
+            if (userProgress.unlockedLevel > 10 && (!userProgress.stars["boss-2"] || userProgress.stars["boss-2"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 10);
+            }
+            if (userProgress.unlockedLevel > 5 && (!userProgress.stars["boss-1"] || userProgress.stars["boss-1"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 5);
+            }
+            saveProgress();
         } else {
-            userProgress = { unlockedLevel: 1, stars: {} };
+            userProgress = { unlockedLevel: 1, stars: {}, playedBossAnimations: {} };
             saveProgress();
         }
     } catch (e) {
         console.error("Error loading progress:", e);
-        userProgress = { unlockedLevel: 1, stars: {} };
+        userProgress = { unlockedLevel: 1, stars: {}, playedBossAnimations: {} };
     }
-    // Lock all levels except Level 1 as requested
-    userProgress = { unlockedLevel: 1, stars: {} };
-    saveProgress();
 }
 
 // Save Progress to LocalStorage
@@ -819,10 +1697,29 @@ function isLevelUnlocked(levelId) {
         const boss = getBossNode(levelId);
         if (!boss) return false;
         return boss.requiredLevels.every(lvl => 
-            userProgress.unlockedLevel > lvl || (userProgress.stars[lvl] && userProgress.stars[lvl] > 0)
+            (userProgress.stars[lvl] && userProgress.stars[lvl] > 0) || userProgress.unlockedLevel > lvl
         );
     }
     const lvlNum = Number(levelId);
+    if (isNaN(lvlNum)) return false;
+
+    // Boss gating: Level 6 & subsequent Zone levels remain locked until the Zone Boss is completed
+    if (lvlNum >= 6 && (!userProgress.stars["boss-1"] || userProgress.stars["boss-1"] <= 0)) {
+        return false;
+    }
+    if (lvlNum >= 11 && (!userProgress.stars["boss-2"] || userProgress.stars["boss-2"] <= 0)) {
+        return false;
+    }
+    if (lvlNum >= 16 && (!userProgress.stars["boss-3"] || userProgress.stars["boss-3"] <= 0)) {
+        return false;
+    }
+    if (lvlNum >= 21 && (!userProgress.stars["boss-4"] || userProgress.stars["boss-4"] <= 0)) {
+        return false;
+    }
+    if (lvlNum >= 26 && (!userProgress.stars["boss-5"] || userProgress.stars["boss-5"] <= 0)) {
+        return false;
+    }
+
     return userProgress.unlockedLevel >= lvlNum;
 }
 
@@ -1049,12 +1946,7 @@ function renderLevelNodes() {
                 const bossCrownOverlay = document.createElement("div");
                 bossCrownOverlay.className = "boss-unlocked-badge";
                 bossCrownOverlay.innerHTML = `👑 BOSS`;
-                bossCrownOverlay.title = "Click to replay Black Hole Emergence!";
-                bossCrownOverlay.style.cursor = "pointer";
-                bossCrownOverlay.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    triggerBossUnlockAnimation(level.id);
-                });
+                bossCrownOverlay.title = "Boss Challenge Unlocked";
                 wrapper.appendChild(bossCrownOverlay);
             }
         }
@@ -1111,6 +2003,16 @@ function handleNodeClick(level, isLocked, isBoss, btnElement) {
             const firstReq = level.requiredLevels ? level.requiredLevels[0] : 1;
             const lastReq = level.requiredLevels ? level.requiredLevels[level.requiredLevels.length - 1] : 5;
             lockMessage = `${level.title} is Locked! Complete Levels ${firstReq}–${lastReq} first to unlock!`;
+        } else if (Number(level.id) === 6 && (!userProgress.stars["boss-1"] || userProgress.stars["boss-1"] <= 0)) {
+            lockMessage = `Level 6 is Locked! Defeat the Zone 1 Boss first to enter Frozen Glacier!`;
+        } else if (Number(level.id) === 11 && (!userProgress.stars["boss-2"] || userProgress.stars["boss-2"] <= 0)) {
+            lockMessage = `Level 11 is Locked! Defeat the Zone 2 Boss first to enter Blossom Haven!`;
+        } else if (Number(level.id) === 16 && (!userProgress.stars["boss-3"] || userProgress.stars["boss-3"] <= 0)) {
+            lockMessage = `Level 16 is Locked! Defeat the Zone 3 Boss first to enter Tropical Bay!`;
+        } else if (Number(level.id) === 21 && (!userProgress.stars["boss-4"] || userProgress.stars["boss-4"] <= 0)) {
+            lockMessage = `Level 21 is Locked! Defeat the Zone 4 Boss first to enter Golden Sands!`;
+        } else if (Number(level.id) === 26 && (!userProgress.stars["boss-5"] || userProgress.stars["boss-5"] <= 0)) {
+            lockMessage = `Level 26 is Locked! Defeat the Zone 5 Boss first to enter Dragon Peak!`;
         } else {
             lockMessage = `Level ${level.id} is Locked! Complete previous levels first.`;
         }
@@ -1123,13 +2025,17 @@ function handleNodeClick(level, isLocked, isBoss, btnElement) {
     activeSelectedLevel = level;
 
     // Open engine or level modal when student clicks level node
+    const isBossFinal = Boolean(isBoss || isBossLevel(level.id));
+    const pkgInfo = getLevelExperiencePackage(level.id, isBossFinal);
     if (window.electronAPI?.openEngine) {
         window.electronAPI.openEngine({
             id: level.id,
-            title: level.title,
+            levelId: level.id,
+            packageId: pkgInfo.packageId,
+            title: level.title || pkgInfo.title,
             zone: level.zone,
             zoneName: level.zoneName,
-            isBoss: isBoss
+            isBoss: pkgInfo.isBoss
         });
     } else {
         openModal(level);
@@ -1166,47 +2072,145 @@ function closeModal() {
     activeSelectedLevel = null;
 }
 
+// Check and trigger any unplayed Boss unlock animations (e.g. when returning to Map after completing Level 5)
+function checkAndTriggerPendingBossAnimations() {
+    BOSS_NODES.forEach(boss => {
+        const unlocked = isLevelUnlocked(boss.id);
+        if (unlocked && !userProgress.playedBossAnimations?.[boss.id]) {
+            userProgress.playedBossAnimations = userProgress.playedBossAnimations || {};
+            userProgress.playedBossAnimations[boss.id] = true;
+            saveProgress();
+            
+            // Re-render level nodes so Boss appears in DOM
+            renderLevelNodes();
+            updateHUD();
+
+            // Automatically trigger the existing Boss black-hole emergence animation
+            setTimeout(() => {
+                triggerBossUnlockAnimation(boss.id);
+                speakBuddy(`🌌 Dimensional Black Hole Opened! ${boss.title} Emerges!`, "excited", 4500);
+            }, 300);
+        }
+    });
+}
+window.checkAndTriggerPendingBossAnimations = checkAndTriggerPendingBossAnimations;
+
 // Complete Level & Unlock Next Level
-function completeLevel(levelId, starsEarned = 1) {
+function completeLevel(levelId, starsEarned = 3) {
+    let normalizedLevelId = levelId;
+    if (String(levelId) === "49" || String(levelId) === "44" || String(levelId) === "117" || String(levelId).toLowerCase().includes("picnic") || String(levelId).toLowerCase().includes("big_house") || String(levelId).toLowerCase().includes("house")) {
+        normalizedLevelId = 1;
+    }
+
     const prevBossStatuses = {};
     BOSS_NODES.forEach(b => {
         prevBossStatuses[b.id] = isLevelUnlocked(b.id);
     });
 
-    userProgress.stars[levelId] = Math.max(userProgress.stars[levelId] || 0, starsEarned);
+    const numId = Number(normalizedLevelId);
+    userProgress.stars = userProgress.stars || {};
+    userProgress.stars[normalizedLevelId] = Math.max(userProgress.stars[normalizedLevelId] || 0, starsEarned);
+    if (!isNaN(numId)) {
+        userProgress.stars[numId] = Math.max(userProgress.stars[numId] || 0, starsEarned);
+    }
 
-    const isBoss = isBossLevel(levelId);
-    if (!isBoss) {
-        const numId = Number(levelId);
-        if (numId === userProgress.unlockedLevel && userProgress.unlockedLevel < 30) {
-            userProgress.unlockedLevel += 1;
+    const isBoss = isBossLevel(normalizedLevelId);
+    let levelJustUnlocked = null;
+
+    if (!isBoss && !isNaN(numId)) {
+        // Do not advance unlockedLevel across zone boundaries (5, 10, 15, 20, 25)
+        // Defeating the realm boss is required to unlock the next zone!
+        if (numId % 5 !== 0 && numId >= userProgress.unlockedLevel && userProgress.unlockedLevel < 30) {
+            userProgress.unlockedLevel = numId + 1;
+            levelJustUnlocked = userProgress.unlockedLevel;
+        }
+    } else if (isBoss) {
+        // Completing a Boss unlocks the first level of the next Zone realm
+        if (normalizedLevelId === "boss-1" || normalizedLevelId === "1") {
+            userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 6);
+            levelJustUnlocked = 6;
+        } else if (normalizedLevelId === "boss-2" || normalizedLevelId === "2") {
+            userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 11);
+            levelJustUnlocked = 11;
+        } else if (normalizedLevelId === "boss-3" || normalizedLevelId === "3") {
+            userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 16);
+            levelJustUnlocked = 16;
+        } else if (normalizedLevelId === "boss-4" || normalizedLevelId === "4") {
+            userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 21);
+            levelJustUnlocked = 21;
+        } else if (normalizedLevelId === "boss-5" || normalizedLevelId === "5") {
+            userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel, 26);
+            levelJustUnlocked = 26;
         }
     }
 
     saveProgress();
 
-    // Check if a Boss level was just unlocked
+    // Check if any Boss level was just unlocked (e.g. Boss 1 after Level 5 completion)
     let newlyUnlockedBoss = null;
     BOSS_NODES.forEach(b => {
-        if (!prevBossStatuses[b.id] && isLevelUnlocked(b.id)) {
+        if (!prevBossStatuses[b.id] && isLevelUnlocked(b.id) && !userProgress.playedBossAnimations?.[b.id]) {
             newlyUnlockedBoss = b;
         }
     });
 
-    if (newlyUnlockedBoss) {
-        window.freshlyUnlockedBossId = newlyUnlockedBoss.id;
-        speakBuddy(`🌌 Dimensional Black Hole Opened! ${newlyUnlockedBoss.title} Emerges!`, "excited", 4000);
+    // Determine corresponding zone for the completed level
+    let unlockedZoneNum = 1;
+    if (isBoss) {
+        unlockedZoneNum = Number(String(normalizedLevelId).replace("boss-", "")) || 1;
+    } else if (!isNaN(numId)) {
+        unlockedZoneNum = Math.min(6, Math.floor((numId - 1) / 5) + 1);
     }
+
+    // Capture currently unlocked pieces before granting the new level's piece
+    const prevUnlockedPieces = [...(userProgress.unlockedPieces?.[unlockedZoneNum] || [])];
+
+    // Compute updated random unlocked pieces for this zone
+    const currentUnlockedPieces = getZoneUnlockedPieces(unlockedZoneNum, userProgress);
+
+    // Identify which random piece was newly discovered
+    const newlyDiscoveredPiece = currentUnlockedPieces.find(p => !prevUnlockedPieces.includes(p)) || currentUnlockedPieces[currentUnlockedPieces.length - 1] || 1;
+    const unlockedPieceIdx = newlyDiscoveredPiece;
 
     renderLevelNodes();
     updateHUD();
+    updateBuddyAvatar();
+
+    // Automatically reveal the Puzzle Board & snap the new random piece into place!
+    setTimeout(() => {
+        openBuddyPuzzleModal(unlockedZoneNum, unlockedPieceIdx);
+    }, 450);
 
     if (newlyUnlockedBoss) {
-        scrollToBossLevel(newlyUnlockedBoss.id);
+        userProgress.playedBossAnimations = userProgress.playedBossAnimations || {};
+        userProgress.playedBossAnimations[newlyUnlockedBoss.id] = true;
+        saveProgress();
+        setTimeout(() => {
+            triggerBossUnlockAnimation(newlyUnlockedBoss.id);
+            speakBuddy(`🌌 Dimensional Black Hole Opened! ${newlyUnlockedBoss.title} Emerges! Defeat the Boss to unlock Level 6!`, "excited", 5000);
+        }, 800);
+    } else if (isBoss) {
+        const bossNode = getBossNode(normalizedLevelId);
+        const bossTitle = bossNode?.title || "Boss";
+        const avatarInfo = getBuddyAvatarInfo(userProgress);
+        speakBuddy(`👑 Victory! ${bossTitle} Defeated! Part ${unlockedPieceIdx}/6 Discovered! I have evolved into ${avatarInfo.title}!`, "excited", 5000);
+        scrollToCurrentLevel();
+    } else if (levelJustUnlocked && isLevelUnlocked(levelJustUnlocked)) {
+        speakBuddy(`🎉 Level ${numId} Completed! Discovered Mystery Shard: Part ${unlockedPieceIdx}/6 Unlocked! Level ${levelJustUnlocked} is now unlocked!`, "happy", 3500);
+        scrollToCurrentLevel();
+    } else if (numId === 5) {
+        speakBuddy(`🎉 Level 5 Completed! Discovered Mystery Shard: Part ${unlockedPieceIdx}/6 Unlocked! Defeat the Forest Guardian Boss!`, "happy", 4000);
     } else {
+        speakBuddy(`⭐ Level ${normalizedLevelId} Completed! Discovered Mystery Shard: Part ${unlockedPieceIdx}/6 Unlocked!`, "happy", 3000);
         scrollToCurrentLevel();
     }
 }
+window.completeLevel = completeLevel;
+window.unlockNextLevel = function() {
+    if (userProgress.unlockedLevel < 30) {
+        completeLevel(userProgress.unlockedLevel, 3);
+    }
+};
 
 // Update Top HUD Display
 function updateHUD() {
@@ -1235,6 +2239,17 @@ function updateHUD() {
 
     const statLevelEl = document.getElementById("hud-stat-level") || document.getElementById("modal-stat-level");
     if (statLevelEl) statLevelEl.innerText = `Level ${userProgress.unlockedLevel}`;
+
+    // Update Top HUD Puzzle Badge Count
+    const currentZonePuzzle = getCurrentZonePuzzle(userProgress);
+    const puzzleStatus = getZonePuzzlePiecesStatus(currentZonePuzzle.zone, userProgress);
+    const puzzleBadgeEl = document.getElementById("hud-puzzle-badge");
+    if (puzzleBadgeEl) {
+        puzzleBadgeEl.innerText = `${puzzleStatus.unlockedCount}/6`;
+    }
+
+    // AI Buddy Seasonal Avatar Synchronization
+    updateBuddyAvatar();
 
     // Dynamically Bind Authenticated Student Session Data (Fixes static fallback string bug)
     loadStudentProfileSession();
@@ -1272,7 +2287,7 @@ async function loadStudentProfileSession() {
 // Lock All Levels Except Level 1 & Reset Progress
 function lockAllLevelsExcept1(showPrompt = false) {
     if (!showPrompt || confirm("Are you sure you want to lock all levels except Level 1?")) {
-        userProgress = { unlockedLevel: 1, stars: {} };
+        userProgress = { unlockedLevel: 1, stars: {}, playedBossAnimations: {}, unlockedPieces: {} };
         saveProgress();
         renderLevelNodes();
         updateHUD();
@@ -1304,6 +2319,12 @@ function scrollToCurrentLevel() {
 
 // Fetch and display published packages received from CMS / Local Server API
 async function loadCMSPublishedPackages(showToastFeedback = false) {
+    // 0. High-performance cache check: reuse already-loaded static package metadata
+    if (!showToastFeedback && Array.isArray(window.cmsPublishedPackages) && window.cmsPublishedPackages.length > 0) {
+        console.log("[CMS Integration] ⚡ Reusing cached published packages (0ms overhead):", window.cmsPublishedPackages.length);
+        return window.cmsPublishedPackages;
+    }
+
     let publishedPackages = [];
 
     // Extract logged in student's grade or student ID from session / localStorage
@@ -1324,17 +2345,21 @@ async function loadCMSPublishedPackages(showToastFeedback = false) {
         }
     }
 
-    // 2. HTTP Fallback sync if IPC returned empty or unavailable
+    // 2. HTTP Fallback sync if IPC returned empty or unavailable (strict 600ms timeout)
     if (!Array.isArray(publishedPackages) || publishedPackages.length === 0) {
         try {
             const ports = [8000, 5000];
             for (const port of ports) {
                 try {
                     const gradeParam = studentGradeOrCode ? `?grade=${encodeURIComponent(studentGradeOrCode)}` : '';
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 600);
                     const res = await fetch(`http://localhost:${port}/api/v1/lms/published-packages/${gradeParam}`, {
                         method: "GET",
-                        headers: { "Accept": "application/json" }
+                        headers: { "Accept": "application/json" },
+                        signal: controller.signal
                     });
+                    clearTimeout(timeoutId);
                     if (res.ok) {
                         const data = await res.json();
                         publishedPackages = data.packages || (Array.isArray(data) ? data : []);
@@ -1404,13 +2429,4 @@ async function loadCMSPublishedPackages(showToastFeedback = false) {
 
 document.addEventListener("DOMContentLoaded", () => {
     loadCMSPublishedPackages();
-
-    const testBtn = document.getElementById("test-boss-anim-btn");
-    if (testBtn) {
-        testBtn.addEventListener("click", () => {
-            let targetBoss = BOSS_NODES.find(b => isLevelUnlocked(b.id))?.id || "boss-1";
-            triggerBossUnlockAnimation(targetBoss);
-            showToast(`🌌 Dimensional Black Hole Unleashed for ${targetBoss}!`);
-        });
-    }
 });

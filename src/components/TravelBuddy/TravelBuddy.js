@@ -8,51 +8,51 @@
 (function (global) {
     const _buddyConfig = (typeof global.buddyConfig !== 'undefined')
         ? global.buddyConfig
-        : require('./buddy.config');
+        : (typeof require !== 'undefined' ? require('./buddy.config') : {});
 
     const _buddyEvents = (typeof global.buddyEvents !== 'undefined')
         ? global.buddyEvents
-        : require('../../events/buddyEvents').buddyEvents;
+        : (typeof require !== 'undefined' ? require('../../events/buddyEvents').buddyEvents : null);
 
     const _BuddyAnimations = (typeof global.BuddyAnimations !== 'undefined')
         ? global.BuddyAnimations
-        : require('./BuddyAnimations');
+        : (typeof require !== 'undefined' ? require('./BuddyAnimations') : null);
 
     const _BuddyScene = (typeof global.BuddyScene !== 'undefined')
         ? global.BuddyScene
-        : require('./BuddyScene');
+        : (typeof require !== 'undefined' ? require('./BuddyScene') : null);
 
     const _BuddyController = (typeof global.BuddyController !== 'undefined')
         ? global.BuddyController
-        : require('./BuddyController');
+        : (typeof require !== 'undefined' ? require('./BuddyController') : null);
 
     const _buddyContext = (typeof global.buddyContext !== 'undefined')
         ? global.buddyContext
-        : require('../../ai/buddy/buddyContext').buddyContext;
+        : (typeof require !== 'undefined' ? require('../../ai/buddy/buddyContext').buddyContext : null);
 
     const _travelDataService = (typeof global.travelDataService !== 'undefined')
         ? global.travelDataService
-        : require('../../services/travel/travelDataService').travelDataService;
+        : (typeof require !== 'undefined' ? require('../../services/travel/travelDataService').travelDataService : null);
 
     const _buddyMemory = (typeof global.buddyMemory !== 'undefined')
         ? global.buddyMemory
-        : require('../../memory/buddy/buddyMemory').buddyMemory;
+        : (typeof require !== 'undefined' ? require('../../memory/buddy/buddyMemory').buddyMemory : null);
 
     const _buddyObserver = (typeof global.buddyObserver !== 'undefined')
         ? global.buddyObserver
-        : require('../../ai/buddy/buddyObserver').buddyObserver;
+        : (typeof require !== 'undefined' ? require('../../ai/buddy/buddyObserver').buddyObserver : null);
 
     const _BuddyAI = (typeof global.BuddyAI !== 'undefined')
         ? global.BuddyAI
-        : require('../../ai/buddy/buddyAI').BuddyAI;
+        : (typeof require !== 'undefined' ? require('../../ai/buddy/buddyAI').BuddyAI : null);
 
     const _BuddyVoiceController = (typeof global.BuddyVoiceController !== 'undefined')
         ? global.BuddyVoiceController
-        : require('../../voice/buddy/voiceController');
+        : (typeof require !== 'undefined' ? require('../../voice/buddy/voiceController') : null);
 
     const _BuddyBehaviorEngine = (typeof global.BuddyBehaviorEngine !== 'undefined')
         ? global.BuddyBehaviorEngine
-        : require('../../character/buddy/BuddyBehaviorEngine').BuddyBehaviorEngine;
+        : (typeof require !== 'undefined' ? require('../../character/buddy/BuddyBehaviorEngine').BuddyBehaviorEngine : null);
 
     const _PointAction = (typeof global.PointAction !== 'undefined')
         ? global.PointAction
@@ -98,6 +98,10 @@
         ? global.MomoSpeech
         : (typeof require !== 'undefined' ? require('../../voice/buddy/MomoSpeech').MomoSpeech : null);
 
+    const _PNgAmbientController = (typeof global.PNgAmbientController !== 'undefined')
+        ? global.PNgAmbientController
+        : (typeof require !== 'undefined' ? require('./PNgAmbientController') : null);
+
     class TravelBuddy {
         constructor(options = {}) {
             this.config = { ..._buddyConfig, ...options };
@@ -120,6 +124,7 @@
             this.eventDetector = null;
             this.debugPanelElement = null;
             this.momo = null;
+            this.pngAmbientController = null;
 
             this.unsubscribeEvents = [];
             this.isInitialized = false;
@@ -128,11 +133,18 @@
         async init(targetContainer = document.body) {
             if (this.isInitialized) return this;
 
+            // Resolve initial character asset from world map progression
+            if (typeof global !== 'undefined' && typeof global.getBuddyAvatarForProgress === 'function') {
+                if (!this.config.character) this.config.character = {};
+                this.config.character.asset = global.getBuddyAvatarForProgress();
+            }
+
             // 1. Initialize Scene Viewport & Rig Controller & Animation Engine
             this.scene = new _BuddyScene(targetContainer, this.config, this.animationManager);
             await this.scene.mount();
             this.rig = this.scene.rig;
             this.anim = this.scene.animationEngine;
+            this.orbitControls = this.scene.orbitControls;
             this.pointAction = _PointAction && this.anim ? new _PointAction(this.anim, { debug: this.config.debug?.enabled }) : null;
             this.gazeController = _GazeController && this.anim ? new _GazeController(this.anim, { debug: this.config.debug?.enabled }) : null;
             this.face = _BuddyFaceController && this.anim ? new _BuddyFaceController(this.anim, this.rig) : null;
@@ -223,6 +235,12 @@
 
             // 10. Check for initial post-login greeting trigger
             this.checkLoginGreeting();
+
+            // 11. Initialize PNg-Exclusive Ambient Animal Interaction Controller
+            if (_PNgAmbientController) {
+                this.pngAmbientController = new _PNgAmbientController(this.scene, this.config);
+                this.pngAmbientController.init();
+            }
 
             this.isInitialized = true;
             console.log('[TravelBuddy] Step 7 Persistent Trip Memory & Personalization Initialized. Accessible via window.travelBuddy');
@@ -1491,6 +1509,24 @@
             return this.rig?.getAllPartStates();
         }
 
+        get orbit() {
+            return this.scene?.orbitControls || this.orbitControls;
+        }
+
+        async setCharacterAsset(assetPath) {
+            if (!assetPath) return;
+            if (!this.config.character) this.config.character = {};
+            this.config.character.asset = assetPath;
+            if (this.scene) {
+                await this.scene.loadCharacterSvg(assetPath);
+            }
+            if (this.pngAmbientController) {
+                this.pngAmbientController.onCharacterAssetChanged(assetPath);
+            }
+            const dbAsset = document.getElementById('db-char-asset');
+            if (dbAsset) dbAsset.textContent = assetPath;
+        }
+
         show() {
             this.controller?.show();
         }
@@ -1678,6 +1714,10 @@
         }
 
         destroy() {
+            if (this.pngAmbientController) {
+                this.pngAmbientController.destroy();
+                this.pngAmbientController = null;
+            }
             for (const unsub of this.unsubscribeEvents) {
                 unsub();
             }

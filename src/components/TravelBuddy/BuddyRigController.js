@@ -45,9 +45,17 @@
         }
 
         validateCharacterAsset(assetPath) {
-            const expected = this.config.character?.asset || 'AI/png.svg';
-            if (assetPath && assetPath !== expected && assetPath !== 'AI/PNg.svg') {
-                console.warn(`[BuddyRigController] Character replacement blocked. Buddy must use ${expected}. Attempted: ${assetPath}`);
+            const validAssets = [
+                'AI/png.svg',
+                'AI/PNg.svg',
+                'AI/ICE BLUE ROBOT.svg',
+                'AI/PURPLE ROBOT.svg',
+                'AI/GREEN.svg',
+                'AI/GOLD ROBOT.svg',
+                'AI/RED ROBOT.svg'
+            ];
+            if (assetPath && !validAssets.includes(assetPath)) {
+                console.warn(`[BuddyRigController] Character asset unrecognized: ${assetPath}`);
                 return false;
             }
             return true;

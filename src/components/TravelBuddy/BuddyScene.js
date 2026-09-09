@@ -14,6 +14,10 @@
         ? global.BuddyAnimationEngine
         : (typeof require !== 'undefined' ? require('./BuddyAnimationEngine') : null);
 
+    const _BuddyOrbitControls = (typeof global.BuddyOrbitControls !== 'undefined')
+        ? global.BuddyOrbitControls
+        : (typeof require !== 'undefined' ? require('./BuddyOrbitControls') : null);
+
     class BuddyScene {
         constructor(containerElement, config = {}, animationManager = null) {
             this.container = containerElement || document.body;
@@ -22,6 +26,7 @@
             this.rig = new _BuddyRigController(this);
             this.animationEngine = _BuddyAnimationEngine ? new _BuddyAnimationEngine(this.rig) : null;
             this.anim = this.animationEngine;
+            this.orbitControls = null;
 
             this.rootElement = null;
             this.characterElement = null;
@@ -42,8 +47,14 @@
             this.createRootLayout();
             await this.loadCharacterSvg();
             this.bindInteractions();
+
+            // Initialize 3D Orbit Controls
+            if (_BuddyOrbitControls) {
+                this.orbitControls = new _BuddyOrbitControls(this, this.config.orbit || {});
+            }
+
             this.isLoaded = true;
-            console.log('[TravelBuddy] Scene mounted successfully with Rig Controller.');
+            console.log('[TravelBuddy] Scene mounted successfully with Rig Controller & 3D Orbit Controls.');
         }
 
         createRootLayout() {
@@ -78,6 +89,13 @@
             root.appendChild(fx);
             this.fxContainer = fx;
 
+            // Ambient Creatures Layer Container (Exclusive for PNg)
+            const ambientLayer = document.createElement('div');
+            ambientLayer.className = 'buddy-ambient-creatures-layer';
+            ambientLayer.setAttribute('aria-hidden', 'true');
+            root.appendChild(ambientLayer);
+            this.ambientCreaturesLayer = ambientLayer;
+
             // Character Container
             const charContainer = document.createElement('div');
             charContainer.className = 'buddy-character-wrap anim-idle';
@@ -87,14 +105,7 @@
             root.appendChild(charContainer);
             this.characterElement = charContainer;
 
-            // Floating Mic Button
-            const micBtn = document.createElement('button');
-            micBtn.id = 'buddy-mic-trigger';
-            micBtn.className = 'buddy-mic-btn';
-            micBtn.title = 'Talk to Travel Buddy (Microphone)';
-            micBtn.innerHTML = '<span class="mic-icon">🎤</span><span class="mic-wave"></span>';
-            root.appendChild(micBtn);
-            this.micButton = micBtn;
+            this.micButton = null;
 
             // Status Indicator Pill
             const badge = document.createElement('div');
@@ -107,8 +118,12 @@
             this.rootElement = root;
         }
 
-        async loadCharacterSvg() {
-            const svgPath = this.config.character?.asset || this.config.asset?.path || 'AI/png.svg';
+        async loadCharacterSvg(newPath = null) {
+            if (newPath) {
+                if (!this.config.character) this.config.character = {};
+                this.config.character.asset = newPath;
+            }
+            const svgPath = newPath || this.config.character?.asset || this.config.asset?.path || 'AI/PNg.svg';
             try {
                 const response = await fetch(svgPath);
                 if (!response.ok) {
@@ -121,6 +136,13 @@
                 if (this.svgElement) {
                     this.svgElement.setAttribute('class', 'buddy-svg-canvas');
                     this.svgElement.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                    this.svgElement.setAttribute('width', '100%');
+                    this.svgElement.setAttribute('height', '100%');
+                    this.svgElement.style.width = '100%';
+                    this.svgElement.style.height = '100%';
+                    this.svgElement.style.maxWidth = '100%';
+                    this.svgElement.style.maxHeight = '100%';
+                    this.svgElement.style.display = 'block';
                     
                     this.faceGroup = this.svgElement.querySelector('#buddy-face-features') || this.svgElement.querySelector('#face-features');
                     this.leftArm = this.svgElement.querySelector('#buddy-left-arm') || this.svgElement.querySelector('#left-arm');
@@ -130,6 +152,14 @@
 
                     if (this.rig) {
                         this.rig.attachSvg(this.svgElement);
+                    }
+                    if (this.orbitControls) {
+                        this.orbitControls.attach(this.characterElement, this.rootElement);
+                    }
+
+                    // Inform PNg ambient controller if present
+                    if (global.travelBuddy && global.travelBuddy.pngAmbientController) {
+                        global.travelBuddy.pngAmbientController.onCharacterAssetChanged(svgPath);
                     }
                 }
             } catch (err) {
@@ -264,12 +294,12 @@
         }
 
         setVoiceVisualState(voiceState) {
-            if (!this.micButton) return;
-
-            const iconSpan = this.micButton.querySelector('.mic-icon');
+            const iconSpan = this.micButton ? this.micButton.querySelector('.mic-icon') : null;
             const statusText = this.statusBadge?.querySelector('#buddy-status-text');
 
-            this.micButton.className = `buddy-mic-btn state-${voiceState}`;
+            if (this.micButton) {
+                this.micButton.className = `buddy-mic-btn state-${voiceState}`;
+            }
 
             switch (voiceState) {
                 case 'listening':
@@ -351,6 +381,10 @@
         }
 
         destroy() {
+            if (this.orbitControls) {
+                this.orbitControls.detach();
+                this.orbitControls = null;
+            }
             if (this.speechTimeout) {
                 clearTimeout(this.speechTimeout);
                 this.speechTimeout = null;

@@ -108,17 +108,22 @@
                         } catch (e) {}
 
                         const utterance = new window.SpeechSynthesisUtterance(cleanText);
-                        utterance.rate = 1.05;
-                        utterance.pitch = 1.35;
+                        utterance.rate = 1.04;  // 5yo child pace
+                        utterance.pitch = 1.55; // 5yo child bright cheerful pitch
                         utterance.lang = 'en-US';
 
                         // Best voice selection (child / youthful / en-US)
                         const voices = window.speechSynthesis.getVoices() || [];
                         const friendlyVoice = voices.find(v => {
                             const n = v.name.toLowerCase();
-                            return (v.lang.startsWith('en') || v.lang.includes('US')) &&
-                                (n.includes('child') || n.includes('zira') || n.includes('samantha') ||
-                                 n.includes('jenny') || n.includes('natural') || n.includes('google'));
+                            const vLang = v.lang.toLowerCase();
+                            const isEn = vLang.includes('en') || vLang.includes('us') || vLang.includes('gb');
+                            return isEn && (
+                                n.includes('child') || n.includes('kid') || n.includes('junior') ||
+                                n.includes('ana') || n.includes('ivy') || n.includes('maisie') ||
+                                n.includes('noah') || n.includes('zira') || n.includes('samantha') ||
+                                n.includes('jenny') || n.includes('aria') || n.includes('natural')
+                            );
                         });
                         if (friendlyVoice) {
                             utterance.voice = friendlyVoice;

@@ -37,7 +37,8 @@
                 rig: this.rig,
                 speech: this.speech,
                 gazeController: options.gazeController || null,
-                faceController: options.faceController || null
+                faceController: options.faceController || null,
+                activeArm: options.activeArm || 'left'
             });
 
             this.listeners = new Set();

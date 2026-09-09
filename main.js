@@ -1,10 +1,13 @@
 const path = require('path');
 const fs = require('fs'); // Explicit Node.js core filesystem module import
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell, session } = require('electron');
 
 // Allow Electron's net module (Chromium) to connect to localhost without TLS/CORS issues
 app.commandLine.appendSwitch('allow-insecure-localhost');
 app.commandLine.appendSwitch('host-resolver-rules', 'MAP localhost 127.0.0.1');
+// Prevent Windows Chromium GPUCache / disk_cache file-lock permission errors & silence noise
+app.commandLine.appendSwitch('disable-gpu-shader-disk-cache');
+app.commandLine.appendSwitch('log-level', '3');
 
 let mainWindow = null;
 let engineWindow = null;
@@ -13,15 +16,30 @@ function createMainWindow() {
     mainWindow = new BrowserWindow({
         width: 1280,
         height: 720,
-        fullscreen: false,
+        show: false,
+        backgroundColor: '#6366f1',
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: false,
+            nodeIntegrationInSubFrames: true,
+            sandbox: true,
             preload: path.join(__dirname, "preload.js")
         }
     });
 
+    // Guard: Prevent unauthorized external popups and open external links safely via OS default browser
+    mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+        if (url.startsWith('https:') || url.startsWith('http:') || url.startsWith('mailto:')) {
+            shell.openExternal(url);
+        }
+        return { action: 'deny' };
+    });
+
     mainWindow.loadFile("login.html");
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    });
 
     mainWindow.on("closed", () => {
         mainWindow = null;
@@ -31,35 +49,155 @@ function createMainWindow() {
     });
 }
 
-async function openEngine(packageData) {
-    let packageId = typeof packageData === 'object' ? (packageData?.packageId || packageData?.id || packageData?.scenarioId || 1) : packageData;
-    let packageTitle = typeof packageData === 'object' ? (packageData?.title || packageId) : packageId;
-
-    // Resolve actual lesson from SQLite for Level 1 or given level
-    try {
-        const { getLessonsForGrade } = require("./src/main/db/sqlite");
-        const lessons = getLessonsForGrade();
-        if (Array.isArray(lessons) && lessons.length > 0) {
-            if (Number(packageId) === 1 || String(packageId) === '1') {
-                packageId = lessons[0]?.lesson_id || '49';
-                packageTitle = lessons[0]?.title || 'The Lost Picnic';
-            } else {
-                const found = lessons.find(l => String(l.lesson_id) === String(packageId));
-                if (found) {
-                    packageId = found.lesson_id;
-                    packageTitle = found.title;
+function resolvePackageMediaUrls(data, basePath) {
+    if (!data || !basePath) return data;
+    const fileMap = new Map();
+    function scanDir(dir) {
+        if (!fs.existsSync(dir)) return;
+        try {
+            const entries = fs.readdirSync(dir, { withFileTypes: true });
+            for (const entry of entries) {
+                const fullPath = path.join(dir, entry.name);
+                if (entry.isDirectory()) {
+                    scanDir(fullPath);
+                } else if (entry.isFile()) {
+                    fileMap.set(entry.name.toLowerCase(), fullPath);
                 }
             }
+        } catch (e) {}
+    }
+    scanDir(basePath);
+
+    function resolveValue(val) {
+        if (Array.isArray(val)) {
+            return val.map(resolveValue);
         }
-    } catch (e) {}
+        if (val && typeof val === 'object') {
+            const res = {};
+            for (const [k, v] of Object.entries(val)) {
+                res[k] = resolveValue(v);
+            }
+            return res;
+        }
+        if (typeof val === 'string') {
+            const filename = val.split(/[/\\]/).pop().toLowerCase();
+            if (fileMap.has(filename)) {
+                const localPath = fileMap.get(filename);
+                return `file:///${localPath.replace(/\\/g, '/')}`;
+            }
+        }
+        return val;
+    }
+
+    return resolveValue(data);
+}
+
+const SAMPLES_REGULAR_PACKAGES = [
+    { id: "Hello!_This_Is_Me..._v1", title: "Hello! This Is Me" },
+    { id: "Things_I_Like_v6", title: "Things I Like" },
+    { id: "Meet_My_Friends_v8", title: "Meet My Friends" },
+    { id: "This_Is_My_Family_v7", title: "This Is My Family" },
+    { id: "Welcome_to_My_Classroom_v3", title: "Welcome to My Classroom" },
+    { id: "Where_Is_My_Pencil__v2", title: "Where Is My Pencil?" },
+    { id: "What's_in_My_School_Bag__v4", title: "What's in My School Bag?" },
+    { id: "Can_You_Help_Me__v1", title: "Can You Help Me?" }
+];
+
+function getSamplePackageForLevel(levelId, isBoss = false) {
+    const isBossLevel = Boolean(
+        isBoss || 
+        String(levelId).startsWith("boss-") || 
+        levelId === 30 || 
+        levelId === "30"
+    );
+    if (isBossLevel) {
+        return {
+            packageId: "Assessent_v5",
+            packageTitle: "Assessment Challenge",
+            isBoss: true
+        };
+    }
+    const num = parseInt(levelId, 10);
+    const validNum = (!isNaN(num) && num >= 1) ? num : 1;
+    const pkg = SAMPLES_REGULAR_PACKAGES[(validNum - 1) % SAMPLES_REGULAR_PACKAGES.length];
+    return {
+        packageId: pkg.id,
+        packageTitle: pkg.title,
+        isBoss: false
+    };
+}
+
+function findPackageExperience(requestedId) {
+    const rawId = String(requestedId || '').trim();
+    const isBoss = rawId.startsWith('boss-') || rawId.toLowerCase().includes('asses');
+
+    const candidates = [
+        rawId,
+        isBoss ? 'Assessent_v5' : null,
+        rawId.replace(/\.elab$/i, ''),
+        rawId.replace(/\.zip$/i, ''),
+        'Assessent_v5',
+        'Hello!_This_Is_Me..._v1',
+        'Things_I_Like_v6',
+        'Meet_My_Friends_v8',
+        'This_Is_My_Family_v7',
+        'Welcome_to_My_Classroom_v3',
+        'Where_Is_My_Pencil__v2',
+        'What\'s_in_My_School_Bag__v4',
+        'Can_You_Help_Me__v1'
+    ].filter(Boolean);
+
+    const baseSearchDirs = [
+        path.join(__dirname, 'language-lab-engine', 'src', 'runtime', 'samples'),
+        path.join(__dirname, 'language-lab-engine', 'src', 'packages'),
+        path.join(__dirname, 'language-lab-engine', 'public', 'packages'),
+        path.join(__dirname, 'assets', 'packages')
+    ];
+
+    for (const baseDir of baseSearchDirs) {
+        for (const cand of candidates) {
+            const jsonPath = path.join(baseDir, cand, 'experience.json');
+            if (fs.existsSync(jsonPath)) {
+                try {
+                    const rawData = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+                    const basePath = path.join(baseDir, cand);
+                    const data = resolvePackageMediaUrls(rawData, basePath);
+                    return { data, basePath };
+                } catch (e) {}
+            }
+        }
+    }
+    return null;
+}
+
+async function openEngine(packageData) {
+    const originalLevelId = typeof packageData === 'object' ? (packageData?.levelId || packageData?.id || 1) : packageData;
+    const isBossExplicit = typeof packageData === 'object' ? Boolean(packageData?.isBoss || String(originalLevelId).startsWith('boss-')) : String(originalLevelId).startsWith('boss-');
+
+    const mapped = getSamplePackageForLevel(originalLevelId, isBossExplicit);
+    let packageId = mapped.packageId;
+    let packageTitle = mapped.packageTitle;
+    let isBoss = mapped.isBoss;
+
+    if (typeof packageData === 'object' && packageData?.packageId && !['1', 1, 'big_house_v4.elab', 'asses_v6'].includes(packageData.packageId)) {
+        packageId = packageData.packageId;
+    }
+    if (typeof packageData === 'object' && packageData?.title && !['asses', 'big house'].includes(packageData.title)) {
+        packageTitle = packageData.title;
+    }
+    if (isBoss || String(packageId).toLowerCase().includes('asses')) {
+        packageId = 'Assessent_v5';
+        packageTitle = 'Assessment Challenge';
+        isBoss = true;
+    }
 
     try {
-        console.log('[Main Process] Attempting to open engine for package:', packageId, 'Title:', packageTitle);
+        console.log('[Main Process] Attempting to open engine for level:', originalLevelId, 'Package:', packageId, 'Title:', packageTitle, 'isBoss:', isBoss);
 
-        const indexPath = path.join(__dirname, 'player.html');
+        const indexPath = path.join(__dirname, 'language-lab-engine', 'dist', 'index.html');
         console.log('[Main Process] Engine Renderer Target:', indexPath);
 
-        // 4. Launch Engine Window
+        // Launch Engine Window
         if (engineWindow && !engineWindow.isDestroyed()) {
             engineWindow.focus();
         } else {
@@ -71,12 +209,19 @@ async function openEngine(packageData) {
                 modal: false,
                 title: `Language Lab Experience Engine - ${packageTitle}`,
                 webPreferences: {
-                    nodeIntegration: true,
-                    contextIsolation: false,
+                    contextIsolation: true,
+                    nodeIntegration: false,
                     webSecurity: false,
-                    allowRunningInsecureContent: true,
                     preload: path.join(__dirname, "preload.js")
                 }
+            });
+
+            // Guard: Prevent unauthorized external popups from engine window
+            engineWindow.webContents.setWindowOpenHandler(({ url }) => {
+                if (url.startsWith('https:') || url.startsWith('http:') || url.startsWith('mailto:')) {
+                    shell.openExternal(url);
+                }
+                return { action: 'deny' };
             });
 
             engineWindow.on('closed', () => {
@@ -87,8 +232,8 @@ async function openEngine(packageData) {
             });
         }
 
-        // 5. Load target into engine window
-        const queryParams = `levelId=${encodeURIComponent(packageId)}&title=${encodeURIComponent(packageTitle)}&packageId=${encodeURIComponent(packageId)}`;
+        // Load target into engine window
+        const queryParams = `levelId=${encodeURIComponent(originalLevelId)}&title=${encodeURIComponent(packageTitle)}&packageId=${encodeURIComponent(packageId)}`;
 
         if (indexPath.startsWith('http') || indexPath.includes('?')) {
             const targetUrl = indexPath.includes('?') ? `${indexPath}&${queryParams}` : `${indexPath}?${queryParams}`;
@@ -117,6 +262,41 @@ const { initDatabase } = require("./src/main/db/sqlite");
 const { initIpcHandlers } = require("./src/main/ipcHandlers");
 
 app.whenReady().then(() => {
+    // Intercept root-relative requests (e.g., /arrrow.png, /quiz images/...) from engine and map to engine dist
+    const engineDistDir = path.join(__dirname, 'language-lab-engine', 'dist');
+    session.defaultSession.webRequest.onBeforeRequest((details, callback) => {
+        const url = details.url;
+        if (url && url.startsWith('file:///')) {
+            const decoded = decodeURIComponent(url.replace('file:///', ''));
+            const match = decoded.match(/^[a-zA-Z]:\/([^/].*)$/);
+            if (match) {
+                const subPath = match[1];
+                const candidate = path.join(engineDistDir, subPath);
+                if (fs.existsSync(candidate)) {
+                    return callback({ redirectURL: `file:///${candidate.replace(/\\/g, '/')}` });
+                }
+            }
+        }
+        callback({});
+    });
+
+    // Defense-in-depth: Enforce Content Security Policy headers for all network/HTTP loads and Vite dev server
+    const isDev = !app.isPackaged;
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+        const devConnect = isDev ? " http://localhost:5173 ws://localhost:5173" : "";
+        const devScript = isDev ? " http://localhost:5173" : "";
+        const devStyle = isDev ? " http://localhost:5173" : "";
+
+        callback({
+            responseHeaders: {
+                ...details.responseHeaders,
+                'Content-Security-Policy': [
+                    `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://esm.sh${devScript}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com${devStyle}; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file: http: https:; media-src 'self' blob: data: file: http: https:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://esm.sh https://huggingface.co https://cdn-lfs.huggingface.co${devConnect}; worker-src 'self' blob:; object-src 'none'; base-uri 'self';`
+                ]
+            }
+        });
+    });
+
     // Initialize SQLite database and IPC handlers
     initDatabase();
     initIpcHandlers();
@@ -129,28 +309,26 @@ app.whenReady().then(() => {
 
     ipcMain.handle('get-package-experience', async (event, packageId) => {
         try {
-            const requestedId = String(packageId || '49');
+            const requestedId = String(packageId || 'big_house_v4.elab');
             
-            // Check 1: assets/packages/<id>/experience.json
-            const localAssetsDir = path.join(__dirname, 'assets', 'packages', requestedId);
-            const localJsonPath = path.join(localAssetsDir, 'experience.json');
-            if (fs.existsSync(localJsonPath)) {
-                const data = JSON.parse(fs.readFileSync(localJsonPath, 'utf8'));
-                return { success: true, data, basePath: localAssetsDir };
+            // Check packages directories
+            const foundPkg = findPackageExperience(requestedId);
+            if (foundPkg) {
+                return { success: true, data: foundPkg.data, basePath: foundPkg.basePath };
             }
 
-            // Check 2: Check SQLite lessons table
+            // Check SQLite lessons table
             const { getDb } = require('./src/main/db/sqlite');
             const db = getDb();
             const row = db.prepare('SELECT payload_json FROM lessons WHERE lesson_id = ? OR title LIKE ? LIMIT 1').get(requestedId, `%${requestedId}%`);
             if (row && row.payload_json) {
                 const data = typeof row.payload_json === 'string' ? JSON.parse(row.payload_json) : row.payload_json;
                 if (data.activities) {
-                    return { success: true, data, basePath: localAssetsDir };
+                    return { success: true, data, basePath: path.join(__dirname, 'language-lab-engine', 'src', 'packages', requestedId) };
                 }
             }
 
-            // Check 3: userData/experiences
+            // Check 5: userData/experiences
             const experiencesDir = path.join(app.getPath('userData'), 'experiences');
             let baseDir = path.join(experiencesDir, requestedId);
             if (!fs.existsSync(baseDir) && fs.existsSync(experiencesDir)) {
@@ -161,7 +339,7 @@ app.whenReady().then(() => {
 
             const jsonPath = path.join(baseDir, 'experience.json');
             if (fs.existsSync(jsonPath)) {
-                const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+                const data = resolvePackageMediaUrls(JSON.parse(fs.readFileSync(jsonPath, 'utf8')), baseDir);
                 return { success: true, data, basePath: baseDir };
             }
 
@@ -356,8 +534,15 @@ app.whenReady().then(() => {
     ipcMain.handle("get-live-experience", async (event, levelId) => {
         try {
             console.log(`[IPC] get-live-experience requested for level/package ID: ${levelId}`);
+            const requestedId = String(levelId || 'big_house_v4.elab');
 
-            // 1. Primary: Retrieve approved lesson from SQLite (synced from CMS)
+            // 1. Check package directory
+            const foundPkg = findPackageExperience(requestedId);
+            if (foundPkg) {
+                return foundPkg.data;
+            }
+
+            // 3. Retrieve approved lesson from SQLite (synced from CMS)
             try {
                 const { getAllApprovedLessons } = require("./src/main/db/sqlite");
                 const lessons = getAllApprovedLessons();
@@ -389,13 +574,13 @@ app.whenReady().then(() => {
                 console.warn("[IPC] SQLite lesson query notice:", dbErr.message);
             }
 
-            // 2. Secondary: Check extracted packages directory in userData
+            // 4. Check extracted packages directory in userData
             const experiencesDir = path.join(app.getPath('userData'), 'experiences');
-            const targetDir = path.join(experiencesDir, String(levelId || ''));
+            const targetDir = path.join(experiencesDir, requestedId);
             const jsonPath = path.join(targetDir, 'experience.json');
             if (fs.existsSync(jsonPath)) {
                 console.log(`[IPC] Reading package experience.json from userData: ${jsonPath}`);
-                return JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+                return resolvePackageMediaUrls(JSON.parse(fs.readFileSync(jsonPath, 'utf8')), targetDir);
             }
 
             return null;
@@ -403,6 +588,69 @@ app.whenReady().then(() => {
             console.error("[IPC] Error reading live experience JSON:", e);
             return null;
         }
+    });
+
+    // IPC handler to send support emails (defaults to abuthahir133j@gmail.com)
+    ipcMain.handle("send-support-email", async (event, payload = {}) => {
+        const defaultRecipient = "abuthahir133j@gmail.com";
+        const recipient = String(payload.recipient || defaultRecipient).trim();
+        const { rollNo, category, subject, message, ticketId } = payload;
+
+        console.log(`[Support Email] Delivering support message from ${rollNo} to ${recipient}...`);
+
+        let apiSuccess = false;
+        let apiError = null;
+
+        try {
+            const axios = require('axios');
+            const response = await axios.post(`https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`, {
+                studentRollNumber: rollNo || 'Student',
+                ticketId: ticketId || '',
+                issueCategory: category || 'General Support',
+                _subject: `[One Tutor Support] ${subject || 'Inquiry'} (${rollNo || 'Student'})`,
+                subject: subject || 'Support Message',
+                message: message || '',
+                recipient: recipient,
+                _captcha: 'false',
+                _template: 'table',
+                submittedAt: new Date().toISOString()
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Origin': 'https://formsubmit.co',
+                    'Referer': 'https://formsubmit.co/'
+                },
+                timeout: 10000
+            });
+
+            if (response && response.status === 200) {
+                apiSuccess = true;
+                console.log(`[Support Email] ✅ Successfully dispatched email to ${recipient} via FormSubmit.`);
+            }
+        } catch (err) {
+            apiError = err.message;
+            console.warn(`[Support Email] Dispatch notice (${err.message}).`);
+        }
+
+        return {
+            success: apiSuccess,
+            recipient,
+            error: apiError
+        };
+    });
+
+    // IPC handler to open external URLs / mailto links safely
+    ipcMain.handle("open-external", async (event, url) => {
+        try {
+            if (url && (url.startsWith("mailto:") || url.startsWith("http:") || url.startsWith("https:"))) {
+                await shell.openExternal(url);
+                return { success: true };
+            }
+        } catch (e) {
+            console.error("[IPC] open-external failed:", e);
+        }
+        return { success: false };
     });
 
 });

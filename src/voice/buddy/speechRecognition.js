@@ -7,7 +7,7 @@
 (function (global) {
     const _voiceConfig = (typeof global.voiceConfig !== 'undefined')
         ? global.voiceConfig
-        : require('./voiceConfig');
+        : (typeof require !== 'undefined' ? require('./voiceConfig') : {});
 
     class BuddySpeechRecognition {
         constructor(config = {}) {

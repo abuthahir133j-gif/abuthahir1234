@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
+    <title>AI-Buddy Evolution Chamber - One Tutor Language Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --evo-primary: #38bdf8;
+            --evo-glow: rgba(56, 189, 248, 0.45);
+            --bg-dark: #090d16;
+            --card-bg: rgba(15, 23, 42, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 45%, #020617 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Ambient Cosmic Particle Background */
+        .ambient-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .ambient-sparkle {
+            position: absolute;
+            background: radial-gradient(circle, #fff, transparent 70%);
+            border-radius: 50%;
+            animation: floatParticle 8s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            30% { opacity: 0.8; }
+            70% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        .evo-container {
+            position: relative;
+            z-index: 10;
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto 50px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        /* Top Bar */
+        .evo-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 14px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-icon-box {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #0284c7, #6366f1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+        }
+
+        .bar-brand-title {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bar-brand-sub {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: none;
+        }
+
+        .btn-back-map {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+            color: #0f172a;
+            box-shadow: 0 4px 16px rgba(234, 179, 8, 0.35);
+        }
+
+        .btn-back-map:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 22px rgba(234, 179, 8, 0.55);
+            color: #000;
+        }
+
+        .nav-btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .nav-btn-secondary:hover {
+            background: rgba(51, 65, 85, 0.9);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .student-profile-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(30, 27, 75, 0.85);
+            padding: 6px 14px 6px 8px;
+            border-radius: 30px;
+            border: 1.5px solid rgba(129, 140, 248, 0.4);
+        }
+
+        .student-chip-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid #818cf8;
+            object-fit: cover;
+            background: #1e1b4b;
+        }
+
+        .student-chip-name {
+            font-size: 13px;
+            font-weight: 800;
+            color: #c7d2fe;
+        }
+
+        /* Zone Selector Tabs */
+        .zone-tabs-scroller {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 6px 4px 12px 4px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(56, 189, 248, 0.5) rgba(15, 23, 42, 0.5);
+        }
+
+        .zone-tab {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: #94a3b8;
+            user-select: none;
+        }
+
+        .zone-tab:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            color: #f8fafc;
+        }
+
+        .zone-tab.active {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.35) 0%, rgba(99, 102, 241, 0.35) 100%);
+            border-color: #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35), inset 0 0 10px rgba(56, 189, 248, 0.2);
+            color: #ffffff;
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .zone-tab-icon {
+            font-size: 22px;
+        }
+
+        .zone-tab-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .zone-tab-title {
+            font-size: 13.5px;
+            font-weight: 800;
+        }
+
+        .zone-tab-status {
+            font-size: 11px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        .zone-tab.completed .zone-tab-status {
+            color: #10b981;
+        }
+
+        /* Main Evolution Chamber Grid Layout */
+        .evo-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 992px) {
+            .evo-main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Clash Royale Central Card Section */
+        .evo-card-stage {
+            background: linear-gradient(180deg, rgba(30, 27, 75, 0.6) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 2px solid rgba(129, 140, 248, 0.3);
+            border-radius: 28px;
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Ambient Radiant Beam Behind Card */
+        .radiant-halo {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, var(--evo-glow) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            animation: pulseHalo 4s infinite ease-in-out alternate;
+        }
+
+        @keyframes pulseHalo {
+            0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        .evo-zone-header {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .evo-zone-tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .evo-companion-title {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin: 0 0 6px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .evo-companion-desc {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* 6-Piece Assembly Board */
+        .cr-puzzle-board-container {
+            position: relative;
+            z-index: 5;
+            margin: 15px 0 25px 0;
+        }
+
+        .cr-puzzle-board {
+            width: 310px;
+            height: 410px;
+            background: #0b0f19;
+            border-radius: 24px;
+            border: 3.5px solid rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 35px var(--evo-glow), 0 20px 40px rgba(0, 0, 0, 0.9);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 4px;
+            padding: 4px;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .cr-puzzle-board.fully-evolved {
+            border-color: #fbbf24;
+            box-shadow: 0 0 50px rgba(251, 191, 36, 0.6), 0 0 100px rgba(234, 179, 8, 0.3);
+            animation: evolvedCardGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes evolvedCardGlow {
+            0% { transform: scale(1); filter: brightness(1); }
+            100% { transform: scale(1.02); filter: brightness(1.12); }
+        }
+
+        /* Silhouette / Blueprint Layer Behind Pieces */
+        .cr-blueprint-avatar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.12;
+            filter: grayscale(100%) brightness(30%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Individual Puzzle Piece Slots */
+        .cr-slot {
+            position: relative;
+            z-index: 2;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1.5px dashed rgba(148, 163, 184, 0.3);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cr-slot:hover {
+            transform: scale(0.97);
+            border-color: #38bdf8;
+        }
+
+        .cr-slot.selected {
+            border-color: #fef08a !important;
+            box-shadow: 0 0 16px rgba(254, 240, 138, 0.8);
+            z-index: 10;
+        }
+
+        /* Image Slicing (302px width x 402px height content) */
+        .cr-piece-crop {
+            width: 100%;
+            height: 100%;
+            background-size: 302px 402px;
+            background-repeat: no-repeat;
+            transition: all 0.35s ease;
+        }
+
+        .cr-slot-1 .cr-piece-crop { background-position: 0px 0px; }
+        .cr-slot-2 .cr-piece-crop { background-position: -151px 0px; }
+        .cr-slot-3 .cr-piece-crop { background-position: 0px -134px; }
+        .cr-slot-4 .cr-piece-crop { background-position: -151px -134px; }
+        .cr-slot-5 .cr-piece-crop { background-position: 0px -268px; }
+        .cr-slot-6 .cr-piece-crop { background-position: -151px -268px; }
+
+        /* Locked Shard State */
+        .cr-slot.locked .cr-piece-crop {
+            opacity: 0.15;
+            filter: grayscale(100%) brightness(35%);
+        }
+
+        .cr-lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            background: radial-gradient(circle, rgba(15, 23, 42, 0.7) 0%, rgba(2, 6, 23, 0.9) 100%);
+            z-index: 4;
+            transition: opacity 0.3s ease;
+        }
+
+        .cr-lock-icon {
+            font-size: 20px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+        }
+
+        .cr-lock-lvl {
+            font-size: 10px;
+            font-weight: 800;
+            color: #94a3b8;
+            background: rgba(15, 23, 42, 0.85);
+            padding: 2px 6px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cr-part-badge {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 9.5px;
+            font-weight: 800;
+            background: rgba(15, 23, 42, 0.85);
+            color: #38bdf8;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            z-index: 5;
+        }
+
+        /* Unlocked Shard State (Clash Royale Radiant Neon) */
+        .cr-slot.unlocked {
+            border: 2px solid rgba(56, 189, 248, 0.9);
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+        }
+
+        .cr-slot.unlocked .cr-piece-crop {
+            opacity: 1;
+            filter: none;
+        }
+
+        .cr-slot.unlocked .cr-lock-overlay {
+            display: none;
+        }
+
+        /* Boss Shard */
+        .cr-slot.boss-slot.unlocked {
+            border-color: #fbbf24;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+        }
+
+        .cr-slot.boss-slot .cr-part-badge {
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.5);
+            background: rgba(30, 27, 75, 0.9);
+        }
+
+        /* Shard Fly-in Socket Animation */
+        .cr-slot.animating-shard {
+            animation: crShardFlyIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            z-index: 20;
+        }
+
+        @keyframes crShardFlyIn {
+            0% {
+                transform: scale(2) translateY(-40px);
+                opacity: 0;
+                filter: brightness(2.5);
+                box-shadow: 0 0 50px #38bdf8;
+            }
+            60% {
+                transform: scale(0.9);
+                opacity: 1;
+                filter: brightness(1.6);
+                box-shadow: 0 0 30px #38bdf8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                filter: none;
+            }
+        }
+
+        /* Cinematic Level 1 Completion Reaction Overlay */
+        .level-reaction-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.65s ease;
+        }
+
+        .level-reaction-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* Smooth Background Blur & Dim (existing background intact) */
+        .level-reaction-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 15, 25, 0.4);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            transition: backdrop-filter 0.75s cubic-bezier(0.4, 0, 0.2, 1), -webkit-backdrop-filter 0.75s cubic-bezier(0.4, 0, 0.2, 1), background 0.75s ease;
+        }
+
+        .level-reaction-overlay.active .level-reaction-backdrop {
+            backdrop-filter: blur(14px) brightness(0.65);
+            -webkit-backdrop-filter: blur(14px) brightness(0.65);
+            background: rgba(11, 15, 25, 0.65);
+        }
+
+        /* Center Content & Face Animation (Scale-up + Fade-in) */
+        .level-reaction-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.6);
+            opacity: 0;
+            transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.55s ease;
+        }
+
+        .level-reaction-overlay.active .level-reaction-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .level-reaction-overlay.fade-out .level-reaction-content {
+            transform: scale(1.1);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 1, 1), opacity 0.45s ease;
+        }
+
+        .level-reaction-overlay.fade-out .level-reaction-backdrop {
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            background: rgba(11, 15, 25, 0);
+            transition: backdrop-filter 0.55s cubic-bezier(0.4, 0, 1, 1), -webkit-backdrop-filter 0.55s cubic-bezier(0.4, 0, 1, 1), background 0.55s ease;
+        }
+
+        .level-reaction-avatar-wrap {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .level-reaction-burst-ring {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(56, 189, 248, 0) 70%);
+            box-shadow: 0 0 70px rgba(56, 189, 248, 0.55);
+            animation: reactionRingPulse 2s infinite ease-in-out;
+        }
+
+        @keyframes reactionRingPulse {
+            0%, 100% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.12); opacity: 1; box-shadow: 0 0 90px rgba(56, 189, 248, 0.85); }
+        }
+
+        .level-reaction-face-img {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 35px rgba(56, 189, 248, 0.75));
+            transition: transform 0.3s ease;
+        }
+
+        .level-reaction-banner {
+            margin-top: 18px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .reaction-tag {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fef08a;
+            text-transform: uppercase;
+            text-shadow: 0 0 14px rgba(254, 240, 138, 0.9);
+        }
+
+        .reaction-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95);
+        }
+
+        /* Shard Progress Counter */
+        .cr-progress-box {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cr-progress-labels {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cr-shards-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cr-shards-val {
+            font-size: 16px;
+            font-weight: 900;
+            color: #38bdf8;
+        }
+
+        .cr-progress-track {
+            width: 100%;
+            height: 14px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 20px;
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .cr-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0284c7 0%, #38bdf8 50%, #818cf8 100%);
+            border-radius: 20px;
+            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+            position: relative;
+        }
+
+        .cr-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmerBar 2s infinite linear;
+        }
+
+        @keyframes shimmerBar {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Right Panel: Shard Inspector & Companion Lore */
+        .evo-side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .side-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .side-card-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fef08a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shard-detail-box {
+            background: rgba(30, 27, 75, 0.5);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .shard-detail-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        .shard-detail-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 800;
+            width: fit-content;
+        }
+
+        .status-unlocked {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid #10b981;
+        }
+
+        .status-locked {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid #ef4444;
+        }
+
+        .shard-detail-text {
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .perks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .perk-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #e2e8f0;
+        }
+
+        .perk-icon {
+            font-size: 18px;
+        }
+
+        .action-button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .btn-evo-action {
+            width: 100%;
+            padding: 13px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-play-zone {
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4);
+        }
+
+        .btn-play-zone:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+        }
+
+        .btn-test-flyin {
+            background: rgba(129, 140, 248, 0.15);
+            border: 1.5px solid #818cf8;
+            color: #c7d2fe;
+        }
+
+        .btn-test-flyin:hover {
+            background: rgba(129, 140, 248, 0.3);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Sparkle Burst FX Container */
+        #evo-fx-burst-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cosmic ambient particles -->
+    <div class="ambient-particles" id="ambient-particles"></div>
+
+    <div class="evo-container">
+
+        <!-- Top Navigation Bar -->
+        <header class="evo-top-bar">
+            <div class="bar-brand">
+                <div class="brand-icon-box">🧩</div>
+                <div>
+                    <div class="bar-brand-title">AI-Buddy Evolution Chamber</div>
+                    <div class="bar-brand-sub">6-Piece Season Shard Assembly & Companion Evolution</div>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <div class="student-profile-chip" id="student-chip">
+                    <img src="AI/PNg.svg" alt="Avatar" class="student-chip-avatar" id="nav-user-avatar">
+                    <span class="student-chip-name" id="nav-student-id">Student</span>
+                </div>
+                <a href="index.html" class="nav-btn btn-back-map">🗺️ World Map</a>
+                <a href="profile.html" class="nav-btn nav-btn-secondary">👤 Profile</a>
+                <a href="notifications.html" class="nav-btn nav-btn-secondary">🔔 Notifications</a>
+            </div>
+        </header>
+
+        <!-- 6 Zone Selector Tabs -->
+        <nav class="zone-tabs-scroller" id="zone-tabs">
+            <!-- Tabs rendered dynamically by JS -->
+        </nav>
+
+        <!-- Main Chamber Grid -->
+        <main class="evo-main-grid">
+
+            <!-- Central Clash Royale Evolution Card Stage -->
+            <section class="evo-card-stage" id="evo-card-stage">
+                <div class="radiant-halo" id="radiant-halo"></div>
+                <canvas id="evo-fx-burst-canvas"></canvas>
+
+                <div class="evo-zone-header">
+                    <span class="evo-zone-tag" id="evo-zone-tag">Zone 1 • Forest Realm</span>
+                    <h1 class="evo-companion-title" id="evo-companion-title">Ice Blue AI-Buddy</h1>
+                    <p class="evo-companion-desc" id="evo-companion-desc">Assemble all 6 pieces of the Ice Blue Guardian to evolve your companion for Frozen Glacier!</p>
+                </div>
+
+                <!-- 6-Piece Assembly Board (Clash Royale Hex/Grid) -->
+                <div class="cr-puzzle-board-container">
+                    <div class="cr-puzzle-board" id="cr-puzzle-board">
+                        <div class="cr-blueprint-avatar" id="cr-blueprint-bg"></div>
+
+                        <!-- Piece 1 (Level 1) -->
+                        <div class="cr-slot cr-slot-1" data-index="1" onclick="selectPiece(1)">
+                            <div class="cr-piece-crop"></div>
+                            <div class="cr-lock-overlay">
+                                <span class="cr-lock-icon">🔒</span>
+                                <span class="cr-lock-lvl">Level 1</span>
+                            </div>
+                            <span class="cr-part-badge">Part 1</span>
+                        </div>
+
+                        <!-- Piece 2 (Level 2) -->
+                        <div class="cr-slot cr-slot-2" data-index="2" onclick="selectPiece(2)">
+                            <div class="cr-piece-crop"></div>
+                            <div class="cr-lock-overlay">
+                                <span class="cr-lock-icon">🔒</span>
+                                <span class="cr-lock-lvl">Level 2</span>
+                            </div>
+                            <span class="cr-part-badge">Part 2</span>
+                        </div>
+
+                        <!-- Piece 3 (Level 3) -->
+                        <div class="cr-slot cr-slot-3" data-index="3" onclick="selectPiece(3)">
+                            <div class="cr-piece-crop"></div>
+                            <div class="cr-lock-overlay">
+                                <span class="cr-lock-icon">🔒</span>
+                                <span class="cr-lock-lvl">Level 3</span>
+                            </div>
+                            <span class="cr-part-badge">Part 3</span>
+                        </div>
+
+                        <!-- Piece 4 (Level 4) -->
+                        <div class="cr-slot cr-slot-4" data-index="4" onclick="selectPiece(4)">
+                            <div class="cr-piece-crop"></div>
+                            <div class="cr-lock-overlay">
+                                <span class="cr-lock-icon">🔒</span>
+                                <span class="cr-lock-lvl">Level 4</span>
+                            </div>
+                            <span class="cr-part-badge">Part 4</span>
+                        </div>
+
+                        <!-- Piece 5 (Level 5) -->
+                        <div class="cr-slot cr-slot-5" data-index="5" onclick="selectPiece(5)">
+                            <div class="cr-piece-crop"></div>
+                            <div class="cr-lock-overlay">
+                                <span class="cr-lock-icon">🔒</span>
+                                <span class="cr-lock-lvl">Level 5</span>
+                            </div>
+                            <span class="cr-part-badge">Part 5</span>
+                        </div>
+
+                        <!-- Piece 6 (Boss Level - Final Core) -->
+                        <div class="cr-slot cr-slot-6 boss-slot" data-index="6" onclick="selectPiece(6)">
+                            <div class="cr-piece-crop"></div>
+                            <div class="cr-lock-overlay">
+                                <span class="cr-lock-icon">👑</span>
+                                <span class="cr-lock-lvl">Boss Core</span>
+                            </div>
+                            <span class="cr-part-badge">Final Part</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shard Counter & Progress Bar -->
+                <div class="cr-progress-box">
+                    <div class="cr-progress-labels">
+                        <span class="cr-shards-title">⚡ Evolution Shards</span>
+                        <span class="cr-shards-val" id="cr-shards-val">0 / 6</span>
+                    </div>
+                    <div class="cr-progress-track">
+                        <div class="cr-progress-fill" id="cr-progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side Panel: Shard Inspector & Perks -->
+            <aside class="evo-side-panel">
+
+                <!-- Selected Shard Inspector -->
+                <div class="side-card">
+                    <div class="side-card-header">
+                        <span class="side-card-title">🔍 Shard Inspector</span>
+                        <span id="inspector-part-tag" style="font-size: 12px; color: #38bdf8; font-weight: 800;">Part 1</span>
+                    </div>
+                    <div class="shard-detail-box" id="shard-inspector-box">
+                        <div class="shard-detail-title" id="inspector-title">Forest Shard (Piece 1)</div>
+                        <div class="shard-detail-status-pill status-locked" id="inspector-status-pill">
+                            <span>🔒</span> Locked
+                        </div>
+                        <p class="shard-detail-text" id="inspector-desc">
+                            Complete Level 1 in Forest Realm to gather this evolution shard!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Companion Perks & Abilities -->
+                <div class="side-card">
+                    <div class="side-card-header">
+                        <span class="side-card-title">✨ Companion Abilities</span>
+                        <span style="font-size: 11px; background: rgba(56,189,248,0.2); color: #38bdf8; padding: 2px 8px; border-radius: 10px; font-weight: 700;">Active</span>
+                    </div>
+                    <div class="perks-list" id="perks-list">
+                        <div class="perk-item">
+                            <span class="perk-icon">⚡</span>
+                            <span><strong>XP Booster:</strong> +20% Bonus XP on lesson completion</span>
+                        </div>
+                        <div class="perk-item">
+                            <span class="perk-icon">🎯</span>
+                            <span><strong>Smart Hint AI:</strong> Unlimited grammar assists in dialogue tasks</span>
+                        </div>
+                        <div class="perk-item">
+                            <span class="perk-icon">🛡️</span>
+                            <span><strong>Streak Shield:</strong> Protects your daily lesson combo</span>
+                        </div>
+                    </div>
+
+                    <div class="action-button-group">
+                        <a href="index.html" class="btn-evo-action btn-play-zone" id="btn-jump-level">
+                            🚀 Play Zone Levels &rarr;
+                        </a>
+                        <button type="button" class="btn-evo-action btn-test-flyin" onclick="simulateShardFlyIn()">
+                            ✨ Replay Shard Socket Animation
+                        </button>
+                        <button type="button" class="btn-evo-action" style="background: rgba(16, 185, 129, 0.2); border: 1.5px solid #10b981; color: #34d399;" onclick="unlockNextPieceInZone()">
+                            ⚡ Test Unlock Next Shard (+1 Part)
+                        </button>
+                        <button type="button" class="btn-evo-action" style="background: rgba(251, 191, 36, 0.2); border: 1.5px solid #fbbf24; color: #fef08a;" onclick="unlockEntireActiveZone()">
+                            👑 Test Unlock All 6 Shards (Evolve!)
+                        </button>
+                    </div>
+                </div>
+
+            </aside>
+
+        </main>
+    </div>
+
+    <!-- Cinematic Level 1 Completion Reaction Overlay -->
+    <div id="level-completion-reaction-overlay" class="level-reaction-overlay" aria-hidden="true">
+        <div class="level-reaction-backdrop" id="level-reaction-backdrop"></div>
+        <div class="level-reaction-content" id="level-reaction-content">
+            <div class="level-reaction-burst-ring"></div>
+            <div class="level-reaction-avatar-wrap">
+                <img id="level-reaction-face-img" class="level-reaction-face-img" src="AI/ICE BLUE ROBOT.svg" alt="Level 1 Completed Guardian">
+            </div>
+            <div class="level-reaction-banner">
+                <div class="reaction-tag">✨ LEVEL 1 COMPLETED! ✨</div>
+                <div class="reaction-title">Part 1 Evolution Shard Socketed!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio FX & Scripts -->
+    <script>
+        // Inherit Electron IPC bridge from parent window when hosted in shell frame
+        if (!window.electronAPI && window.parent && window.parent.electronAPI) {
+            window.electronAPI = window.parent.electronAPI;
+        }
+        if (!window.api && window.parent && window.parent.api) {
+            window.api = window.parent.api;
+        }
+
+        // Intercept subpage navigation links when running inside persistent game shell
+        document.addEventListener("click", (e) => {
+            const backBtn = e.target.closest(".btn-back-map, #btn-jump-level");
+            if (backBtn && window.parent && window.parent !== window && typeof window.parent.closeSubpage === "function") {
+                e.preventDefault();
+                window.parent.closeSubpage();
+                return;
+            }
+            const profileLink = e.target.closest('a[href="profile.html"]');
+            if (profileLink && window.parent && window.parent !== window && typeof window.parent.openSubpage === "function") {
+                e.preventDefault();
+                window.parent.openSubpage("profile.html");
+                return;
+            }
+            const notifLink = e.target.closest('a[href="notifications.html"]');
+            if (notifLink && window.parent && window.parent !== window && typeof window.parent.openSubpage === "function") {
+                e.preventDefault();
+                window.parent.openSubpage("notifications.html");
+                return;
+            }
+        });
+
+        const AUTH_STORAGE_KEY = "language_lab_authenticated";
+        const STORAGE_KEY = "language_lab_level_progress_v2";
+        const STUDENT_KEY = "language_lab_student_id_v1";
+
+        const ZONE_PUZZLE_CONFIG = {
+            1: {
+                zone: 1,
+                zoneName: "Forest Realm",
+                icon: "🌲",
+                nextFormName: "Ice Blue AI-Buddy",
+                nextFormAsset: "AI/ICE BLUE ROBOT.svg",
+                themeColor: "#38bdf8",
+                bossId: "boss-1",
+                levels: [1, 2, 3, 4, 5],
+                desc: "Assemble all 6 pieces of the Ice Blue Guardian to evolve your AI-Buddy for Frozen Glacier!"
+            },
+            2: {
+                zone: 2,
+                zoneName: "Frozen Glacier",
+                icon: "❄️",
+                nextFormName: "Purple Blossom AI-Buddy",
+                nextFormAsset: "AI/PURPLE ROBOT.svg",
+                themeColor: "#c084fc",
+                bossId: "boss-2",
+                levels: [6, 7, 8, 9, 10],
+                desc: "Assemble all 6 pieces of the Blossom Spirit to evolve your AI-Buddy for Blossom Haven!"
+            },
+            3: {
+                zone: 3,
+                zoneName: "Blossom Haven",
+                icon: "🌸",
+                nextFormName: "Tropical Green AI-Buddy",
+                nextFormAsset: "AI/GREEN.svg",
+                themeColor: "#34d399",
+                bossId: "boss-3",
+                levels: [11, 12, 13, 14, 15],
+                desc: "Assemble all 6 pieces of the Ocean Explorer to evolve your AI-Buddy for Tropical Bay!"
+            },
+            4: {
+                zone: 4,
+                zoneName: "Tropical Bay",
+                icon: "🌊",
+                nextFormName: "Golden Sands AI-Buddy",
+                nextFormAsset: "AI/GOLD ROBOT.svg",
+                themeColor: "#fbbf24",
+                bossId: "boss-4",
+                levels: [16, 17, 18, 19, 20],
+                desc: "Assemble all 6 pieces of the Pharaoh Titan to evolve your AI-Buddy for Golden Sands!"
+            },
+            5: {
+                zone: 5,
+                zoneName: "Golden Sands",
+                icon: "🏜️",
+                nextFormName: "Infernal Red AI-Buddy",
+                nextFormAsset: "AI/RED ROBOT.svg",
+                themeColor: "#f87171",
+                bossId: "boss-5",
+                levels: [21, 22, 23, 24, 25],
+                desc: "Assemble all 6 pieces of the Dragon Master to evolve your AI-Buddy for Dragon Peak!"
+            },
+            6: {
+                zone: 6,
+                zoneName: "Dragon Peak",
+                icon: "🌋",
+                nextFormName: "Ultimate Grandmaster AI-Buddy",
+                nextFormAsset: "AI/RED ROBOT.svg",
+                themeColor: "#f59e0b",
+                bossId: "boss-6",
+                levels: [26, 27, 28, 29, 30],
+                desc: "Assemble all 6 pieces of the Infernal Dragon Lord to complete the ultimate language master collection!"
+            }
+        };
+
+        let currentActiveZone = 1;
+        let selectedPieceIndex = 1;
+        let userProgress = { unlockedLevel: 1, stars: {} };
+
+        // Web Audio Synthesizer for Clash Royale Sound Effects
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playShardSound(type = "snap") {
+            try {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === "snap") {
+                    osc.type = "sine";
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.25);
+                } else if (type === "burst") {
+                    osc.type = "triangle";
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.4);
+                    gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.6);
+                }
+            } catch (err) {}
+        }
+
+        // Particle Generator for Ambient Background
+        function initAmbientParticles() {
+            const container = document.getElementById("ambient-particles");
+            if (!container) return;
+            for (let i = 0; i < 25; i++) {
+                const p = document.createElement("div");
+                p.className = "ambient-sparkle";
+                const size = Math.random() * 4 + 2;
+                p.style.width = `${size}px`;
+                p.style.height = `${size}px`;
+                p.style.left = `${Math.random() * 100}vw`;
+                p.style.animationDuration = `${Math.random() * 6 + 6}s`;
+                p.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(p);
+            }
+        }
+
+        function loadUserData() {
+            const rawProgress = localStorage.getItem("language_lab_level_progress_v2") || 
+                                localStorage.getItem("language_lab_user_progress_v1") || 
+                                localStorage.getItem("language_lab_level_progress_v1");
+            if (rawProgress) {
+                try {
+                    userProgress = JSON.parse(rawProgress);
+                } catch(e){}
+            }
+
+            if (!userProgress || typeof userProgress !== "object") {
+                userProgress = { unlockedLevel: 1, stars: {} };
+            }
+            if (!userProgress.unlockedLevel || isNaN(Number(userProgress.unlockedLevel))) {
+                userProgress.unlockedLevel = 1;
+            }
+            if (!userProgress.stars || typeof userProgress.stars !== "object") {
+                userProgress.stars = {};
+            }
+
+            // Sanitize: A zone boss must be defeated to unlock the next zone (Levels 6, 11, 16, 21, 26)
+            if (userProgress.unlockedLevel > 25 && (!userProgress.stars["boss-5"] || userProgress.stars["boss-5"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 25);
+            }
+            if (userProgress.unlockedLevel > 20 && (!userProgress.stars["boss-4"] || userProgress.stars["boss-4"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 20);
+            }
+            if (userProgress.unlockedLevel > 15 && (!userProgress.stars["boss-3"] || userProgress.stars["boss-3"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 15);
+            }
+            if (userProgress.unlockedLevel > 10 && (!userProgress.stars["boss-2"] || userProgress.stars["boss-2"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 10);
+            }
+            if (userProgress.unlockedLevel > 5 && (!userProgress.stars["boss-1"] || userProgress.stars["boss-1"] <= 0)) {
+                userProgress.unlockedLevel = Math.min(userProgress.unlockedLevel, 5);
+            }
+            saveProgressToStorage();
+
+            const studentId = localStorage.getItem(STUDENT_KEY) || "Student";
+            const navStudentId = document.getElementById("nav-student-id");
+            if (navStudentId) navStudentId.innerText = studentId;
+
+            const savedAvatar = localStorage.getItem("language_lab_selected_avatar_v1");
+            const navAvatar = document.getElementById("nav-user-avatar");
+            if (navAvatar && savedAvatar) {
+                navAvatar.src = savedAvatar;
+            }
+
+            // Determine active zone from user progress
+            const unLvl = Number(userProgress.unlockedLevel) || 1;
+            if (unLvl <= 5 || (!userProgress.stars?.["boss-1"] && unLvl === 6)) currentActiveZone = 1;
+            else if (unLvl <= 10 || (!userProgress.stars?.["boss-2"] && unLvl === 11)) currentActiveZone = 2;
+            else if (unLvl <= 15 || (!userProgress.stars?.["boss-3"] && unLvl === 16)) currentActiveZone = 3;
+            else if (unLvl <= 20 || (!userProgress.stars?.["boss-4"] && unLvl === 21)) currentActiveZone = 4;
+            else if (unLvl <= 25 || (!userProgress.stars?.["boss-5"] && unLvl === 25)) currentActiveZone = 5;
+            else currentActiveZone = 6;
+        }
+
+        function saveProgressToStorage() {
+            localStorage.setItem("language_lab_level_progress_v2", JSON.stringify(userProgress));
+        }
+
+        function renderZoneTabs() {
+            const tabsContainer = document.getElementById("zone-tabs");
+            if (!tabsContainer) return;
+            tabsContainer.innerHTML = "";
+
+            Object.values(ZONE_PUZZLE_CONFIG).forEach(cfg => {
+                const tab = document.createElement("div");
+                tab.className = `zone-tab ${cfg.zone === currentActiveZone ? 'active' : ''}`;
+                tab.id = `zone-tab-${cfg.zone}`;
+                tab.onclick = () => switchZone(cfg.zone);
+
+                const status = getZoneStatus(cfg.zone);
+                if (status.isComplete) tab.classList.add("completed");
+
+                tab.innerHTML = `
+                    <span class="zone-tab-icon">${cfg.icon}</span>
+                    <div class="zone-tab-info">
+                        <span class="zone-tab-title">Zone ${cfg.zone}: ${cfg.zoneName}</span>
+                        <span class="zone-tab-status">${status.unlockedCount}/6 Shards ${status.isComplete ? '✅' : ''}</span>
+                    </div>
+                `;
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        function getCompletedLevelsCountForZone(zoneNum) {
+            const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
+            let count = 0;
+            if (!userProgress || !userProgress.stars) return 0;
+            config.levels.forEach(lvl => {
+                const starVal = userProgress.stars?.[lvl] || userProgress.stars?.[String(lvl)] || 0;
+                const unLvl = Number(userProgress.unlockedLevel) || 1;
+                if (Number(starVal) > 0 || unLvl > lvl) {
+                    count++;
+                }
+            });
+            const bossStar = userProgress.stars?.[config.bossId] || 0;
+            if (Number(bossStar) > 0) {
+                count++;
+            }
+            return Math.min(6, count);
+        }
+
+        function getZoneUnlockedPieces(zoneNum) {
+            if (!userProgress) return [];
+            userProgress.unlockedPieces = userProgress.unlockedPieces || {};
+            let unlocked = userProgress.unlockedPieces[zoneNum];
+            const completedCount = getCompletedLevelsCountForZone(zoneNum);
+
+            if (!Array.isArray(unlocked)) {
+                unlocked = [];
+            }
+
+            const isOldSequential = unlocked.length > 1 && unlocked.every((val, idx) => val === idx + 1);
+
+            if (unlocked.length < completedCount || isOldSequential) {
+                const allPieces = [1, 2, 3, 4, 5, 6];
+                if (isOldSequential) {
+                    unlocked = [];
+                }
+                const remainingLocked = allPieces.filter(p => !unlocked.includes(p));
+                for (let i = remainingLocked.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [remainingLocked[i], remainingLocked[j]] = [remainingLocked[j], remainingLocked[i]];
+                }
+                while (unlocked.length < completedCount && remainingLocked.length > 0) {
+                    unlocked.push(remainingLocked.pop());
+                }
+                userProgress.unlockedPieces[zoneNum] = unlocked;
+                saveProgressToStorage();
+            } else if (unlocked.length > completedCount) {
+                unlocked = unlocked.slice(0, completedCount);
+                userProgress.unlockedPieces[zoneNum] = unlocked;
+                saveProgressToStorage();
+            }
+
+            return unlocked;
+        }
+
+        function getZoneStatus(zoneNum) {
+            const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
+            const unlockedList = getZoneUnlockedPieces(zoneNum);
+            const pieces = [];
+
+            for (let i = 1; i <= 6; i++) {
+                const isBoss = (i === 6);
+                pieces.push({
+                    index: i,
+                    levelId: isBoss ? config.bossId : config.levels[i - 1],
+                    levelTitle: isBoss ? `${config.zoneName} Boss Core` : `Part ${i}`,
+                    unlocked: unlockedList.includes(i),
+                    isBoss: isBoss
+                });
+            }
+
+            const unlockedCount = pieces.filter(p => p.unlocked).length;
+            return {
+                zone: zoneNum,
+                config: config,
+                pieces: pieces,
+                unlockedCount: unlockedCount,
+                totalCount: 6,
+                isComplete: unlockedCount === 6
+            };
+        }
+
+        function unlockNextPieceInZone() {
+            const config = ZONE_PUZZLE_CONFIG[currentActiveZone] || ZONE_PUZZLE_CONFIG[1];
+            const status = getZoneStatus(currentActiveZone);
+            const firstLocked = status.pieces.find(p => !p.unlocked);
+
+            if (!firstLocked) {
+                alert(`Zone ${currentActiveZone} (${config.zoneName}) is already 100% complete!`);
+                return;
+            }
+
+            userProgress.stars = userProgress.stars || {};
+            if (firstLocked.isBoss) {
+                userProgress.stars[config.bossId] = 3;
+            } else {
+                userProgress.stars[firstLocked.levelId] = 3;
+                if (userProgress.unlockedLevel <= firstLocked.levelId) {
+                    userProgress.unlockedLevel = firstLocked.levelId + 1;
+                }
+            }
+
+            saveProgressToStorage();
+            selectedPieceIndex = firstLocked.index;
+            renderZoneTabs();
+            renderChamber();
+            simulateShardFlyIn();
+        }
+
+        function unlockEntireActiveZone() {
+            const config = ZONE_PUZZLE_CONFIG[currentActiveZone] || ZONE_PUZZLE_CONFIG[1];
+            userProgress.stars = userProgress.stars || {};
+            config.levels.forEach(lvl => {
+                userProgress.stars[lvl] = 3;
+            });
+            userProgress.stars[config.bossId] = 3;
+            userProgress.unlockedLevel = Math.max(Number(userProgress.unlockedLevel) || 1, config.levels[config.levels.length - 1] + 1);
+
+            saveProgressToStorage();
+            renderZoneTabs();
+            renderChamber();
+            playShardSound("burst");
+            triggerCanvasBurst();
+        }
+
+        const LEVEL1_REACTION_KEY = "language_lab_level1_reaction_seen";
+        let isReactionAnimating = false;
+
+        function setLevelReactionCharacterImage(assetUrl) {
+            const faceImg = document.getElementById("level-reaction-face-img");
+            if (faceImg && assetUrl) {
+                faceImg.src = assetUrl;
+                localStorage.setItem("language_lab_custom_reaction_face", assetUrl);
+            }
+        }
+        window.setLevelReactionCharacterImage = setLevelReactionCharacterImage;
+
+        function checkAndTriggerLevel1Reaction() {
+            if (isReactionAnimating) return;
+
+            const isLevel1Complete = Boolean(
+                (userProgress.stars && (Number(userProgress.stars[1]) > 0 || Number(userProgress.stars["1"]) > 0)) ||
+                (Number(userProgress.unlockedLevel) > 1)
+            );
+            const hasSeenReaction = localStorage.getItem(LEVEL1_REACTION_KEY) === "true";
+
+            // ONLY trigger reaction sequence if Level 1 is newly completed and reaction hasn't been shown yet
+            if (isLevel1Complete && !hasSeenReaction) {
+                triggerLevel1ReactionSequence();
+            }
+        }
+
+        function triggerLevel1ReactionSequence() {
+            isReactionAnimating = true;
+            const overlay = document.getElementById("level-completion-reaction-overlay");
+            const faceImg = document.getElementById("level-reaction-face-img");
+            const slot1 = document.querySelector(".cr-slot-1");
+
+            // Custom face image override support or Zone 1 companion asset
+            const customFace = localStorage.getItem("language_lab_custom_reaction_face");
+            if (faceImg) {
+                if (customFace) {
+                    faceImg.src = customFace;
+                } else {
+                    const config = ZONE_PUZZLE_CONFIG[1];
+                    faceImg.src = config?.nextFormAsset || "AI/ICE BLUE ROBOT.svg";
+                }
+            }
+
+            // Keep Part 1 temporarily visually locked while the blur & face reveal plays
+            if (slot1) {
+                slot1.classList.remove("unlocked");
+                slot1.classList.add("locked");
+            }
+
+            // 1. Smooth background blur and face/character appears (fade-in + scale-up)
+            if (overlay) {
+                overlay.classList.remove("fade-out");
+                overlay.classList.add("active");
+                overlay.setAttribute("aria-hidden", "false");
+            }
+
+            playShardSound("burst");
+            triggerCanvasBurst();
+
+            // 2. Short completion / reward animation duration (1600ms), then smooth fade-out
+            setTimeout(() => {
+                if (overlay) {
+                    overlay.classList.add("fade-out");
+                }
+
+                // 3. Face smoothly disappears, background returns to normal, Part 1 becomes UNLOCKED
+                setTimeout(() => {
+                    if (overlay) {
+                        overlay.classList.remove("active", "fade-out");
+                        overlay.setAttribute("aria-hidden", "true");
+                    }
+
+                    // Store persistent completion state so animation never replays
+                    localStorage.setItem(LEVEL1_REACTION_KEY, "true");
+                    isReactionAnimating = false;
+
+                    // Unlocked Part 1 becomes active, clickable, and lock icon is removed
+                    selectedPieceIndex = 1;
+                    renderChamber();
+
+                    // Play socket fly-in on Part 1
+                    simulateShardFlyIn();
+                }, 550);
+            }, 1600);
+        }
+
+        function launchPieceLevel(levelId, isBoss) {
+            const isBossBool = String(isBoss) === 'true' || String(levelId).startsWith('boss-') || levelId === 30 || levelId === '30';
+            const regularPackages = [
+                "Hello!_This_Is_Me..._v1",
+                "Things_I_Like_v6",
+                "Meet_My_Friends_v8",
+                "This_Is_My_Family_v7",
+                "Welcome_to_My_Classroom_v3",
+                "Where_Is_My_Pencil__v2",
+                "What's_in_My_School_Bag__v4",
+                "Can_You_Help_Me__v1"
+            ];
+            const num = parseInt(levelId, 10);
+            const packageId = isBossBool ? 'Assessent_v5' : regularPackages[(!isNaN(num) && num >= 1 ? num - 1 : 0) % regularPackages.length];
+
+            if (window.electronAPI?.openEngine) {
+                window.electronAPI.openEngine({
+                    id: levelId,
+                    levelId: levelId,
+                    packageId: packageId,
+                    title: isBossBool ? "Assessment Challenge" : `Level ${levelId}`,
+                    isBoss: isBossBool
+                });
+            } else {
+                window.location.href = `index.html?playLevel=${levelId}`;
+            }
+        }
+        window.launchPieceLevel = launchPieceLevel;
+
+        function resetAllProgressForTest() {
+            userProgress = { unlockedLevel: 1, stars: {} };
+            localStorage.removeItem(LEVEL1_REACTION_KEY);
+            saveProgressToStorage();
+            currentActiveZone = 1;
+            selectedPieceIndex = 1;
+            renderZoneTabs();
+            renderChamber();
+        }
+
+        function switchZone(zoneNum) {
+            currentActiveZone = zoneNum;
+            document.querySelectorAll(".zone-tab").forEach(t => t.classList.remove("active"));
+            const activeTab = document.getElementById(`zone-tab-${zoneNum}`);
+            if (activeTab) activeTab.classList.add("active");
+            selectedPieceIndex = 1;
+            renderChamber();
+        }
+
+        function renderChamber() {
+            const config = ZONE_PUZZLE_CONFIG[currentActiveZone] || ZONE_PUZZLE_CONFIG[1];
+            const status = getZoneStatus(currentActiveZone);
+
+            // Update Root CSS variables for theme colors
+            document.documentElement.style.setProperty('--evo-primary', config.themeColor);
+            document.documentElement.style.setProperty('--evo-glow', `${config.themeColor}66`);
+
+            // Header info
+            document.getElementById("evo-zone-tag").innerText = `Zone ${config.zone} • ${config.zoneName}`;
+            document.getElementById("evo-companion-title").innerText = config.nextFormName;
+            document.getElementById("evo-companion-desc").innerText = config.desc;
+
+            // Blueprint Background
+            const bgEl = document.getElementById("cr-blueprint-bg");
+            if (bgEl) {
+                bgEl.style.backgroundImage = `url("${config.nextFormAsset}")`;
+            }
+
+            // Board Assembled Class
+            const boardEl = document.getElementById("cr-puzzle-board");
+            if (boardEl) {
+                if (status.isComplete) {
+                    boardEl.classList.add("fully-evolved");
+                } else {
+                    boardEl.classList.remove("fully-evolved");
+                }
+            }
+
+            // Slots & Crops
+            status.pieces.forEach(p => {
+                const slotEl = document.querySelector(`.cr-slot-${p.index}`);
+                if (!slotEl) return;
+
+                const cropEl = slotEl.querySelector(".cr-piece-crop");
+                if (cropEl) {
+                    cropEl.style.backgroundImage = `url("${config.nextFormAsset}")`;
+                }
+
+                slotEl.classList.remove("locked", "unlocked", "selected");
+                
+                // If the reaction animation is actively playing, keep Part 1 locked until animation ends
+                const shouldBeUnlocked = (isReactionAnimating && p.index === 1) ? false : p.unlocked;
+
+                if (shouldBeUnlocked) {
+                    slotEl.classList.add("unlocked");
+                } else {
+                    slotEl.classList.add("locked");
+                }
+
+                if (p.index === selectedPieceIndex) {
+                    slotEl.classList.add("selected");
+                }
+            });
+
+            // Progress Bar & Counter
+            const counterEl = document.getElementById("cr-shards-val");
+            if (counterEl) counterEl.innerText = `${status.unlockedCount} / 6 (${Math.round((status.unlockedCount/6)*100)}%)`;
+
+            const fillEl = document.getElementById("cr-progress-fill");
+            if (fillEl) fillEl.style.width = `${(status.unlockedCount / 6) * 100}%`;
+
+            renderInspector(selectedPieceIndex);
+        }
+
+        function selectPiece(pieceIndex) {
+            selectedPieceIndex = pieceIndex;
+            document.querySelectorAll(".cr-slot").forEach(s => s.classList.remove("selected"));
+            const slotEl = document.querySelector(`.cr-slot-${pieceIndex}`);
+            if (slotEl) slotEl.classList.add("selected");
+            playShardSound("snap");
+            renderInspector(pieceIndex);
+        }
+
+        function renderInspector(pieceIndex) {
+            const config = ZONE_PUZZLE_CONFIG[currentActiveZone] || ZONE_PUZZLE_CONFIG[1];
+            const status = getZoneStatus(currentActiveZone);
+            const piece = status.pieces.find(p => p.index === pieceIndex) || status.pieces[0];
+
+            document.getElementById("inspector-part-tag").innerText = piece.isBoss ? "Final Boss Core" : `Part ${piece.index}`;
+            document.getElementById("inspector-title").innerText = `${config.zoneName} Shard #${piece.index}`;
+
+            const pill = document.getElementById("inspector-status-pill");
+            const desc = document.getElementById("inspector-desc");
+
+            if (piece.unlocked) {
+                pill.className = "shard-detail-status-pill status-unlocked";
+                pill.innerHTML = `<span>✅</span> Socketed & Active`;
+                desc.innerHTML = `This shard is fully energized! Powers the <strong>${config.nextFormName}</strong> system with +50 XP bonus.`;
+            } else {
+                pill.className = "shard-detail-status-pill status-locked";
+                pill.innerHTML = `<span>🔒</span> Locked`;
+                if (piece.isBoss) {
+                    desc.innerHTML = `Requires defeating the <strong>${config.zoneName} Boss</strong>. Defeat the Realm Boss to unlock the final core evolution!`;
+                } else {
+                    desc.innerHTML = `Requires completing <strong>Level ${piece.levelId}</strong>. Clear the stage with 1+ star to socket this evolution shard.`;
+                }
+            }
+        }
+
+        // Clash Royale Particle Light Ray Burst on Socketing
+        function triggerCanvasBurst() {
+            const canvas = document.getElementById("evo-fx-burst-canvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            const particles = [];
+            const colors = ["#38bdf8", "#818cf8", "#f472b6", "#fef08a", "#34d399"];
+
+            for (let i = 0; i < 40; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 8 + 3;
+                particles.push({
+                    x: cx,
+                    y: cy,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: Math.random() * 6 + 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    life: 1,
+                    decay: Math.random() * 0.02 + 0.015
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+                particles.forEach(p => {
+                    if (p.life > 0) {
+                        alive = true;
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.life -= p.decay;
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = Math.max(0, p.life);
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+                if (alive) {
+                    requestAnimationFrame(draw);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+            draw();
+        }
+
+        function simulateShardFlyIn() {
+            const slotEl = document.querySelector(`.cr-slot-${selectedPieceIndex}`);
+            if (!slotEl) return;
+            playShardSound("burst");
+            slotEl.classList.remove("animating-shard");
+            void slotEl.offsetWidth; // Trigger reflow
+            slotEl.classList.add("animating-shard");
+            triggerCanvasBurst();
+            setTimeout(() => {
+                slotEl.classList.remove("animating-shard");
+            }, 1100);
+        }
+
+        window.onload = function() {
+            initAmbientParticles();
+            loadUserData();
+            renderZoneTabs();
+            renderChamber();
+            checkAndTriggerLevel1Reaction();
+        };
+
+        // Real-time synchronization when returning from gameplay
+        window.addEventListener("focus", () => {
+            loadUserData();
+            renderZoneTabs();
+            renderChamber();
+            checkAndTriggerLevel1Reaction();
+        });
+
+        window.addEventListener("storage", (e) => {
+            if (e.key === STORAGE_KEY || e.key === "language_lab_pending_completion_level" || e.key === LEVEL1_REACTION_KEY) {
+                loadUserData();
+                renderZoneTabs();
+                renderChamber();
+                checkAndTriggerLevel1Reaction();
+            }
+        });
+
+        if (window.electronAPI?.onLevelCompleted) {
+            window.electronAPI.onLevelCompleted((data) => {
+                if (data && (Number(data.levelId) === 1 || String(data.levelId) === "1")) {
+                    userProgress.stars = userProgress.stars || {};
+                    userProgress.stars[1] = data.stars || 3;
+                    userProgress.unlockedLevel = Math.max(Number(userProgress.unlockedLevel) || 1, 2);
+                    saveProgressToStorage();
+                    loadUserData();
+                    renderZoneTabs();
+                    renderChamber();
+                    checkAndTriggerLevel1Reaction();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

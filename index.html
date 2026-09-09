@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; object-src 'none';">
     <title>Language Lab - World Level Map</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="src/components/TravelBuddy/TravelBuddy.css">
@@ -58,47 +59,22 @@
             </div>
         </div>
 
-        <!-- 2. Profile Avatar Button with Wooden Dropdown Pill -->
+        <!-- 2. Profile Avatar Button (Direct link to Profile) -->
         <div class="hud-btn-group profile-group">
-            <button id="hud-profile-btn" class="hud-profile-trigger" title="Student Profile & Settings">
+            <a href="profile.html" id="hud-profile-btn" class="hud-profile-trigger" title="Student Profile">
                 <div class="profile-avatar-circle">
-                    <img src="student_avatar.png" alt="Student Avatar" class="profile-avatar-img">
+                    <img src="avatars/boy1.png" alt="Student Avatar" class="profile-avatar-img" onerror="this.src='avatars/boy1.png'">
                 </div>
-                <div class="profile-wood-pill">
-                    <svg class="chevron-down-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-            </button>
-            <div id="profile-dropdown" class="hud-dropdown-panel profile-dropdown options-dropdown hidden">
-                <a href="profile.html" class="profile-menu-item">
-                    <span class="menu-item-icon">👤</span>
-                    <span class="menu-item-label">Profile</span>
-                </a>
-                <div class="menu-divider"></div>
-                <button id="hud-logout-btn" class="profile-menu-item logout-item" onclick="handleLogout()">
-                    <span class="menu-item-icon">🚪</span>
-                    <span class="menu-item-label">Logout</span>
-                </button>
-            </div>
+            </a>
         </div>
 
-        <!-- 3. AI Helper Mascot Button -->
+
+        <!-- 4. AI Buddy Evolution Puzzle Button -->
         <div class="hud-btn-group">
-            <button id="hud-robot-btn" class="hud-circle-btn robot-btn" title="One Tutor AI Assistant">
-                <img src="AI/PNg.svg" alt="AI Helper" class="robot-avatar-img">
-            </button>
-            <div id="robot-dropdown" class="hud-dropdown-panel robot-dropdown hidden">
-                <div class="dropdown-header robot-header">
-                    <span>🤖 One Tutor Companion</span>
-                </div>
-                <div class="dropdown-body robot-body">
-                    <p>Hello! Welcome to your Language Lab world map. Click on any unlocked level node to start your lessons!</p>
-                    <button id="test-boss-anim-btn" style="margin-top: 10px; width: 100%; padding: 8px 12px; background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4); transition: transform 0.2s ease;">
-                        🌌 Test Boss Black Hole Unlock FX
-                    </button>
-                </div>
-            </div>
+            <a href="evolution.html" id="hud-puzzle-btn" class="hud-circle-btn puzzle-btn" title="AI-Buddy Evolution Chamber">
+                <span class="puzzle-hud-icon">🧩</span>
+                <span id="hud-puzzle-badge" class="notif-badge puzzle-badge">0/6</span>
+            </a>
         </div>
     </div>
 
@@ -154,7 +130,7 @@
         <div class="modal-card profile-modal-card">
             <button id="profile-modal-close" class="close-btn">&times;</button>
             <div class="profile-modal-header">
-                <img src="student_avatar.png" alt="Student Profile" class="modal-avatar-img">
+                <img src="avatars/boy1.png" alt="Student Profile" class="modal-avatar-img">
                 <div class="modal-user-meta">
                     <h2 class="modal-user-name">Student Profile</h2>
                     <p class="modal-roll-no">Roll Number: <span id="modal-student-id-tag" class="highlight-gold">STU-101</span></p>
@@ -228,6 +204,119 @@
         </div>
     </div>
 
+    <!-- AI-Buddy Season Evolution Puzzle Modal (Exact First Image Card Stage) -->
+    <div id="buddy-puzzle-modal" class="modal-overlay hidden" onclick="if(event.target === this) closeBuddyPuzzleModal()">
+        <div class="modal-card buddy-puzzle-modal-card evo-card-stage">
+            <button id="buddy-puzzle-close" class="close-btn evo-modal-close" onclick="closeBuddyPuzzleModal()" title="Close">&times;</button>
+            <div class="radiant-halo" id="radiant-halo"></div>
+            
+            <div class="evo-zone-header">
+                <span class="evo-zone-tag" id="puzzle-zone-tag">ZONE 1 • FOREST REALM</span>
+                <h2 class="evo-companion-title" id="puzzle-title">Ice Blue AI-Buddy</h2>
+                <p class="evo-companion-desc" id="puzzle-subtitle">Assemble all 6 pieces of the Ice Blue Guardian to evolve your AI-Buddy for Frozen Glacier!</p>
+            </div>
+
+            <!-- 6-Piece Assembly Board (Exact Match to First Image) -->
+            <div class="cr-puzzle-board-container">
+                <div class="cr-puzzle-board" id="puzzle-board">
+                    <!-- Background Blueprint Silhouette -->
+                    <div class="cr-blueprint-avatar" id="puzzle-blueprint-bg"></div>
+
+                    <!-- Piece 1 -->
+                    <div class="cr-slot slot-1 puzzle-slot cr-slot-1" data-piece-index="1">
+                        <div class="cr-piece-crop puzzle-piece-img-crop"></div>
+                        <div class="cr-lock-overlay puzzle-piece-lock-overlay">
+                            <span class="cr-lock-icon slot-lock-icon">🔒</span>
+                            <span class="cr-lock-lvl slot-lvl-tag">Locked</span>
+                        </div>
+                        <span class="cr-part-badge slot-part-badge">Part 1</span>
+                    </div>
+
+                    <!-- Piece 2 -->
+                    <div class="cr-slot slot-2 puzzle-slot cr-slot-2" data-piece-index="2">
+                        <div class="cr-piece-crop puzzle-piece-img-crop"></div>
+                        <div class="cr-lock-overlay puzzle-piece-lock-overlay">
+                            <span class="cr-lock-icon slot-lock-icon">🔒</span>
+                            <span class="cr-lock-lvl slot-lvl-tag">Locked</span>
+                        </div>
+                        <span class="cr-part-badge slot-part-badge">Part 2</span>
+                    </div>
+
+                    <!-- Piece 3 -->
+                    <div class="cr-slot slot-3 puzzle-slot cr-slot-3" data-piece-index="3">
+                        <div class="cr-piece-crop puzzle-piece-img-crop"></div>
+                        <div class="cr-lock-overlay puzzle-piece-lock-overlay">
+                            <span class="cr-lock-icon slot-lock-icon">🔒</span>
+                            <span class="cr-lock-lvl slot-lvl-tag">Locked</span>
+                        </div>
+                        <span class="cr-part-badge slot-part-badge">Part 3</span>
+                    </div>
+
+                    <!-- Piece 4 -->
+                    <div class="cr-slot slot-4 puzzle-slot cr-slot-4" data-piece-index="4">
+                        <div class="cr-piece-crop puzzle-piece-img-crop"></div>
+                        <div class="cr-lock-overlay puzzle-piece-lock-overlay">
+                            <span class="cr-lock-icon slot-lock-icon">🔒</span>
+                            <span class="cr-lock-lvl slot-lvl-tag">Locked</span>
+                        </div>
+                        <span class="cr-part-badge slot-part-badge">Part 4</span>
+                    </div>
+
+                    <!-- Piece 5 -->
+                    <div class="cr-slot slot-5 puzzle-slot cr-slot-5" data-piece-index="5">
+                        <div class="cr-piece-crop puzzle-piece-img-crop"></div>
+                        <div class="cr-lock-overlay puzzle-piece-lock-overlay">
+                            <span class="cr-lock-icon slot-lock-icon">🔒</span>
+                            <span class="cr-lock-lvl slot-lvl-tag">Locked</span>
+                        </div>
+                        <span class="cr-part-badge slot-part-badge">Part 5</span>
+                    </div>
+
+                    <!-- Piece 6 (Boss Level - Final Core Piece) -->
+                    <div class="cr-slot slot-6 puzzle-slot cr-slot-6 boss-slot boss-piece-slot" data-piece-index="6">
+                        <div class="cr-piece-crop puzzle-piece-img-crop"></div>
+                        <div class="cr-lock-overlay puzzle-piece-lock-overlay">
+                            <span class="cr-lock-icon slot-lock-icon">👑</span>
+                            <span class="cr-lock-lvl slot-lvl-tag">Boss Core</span>
+                        </div>
+                        <span class="cr-part-badge boss-badge slot-part-badge">Final Part</span>
+                    </div>
+
+                    <!-- Full Assembled Fusion Glow Layer -->
+                    <div id="puzzle-fusion-glow" class="puzzle-fusion-glow hidden"></div>
+                    <!-- Magnetic Snap Seam Flash Layer -->
+                    <div id="puzzle-seam-flash" class="puzzle-seam-flash hidden"></div>
+                    <!-- Welcome Emote Floating Hologram Overlay (inspired by reference video) -->
+                    <div id="puzzle-robot-emote-overlay" class="puzzle-robot-emote-overlay hidden">
+                        <div class="emote-heart-hologram">💖</div>
+                        <div class="emote-sparkles-container">
+                            <span class="sparkle s1">✨</span>
+                            <span class="sparkle s2">⭐</span>
+                            <span class="sparkle s3">✨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Epic Evolution Banner (shown when 6/6 is complete) -->
+                <div id="puzzle-evolution-banner" class="puzzle-evolution-banner hidden">
+                    <div class="evo-sparkles">✨ 👑 ✨</div>
+                    <div class="evo-title">AI-BUDDY EVOLVED!</div>
+                    <div class="evo-desc" id="puzzle-evolution-desc">You unlocked the Ice Blue AI-Buddy Guardian!</div>
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="puzzle-modal-actions">
+                <button id="puzzle-action-btn" class="btn-primary evo-continue-btn" onclick="closeBuddyPuzzleModal()">▶ Continue Journey</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Persistent Game Subpage Container (Instant Desktop Subview Host) -->
+    <div id="subpage-view-container" class="subpage-view-container hidden" aria-hidden="true">
+        <iframe id="subpage-view-frame" class="subpage-view-frame" title="Subpage View" frameborder="0"></iframe>
+    </div>
+
     <!-- Travel AI Buddy Modules -->
     <script src="src/events/buddyEvents.js"></script>
     <script src="src/components/TravelBuddy/buddy.config.js"></script>
@@ -237,6 +326,7 @@
     <script src="src/components/TravelBuddy/BuddyTimeline.js"></script>
     <script src="src/components/TravelBuddy/BuddyAnimationEngine.js"></script>
     <script src="src/components/TravelBuddy/BuddyAnimations.js"></script>
+    <script src="src/components/TravelBuddy/BuddyOrbitControls.js"></script>
     <script src="src/components/TravelBuddy/BuddyScene.js"></script>
     <script src="src/components/TravelBuddy/BuddyController.js"></script>
     <script src="src/ai/buddy/buddyContext.js"></script>
@@ -285,6 +375,7 @@
     <script src="src/memory/buddy/tripMemory.js"></script>
     <script src="src/memory/buddy/conversationMemory.js"></script>
     <script src="src/memory/buddy/buddyMemory.js"></script>
+    <script src="src/components/TravelBuddy/PNgAmbientController.js"></script>
     <script src="src/components/TravelBuddy/TravelBuddy.js"></script>
 
     <script src="game.js"></script>

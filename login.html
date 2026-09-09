@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
     <title>One Tutor - Student Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+    <style>
+        body { background: #6366f1; }
+    </style>
 </head>
 <body>
 
@@ -61,10 +67,39 @@
                             <span class="btn-arrow">›</span>
                         </button>
                     </form>
+
+                    <!-- Authenticated ENTER Section -->
+                    <div id="authenticated-enter-section" class="authenticated-enter-section hidden">
+                        <div class="student-welcome-badge">
+                            <span class="welcome-label">READY TO EXPLORE</span>
+                            <h3 id="student-welcome-name" class="student-welcome-name">Adventurer</h3>
+                            <p class="student-welcome-code" id="student-welcome-code">LMS: ABU001</p>
+                        </div>
+                        <button type="button" id="enter-world-btn" class="enter-world-btn">
+                            <span class="enter-btn-glow"></span>
+                            <span class="enter-btn-text">ENTER WORLD</span>
+                            <span class="enter-btn-icon">✦</span>
+                        </button>
+                        <button type="button" id="switch-account-btn" class="switch-account-btn">
+                            Switch Student Code
+                        </button>
+                    </div>
                 </div>
 
             </div>
         </div>
+    </div>
+
+    <!-- Immersive Story Intro Cinematic Container -->
+    <div id="story-cinematic-container" class="story-cinematic-container hidden" aria-hidden="true">
+        <video 
+            id="story-video" 
+            class="story-video" 
+            preload="auto" 
+            playsinline
+        ></video>
+        <!-- Cinematic Curtain for Seamless Atmospheric Fade -->
+        <div id="cinematic-curtain" class="cinematic-curtain"></div>
     </div>
 
     <!-- Separate Login Authentication Engine Script -->

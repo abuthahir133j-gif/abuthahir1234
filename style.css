@@ -323,6 +323,16 @@ body::-webkit-scrollbar {
     height: 100vh;
     display: inline-block;
     white-space: nowrap;
+    animation: dashboardFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes dashboardFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 #map-bg {
@@ -537,26 +547,30 @@ body::-webkit-scrollbar {
     display: none !important;
 }
 
-/* Level Details Modal */
+/* Level Details & Evolution Modal Overlay with Deep Background Blur */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(4, 6, 12, 0.75);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 1;
+    visibility: visible;
     transition: opacity 0.3s ease;
 }
 
 .modal-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 .modal-card {
@@ -708,13 +722,14 @@ body::-webkit-scrollbar {
    Top Right Game HUD (3D Circular Badges & Dropdowns)
    ========================================== */
 .top-right-hud {
-    position: fixed;
+    position: fixed !important;
     top: 18px;
     right: 24px;
-    z-index: 1000;
+    z-index: 10000;
     display: flex;
     align-items: center;
     gap: 14px;
+    pointer-events: auto;
 }
 
 .hud-btn-group {
@@ -775,15 +790,17 @@ body::-webkit-scrollbar {
     text-align: center;
 }
 
-/* 2. Profile Trigger with Wooden Dropdown Pill */
+/* 2. Profile Avatar Button */
 .hud-profile-trigger {
     display: flex;
     align-items: center;
+    justify-content: center;
     background: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
     outline: none;
+    text-decoration: none;
 }
 
 .profile-avatar-circle {
@@ -796,7 +813,7 @@ body::-webkit-scrollbar {
     overflow: hidden;
     z-index: 2;
     background: #fef08a;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
 }
 
 .profile-avatar-img {
@@ -805,41 +822,14 @@ body::-webkit-scrollbar {
     object-fit: cover;
 }
 
-.profile-wood-pill {
-    margin-left: -16px;
-    height: 38px;
-    background: linear-gradient(180deg, #c67c33 0%, #8c4c15 100%);
-    border: 2.5px solid #5a300a;
-    border-radius: 0 18px 18px 0;
-    padding: 0 10px 0 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    z-index: 1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1.5px 0 rgba(255, 255, 255, 0.25);
-    transition: all 0.2s ease;
-}
-
-.chevron-down-icon {
-    width: 16px;
-    height: 16px;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
-    transition: transform 0.25s ease;
-}
-
 .hud-profile-trigger:hover .profile-avatar-circle {
-    transform: scale(1.05);
+    transform: translateY(-3px) scale(1.06);
     border-color: #ffe082;
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.6), inset 0 3px 5px rgba(255, 255, 255, 0.8), 0 0 0 2px #f59e0b, 0 0 14px rgba(255, 215, 0, 0.5);
 }
 
-.hud-profile-trigger:hover .profile-wood-pill {
-    background: linear-gradient(180deg, #d98d41 0%, #9e561a 100%);
-}
-
-.hud-profile-trigger.active .chevron-down-icon {
-    transform: rotate(180deg);
+.hud-profile-trigger:active .profile-avatar-circle {
+    transform: translateY(1px) scale(0.98);
 }
 
 /* 3. AI Helper Robot Button */
@@ -851,7 +841,10 @@ body::-webkit-scrollbar {
 .robot-avatar-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 4px;
+    box-sizing: border-box;
+    display: block;
 }
 
 /* Dropdown Panels */
@@ -1004,6 +997,22 @@ body::-webkit-scrollbar {
     color: #ffffff;
 }
 
+.puzzle-dropdown-link {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    color: #ffffff !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.6) !important;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.puzzle-dropdown-link:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #075985 100%) !important;
+    border-color: #38bdf8 !important;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 18px rgba(56, 189, 248, 0.55);
+}
+
 /* Profile Dropdown Specifics */
 .profile-panel-header {
     display: flex;
@@ -1101,13 +1110,26 @@ body::-webkit-scrollbar {
     color: #facc15;
 }
 
+.profile-menu-item.logout-item {
+    color: #f87171;
+}
+
 .profile-menu-item.logout-item:hover {
     background: rgba(239, 68, 68, 0.22);
-    color: #f87171;
+    color: #fca5a5;
 }
 
 .menu-item-icon {
     font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.menu-item-icon svg {
+    display: block;
 }
 
 .menu-divider {
@@ -2257,4 +2279,885 @@ body::-webkit-scrollbar {
 @keyframes statusPulseRed {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.3); opacity: 0.5; }
+}
+
+/* ==========================================================================
+   AI-BUDDY SEASON EVOLUTION PUZZLE MODAL & 6-PIECE ASSEMBLY SYSTEM
+   ========================================================================== */
+
+/* Top HUD Puzzle Button */
+.puzzle-btn {
+    background: linear-gradient(145deg, #0284c7 0%, #0369a1 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.puzzle-hud-icon {
+    font-size: 22px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.puzzle-btn:hover .puzzle-hud-icon {
+    transform: rotate(12deg) scale(1.15);
+}
+
+.puzzle-badge {
+    background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+    border-color: #e0f2fe;
+}
+
+/* Puzzle Modal Overlay & Card (Exact First Image Clash Royale Evolution Card) */
+#buddy-puzzle-modal.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(3, 7, 18, 0.78);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+    overflow: hidden !important;
+}
+
+#buddy-puzzle-modal::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+}
+
+#buddy-puzzle-modal.hidden {
+    display: none !important;
+}
+
+body.puzzle-modal-open {
+    overflow: hidden !important;
+}
+
+body.puzzle-modal-open #game {
+    filter: blur(8px);
+    transition: filter 0.35s ease;
+}
+
+.buddy-puzzle-modal-card.evo-card-stage {
+    background: linear-gradient(180deg, rgba(26, 22, 65, 0.94) 0%, rgba(11, 16, 32, 0.98) 100%);
+    border: 2px solid rgba(129, 140, 248, 0.35);
+    border-radius: 26px;
+    padding: 18px 22px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 45px rgba(56, 189, 248, 0.22);
+    max-width: 410px;
+    width: 94%;
+    max-height: 96vh;
+    animation: evoCardPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+@keyframes evoCardPop {
+    0% { transform: scale(0.82) translateY(30px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.buddy-puzzle-modal-card .radiant-halo {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 460px;
+    height: 460px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, rgba(99, 102, 241, 0.14) 50%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+    animation: pulseHalo 4s infinite ease-in-out alternate;
+}
+
+@keyframes pulseHalo {
+    0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+.evo-zone-header {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.evo-zone-tag {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1.5px solid #38bdf8;
+    color: #38bdf8;
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+}
+
+.evo-companion-title {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin: 2px 0 4px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.evo-companion-desc {
+    font-size: 12px;
+    color: #cbd5e1;
+    max-width: 340px;
+    margin: 0 auto;
+    line-height: 1.35;
+}
+
+.cr-puzzle-board-container {
+    position: relative;
+    z-index: 5;
+    margin: 6px 0 10px 0;
+}
+
+.cr-puzzle-board {
+    width: 310px;
+    height: 410px;
+    background: #0b0f19;
+    border-radius: 24px;
+    border: 3.5px solid rgba(56, 189, 248, 0.7);
+    box-shadow: 0 0 35px rgba(56, 189, 248, 0.35), 0 20px 40px rgba(0, 0, 0, 0.9);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
+    padding: 4px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.cr-blueprint-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.12;
+    filter: grayscale(100%) brightness(30%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cr-slot {
+    position: relative;
+    z-index: 2;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(15, 23, 42, 0.65);
+    border: 1.5px dashed rgba(148, 163, 184, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cr-piece-crop, .puzzle-piece-img-crop {
+    width: 100%;
+    height: 100%;
+    background-size: 302px 402px;
+    background-repeat: no-repeat;
+    transition: all 0.35s ease;
+}
+
+.slot-1 .cr-piece-crop, .slot-1 .puzzle-piece-img-crop, .cr-slot-1 .cr-piece-crop { background-position: 0px 0px; }
+.slot-2 .cr-piece-crop, .slot-2 .puzzle-piece-img-crop, .cr-slot-2 .cr-piece-crop { background-position: -151px 0px; }
+.slot-3 .cr-piece-crop, .slot-3 .puzzle-piece-img-crop, .cr-slot-3 .cr-piece-crop { background-position: 0px -134px; }
+.slot-4 .cr-piece-crop, .slot-4 .puzzle-piece-img-crop, .cr-slot-4 .cr-piece-crop { background-position: -151px -134px; }
+.slot-5 .cr-piece-crop, .slot-5 .puzzle-piece-img-crop, .cr-slot-5 .cr-piece-crop { background-position: 0px -268px; }
+.slot-6 .cr-piece-crop, .slot-6 .puzzle-piece-img-crop, .cr-slot-6 .cr-piece-crop { background-position: -151px -268px; }
+
+/* Locked state */
+.cr-slot.locked .cr-piece-crop, .puzzle-slot.locked .puzzle-piece-img-crop {
+    opacity: 0.15;
+    filter: grayscale(100%) brightness(35%);
+}
+
+.cr-lock-overlay, .puzzle-piece-lock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: radial-gradient(circle, rgba(15, 23, 42, 0.7) 0%, rgba(2, 6, 23, 0.9) 100%);
+    z-index: 4;
+}
+
+.cr-lock-icon, .slot-lock-icon {
+    font-size: 20px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+}
+
+.cr-lock-lvl, .slot-lvl-tag {
+    font-size: 10px;
+    font-weight: 800;
+    color: #94a3b8;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cr-part-badge, .slot-part-badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 9.5px;
+    font-weight: 800;
+    background: rgba(15, 23, 42, 0.85);
+    color: #38bdf8;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    z-index: 5;
+}
+
+.cr-part-badge.boss-badge, .slot-part-badge.boss-badge {
+    color: #fbbf24;
+    border-color: rgba(251, 191, 36, 0.5);
+    background: rgba(30, 27, 75, 0.9);
+}
+
+/* Unlocked state */
+.cr-slot.unlocked, .puzzle-slot.unlocked {
+    border: 2px solid rgba(56, 189, 248, 0.9);
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+}
+
+.cr-slot.unlocked .cr-piece-crop, .puzzle-slot.unlocked .puzzle-piece-img-crop {
+    opacity: 1;
+    filter: none;
+}
+
+.cr-slot.unlocked .cr-lock-overlay, .puzzle-slot.unlocked .puzzle-piece-lock-overlay {
+    display: none !important;
+}
+
+/* Highlighted state (Part 1 in user's first image!) */
+.cr-slot.highlighted,
+.cr-slot.just-unlocked,
+.puzzle-slot.highlighted,
+.puzzle-slot.just-unlocked {
+    border: 2.5px solid #facc15 !important;
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.9), inset 0 0 10px rgba(250, 204, 21, 0.3) !important;
+    z-index: 10;
+    animation: goldBorderPulse 2s infinite alternate ease-in-out;
+}
+
+@keyframes goldBorderPulse {
+    0% { box-shadow: 0 0 14px rgba(250, 204, 21, 0.7); }
+    100% { box-shadow: 0 0 26px rgba(250, 204, 21, 1), inset 0 0 12px rgba(250, 204, 21, 0.4); }
+}
+
+.evo-continue-btn {
+    padding: 10px 28px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 14px;
+    background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.4);
+    cursor: pointer;
+    color: white;
+    transition: all 0.25s ease;
+}
+
+.evo-continue-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 22px rgba(56, 189, 248, 0.6);
+}
+
+.evo-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #94a3b8;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.2s ease;
+}
+
+.evo-modal-close:hover {
+    background: rgba(239, 68, 68, 0.8);
+    color: #ffffff;
+    border-color: #ef4444;
+    transform: scale(1.1);
+}
+
+/* Full Fusion Glow */
+.puzzle-fusion-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.4) 0%, rgba(56, 189, 248, 0.25) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 15;
+    animation: fusionBurst 1.8s ease-out forwards;
+}
+
+.puzzle-fusion-glow.hidden {
+    display: none;
+}
+
+@keyframes fusionBurst {
+    0% { opacity: 0; transform: scale(0.5); }
+    40% { opacity: 1; transform: scale(1.15); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+/* Evolution Banner */
+.puzzle-evolution-banner {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.95));
+    border: 2px solid #fbbf24;
+    border-radius: 18px;
+    padding: 12px 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(251, 191, 36, 0.4);
+    z-index: 25;
+    animation: bannerPopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.puzzle-evolution-banner.hidden {
+    display: none;
+}
+
+.evo-sparkles {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.evo-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #fbbf24;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.evo-desc {
+    font-size: 11.5px;
+    color: #f1f5f9;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+@keyframes bannerPopIn {
+    0% { transform: translateX(-50%) scale(0.6) translateY(30px); opacity: 0; }
+    100% { transform: translateX(-50%) scale(1) translateY(0); opacity: 1; }
+}
+
+.puzzle-modal-actions {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* ==========================================================================
+   FINAL ROBOT ASSEMBLY + WELCOME EMOTE SYSTEM
+   ========================================================================== */
+
+/* Assembled Board State — Completely Seamless Robot */
+.cr-puzzle-board.assembled {
+    gap: 0px !important;
+    padding: 0px !important;
+    border-color: rgba(56, 189, 248, 0.95);
+    box-shadow: 0 0 45px rgba(56, 189, 248, 0.5), 0 0 25px rgba(250, 204, 21, 0.35), 0 20px 40px rgba(0, 0, 0, 0.95);
+    transition: gap 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                padding 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.6s ease;
+}
+
+.cr-puzzle-board.assembled .cr-slot {
+    border: none !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    transition: all 0.5s ease;
+}
+
+.cr-puzzle-board.assembled .cr-part-badge,
+.cr-puzzle-board.assembled .cr-lock-overlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: none !important;
+}
+
+/* Assembling State — Pre-Assembly to Physical Convergence */
+.cr-puzzle-board.assembling {
+    box-shadow: 0 0 50px rgba(56, 189, 248, 0.6), 0 0 30px rgba(250, 204, 21, 0.4), 0 20px 40px rgba(0, 0, 0, 0.95);
+}
+
+.cr-puzzle-board.assembling .cr-part-badge,
+.cr-puzzle-board.assembling .cr-lock-overlay {
+    opacity: 0 !important;
+    transform: scale(0.6);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none !important;
+}
+
+/* Staggered physical convergence keyframes for each piece */
+.cr-slot.slot-1.piece-assembling {
+    animation: assemblePiece1 1.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 12;
+}
+
+.cr-slot.slot-2.piece-assembling {
+    animation: assemblePiece2 1.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 12;
+}
+
+.cr-slot.slot-3.piece-assembling {
+    animation: assemblePiece3 1.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 11;
+}
+
+.cr-slot.slot-4.piece-assembling {
+    animation: assemblePiece4 1.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 11;
+}
+
+.cr-slot.slot-5.piece-assembling {
+    animation: assemblePiece5 1.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 10;
+}
+
+.cr-slot.slot-6.piece-assembling {
+    animation: assemblePiece6 1.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 10;
+}
+
+/* Slot 1: Top-Left piece converges down-right into center neck/crown */
+@keyframes assemblePiece1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        border-color: rgba(56, 189, 248, 0.9);
+    }
+    30% {
+        transform: translate(-3px, -5px) scale(1.04);
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.9), inset 0 0 10px rgba(56, 189, 248, 0.4);
+        border-color: #38bdf8;
+    }
+    75% {
+        transform: translate(2px, 2px) scale(1.01);
+        border-color: rgba(56, 189, 248, 0.4);
+        border-radius: 4px;
+    }
+    90% {
+        transform: translate(2px, 2px) scale(1.02);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
+        border-color: transparent;
+        border-radius: 0;
+    }
+    100% {
+        transform: translate(2px, 2px) scale(1);
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+/* Slot 2: Top-Right piece converges down-left into center neck/crown */
+@keyframes assemblePiece2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        border-color: rgba(56, 189, 248, 0.9);
+    }
+    30% {
+        transform: translate(3px, -5px) scale(1.04);
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.9), inset 0 0 10px rgba(56, 189, 248, 0.4);
+        border-color: #38bdf8;
+    }
+    75% {
+        transform: translate(-2px, 2px) scale(1.01);
+        border-color: rgba(56, 189, 248, 0.4);
+        border-radius: 4px;
+    }
+    90% {
+        transform: translate(-2px, 2px) scale(1.02);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
+        border-color: transparent;
+        border-radius: 0;
+    }
+    100% {
+        transform: translate(-2px, 2px) scale(1);
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+/* Slot 3: Mid-Left piece converges inward to meet chest/core */
+@keyframes assemblePiece3 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        border-color: rgba(56, 189, 248, 0.9);
+    }
+    30% {
+        transform: translate(-4px, 0) scale(1.04);
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.9), inset 0 0 10px rgba(56, 189, 248, 0.4);
+        border-color: #38bdf8;
+    }
+    75% {
+        transform: translate(2px, 0) scale(1.01);
+        border-color: rgba(56, 189, 248, 0.4);
+        border-radius: 4px;
+    }
+    90% {
+        transform: translate(2px, 0) scale(1.02);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
+        border-color: transparent;
+        border-radius: 0;
+    }
+    100% {
+        transform: translate(2px, 0) scale(1);
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+/* Slot 4: Mid-Right piece converges inward to meet chest/core */
+@keyframes assemblePiece4 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        border-color: rgba(56, 189, 248, 0.9);
+    }
+    30% {
+        transform: translate(4px, 0) scale(1.04);
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.9), inset 0 0 10px rgba(56, 189, 248, 0.4);
+        border-color: #38bdf8;
+    }
+    75% {
+        transform: translate(-2px, 0) scale(1.01);
+        border-color: rgba(56, 189, 248, 0.4);
+        border-radius: 4px;
+    }
+    90% {
+        transform: translate(-2px, 0) scale(1.02);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
+        border-color: transparent;
+        border-radius: 0;
+    }
+    100% {
+        transform: translate(-2px, 0) scale(1);
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+/* Slot 5: Bottom-Left piece converges up-right to lock waist/leg */
+@keyframes assemblePiece5 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        border-color: rgba(56, 189, 248, 0.9);
+    }
+    30% {
+        transform: translate(-3px, 5px) scale(1.04);
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.9), inset 0 0 10px rgba(56, 189, 248, 0.4);
+        border-color: #38bdf8;
+    }
+    75% {
+        transform: translate(2px, -2px) scale(1.01);
+        border-color: rgba(56, 189, 248, 0.4);
+        border-radius: 4px;
+    }
+    90% {
+        transform: translate(2px, -2px) scale(1.02);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
+        border-color: transparent;
+        border-radius: 0;
+    }
+    100% {
+        transform: translate(2px, -2px) scale(1);
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+/* Slot 6: Bottom-Right piece converges up-left to lock waist/leg */
+@keyframes assemblePiece6 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        border-color: rgba(56, 189, 248, 0.9);
+    }
+    30% {
+        transform: translate(3px, 5px) scale(1.04);
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.9), inset 0 0 10px rgba(56, 189, 248, 0.4);
+        border-color: #38bdf8;
+    }
+    75% {
+        transform: translate(-2px, -2px) scale(1.01);
+        border-color: rgba(56, 189, 248, 0.4);
+        border-radius: 4px;
+    }
+    90% {
+        transform: translate(-2px, -2px) scale(1.02);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
+        border-color: transparent;
+        border-radius: 0;
+    }
+    100% {
+        transform: translate(-2px, -2px) scale(1);
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+/* Seam Flash Layer (Magnetic Snap Visual Light) */
+.puzzle-seam-flash {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 18;
+    background: 
+        linear-gradient(to right, transparent calc(50% - 2px), rgba(255, 255, 255, 0.9) 50%, transparent calc(50% + 2px)),
+        linear-gradient(to bottom, transparent calc(33.3% - 2px), rgba(255, 255, 255, 0.8) 33.3%, transparent calc(33.3% + 2px)),
+        linear-gradient(to bottom, transparent calc(66.6% - 2px), rgba(255, 255, 255, 0.8) 66.6%, transparent calc(66.6% + 2px));
+    opacity: 0;
+}
+
+.puzzle-seam-flash.flash-active {
+    animation: seamFlashBurst 0.9s ease-out forwards;
+}
+
+@keyframes seamFlashBurst {
+    0% { opacity: 0; filter: drop-shadow(0 0 8px #38bdf8); }
+    30% { opacity: 1; filter: drop-shadow(0 0 18px #ffffff) drop-shadow(0 0 24px #38bdf8); }
+    100% { opacity: 0; filter: drop-shadow(0 0 4px #38bdf8); }
+}
+
+/* Welcome Emote Sequence & Character Animations */
+.cr-puzzle-board.robot-welcome-emote {
+    animation: emoteFullSequence 4.2s ease-in-out forwards;
+}
+
+@keyframes emoteFullSequence {
+    /* 0-15%: Small idle movement & notice player */
+    0% { transform: translateY(0) scale(1); }
+    12% { transform: translateY(-4px) scale(1.015); }
+    20% { transform: translateY(-8px) rotate(-1.5deg) scale(1.03); }
+    
+    /* 25-45%: Friendly wave & heart welcome gesture (inspired by reference video) */
+    30% { transform: translateY(-10px) rotate(1.8deg) scale(1.04); }
+    40% { transform: translateY(-12px) rotate(-1.5deg) scale(1.04); }
+    50% { transform: translateY(-10px) rotate(1.5deg) scale(1.035); }
+    
+    /* 55-75%: Cheerful celebratory bounce */
+    60% { transform: translateY(-18px) scale(1.05, 0.97); }
+    70% { transform: translateY(0px) scale(0.98, 1.03); }
+    80% { transform: translateY(-10px) scale(1.02); }
+    
+    /* 85-100%: Return to calm idle pose */
+    92% { transform: translateY(-4px) scale(1.01); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Assembled Continuous Idle Breathing Float */
+.cr-puzzle-board.assembled.idle-ready {
+    animation: assembledRobotIdleFloat 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes assembledRobotIdleFloat {
+    0% {
+        transform: translateY(0px);
+        box-shadow: 0 0 35px rgba(56, 189, 248, 0.4), 0 20px 40px rgba(0, 0, 0, 0.9);
+    }
+    100% {
+        transform: translateY(-8px);
+        box-shadow: 0 0 48px rgba(56, 189, 248, 0.6), 0 0 20px rgba(250, 204, 21, 0.35), 0 24px 44px rgba(0, 0, 0, 0.95);
+    }
+}
+
+/* Floating Hologram Heart & Sparkles (Reference video inspiration) */
+.puzzle-robot-emote-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 22;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.puzzle-robot-emote-overlay.hidden {
+    display: none;
+}
+
+.emote-heart-hologram {
+    font-size: 56px;
+    filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.9)) drop-shadow(0 0 30px rgba(56, 189, 248, 0.8));
+    animation: floatingHeartEmote 3.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes floatingHeartEmote {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.2);
+    }
+    15% {
+        opacity: 1;
+        transform: translateY(0px) scale(1.25);
+    }
+    30% {
+        transform: translateY(-12px) scale(1.1);
+    }
+    45% {
+        transform: translateY(-24px) scale(1.35);
+    }
+    60% {
+        transform: translateY(-36px) scale(1.15);
+    }
+    85% {
+        opacity: 0.9;
+        transform: translateY(-55px) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(0.8);
+    }
+}
+
+.emote-sparkles-container {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.emote-sparkles-container .sparkle {
+    position: absolute;
+    font-size: 22px;
+    filter: drop-shadow(0 0 10px #facc15);
+    animation: sparkleDrift 2.8s ease-out forwards;
+}
+
+.emote-sparkles-container .s1 {
+    top: 10px;
+    left: 15px;
+    animation-delay: 0.2s;
+}
+
+.emote-sparkles-container .s2 {
+    top: -15px;
+    right: 10px;
+    animation-delay: 0.5s;
+}
+
+.emote-sparkles-container .s3 {
+    bottom: 10px;
+    left: 45%;
+    animation-delay: 0.8s;
+}
+
+@keyframes sparkleDrift {
+    0% { opacity: 0; transform: scale(0.3) translateY(10px); }
+    25% { opacity: 1; transform: scale(1.2) translateY(0); }
+    70% { opacity: 0.8; transform: scale(1) translateY(-25px); }
+    100% { opacity: 0; transform: scale(0.4) translateY(-45px); }
+}
+
+@media (max-height: 720px) {
+    .buddy-puzzle-modal-card.evo-card-stage {
+        transform: scale(0.88);
+        transform-origin: center center;
+    }
+}
+
+@media (max-height: 600px) {
+    .buddy-puzzle-modal-card.evo-card-stage {
+        transform: scale(0.78);
+        transform-origin: center center;
+    }
+}
+
+/* ==========================================================================
+   High-Performance Desktop Game Subpage View Container (Instant Navigation)
+   ========================================================================== */
+.subpage-view-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.12s ease-out;
+    contain: strict;
+}
+
+.subpage-view-container.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.subpage-view-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    display: block;
 }

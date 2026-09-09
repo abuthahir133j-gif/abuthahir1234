@@ -29,7 +29,8 @@
             this.gazeController = options.gazeController || null;
             this.faceController = options.faceController || null;
             this.speech = options.speech || _MomoSpeech;
-            this.activeArm = options.activeArm || 'right'; // 'right' or 'left'
+            // 'left' corresponds to AI Buddy's anatomical right arm facing the user (screen-left)
+            this.activeArm = options.activeArm || 'left';
             this.isRunning = false;
         }
 
@@ -40,11 +41,12 @@
             }
         }
 
-        setDependencies({ gazeController, faceController, speech, rig }) {
+        setDependencies({ gazeController, faceController, speech, rig, activeArm }) {
             if (gazeController) this.gazeController = gazeController;
             if (faceController) this.faceController = faceController;
             if (speech) this.speech = speech;
             if (rig) this.rig = rig;
+            if (activeArm) this.activeArm = activeArm;
         }
 
         /**

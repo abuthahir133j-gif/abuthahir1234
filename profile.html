@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
     <title>Student Profile - One Tutor Language Lab</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -97,6 +98,64 @@
             background: #ef4444;
             color: #ffffff;
             border-color: #ef4444;
+        }
+
+        /* Lock All Levels (Keep Level 1) Button */
+        .btn-lock-levels {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 13px;
+            border: 2px solid #facc15;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25), 0 0 10px rgba(250, 204, 21, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .btn-lock-levels:hover {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            border-color: #fde047;
+            box-shadow: 0 6px 18px rgba(250, 204, 21, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .btn-lock-levels:active {
+            transform: translateY(1px);
+        }
+
+        .btn-lock-icon {
+            font-size: 15px;
+            display: inline-block;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+        }
+
+        .profile-toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #0f172a;
+            color: #facc15;
+            border: 2px solid #facc15;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(250, 204, 21, 0.25);
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .profile-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         /* Main Profile Hero Card */
@@ -565,6 +624,10 @@
                 <img src="Login/logo.png" alt="One Tutor Logo">
             </div>
             <div class="nav-actions">
+                <button id="profile-lock-levels-btn" class="btn-lock-levels" onclick="lockAllLevelsExcept1(true)" title="Lock all levels and keep only Level 1 unlocked">
+                    <span class="btn-lock-icon">🔒</span>
+                    <span>Lock All Levels (Keep Level 1)</span>
+                </button>
                 <a href="index.html" class="btn-back-map">
                     <span>🗺️ Back to Map</span>
                 </a>
@@ -575,7 +638,7 @@
         <!-- Student Hero Profile Card -->
         <div class="profile-hero-card">
             <div class="hero-avatar-wrap">
-                <img src="student_avatar.png" alt="Student Avatar" class="hero-avatar-img" id="profile-avatar-img">
+                <img src="avatars/boy1.png" alt="Student Avatar" class="hero-avatar-img" id="profile-avatar-img" onerror="this.src='avatars/boy1.png'">
                 <div class="hero-level-badge" id="hero-level-tag">Level 1</div>
             </div>
             <div class="hero-info-section">
@@ -680,12 +743,12 @@
                         <h3 class="settings-subcard-title">🌏 Language</h3>
                         <label class="settings-label" for="app-language-select">Application Interface Language</label>
                         <select id="app-language-select" class="settings-select">
-                            <option value="en-US" selected>English (US)</option>
-                            <option value="en-UK">English (UK)</option>
+                            <option value="en-US" selected>English (UK)</option>
+                            <!-- <option value="en-UK">English (UK)</option>
                             <option value="es">Spanish (Español)</option>
                             <option value="fr">French (Français)</option>
                             <option value="de">German (Deutsch)</option>
-                            <option value="hi">Hindi (हिंदी)</option>
+                            <option value="hi">Hindi (हिंदी)</option> -->
                         </select>
                     </div>
 
@@ -732,10 +795,22 @@
                         <h3 class="settings-subcard-title">ℹ️ About Application</h3>
                         <div class="about-app-box">
                             <div class="about-app-name">Language Lab Student Desktop</div>
-                            <div class="about-app-meta">Version v2.4.1 Enterprise</div>
-                            <div class="about-app-meta">Build #8842-PROD</div>
-                            <div class="about-app-meta">Electron Desktop Engine</div>
-                            <div class="about-app-meta">Auto Sync Active</div>
+                            <div class="about-app-row">
+                                <span class="about-app-label">Version:</span>
+                                <span class="about-app-val">v2.4.1 Enterprise</span>
+                            </div>
+                            <div class="about-app-row">
+                                <span class="about-app-label">Updated:</span>
+                                <span class="about-app-val">August 2026</span>
+                            </div>
+                            <div class="about-app-row">
+                                <span class="about-app-label">Platform:</span>
+                                <span class="about-app-val">Electron Desktop Engine</span>
+                            </div>
+                            <div class="about-app-row">
+                                <span class="about-app-label">Sync Status:</span>
+                                <span class="about-app-val about-app-status-badge">🟢 Auto Sync Active</span>
+                            </div>
                         </div>
                     </div>
 
@@ -871,6 +946,11 @@
 
             <form id="contact-support-form" class="support-form">
                 <div id="support-form-alert" class="support-alert hidden"></div>
+
+                <div class="support-form-group">
+                    <label class="support-form-label" for="support-recipient-email">Support Email (Recipient)</label>
+                    <input type="email" id="support-recipient-email" class="support-input" value="abuthahir133j@gmail.com" readonly style="background: rgba(99, 102, 241, 0.08); font-weight: 600; color: #818cf8; cursor: default;">
+                </div>
 
                 <div class="support-form-group">
                     <label class="support-form-label" for="support-roll-no">Student Roll Number</label>
@@ -1248,16 +1328,18 @@
 
         /* FAQ Accordion Styling */
         .faq-search-box {
+            
             margin-bottom: 16px;
         }
 
         .faq-accordion-list {
-            max-height: 320px;
+            max-height: 440px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding-right: 4px;
+            gap: 12px;
+            padding: 4px 6px 16px 2px;
+            scrollbar-width: thin;
         }
 
         .faq-item {
@@ -1265,13 +1347,13 @@
             border-radius: 14px;
             background: #f8fafc;
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
 
         .faq-item.active {
             border-color: #3b82f6;
             background: #ffffff;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
         }
 
         .faq-question {
@@ -1279,7 +1361,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 16px;
+            padding: 14px 18px 10px 18px;
             background: none;
             border: none;
             font-size: 14px;
@@ -1287,6 +1369,7 @@
             color: #1e293b;
             cursor: pointer;
             text-align: left;
+            line-height: 1.4;
         }
 
         .faq-icon {
@@ -1294,6 +1377,8 @@
             font-weight: 800;
             color: #64748b;
             transition: transform 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 10px;
         }
 
         .faq-item.active .faq-icon {
@@ -1304,30 +1389,87 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 16px;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s ease;
+            padding: 0 18px;
         }
 
         .faq-item.active .faq-answer {
-            max-height: 200px;
-            padding: 0 16px 14px 16px;
+            max-height: 300px;
+            padding: 4px 18px 22px 18px;
         }
 
         .faq-answer p {
-            font-size: 13px;
+            font-size: 13.5px;
             color: #475569;
-            line-height: 1.5;
+            line-height: 1.65;
             margin: 0;
+            word-break: normal;
+            letter-spacing: 0.01em;
+        }
+
+        /* About Application Styles */
+        .about-app-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .about-app-name {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: #0f172a;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .about-app-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        .about-app-label {
+            color: #64748b;
+            font-weight: 600;
+        }
+        .about-app-val {
+            color: #1e293b;
+            font-weight: 700;
+        }
+        .about-app-status-badge {
+            color: #059669;
+            font-size: 12px;
+            font-weight: 700;
+            background: #ecfdf5;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid #a7f3d0;
         }
     </style>
 
     <!-- Script to Load Live Profile Data & Manage Avatars -->
     <script>
+        // Inherit Electron IPC bridge from parent window when hosted in shell frame
+        if (!window.electronAPI && window.parent && window.parent.electronAPI) {
+            window.electronAPI = window.parent.electronAPI;
+        }
+        if (!window.api && window.parent && window.parent.api) {
+            window.api = window.parent.api;
+        }
+
+        // Intercept Back to Map immediately (synchronous capture phase)
+        document.addEventListener("click", (e) => {
+            const backBtn = e.target.closest(".btn-back-map");
+            if (backBtn && window.parent && window.parent !== window && typeof window.parent.closeSubpage === "function") {
+                e.preventDefault();
+                e.stopPropagation();
+                window.parent.closeSubpage();
+            }
+        }, true);
+
         const AUTH_STORAGE_KEY = "language_lab_authenticated";
         const STUDENT_KEY = "language_lab_student_id_v1";
         const LAST_LOGIN_DATE_KEY = "language_lab_last_login_date_v1";
         const APP_SESSION_KEY = "language_lab_app_session_v1";
-        const PROGRESS_KEY = "language_lab_level_progress_v1";
+        const PROGRESS_KEY = "language_lab_level_progress_v2";
         const AVATAR_KEY = "language_lab_selected_avatar_v1";
 
         function getTodayDateString() {
@@ -1373,7 +1515,11 @@
             { id: 'g14', url: 'avatars/girl14.png' }
         ];
 
-        let selectedAvatarUrl = localStorage.getItem(AVATAR_KEY) || 'student_avatar.png';
+        let storedAvatar = localStorage.getItem(AVATAR_KEY);
+        if (!storedAvatar || storedAvatar === 'student_avatar.png') {
+            storedAvatar = 'avatars/boy1.png';
+        }
+        let selectedAvatarUrl = storedAvatar;
         let currentTabGender = 'boys';
         let tempSelectedUrl = selectedAvatarUrl;
 
@@ -1565,9 +1711,77 @@
             localStorage.removeItem("language_lab_student_session_v1");
             sessionStorage.removeItem(APP_SESSION_KEY);
             sessionStorage.clear();
-            window.location.href = "login.html";
+            if (window.parent && window.parent !== window) {
+                window.parent.location.href = "login.html";
+            } else {
+                window.location.href = "login.html";
+            }
         }
         window.handleLogout = handleLogout;
+
+        // Toast feedback notifier
+        function showProfileToast(message) {
+            let toast = document.getElementById("profile-toast");
+            if (!toast) {
+                toast = document.createElement("div");
+                toast.id = "profile-toast";
+                toast.className = "profile-toast";
+                document.body.appendChild(toast);
+            }
+            toast.innerText = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        // Lock All Levels Except Level 1 & Reset Progress
+        function lockAllLevelsExcept1(showPrompt = false) {
+            if (!showPrompt || confirm("Are you sure you want to lock all levels except Level 1?")) {
+                const resetData = {
+                    unlockedLevel: 1,
+                    stars: {},
+                    playedBossAnimations: {},
+                    unlockedPieces: {}
+                };
+                localStorage.setItem(PROGRESS_KEY, JSON.stringify(resetData));
+
+                // Instantly update stats on Profile UI
+                const heroLevelTag = document.getElementById("hero-level-tag");
+                if (heroLevelTag) heroLevelTag.innerText = "Level 1";
+
+                const statLevels = document.getElementById("stat-levels");
+                if (statLevels) statLevels.innerText = "1 / 30";
+
+                const statStars = document.getElementById("stat-stars");
+                if (statStars) statStars.innerText = "0 / 30";
+
+                // Lock achievement badges
+                const badgesToReset = [
+                    { boxId: "badge-glacier", statusId: "status-glacier" },
+                    { boxId: "badge-blossom", statusId: "status-blossom" },
+                    { boxId: "badge-bay", statusId: "status-bay" },
+                    { boxId: "badge-sands", statusId: "status-sands" },
+                    { boxId: "badge-peak", statusId: "status-peak" }
+                ];
+                badgesToReset.forEach(item => {
+                    const box = document.getElementById(item.boxId);
+                    if (box) box.classList.remove("unlocked");
+                    const st = document.getElementById(item.statusId);
+                    if (st) {
+                        st.innerText = "Locked";
+                        st.style.color = "#94a3b8";
+                    }
+                });
+
+                showProfileToast("🔒 All levels locked except Level 1!");
+            }
+        }
+        function resetProgress() {
+            lockAllLevelsExcept1(true);
+        }
+        window.lockAllLevelsExcept1 = lockAllLevelsExcept1;
+        window.resetProgress = resetProgress;
 
         // Avatar Picker Engine
         function setupAvatarPicker() {
@@ -1615,6 +1829,11 @@
                     const avatarImg = document.getElementById("profile-avatar-img");
                     if (avatarImg) avatarImg.src = selectedAvatarUrl;
                     if (avatarModal) avatarModal.classList.add("hidden");
+
+                    // Immediately update Dashboard avatar without full reload
+                    if (window.parent && window.parent !== window && typeof window.parent.updateDashboardAvatar === "function") {
+                        window.parent.updateDashboardAvatar(selectedAvatarUrl);
+                    }
                 });
             }
         }
@@ -1711,23 +1930,35 @@
             if (contactCancelBtn) contactCancelBtn.addEventListener("click", () => contactModal.classList.add("hidden"));
 
             if (contactForm) {
-                contactForm.addEventListener("submit", (e) => {
+                contactForm.addEventListener("submit", async (e) => {
                     e.preventDefault();
+                    const defaultSupportEmail = "abuthahir133j@gmail.com";
+                    const recipient = (document.getElementById("support-recipient-email")?.value || defaultSupportEmail).trim();
                     const subject = document.getElementById("support-subject").value.trim();
-                    const category = document.getElementById("support-category").value;
+                    const categoryEl = document.getElementById("support-category");
+                    const category = categoryEl.value;
+                    const categoryText = categoryEl.options[categoryEl.selectedIndex]?.text || category;
                     const message = document.getElementById("support-message").value.trim();
-                    const rollNo = supportRollInput ? supportRollInput.value : "STU-101";
+                    const rollNo = supportRollInput ? supportRollInput.value : (localStorage.getItem(STUDENT_KEY) || "STU-101");
+                    const submitBtn = document.getElementById("contact-support-submit-btn");
 
                     if (!subject || !message) {
                         showSupportAlert(supportAlert, "Please fill in all required fields.", "error");
                         return;
                     }
 
+                    const originalBtnText = submitBtn ? submitBtn.innerText : "📨 Send Message";
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.innerText = "⏳ Sending Message...";
+                    }
+
                     const ticketId = "SUP-" + Math.floor(100000 + Math.random() * 900000);
                     const ticket = {
                         id: ticketId,
+                        recipient,
                         rollNo,
-                        category,
+                        category: categoryText,
                         subject,
                         message,
                         timestamp: new Date().toISOString()
@@ -1739,8 +1970,51 @@
                         localStorage.setItem("language_lab_support_tickets_v1", JSON.stringify(existingTickets));
                     } catch (err) {}
 
-                    showSupportAlert(supportAlert, `✅ Support ticket submitted successfully! Ticket ID: <strong>#${ticketId}</strong>. Our team will contact you shortly.`, "success");
+                    // Deliver message directly to abuthahir133j@gmail.com
+                    try {
+                        if (window.electronAPI && typeof window.electronAPI.sendSupportEmail === "function") {
+                            await window.electronAPI.sendSupportEmail({
+                                recipient,
+                                rollNo,
+                                category: categoryText,
+                                subject,
+                                message,
+                                ticketId
+                            });
+                        } else {
+                            await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    studentRollNumber: rollNo,
+                                    issueCategory: categoryText,
+                                    subject: subject,
+                                    message: message,
+                                    ticketId: ticketId,
+                                    _captcha: 'false',
+                                    _template: 'table',
+                                    _subject: `[One Tutor Support] ${subject} (Student: ${rollNo})`,
+                                    _replyto: recipient
+                                })
+                            });
+                        }
+                    } catch (dispatchErr) {
+                        console.warn("[Support] Dispatch notice:", dispatchErr);
+                    }
+
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = originalBtnText;
+                    }
+
+                    showSupportAlert(supportAlert, `✅ Support ticket submitted successfully! Ticket ID: <strong>#${ticketId}</strong>. Message sent to <strong>${recipient}</strong>. Our team will contact you shortly.`, "success");
+
                     contactForm.reset();
+                    const recipientInput = document.getElementById("support-recipient-email");
+                    if (recipientInput) recipientInput.value = defaultSupportEmail;
                     if (supportRollInput) supportRollInput.value = rollNo;
 
                     setTimeout(() => {
@@ -1771,8 +2045,9 @@
             if (bugCancelBtn) bugCancelBtn.addEventListener("click", () => bugModal.classList.add("hidden"));
 
             if (bugForm) {
-                bugForm.addEventListener("submit", (e) => {
+                bugForm.addEventListener("submit", async (e) => {
                     e.preventDefault();
+                    const defaultSupportEmail = "abuthahir133j@gmail.com";
                     const title = document.getElementById("bug-title").value.trim();
                     const severity = document.getElementById("bug-severity").value;
                     const description = document.getElementById("bug-description").value.trim();
@@ -1786,6 +2061,7 @@
                     const bugId = "BUG-" + Math.floor(10000 + Math.random() * 90000);
                     const bugReport = {
                         id: bugId,
+                        recipient: defaultSupportEmail,
                         rollNo: savedStudent.trim(),
                         title,
                         severity,
@@ -1800,7 +2076,18 @@
                         localStorage.setItem("language_lab_bug_reports_v1", JSON.stringify(existingBugs));
                     } catch (err) {}
 
-                    showSupportAlert(bugAlert, `🐞 Bug report submitted successfully! Reference ID: <strong>#${bugId}</strong>. Thank you for reporting!`, "success");
+                    // Forward bug report to default support email
+                    if (window.electronAPI && typeof window.electronAPI.sendSupportEmail === "function") {
+                        window.electronAPI.sendSupportEmail({
+                            recipient: defaultSupportEmail,
+                            rollNo: savedStudent.trim(),
+                            category: `Bug Report (${severity})`,
+                            subject: title,
+                            message: description
+                        }).catch(() => {});
+                    }
+
+                    showSupportAlert(bugAlert, `🐞 Bug report submitted successfully to <strong>${defaultSupportEmail}</strong>! Reference ID: <strong>#${bugId}</strong>.`, "success");
                     bugForm.reset();
 
                     setTimeout(() => {

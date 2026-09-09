@@ -7,15 +7,15 @@
 (function (global) {
     const _voiceConfig = (typeof global.voiceConfig !== 'undefined')
         ? global.voiceConfig
-        : require('./voiceConfig');
+        : (typeof require !== 'undefined' ? require('./voiceConfig') : {});
 
     const _BuddySpeechRecognition = (typeof global.BuddySpeechRecognition !== 'undefined')
         ? global.BuddySpeechRecognition
-        : require('./speechRecognition');
+        : (typeof require !== 'undefined' ? require('./speechRecognition') : null);
 
     const _BuddySpeechSynthesis = (typeof global.BuddySpeechSynthesis !== 'undefined')
         ? global.BuddySpeechSynthesis
-        : require('./speechSynthesis');
+        : (typeof require !== 'undefined' ? require('./speechSynthesis') : null);
 
     class BuddyVoiceController {
         constructor(buddyController = null, buddyAI = null, config = {}) {

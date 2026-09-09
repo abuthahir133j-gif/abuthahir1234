@@ -19,10 +19,13 @@ const { BuddyFaceController } = require('../../character/buddy/actions/BuddyFace
 const PointAction = require('../../character/buddy/actions/PointAction');
 const { BuddyReactionConfig, BUDDY_REACTION_CONFIG, REACTION_PRIORITY } = require('../../character/buddy/reactions/BuddyReactionConfig');
 const { BuddyEventDetector } = require('../../character/buddy/reactions/BuddyEventDetector');
-const { BuddyReactionManager } = require('../../character/buddy/reactions/BuddyReactionManager');
+const BuddyOrbitControls = require('./BuddyOrbitControls');
+const PNgAmbientController = require('./PNgAmbientController');
 const TravelBuddy = require('./TravelBuddy');
 
 module.exports = {
+    PNgAmbientController,
+    BuddyOrbitControls,
     TravelBuddy,
     BuddyAnimationEngine,
     BuddyTimeline,

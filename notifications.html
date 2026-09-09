@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
     <title>Notification Center - One Tutor Language Lab</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -469,7 +470,7 @@
             </div>
             <div class="nav-actions">
                 <div class="student-profile-chip">
-                    <img id="nav-student-avatar" src="student_avatar.png" alt="Avatar" class="chip-avatar">
+                    <img id="nav-student-avatar" src="avatars/boy1.png" alt="Avatar" class="chip-avatar" onerror="this.src='avatars/boy1.png'">
                     <span id="nav-student-roll" class="chip-roll">Student</span>
                 </div>
                 <a href="index.html" class="nav-btn btn-back-map">
@@ -524,6 +525,30 @@
     </div>
 
     <script>
+        // Inherit Electron IPC bridge from parent window when hosted in shell frame
+        if (!window.electronAPI && window.parent && window.parent.electronAPI) {
+            window.electronAPI = window.parent.electronAPI;
+        }
+        if (!window.api && window.parent && window.parent.api) {
+            window.api = window.parent.api;
+        }
+
+        // Intercept subpage navigation links when running inside persistent game shell
+        document.addEventListener("click", (e) => {
+            const backBtn = e.target.closest(".btn-back-map");
+            if (backBtn && window.parent && window.parent !== window && typeof window.parent.closeSubpage === "function") {
+                e.preventDefault();
+                window.parent.closeSubpage();
+                return;
+            }
+            const profileLink = e.target.closest('a[href="profile.html"]');
+            if (profileLink && window.parent && window.parent !== window && typeof window.parent.openSubpage === "function") {
+                e.preventDefault();
+                window.parent.openSubpage("profile.html");
+                return;
+            }
+        });
+
         const AUTH_STORAGE_KEY = "language_lab_authenticated";
         const STUDENT_KEY = "language_lab_student_id_v1";
         const LAST_LOGIN_DATE_KEY = "language_lab_last_login_date_v1";
@@ -693,7 +718,11 @@
             localStorage.removeItem("language_lab_student_session_v1");
             sessionStorage.removeItem(APP_SESSION_KEY);
             sessionStorage.clear();
-            window.location.href = "login.html";
+            if (window.parent && window.parent !== window) {
+                window.parent.location.href = "login.html";
+            } else {
+                window.location.href = "login.html";
+            }
         }
         window.handleLogout = handleLogout;
 

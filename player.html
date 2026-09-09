@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
     <title>Language Lab - Experience Engine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -741,9 +742,11 @@
 
         function ExperienceEngineApp() {
             const urlParams = new URLSearchParams(window.location.search);
-            const levelIdParam = Number(urlParams.get('levelId')) || 1;
+            const rawLevelId = urlParams.get('levelId') || '1';
+            const isBossLevel = typeof rawLevelId === 'string' && rawLevelId.startsWith('boss-');
+            const levelIdParam = isBossLevel ? rawLevelId : (Number(rawLevelId) || 1);
             const packageIdParam = urlParams.get('packageId') || '49';
-            const titleParam = urlParams.get('title') || 'The Lost Picnic';
+            const titleParam = urlParams.get('title') || (isBossLevel ? 'Forest Guardian Boss' : 'big house');
 
             const [currentActivityIdx, setCurrentActivityIdx] = useState(0);
             const [currentScreenIdx, setCurrentScreenIdx] = useState(0);
@@ -820,14 +823,27 @@
                 loadExperience();
             }, []);
 
-            // Audio Speech Synthesis Player
+            // Audio Speech Synthesis Player — 5-Year-Old Child Voice
             function playSpeech(text) {
                 if ('speechSynthesis' in window && text) {
                     window.speechSynthesis.cancel();
                     const utterance = new SpeechSynthesisUtterance(text);
-                    utterance.rate = 0.95;
-                    utterance.pitch = 1.0;
+                    utterance.rate = 1.04;
+                    utterance.pitch = 1.55;
                     utterance.lang = 'en-US';
+                    const voices = window.speechSynthesis.getVoices() || [];
+                    const friendlyVoice = voices.find(v => {
+                        const n = v.name.toLowerCase();
+                        const vLang = v.lang.toLowerCase();
+                        const isEn = vLang.includes('en') || vLang.includes('us') || vLang.includes('gb');
+                        return isEn && (
+                            n.includes('child') || n.includes('kid') || n.includes('junior') ||
+                            n.includes('ana') || n.includes('ivy') || n.includes('maisie') ||
+                            n.includes('zira') || n.includes('samantha') || n.includes('jenny') ||
+                            n.includes('aria') || n.includes('natural')
+                        );
+                    });
+                    if (friendlyVoice) utterance.voice = friendlyVoice;
                     window.speechSynthesis.speak(utterance);
                 }
             }
@@ -851,6 +867,41 @@
                 }
             }
 
+            function saveAndSignalCompletion(starsCount = 3) {
+                try {
+                    const STORAGE_KEY = "language_lab_level_progress_v2";
+                    const saved = localStorage.getItem(STORAGE_KEY);
+                    let progress = saved ? JSON.parse(saved) : { unlockedLevel: 1, stars: {} };
+                    progress.stars = progress.stars || {};
+                    progress.stars[levelIdParam] = Math.max(progress.stars[levelIdParam] || 0, starsCount);
+
+                    if (isBossLevel) {
+                        if (levelIdParam === 'boss-1') progress.unlockedLevel = Math.max(progress.unlockedLevel || 1, 6);
+                        else if (levelIdParam === 'boss-2') progress.unlockedLevel = Math.max(progress.unlockedLevel || 1, 11);
+                        else if (levelIdParam === 'boss-3') progress.unlockedLevel = Math.max(progress.unlockedLevel || 1, 16);
+                        else if (levelIdParam === 'boss-4') progress.unlockedLevel = Math.max(progress.unlockedLevel || 1, 21);
+                        else if (levelIdParam === 'boss-5') progress.unlockedLevel = Math.max(progress.unlockedLevel || 1, 26);
+                    } else {
+                        const numId = Number(levelIdParam) || 1;
+                        progress.stars[numId] = Math.max(progress.stars[numId] || 0, starsCount);
+                        if (numId >= (progress.unlockedLevel || 1) && (progress.unlockedLevel || 1) < 30) {
+                            progress.unlockedLevel = numId + 1;
+                        }
+                    }
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+                    localStorage.setItem("language_lab_pending_completion_level", String(levelIdParam));
+                    sessionStorage.setItem("language_lab_just_completed_level", String(levelIdParam));
+                    console.log('[Player] Progress saved to localStorage:', progress);
+                } catch (e) {
+                    console.error("Error saving local progress in player:", e);
+                }
+
+                if (window.electronAPI && typeof window.electronAPI.completeLevel === 'function') {
+                    window.electronAPI.completeLevel(levelIdParam, starsCount);
+                    console.log('[Player] Sent completeLevel IPC for level:', levelIdParam);
+                }
+            }
+
             function handleNextScreen() {
                 if (currentScreenIdx < screens.length - 1) {
                     setCurrentScreenIdx(currentScreenIdx + 1);
@@ -860,6 +911,7 @@
                 } else {
                     setIsCompleted(true);
                     setStars(3);
+                    saveAndSignalCompletion(3);
                     if (typeof confetti === 'function') {
                         confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
                     }
@@ -877,6 +929,9 @@
             }
 
             function handleExit() {
+                if (isCompleted) {
+                    saveAndSignalCompletion(stars || 3);
+                }
                 if (window.electronAPI && typeof window.electronAPI.closeEngine === 'function') {
                     window.electronAPI.closeEngine();
                 } else {
@@ -885,10 +940,8 @@
             }
 
             function handleSaveAndReturn() {
-                if (window.electronAPI && typeof window.electronAPI.completeLevel === 'function') {
-                    window.electronAPI.completeLevel(levelIdParam, 3);
-                }
-                setTimeout(() => handleExit(), 300);
+                saveAndSignalCompletion(stars || 3);
+                setTimeout(() => handleExit(), 200);
             }
 
             const lessonTitle = experienceData?.title || titleParam;
@@ -903,11 +956,11 @@
                             <button className="back-btn" onClick={handleExit}>
                                 <span>←</span> Back to Map
                             </button>
-                            <span className="level-pill">Level {levelIdParam}</span>
+                            <span className="level-pill">{isBossLevel ? '👑 BOSS' : `Level ${levelIdParam}`}</span>
                             <span className="grade-badge">{gradeDisplay}</span>
                             <div className="header-title-box">
                                 <h1 className="header-title">{lessonTitle}</h1>
-                                <span className="header-subtitle">CMS Package Player • Level {levelIdParam}</span>
+                                <span className="header-subtitle">{isBossLevel ? 'Zone Realm Boss Battle' : `CMS Package Player • Level ${levelIdParam}`}</span>
                             </div>
                         </div>
 
@@ -1236,7 +1289,7 @@
                                 /* Victory Mastery Screen */
                                 <div className="victory-container">
                                     <div className="victory-stars">★★★</div>
-                                    <h2 className="victory-title">The Lost Picnic Mastered!</h2>
+                                    <h2 className="victory-title">{lessonTitle || 'big house'} Mastered!</h2>
                                     <p className="victory-subtitle">
                                         Outstanding work, <strong>{studentName}</strong>! You have completed all 5 interactive activities in <strong>"{lessonTitle}"</strong> for <strong>{gradeDisplay}</strong>.
                                     </p>

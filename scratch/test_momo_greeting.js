@@ -47,6 +47,14 @@ rUpperArmEl.appendChild(rForearmEl);
 rForearmEl.appendChild(rHandEl);
 rArmEl.appendChild(rUpperArmEl);
 
+const lArmEl = new MockHierarchicalSVGElement('buddy-left-arm', bodyEl);
+const lUpperArmEl = new MockHierarchicalSVGElement('buddy-left-upper-arm', lArmEl);
+const lForearmEl = new MockHierarchicalSVGElement('buddy-left-forearm', lUpperArmEl);
+const lHandEl = new MockHierarchicalSVGElement('buddy-left-hand', lForearmEl);
+lUpperArmEl.appendChild(lForearmEl);
+lForearmEl.appendChild(lHandEl);
+lArmEl.appendChild(lUpperArmEl);
+
 const headEl = new MockHierarchicalSVGElement('buddy-head', rootSvg);
 const leftEyeEl = new MockHierarchicalSVGElement('buddy-left-eye', headEl);
 const rightEyeEl = new MockHierarchicalSVGElement('buddy-right-eye', headEl);
@@ -60,7 +68,11 @@ const elementsMap = {
     'buddy-right-arm': rArmEl,
     'buddy-right-upper-arm': rUpperArmEl,
     'buddy-right-forearm': rForearmEl,
-    'buddy-right-hand': rHandEl
+    'buddy-right-hand': rHandEl,
+    'buddy-left-arm': lArmEl,
+    'buddy-left-upper-arm': lUpperArmEl,
+    'buddy-left-forearm': lForearmEl,
+    'buddy-left-hand': lHandEl
 };
 
 const mockDoc = {
@@ -157,20 +169,20 @@ async function runAcceptanceTests() {
     console.log('✓ Exact speech text verified: "Hi, I am Momo, let\'s see today\'s adventure!"');
 
     // -------------------------------------------------------------------------
-    // TEST 4: Connected Hierarchical Hand & Arm Kinematics
+    // TEST 4: Connected Hierarchical Hand & Arm Kinematics (AI Buddy's Right Arm)
     // -------------------------------------------------------------------------
     testCount++;
-    console.log(`\n--- TEST ${testCount}: Connected Hierarchical Arm Movement ---`);
-    assert.strictEqual(rForearmEl.parent.id, 'buddy-right-upper-arm', 'Forearm child of Upper Arm');
-    assert.strictEqual(rHandEl.parent.id, 'buddy-right-forearm', 'Hand child of Forearm');
+    console.log(`\n--- TEST ${testCount}: Connected Hierarchical Arm Movement (AI Buddy's Right Arm / Screen-Left) ---`);
+    assert.strictEqual(lForearmEl.parent.id, 'buddy-left-upper-arm', 'Forearm child of Upper Arm');
+    assert.strictEqual(lHandEl.parent.id, 'buddy-left-forearm', 'Hand child of Forearm');
 
     // Verify zero drift after greeting return to idle
-    const upperArmState = rig.getPartState('rightUpperArm');
-    const forearmState = rig.getPartState('rightForearm');
-    const handState = rig.getPartState('rightHand');
-    assert.strictEqual(Math.round(upperArmState.rotation), 0, 'Upper arm returned to 0°');
-    assert.strictEqual(Math.round(forearmState.rotation), 0, 'Forearm returned to 0°');
-    assert.strictEqual(Math.round(handState.rotation), 0, 'Hand returned to 0°');
+    const upperArmState = rig.getPartState('leftUpperArm');
+    const forearmState = rig.getPartState('leftForearm');
+    const handState = rig.getPartState('leftHand');
+    assert.strictEqual(Math.round(upperArmState.rotation), 0, 'Left Upper arm returned to 0°');
+    assert.strictEqual(Math.round(forearmState.rotation), 0, 'Left Forearm returned to 0°');
+    assert.strictEqual(Math.round(handState.rotation), 0, 'Left Hand returned to 0°');
     console.log('✓ Hierarchical arm chain verified with zero transform drift.');
 
     // -------------------------------------------------------------------------

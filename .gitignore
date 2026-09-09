@@ -6,3 +6,4 @@ node_modules/
 data/temp_pkgs/
 *.zip
 *.mp4
+language-lab-engine/

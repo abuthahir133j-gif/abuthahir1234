@@ -556,7 +556,7 @@ function normalizeGrade(gradeStr) {
 
 function getAllApprovedLessons() {
     const database = getDb();
-    const stmt = database.prepare(`SELECT * FROM lessons WHERE UPPER(status) IN ('APPROVED', 'PUBLISHED') ORDER BY CASE WHEN title LIKE '%The Lost Picnic%' OR lesson_id = '49' THEN 0 ELSE 1 END, rowid ASC`);
+    const stmt = database.prepare(`SELECT * FROM lessons WHERE UPPER(status) IN ('APPROVED', 'PUBLISHED') ORDER BY CASE WHEN lesson_id IN ('44', '117', '49') OR title LIKE '%big house%' OR title LIKE '%The Lost Picnic%' THEN 0 ELSE 1 END, rowid ASC`);
     return stmt.all();
 }
 
@@ -602,14 +602,14 @@ function getLessonsForGrade(grade) {
     });
 
     const resultList = matched.length > 0 ? matched : all;
-    // Always guarantee 'The Lost Picnic' is Level 1 at index 0
-    const picnicIdx = resultList.findIndex(l => (l.title && l.title.includes('The Lost Picnic')) || l.lesson_id === '49');
-    if (picnicIdx > 0) {
-        const [picnic] = resultList.splice(picnicIdx, 1);
-        resultList.unshift(picnic);
-    } else if (picnicIdx === -1) {
-        const picnic = all.find(l => (l.title && l.title.includes('The Lost Picnic')) || l.lesson_id === '49');
-        if (picnic) resultList.unshift(picnic);
+    // Always guarantee Package ('big house' / 'big_house_v4.elab' / '44') is at index 0 (Level 1)
+    const houseIdx = resultList.findIndex(l => (l.title && (l.title.toLowerCase().includes('big house') || l.title.includes('The Lost Picnic'))) || ['44', '117', '49'].includes(String(l.lesson_id)));
+    if (houseIdx > 0) {
+        const [house] = resultList.splice(houseIdx, 1);
+        resultList.unshift(house);
+    } else if (houseIdx === -1) {
+        const house = all.find(l => (l.title && (l.title.toLowerCase().includes('big house') || l.title.includes('The Lost Picnic'))) || ['44', '117', '49'].includes(String(l.lesson_id)));
+        if (house) resultList.unshift(house);
     }
 
     return resultList;

@@ -60,17 +60,36 @@
     height: 100%;
     cursor: pointer;
     transform-origin: center bottom;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     filter: drop-shadow(0 12px 24px rgba(11, 26, 48, 0.25));
 }
 
-.buddy-character-wrap:hover {
-    transform: scale(1.08) translateY(-4px);
-    filter: drop-shadow(0 16px 32px rgba(0, 173, 238, 0.35));
+.buddy-character-wrap svg,
+.buddy-svg-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    display: block;
+    object-fit: contain;
+    overflow: visible;
 }
 
-.buddy-character-wrap:active {
-    transform: scale(0.96);
+.buddy-character-wrap:hover {
+    filter: drop-shadow(0 16px 32px rgba(0, 173, 238, 0.45));
+}
+
+.buddy-character-wrap.orbit-controlled {
+    transform-style: preserve-3d;
+    cursor: grab;
+    transition: filter 0.25s ease;
+}
+
+.buddy-character-wrap.orbit-controlled:active {
+    cursor: grabbing;
 }
 
 /* Base Rigged Joints (Hierarchical Coordinate Space: 672 x 1024) */
@@ -195,15 +214,18 @@
     animation: buddyFloat 3.2s ease-in-out infinite;
 }
 
-.anim-idle .buddy-svg-canvas #head {
+.anim-idle .buddy-svg-canvas #head,
+.anim-idle .buddy-svg-canvas #buddy-head {
     animation: buddyHeadIdle 4.8s ease-in-out infinite alternate;
 }
 
-.anim-idle .buddy-svg-canvas #left-arm {
+.anim-idle .buddy-svg-canvas #left-arm,
+.anim-idle .buddy-svg-canvas #buddy-left-arm {
     animation: buddyLeftArmIdle 3.2s ease-in-out infinite alternate;
 }
 
-.anim-idle .buddy-svg-canvas #right-arm {
+.anim-idle .buddy-svg-canvas #right-arm,
+.anim-idle .buddy-svg-canvas #buddy-right-arm {
     animation: buddyRightArmIdle 3.2s ease-in-out infinite alternate;
 }
 
@@ -236,11 +258,13 @@
     animation: buddyWaveBody 0.6s ease-in-out infinite alternate;
 }
 
-.anim-wave .buddy-svg-canvas #head {
+.anim-wave .buddy-svg-canvas #head,
+.anim-wave .buddy-svg-canvas #buddy-head {
     transform: rotate(6deg) translateY(-2px);
 }
 
-.anim-wave .buddy-svg-canvas #right-arm {
+.anim-wave .buddy-svg-canvas #right-arm,
+.anim-wave .buddy-svg-canvas #buddy-right-arm {
     animation: buddyArmWave 0.35s ease-in-out infinite alternate;
     transform-origin: 365px 295px;
 }
@@ -264,15 +288,18 @@
     animation: buddyHappyBounce 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite alternate;
 }
 
-.anim-happy .buddy-svg-canvas #head {
+.anim-happy .buddy-svg-canvas #head,
+.anim-happy .buddy-svg-canvas #buddy-head {
     animation: buddyHappyHead 0.45s ease-in-out infinite alternate;
 }
 
-.anim-happy .buddy-svg-canvas #left-arm {
+.anim-happy .buddy-svg-canvas #left-arm,
+.anim-happy .buddy-svg-canvas #buddy-left-arm {
     transform: translateY(-20px) rotate(-30deg);
 }
 
-.anim-happy .buddy-svg-canvas #right-arm {
+.anim-happy .buddy-svg-canvas #right-arm,
+.anim-happy .buddy-svg-canvas #buddy-right-arm {
     transform: translateY(-20px) rotate(30deg);
 }
 
@@ -291,15 +318,18 @@
     animation: buddySadDroop 3s ease-in-out infinite;
 }
 
-.anim-sad .buddy-svg-canvas #head {
+.anim-sad .buddy-svg-canvas #head,
+.anim-sad .buddy-svg-canvas #buddy-head {
     transform: translateY(12px) rotate(3deg);
 }
 
-.anim-sad .buddy-svg-canvas #left-arm {
+.anim-sad .buddy-svg-canvas #left-arm,
+.anim-sad .buddy-svg-canvas #buddy-left-arm {
     transform: translateY(14px) rotate(8deg);
 }
 
-.anim-sad .buddy-svg-canvas #right-arm {
+.anim-sad .buddy-svg-canvas #right-arm,
+.anim-sad .buddy-svg-canvas #buddy-right-arm {
     transform: translateY(14px) rotate(-8deg);
 }
 
@@ -313,15 +343,18 @@
     animation: buddySurpriseJump 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
 }
 
-.anim-surprised .buddy-svg-canvas #head {
+.anim-surprised .buddy-svg-canvas #head,
+.anim-surprised .buddy-svg-canvas #buddy-head {
     transform: translateY(-10px) scale(1.06);
 }
 
-.anim-surprised .buddy-svg-canvas #left-arm {
+.anim-surprised .buddy-svg-canvas #left-arm,
+.anim-surprised .buddy-svg-canvas #buddy-left-arm {
     transform: translate(-15px, -15px) rotate(-45deg);
 }
 
-.anim-surprised .buddy-svg-canvas #right-arm {
+.anim-surprised .buddy-svg-canvas #right-arm,
+.anim-surprised .buddy-svg-canvas #buddy-right-arm {
     transform: translate(15px, -15px) rotate(45deg);
 }
 
@@ -335,11 +368,13 @@
     animation: buddyThinkingFloat 2.6s ease-in-out infinite;
 }
 
-.anim-thinking .buddy-svg-canvas #head {
+.anim-thinking .buddy-svg-canvas #head,
+.anim-thinking .buddy-svg-canvas #buddy-head {
     transform: rotate(-12deg) translateY(-4px);
 }
 
-.anim-thinking .buddy-svg-canvas #right-arm {
+.anim-thinking .buddy-svg-canvas #right-arm,
+.anim-thinking .buddy-svg-canvas #buddy-right-arm {
     transform: translate(-30px, -55px) rotate(-75deg);
 }
 
@@ -353,11 +388,13 @@
     animation: buddyExcitedWiggle 0.22s ease-in-out infinite alternate;
 }
 
-.anim-excited .buddy-svg-canvas #left-arm {
+.anim-excited .buddy-svg-canvas #left-arm,
+.anim-excited .buddy-svg-canvas #buddy-left-arm {
     transform: translateY(-35px) rotate(-55deg);
 }
 
-.anim-excited .buddy-svg-canvas #right-arm {
+.anim-excited .buddy-svg-canvas #right-arm,
+.anim-excited .buddy-svg-canvas #buddy-right-arm {
     transform: translateY(-35px) rotate(55deg);
 }
 
@@ -371,15 +408,18 @@
     animation: buddyCelebrateJump 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
 }
 
-.anim-celebrate .buddy-svg-canvas #head {
+.anim-celebrate .buddy-svg-canvas #head,
+.anim-celebrate .buddy-svg-canvas #buddy-head {
     animation: buddyCelebrateSpin 1.6s ease-in-out infinite;
 }
 
-.anim-celebrate .buddy-svg-canvas #left-arm {
+.anim-celebrate .buddy-svg-canvas #left-arm,
+.anim-celebrate .buddy-svg-canvas #buddy-left-arm {
     transform: translate(-10px, -50px) rotate(-70deg);
 }
 
-.anim-celebrate .buddy-svg-canvas #right-arm {
+.anim-celebrate .buddy-svg-canvas #right-arm,
+.anim-celebrate .buddy-svg-canvas #buddy-right-arm {
     transform: translate(10px, -50px) rotate(70deg);
 }
 
@@ -400,22 +440,30 @@
 }
 
 .anim-talking .buddy-svg-canvas #head,
-.anim-speaking .buddy-svg-canvas #head {
+.anim-speaking .buddy-svg-canvas #head,
+.anim-talking .buddy-svg-canvas #buddy-head,
+.anim-speaking .buddy-svg-canvas #buddy-head {
     animation: buddyTalkingHead 0.4s ease-in-out infinite alternate;
 }
 
 .anim-talking .buddy-svg-canvas #face-features,
-.anim-speaking .buddy-svg-canvas #face-features {
+.anim-speaking .buddy-svg-canvas #face-features,
+.anim-talking .buddy-svg-canvas #buddy-face-features,
+.anim-speaking .buddy-svg-canvas #buddy-face-features {
     animation: buddyMouthFlutter 0.28s ease-in-out infinite alternate;
 }
 
 .anim-talking .buddy-svg-canvas #left-arm,
-.anim-speaking .buddy-svg-canvas #left-arm {
+.anim-speaking .buddy-svg-canvas #left-arm,
+.anim-talking .buddy-svg-canvas #buddy-left-arm,
+.anim-speaking .buddy-svg-canvas #buddy-left-arm {
     animation: buddyTalkingLeftArm 0.7s ease-in-out infinite alternate;
 }
 
 .anim-talking .buddy-svg-canvas #right-arm,
-.anim-speaking .buddy-svg-canvas #right-arm {
+.anim-speaking .buddy-svg-canvas #right-arm,
+.anim-talking .buddy-svg-canvas #buddy-right-arm,
+.anim-speaking .buddy-svg-canvas #buddy-right-arm {
     animation: buddyTalkingRightArm 0.7s ease-in-out infinite alternate;
 }
 
@@ -917,4 +965,270 @@
 #buddy-mouth {
     transform-origin: 336px 375px;
 }
+
+/* ==========================================================================
+   10. PNg-Exclusive Hand-Landing Bird Interaction System
+   ========================================================================== */
+
+/* The Interaction Bird Container (Positioned within .buddy-character-wrap 150x150) */
+.png-interaction-bird {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 42px;
+    height: 36px;
+    z-index: 10005;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.35));
+    will-change: transform, opacity;
+}
+
+.png-interaction-bird svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* --- Wing States: Flight Flapping vs Perched Folded --- */
+.png-interaction-bird .bird-wing-flight {
+    display: block;
+    transform-origin: 27px 28px;
+    animation: birdWingFlap 0.16s ease-in-out infinite alternate;
+}
+
+.png-interaction-bird .bird-wing-perched {
+    display: none;
+}
+
+@keyframes birdWingFlap {
+    0% {
+        transform: rotate(-36deg) scaleY(0.68);
+    }
+    100% {
+        transform: rotate(32deg) scaleY(1.18);
+    }
+}
+
+/* Perched State: Sits Calmly on PNg's Hand */
+.png-interaction-bird.bird-perched-on-hand {
+    transform: translate3d(85px, 36px, 0);
+    animation: birdBreathingPerch 2s ease-in-out infinite alternate;
+}
+
+.png-interaction-bird.bird-perched-on-hand .bird-wing-flight {
+    display: none !important;
+}
+
+.png-interaction-bird.bird-perched-on-hand .bird-wing-perched {
+    display: block !important;
+}
+
+@keyframes birdBreathingPerch {
+    0% {
+        transform: translate3d(85px, 36px, 0);
+    }
+    100% {
+        transform: translate3d(85px, 34.5px, 0);
+    }
+}
+
+/* Landing Squash/Balance Hop */
+.png-interaction-bird.bird-landing-hop {
+    animation: birdLandingHopKeyframes 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+@keyframes birdLandingHopKeyframes {
+    0% {
+        transform: translate3d(85px, 30px, 0) scale(1.05);
+    }
+    50% {
+        transform: translate3d(85px, 38px, 0) scale(0.95, 1.05);
+    }
+    100% {
+        transform: translate3d(85px, 36px, 0) scale(1);
+    }
+}
+
+/* Chirp / Pet Reaction on Hand */
+.png-interaction-bird.bird-chirp-react {
+    animation: birdChirpReactKeyframes 0.6s ease-in-out infinite alternate !important;
+}
+
+@keyframes birdChirpReactKeyframes {
+    0% {
+        transform: translate3d(85px, 36px, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(85px, 33px, 0) rotate(-5deg) scale(1.04);
+    }
+    100% {
+        transform: translate3d(85px, 35px, 0) rotate(3deg) scale(1.02);
+    }
+}
+
+/* --- Entrance 1: High Curve from Map Sky -> Loops Around PNg -> Descends onto Hand (3.4s) --- */
+.png-interaction-bird.flight-entrance-curve-right {
+    animation: birdEntranceCurveRight 3.4s cubic-bezier(0.25, 0.9, 0.4, 1) forwards;
+}
+
+@keyframes birdEntranceCurveRight {
+    0% {
+        opacity: 0;
+        transform: translate3d(-340px, -200px, 0) scale(0.55) rotate(18deg);
+    }
+    22% {
+        opacity: 1;
+        transform: translate3d(-180px, -90px, 0) scale(0.85) rotate(10deg);
+    }
+    45% {
+        opacity: 1;
+        transform: translate3d(-20px, -20px, 0) scale(0.95) rotate(-8deg);
+    }
+    65% {
+        opacity: 1;
+        transform: translate3d(25px, 20px, 0) scale(1) rotate(6deg);
+    }
+    80% {
+        opacity: 1;
+        transform: translate3d(60px, 46px, 0) scale(1) rotate(-6deg);
+    }
+    92% {
+        opacity: 1;
+        transform: translate3d(81px, 39px, 0) scale(1) rotate(-2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(85px, 36px, 0) scale(1) rotate(0deg);
+    }
+}
+
+/* --- Entrance 2: Gliding from Upper Forest Canopy -> Circles PNg -> Descends onto Hand (3.4s) --- */
+.png-interaction-bird.flight-entrance-curve-left {
+    animation: birdEntranceCurveLeft 3.4s cubic-bezier(0.25, 0.9, 0.4, 1) forwards;
+}
+
+@keyframes birdEntranceCurveLeft {
+    0% {
+        opacity: 0;
+        transform: translate3d(-260px, -240px, 0) scale(0.55) rotate(22deg);
+    }
+    22% {
+        opacity: 1;
+        transform: translate3d(-120px, -110px, 0) scale(0.85) rotate(12deg);
+    }
+    48% {
+        opacity: 1;
+        transform: translate3d(15px, -30px, 0) scale(0.95) rotate(-10deg);
+    }
+    68% {
+        opacity: 1;
+        transform: translate3d(110px, 15px, 0) scale(1) rotate(8deg);
+    }
+    84% {
+        opacity: 1;
+        transform: translate3d(98px, 48px, 0) scale(1) rotate(-4deg);
+    }
+    94% {
+        opacity: 1;
+        transform: translate3d(88px, 40px, 0) scale(1) rotate(2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(85px, 36px, 0) scale(1) rotate(0deg);
+    }
+}
+
+/* --- Takeoff Departure: Takes Off From Hand -> Soars into Distance (1.8s) --- */
+.png-interaction-bird.flight-takeoff-departure {
+    animation: birdTakeoffDepartureKeyframes 1.8s cubic-bezier(0.3, 0.1, 0.2, 1) forwards;
+}
+
+@keyframes birdTakeoffDepartureKeyframes {
+    0% {
+        opacity: 1;
+        transform: translate3d(85px, 36px, 0) scale(1) rotate(0deg);
+    }
+    14% {
+        opacity: 1;
+        transform: translate3d(83px, 39px, 0) scale(0.95, 1.05) rotate(8deg);
+    }
+    30% {
+        opacity: 1;
+        transform: translate3d(55px, 12px, 0) scale(1.02) rotate(18deg);
+    }
+    58% {
+        opacity: 1;
+        transform: translate3d(-70px, -60px, 0) scale(0.9) rotate(24deg);
+    }
+    80% {
+        opacity: 0.85;
+        transform: translate3d(-200px, -140px, 0) scale(0.68) rotate(30deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(-340px, -220px, 0) scale(0.35) rotate(35deg);
+    }
+}
+
+/* ==========================================================================
+   11. PNg Interactive Character Reactive Micro-Animations
+   ========================================================================== */
+
+.buddy-character-wrap.png-bird-system-enabled {
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* PNg Extends Right Hand as a Sturdy, Gentle Perch */
+.buddy-character-wrap.png-perch-ready .buddy-svg-canvas #buddy-right-arm {
+    transition: transform 0.7s cubic-bezier(0.34, 1.4, 0.64, 1);
+    transform: translate(12px, -22px) rotate(-36deg);
+}
+
+/* PNg Notices the Bird on its Hand: Head turns and tilts toward hand, eyes gaze down */
+.buddy-character-wrap.png-notice-bird .buddy-svg-canvas #buddy-head {
+    transition: transform 0.6s cubic-bezier(0.34, 1.3, 0.64, 1);
+    transform: rotate(10deg) translate(7px, 2px);
+}
+
+/* PNg Gently Interacts/Touches Bird: Subtle Playful Finger Movement & Happy Bounce */
+.buddy-character-wrap.png-interact-bird {
+    animation: pngFriendlyInteractBounce 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) 2 alternate;
+}
+
+@keyframes pngFriendlyInteractBounce {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        transform: translateY(-5px) scale(1.02);
+    }
+}
+
+.buddy-character-wrap.png-interact-bird .buddy-svg-canvas #buddy-right-arm {
+    animation: pngFingerPetMicroMove 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes pngFingerPetMicroMove {
+    0% {
+        transform: translate(12px, -22px) rotate(-36deg);
+    }
+    100% {
+        transform: translate(14px, -24px) rotate(-32deg);
+    }
+}
+
+/* PNg Watches Bird Take Off & Fly Away */
+.buddy-character-wrap.png-watch-departure .buddy-svg-canvas #buddy-head {
+    transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: rotate(12deg) translate(5px, -4px);
+}
+
+/* Smooth Return to Neutral Idle */
+.buddy-character-wrap.png-idle-restore .buddy-svg-canvas #buddy-head,
+.buddy-character-wrap.png-idle-restore .buddy-svg-canvas #buddy-right-arm {
+    transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
 

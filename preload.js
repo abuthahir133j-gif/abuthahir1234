@@ -35,5 +35,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
     // CMS base URL retrieval
     getCmsBaseUrl: () => ipcRenderer.invoke("get-cms-base-url"),
     // Login User bridge helper
-    loginUser: (credentials) => ipcRenderer.invoke("login-user", credentials)
+    loginUser: (credentials) => ipcRenderer.invoke("login-user", credentials),
+    // Support Email delivery & mailto bridge
+    sendSupportEmail: (payload) => ipcRenderer.invoke("send-support-email", payload),
+    openExternal: (url) => ipcRenderer.invoke("open-external", url)
 });

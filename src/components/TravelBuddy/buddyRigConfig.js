@@ -9,11 +9,11 @@
  * - Default rest poses / transform limits
  */
 (function (global) {
-    // Single Source of Truth for Buddy Asset (Locked)
+    // Central Buddy Asset Configuration (Supports Multiple Seasonal Rigs)
     const buddyCharacterConfig = {
-        asset: 'AI/png.svg',
-        allowCharacterSwap: false,
-        locked: true
+        asset: 'AI/PNg.svg',
+        allowCharacterSwap: true,
+        locked: false
     };
 
     const BUDDY_RIG_CONFIG = {
