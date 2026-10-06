@@ -1,0 +1,443 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "34",
+  "title": "Things I Like",
+  "description": "Talk about favourite food, games, colours and activities; ask others about their likes and express personal preferences.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "80",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "87",
+          "title": "What Do They Like?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "What Do They Like?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788776523292-o1vn9dfz9",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "You are ordering food at a restaurant",
+                  "userRole": "Stude",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "What do you like, Sam?",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "I like football. I also like blue. What about you?",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "I like drawing. My favourite colour is pink.",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "Do you like ice cream?"
+                    },
+                    {
+                      "prompt": "Yes! I like ice cream.",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    }
+                  ],
+                  "npcCharacter": "Mia"
+                }
+              },
+              {
+                "id": "block-1788776653796-x3n3pge1m",
+                "type": "quiz",
+                "styles": {
+                  "top": "394.33333333333337px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Blue"
+                        },
+                        {
+                          "text": "Pink"
+                        },
+                        {
+                          "text": "Green"
+                        },
+                        {
+                          "text": "Red"
+                        }
+                      ],
+                      "question": "What is Mia's favourite colour?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "81",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "88",
+          "title": "Ask Your Friend",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Ask Your Friend",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788776726035-jrd2ezezs",
+                "type": "hotspot_explorer",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "hotspots": [
+                    {
+                      "x": 211,
+                      "y": 94,
+                      "id": "hotspot_1",
+                      "hint": "Click on the highlighted object",
+                      "info": "Exploration description here...",
+                      "name": "Target 1",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 198,
+                      "y": 191,
+                      "id": "hotspot_1788776741336",
+                      "hint": "",
+                      "info": "",
+                      "name": "Target 2",
+                      "width": 80,
+                      "height": 80
+                    }
+                  ],
+                  "imageUrl": "/media/media_library/5dbac5588aad4281b4eb83304c61e82d.jpg"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/5dbac5588aad4281b4eb83304c61e82d.jpg"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 131,
+              "type": "IMAGE",
+              "url": "assets/images/5dbac5588aad4281b4eb83304c61e82d.jpg",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "82",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "89",
+          "title": "My Likes",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "My Likes",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788776771194-o3cxc8svy",
+                "slot": "left",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "",
+                      "passage": "My name is Arjun.\nI like mangoes.\nI like playing football.\nMy favourite colour is green.\nI like drawing with my friends.",
+                      "question": ""
+                    }
+                  ],
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1788776781500-wwx0x4aan",
+                "slot": "left",
+                "type": "match",
+                "styles": {
+                  "top": "224.33333333333334px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "Gamme",
+                    "colour",
+                    "Activity"
+                  ],
+                  "rightItems": [
+                    " Football",
+                    "Green",
+                    "Drawing"
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "83",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "90",
+          "title": "Things I Like",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Things I Like",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788776905870-mi07b65l1",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "prompt": "Write about three things you like",
+                  "minWords": 25,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

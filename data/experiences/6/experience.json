@@ -1,0 +1,320 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "9",
+  "title": "Writing",
+  "description": "",
+  "language": "English",
+  "grade": "Grade 7",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 75,
+  "activities": [
+    {
+      "id": "14",
+      "title": "Writing",
+      "description": "To improve the writing",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "15",
+          "title": "Writing challenge1",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "To improve the writing",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Writing challenge1",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1787215209610-umrod7zpx",
+                "slot": "left",
+                "type": "heading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "color": "#1F2937",
+                  "fontSize": "32px",
+                  "alignment": "Center",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Bold"
+                },
+                "content": {
+                  "tag": "H2",
+                  "text": "Writing"
+                }
+              },
+              {
+                "id": "block-1787215230827-s7ke2xr22",
+                "slot": "left",
+                "type": "text",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px",
+                  "color": "#334155",
+                  "fontSize": "16px",
+                  "alignment": "Left",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "To improve the writing"
+                }
+              },
+              {
+                "id": "block-1787215248818-0ov5yge0x",
+                "slot": "right",
+                "type": "image",
+                "styles": {
+                  "top": "637px",
+                  "left": "20px",
+                  "minHeight": "550px"
+                },
+                "content": {
+                  "url": "/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                  "caption": "",
+                  "media_id": 32,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1787215293021-8k6vzlcn1",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1297px",
+                  "left": "20px",
+                  "minHeight": "60px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215306886-9pb9d7r8a",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1249px",
+                  "left": "20px",
+                  "minHeight": "60px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215319021-k0y5di1r9",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1325px",
+                  "left": "20px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215320789-7p42d0uf4",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1441px",
+                  "left": "20px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215350813-di14liwc9",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1557px",
+                  "left": "20px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215387852-o6c2x3uju",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1673px",
+                  "left": "20px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215394534-2c7g7cgkb",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1789px",
+                  "left": "20px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215404293-r676o4yfy",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "1905px",
+                  "left": "20px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215415557-3bu0z2qu8",
+                "slot": "left",
+                "type": "http://187.52.116.48/media/media_library/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+                "styles": {
+                  "top": "2021px",
+                  "left": "20px"
+                },
+                "content": {}
+              },
+              {
+                "id": "block-1787215421691-f2i8rgtt3",
+                "slot": "right",
+                "type": "audio",
+                "styles": {
+                  "top": "2137px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "",
+                  "title": "Audio Clip"
+                }
+              },
+              {
+                "id": "block-1787215423650-8wub1x7hq",
+                "slot": "right",
+                "type": "video",
+                "styles": {
+                  "top": "2253px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/7826363b1bc64a989bd56b434d667a19.mp4",
+                  "media_id": 33,
+                  "media_type": "VIDEO"
+                }
+              },
+              {
+                "id": "block-1787215456226-hx77d3ny5",
+                "slot": "left",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "2951px",
+                  "left": "20px",
+                  "minHeight": "60px"
+                },
+                "content": {
+                  "prompt": "Write about your favorite hobby.",
+                  "minWords": 10,
+                  "placeholder": "Start writing here..."
+                }
+              },
+              {
+                "id": "block-1787215460418-wqed3vj2k",
+                "slot": "left",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "2728px",
+                  "left": "20px",
+                  "minHeight": "60px"
+                },
+                "content": {
+                  "prompt": "Write about your favorite hobby.",
+                  "minWords": 10,
+                  "placeholder": "Start writing here..."
+                }
+              },
+              {
+                "id": "block-1787215474210-2go2e0izz",
+                "slot": "left",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "2939px",
+                  "left": "20px",
+                  "minHeight": "60px"
+                },
+                "content": {
+                  "prompt": "Write about your favorite hobby.",
+                  "minWords": 10,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+            "video": "assets/video/7826363b1bc64a989bd56b434d667a19.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 32,
+              "type": "IMAGE",
+              "url": "assets/images/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+              "missing": false
+            },
+            {
+              "media_id": 33,
+              "type": "VIDEO",
+              "url": "assets/video/7826363b1bc64a989bd56b434d667a19.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 32,
+              "type": "IMAGE",
+              "url": "assets/images/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+              "missing": false
+            },
+            {
+              "media_id": 33,
+              "type": "VIDEO",
+              "url": "assets/video/7826363b1bc64a989bd56b434d667a19.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 32,
+              "type": "IMAGE",
+              "url": "assets/images/6ac9082d8cfa4596b00763e61e03ed6f.jpeg",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

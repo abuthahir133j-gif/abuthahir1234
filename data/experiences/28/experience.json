@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "57",
+  "title": "RHYTHM, RHYME & ENGLISH TIME!",
+  "description": "listen to and understand a short rhyme\nidentify rhyming words\nnotice repeated sounds\nsay words with clearer pronunciation",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "156",
+      "title": "Writing",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "163",
+          "title": "Make a Rhyme",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Make a Rhyme",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789020795624-k3mw0jy61",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "sun [fun]"
+                    },
+                    {
+                      "id": "item-1789020809926",
+                      "text": "cat [hat]"
+                    },
+                    {
+                      "id": "item-1789020819609",
+                      "text": "play [day]"
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              },
+              {
+                "id": "block-1789020841487-ncwscqu4d",
+                "type": "input",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "label": "Make Your Own Rhyme",
+                  "prompt": "Write two short sentences that end with rhyming words.",
+                  "question": "Make Your Own Rhyme",
+                  "placeholder": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "157",
+      "title": "Reading",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "164",
+          "title": "Rhyme Time",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Rhyme Time",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789020881626-b34xo40jj",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "",
+                      "passage": "A Fun Day\n\nI run in the sun.\n\nI have lots of fun.\n\nI play every day.\n\nI laugh and say, “Hooray!”",
+                      "question": ""
+                    }
+                  ],
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1789020905625-0ckgg5atr",
+                "type": "match",
+                "styles": {
+                  "top": "277px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "run",
+                    "day"
+                  ],
+                  "rightItems": [
+                    "fun",
+                    "say"
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

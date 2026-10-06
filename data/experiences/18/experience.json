@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "33",
+  "title": "This Is My Family",
+  "description": "Name and talk about family members, understand simple family descriptions, and create a short introduction to one's family.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "76",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "83",
+          "title": "Meet My Family",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Write about them",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Meet My Family",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788775840616-wqjqr1flh",
+                "slot": "right",
+                "type": "video",
+                "styles": {
+                  "top": "13.333333333333314px",
+                  "left": "28.66666666666663px",
+                  "minHeight": "140px",
+                  "blockWidth": "713.3333333333334px"
+                },
+                "content": {
+                  "url": "/media/media_library/e4d199a0a0034862ac2ddafd3aa90d6e.mp4",
+                  "media_id": 130,
+                  "media_type": "VIDEO"
+                }
+              },
+              {
+                "id": "block-1788776092625-ixf3bbmdl",
+                "slot": "left",
+                "type": "text",
+                "styles": {
+                  "top": "452.33333333333337px",
+                  "left": "0px",
+                  "color": "#334155",
+                  "fontSize": "16px",
+                  "alignment": "Left",
+                  "minHeight": "149px",
+                  "blockWidth": "934px",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Write about them"
+                }
+              }
+            ],
+            "media_id": 130,
+            "alignment": "Center",
+            "media_url": "/media/media_library/e4d199a0a0034862ac2ddafd3aa90d6e.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "video": "assets/video/e4d199a0a0034862ac2ddafd3aa90d6e.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 130,
+              "type": "VIDEO",
+              "url": "assets/video/e4d199a0a0034862ac2ddafd3aa90d6e.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 130,
+              "type": "VIDEO",
+              "url": "assets/video/e4d199a0a0034862ac2ddafd3aa90d6e.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "77",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "84",
+          "title": "Introduce Your Family",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Introduce Your Family",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788776189251-s4vyay50v",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "105px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "INtrouduce ur Family ."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "78",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "85",
+          "title": "Riya's Family",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Riya's Family",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788776270376-yk15710v1",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "",
+                      "passage": "This is Riya's family.\nThis is her mother.\nThis is her father.\nThis is her brother.\nThey are a happy family.",
+                      "question": ""
+                    }
+                  ],
+                  "question": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "79",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 4,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "86",
+          "title": "My Family",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "My Family",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788776323699-1r61vf8ib",
+                "type": "sequence",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    "MY name is miya",
+                    "This  is  my mother.",
+                    "byeee"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

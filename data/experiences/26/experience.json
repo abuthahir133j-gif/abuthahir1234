@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "59",
+  "title": "MY LITTLE STORY",
+  "description": "listen to a short personal story\nidentify the main events\nunderstand events in sequence\nuse picture clues to build a story",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "160",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "167",
+          "title": "A Special Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "A Special Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789022233502-95o95uh2y",
+                "type": "video",
+                "styles": {
+                  "top": "18px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/9f707a76a9674657aab579e6a81aea8e.mp4",
+                  "media_id": 179,
+                  "media_type": "VIDEO"
+                }
+              },
+              {
+                "id": "block-1789022291970-arbq2xam8",
+                "type": "quiz",
+                "styles": {
+                  "top": "598px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Ate lunch"
+                        },
+                        {
+                          "text": "Flew a kite"
+                        },
+                        {
+                          "text": "Went to school"
+                        }
+                      ],
+                      "question": "What did the child do finally?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 179,
+            "alignment": "Center",
+            "media_url": "/media/media_library/9f707a76a9674657aab579e6a81aea8e.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "video": "assets/video/9f707a76a9674657aab579e6a81aea8e.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 179,
+              "type": "VIDEO",
+              "url": "assets/video/9f707a76a9674657aab579e6a81aea8e.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 179,
+              "type": "VIDEO",
+              "url": "assets/video/9f707a76a9674657aab579e6a81aea8e.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "161",
+      "title": "Writing",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "168",
+          "title": "Tell My Little Story",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Tell My Little Story",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789022359471-botlenxsy",
+                "type": "sequence",
+                "styles": {
+                  "top": "793.3333333333334px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    "Get ready",
+                    "Go to park",
+                    "Have picnic",
+                    "Play",
+                    "Go home"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              },
+              {
+                "id": "block-1789022521214-j1ywu188y",
+                "type": "image",
+                "styles": {
+                  "top": "405.66666666666663px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/1adb29bd34bb497ab655d2adf32bea10.png",
+                  "caption": "",
+                  "media_id": 180,
+                  "media_type": "IMAGE"
+                }
+              }
+            ],
+            "media_id": 180,
+            "alignment": "Center",
+            "media_url": "/media/media_library/1adb29bd34bb497ab655d2adf32bea10.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/1adb29bd34bb497ab655d2adf32bea10.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 180,
+              "type": "IMAGE",
+              "url": "assets/images/1adb29bd34bb497ab655d2adf32bea10.png",
+              "missing": false
+            },
+            {
+              "media_id": 180,
+              "type": "IMAGE",
+              "url": "assets/images/1adb29bd34bb497ab655d2adf32bea10.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

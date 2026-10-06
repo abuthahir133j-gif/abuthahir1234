@@ -1,0 +1,116 @@
+{
+  "package_name": "hello-this-is-me",
+  "experience_id": 24,
+  "experience_title": "Hello! This Is Me...",
+  "version": "233",
+  "build_number": 2,
+  "created_at": "2026-09-18T11:04:46.940857+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 49976,
+      "checksum": "b5025b411015f51ca36a0d9320258615cf96299dc7b06ab0be20b03378e00070"
+    },
+    {
+      "path": "metadata.json",
+      "size": 243,
+      "checksum": "23d528037653949156494efc8c24b68d818b029d0b2e26b646a3e052d5ac0a14"
+    },
+    {
+      "path": "assets/audio/761fc128998e4aedabae295f6fa3bdea.mp3",
+      "size": 37963,
+      "checksum": "a006fae3393bbd20a3976d2158c1a10bcfe1ac1c90013d209eaa2a986024f530"
+    },
+    {
+      "path": "assets/video/dd84d63344584451b53384f04c237b53.mp4",
+      "size": 37807361,
+      "checksum": "e845818dc8a9113653f06120d0eb4389687ffd3a994395f661075e7c47f1656a"
+    },
+    {
+      "path": "assets/images/0c197647b4da48e8943763d60595d1ae.png",
+      "size": 1798818,
+      "checksum": "576bfd48a19984721a4e237d51e4869282d11c1a6927cc0764104730272d0d8c"
+    },
+    {
+      "path": "assets/images/43d41f32ac704680b8b6ae5256ab4367.png",
+      "size": 2317368,
+      "checksum": "d275f515b9b83b9c987d197770095672d4a53a8a69899a3d3954736c7148b478"
+    },
+    {
+      "path": "assets/images/74a6848577be44029e60c66b1fdd9b2c.png",
+      "size": 1468016,
+      "checksum": "35d1d6f8d4123942d5fd17f96b9e31fa43d5fe7914d6ee1603da2a48c1862e28"
+    },
+    {
+      "path": "assets/audio/ddabaf9181b042068ad4967c22ee10ac.mp3",
+      "size": 37963,
+      "checksum": "a006fae3393bbd20a3976d2158c1a10bcfe1ac1c90013d209eaa2a986024f530"
+    },
+    {
+      "path": "assets/audio/5b366b8600ac46179c0e3e962ccab3a6.mp3",
+      "size": 35038,
+      "checksum": "bf55c6b19aa4b13c39cad27c979483ff13fa043c3b3a0035589cba0aa70bd769"
+    },
+    {
+      "path": "assets/images/0be9cc2fcd784527ac4eb2e42cb10f20.png",
+      "size": 1798818,
+      "checksum": "576bfd48a19984721a4e237d51e4869282d11c1a6927cc0764104730272d0d8c"
+    },
+    {
+      "path": "assets/audio/8cb97dffb2cd4b368f470b9ba2b45e0d.mp3",
+      "size": 34202,
+      "checksum": "1d6d83af16d0632bb524718324b16951c64b4bced727f20500a7af5a550d9cf1"
+    },
+    {
+      "path": "assets/audio/b5b0f61e5ca04c9ca7f21579d8c37046.mp3",
+      "size": 58025,
+      "checksum": "ad3d68f3d62439880c6ae8736e14d12ad100db1acf004e83fcb3b1227d670364"
+    },
+    {
+      "path": "assets/images/b226fdf8df3146558f162a2e26b62e78.png",
+      "size": 1773688,
+      "checksum": "622e9598f4fdc64a9228860010ceae124fec111577fb92c771599070c8f8fa0f"
+    },
+    {
+      "path": "assets/audio/ae719af6e8c142a1807ae26814e695a2.mp3",
+      "size": 32112,
+      "checksum": "45aee59fe9b63ec160cc90c9f12696a9863ccd953a592bfe30d358221cf409fd"
+    },
+    {
+      "path": "assets/images/2ef641b972b84f2aac0ac453aa5484d4.jpeg",
+      "size": 278870,
+      "checksum": "efad5ef85cbbb175fe7140070d5db66cdcfd950265a64eaf8fb83fa5096a8f38"
+    },
+    {
+      "path": "assets/images/987c7b189ff340dfbae7dfd1756b55f1.png",
+      "size": 1831466,
+      "checksum": "e2b940162a8e12f420fbc79159d0699859e912adca2580aa0e11e5d2bc983a58"
+    },
+    {
+      "path": "assets/video/b02efeaea606493d8a168bb22bffd8bb.mp4",
+      "size": 37807361,
+      "checksum": "e845818dc8a9113653f06120d0eb4389687ffd3a994395f661075e7c47f1656a"
+    },
+    {
+      "path": "assets/images/90a4e4b4025e457998b0f1cce34c6552.png",
+      "size": 1432062,
+      "checksum": "d692892e64d4f4a5431c6dd3e018d82eaac594c4cd5e5a63ee240c0031ae0942"
+    },
+    {
+      "path": "assets/images/4358371bfce5453a8aed319e0bbe15ed.png",
+      "size": 1773688,
+      "checksum": "622e9598f4fdc64a9228860010ceae124fec111577fb92c771599070c8f8fa0f"
+    },
+    {
+      "path": "assets/audio/2720f248cb104cf3a0de2e9d5d14f8f7.mp3",
+      "size": 66385,
+      "checksum": "fbdf1d407b791d733b79bb5fcb9e77096a4949eb626938e43f1a26ca61710750"
+    }
+  ],
+  "checksums": {
+    "experience_json": "b5025b411015f51ca36a0d9320258615cf96299dc7b06ab0be20b03378e00070",
+    "metadata_json": "23d528037653949156494efc8c24b68d818b029d0b2e26b646a3e052d5ac0a14"
+  }
+}

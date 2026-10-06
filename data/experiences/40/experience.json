@@ -1,0 +1,457 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "45",
+  "title": "My Happy Day",
+  "description": "Bring together familiar language to describe a memorable day through pictures, sequencing, speaking, and guided writing.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "118",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "126",
+          "title": "A Special Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "A Special Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788946016833-tlvo04p08",
+                "slot": "right",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/7a36f5d975b741749fb76972cd86719c.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 151,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788946055818-vgnt7ue5f",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "218px",
+                  "left": "0px",
+                  "minHeight": "513px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "School"
+                        },
+                        {
+                          "text": "Park"
+                        },
+                        {
+                          "text": "Shop"
+                        },
+                        {
+                          "text": "Garden"
+                        }
+                      ],
+                      "question": "Where does the family go?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Sad"
+                        },
+                        {
+                          "text": "Tired"
+                        },
+                        {
+                          "text": "Happy"
+                        }
+                      ],
+                      "question": "How does the child feel?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Option A"
+                        },
+                        {
+                          "text": "Option B"
+                        },
+                        {
+                          "text": "Option C"
+                        },
+                        {
+                          "text": "Option D"
+                        }
+                      ],
+                      "question": "What did you learn from this lesson?",
+                      "correctAnswerIndex": 2
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 151,
+            "alignment": "Center",
+            "media_url": "/media/media_library/7a36f5d975b741749fb76972cd86719c.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/7a36f5d975b741749fb76972cd86719c.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 151,
+              "type": "AUDIO",
+              "url": "assets/audio/7a36f5d975b741749fb76972cd86719c.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 151,
+              "type": "AUDIO",
+              "url": "assets/audio/7a36f5d975b741749fb76972cd86719c.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "119",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "127",
+          "title": "Tell Me About Your Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "What did you do today?",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "Respond to the waiter",
+                "speaker": "user",
+                "expectedResponse": "I went to the park",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "What did you do there?",
+                "speaker": "npc",
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "expectedResponse": "I played games"
+              },
+              {
+                "prompt": "How did you feel?",
+                "speaker": "npc",
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "expectedResponse": "I felt happy."
+              }
+            ],
+            "title": "Tell Me About Your Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788946158500-ufuln9hxu",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "You are ordering food at a restaurant",
+                  "userRole": "Child ",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "What did you do today?",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "Respond to the waiter",
+                      "speaker": "user",
+                      "expectedResponse": "I went to the park",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "What did you do there?",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "I played games"
+                    },
+                    {
+                      "prompt": "How did you feel?",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "I felt happy."
+                    }
+                  ],
+                  "npcCharacter": "friend"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "120",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "128",
+          "title": "A Happy Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "A Happy Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788949421841-oj53r2jsh",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q_1788949452240",
+                      "type": "text",
+                      "question": "The child goes to the ________."
+                    },
+                    {
+                      "id": "q_1788949469130",
+                      "type": "text",
+                      "question": "The family goes home in the ______"
+                    }
+                  ],
+                  "documentUrl": "/media/media_library/2a3221b24f6b4575812a33b1ce7fa1f5.png",
+                  "documentType": "form"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/2a3221b24f6b4575812a33b1ce7fa1f5.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 152,
+              "type": "IMAGE",
+              "url": "assets/images/2a3221b24f6b4575812a33b1ce7fa1f5.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "121",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "129",
+          "title": "My Special Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Special Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788949508737-ty4v7ty8q",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "prompt": "Think of a happy day. What did you do? Who were you with? How did you feel?",
+                  "minWords": 40,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

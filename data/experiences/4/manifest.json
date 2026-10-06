@@ -1,0 +1,31 @@
+{
+  "package_name": "listening",
+  "experience_id": 5,
+  "experience_title": "Listening",
+  "version": "1.0.0",
+  "build_number": 1,
+  "created_at": "2026-08-19T09:49:44.393709+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 8356,
+      "checksum": "94a093204adc219c730f9ee24bc81aed122e87188c9b43eecaa2d3c64358c0fa"
+    },
+    {
+      "path": "metadata.json",
+      "size": 238,
+      "checksum": "560fc63989b5338bff0fda368c83cac2891384498969ffeaced52f815d0d0159"
+    },
+    {
+      "path": "assets/images/de97e96a341344b0827087af7e14f5e0.png",
+      "size": 153502,
+      "checksum": "5e24694879674b2c047f981814adfedb53d7c86f63f59f2c469fa967bf904e17"
+    }
+  ],
+  "checksums": {
+    "experience_json": "94a093204adc219c730f9ee24bc81aed122e87188c9b43eecaa2d3c64358c0fa",
+    "metadata_json": "560fc63989b5338bff0fda368c83cac2891384498969ffeaced52f815d0d0159"
+  }
+}

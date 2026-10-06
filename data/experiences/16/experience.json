@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "35",
+  "title": "Assessent",
+  "description": "",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "84",
+      "title": "Activity",
+      "description": "Default assessment activity",
+      "sequence": 1,
+      "estimatedDuration": 15,
+      "skills": [],
+      "activityType": "ASSESSMENT",
+      "masteryThreshold": 70,
+      "screens": [
+        {
+          "id": "91",
+          "title": "Look What I Can Do!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Look What I Can Do!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788778625722-t5lnzqlwd",
+                "slot": "right",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/ed46f75ec31347c2b56731d6a6387dd8.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 132,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788778696707-p0o4u3r2r",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "225px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Happy"
+                        },
+                        {
+                          "text": "Sad"
+                        },
+                        {
+                          "text": "Fear"
+                        },
+                        {
+                          "text": "Bored"
+                        }
+                      ],
+                      "question": "How does Sam feel?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1788778740161-q4noozpau",
+                "slot": "left",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "467px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "mcq",
+                      "options": [
+                        "8",
+                        "6"
+                      ],
+                      "question": "How old is Riya?",
+                      "correctAnswer": 0
+                    }
+                  ],
+                  "documentUrl": "/media/media_library/e9d076cd06c84536996d5e2613d8c7cd.png",
+                  "documentType": "form"
+                }
+              }
+            ],
+            "media_id": 132,
+            "alignment": "Center",
+            "media_url": "/media/media_library/ed46f75ec31347c2b56731d6a6387dd8.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/ed46f75ec31347c2b56731d6a6387dd8.mp3",
+            "image": "assets/images/e9d076cd06c84536996d5e2613d8c7cd.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 132,
+              "type": "AUDIO",
+              "url": "assets/audio/ed46f75ec31347c2b56731d6a6387dd8.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 132,
+              "type": "AUDIO",
+              "url": "assets/audio/ed46f75ec31347c2b56731d6a6387dd8.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 133,
+              "type": "IMAGE",
+              "url": "assets/images/e9d076cd06c84536996d5e2613d8c7cd.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

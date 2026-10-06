@@ -1,0 +1,313 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "46",
+  "title": "My School World",
+  "description": "Check whether the learner can understand and use English related to school objects, classroom language, locations, asking for help, and school-day activities.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "122",
+      "title": "Activity",
+      "description": "Default assessment activity",
+      "sequence": 1,
+      "estimatedDuration": 15,
+      "skills": [],
+      "activityType": "ASSESSMENT",
+      "masteryThreshold": 70,
+      "screens": [
+        {
+          "id": "130",
+          "title": "CHALLENEGE",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "CHALLENEGE",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788949788851-6foalswt7",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/eb0ddccaee2841a2ae19ad4ab14469bb.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 153,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788949825116-t49acikv0",
+                "type": "quiz",
+                "styles": {
+                  "top": "188px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Ball, book and shoes"
+                        },
+                        {
+                          "text": "Book, pencil, eraser and rule"
+                        },
+                        {
+                          "text": "Cup, plate and spoon"
+                        }
+                      ],
+                      "question": "What is in the school bag?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1788949858633-fjt2175ze",
+                "type": "audio",
+                "styles": {
+                  "top": "412px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/4a20bd8f38bb457c9fe20f460d48dce7.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 154,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788949900630-gi9pegxqi",
+                "type": "quiz",
+                "styles": {
+                  "top": "585px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Under the book"
+                        },
+                        {
+                          "text": "In the  Bag"
+                        },
+                        {
+                          "text": "On the Ground"
+                        }
+                      ],
+                      "question": "Where is the pencil?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1788950023414-9bhlfkpnx",
+                "type": "audio",
+                "styles": {
+                  "top": "799px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/0bcd3607c5494962a469679228512989.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 155,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788950037867-i33ochi20",
+                "type": "quiz",
+                "styles": {
+                  "top": "951px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Goes home"
+                        },
+                        {
+                          "text": "Plays outside"
+                        },
+                        {
+                          "text": "Goes to sleep"
+                        }
+                      ],
+                      "question": "What does the child do after lunch?.",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1788950145283-dhdfjxv1x",
+                "type": "input",
+                "styles": {
+                  "top": "1841px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "placeholder": "WHAT dou you see there "
+                }
+              },
+              {
+                "id": "block-1788950198022-6cmo8qptj",
+                "type": "image",
+                "styles": {
+                  "top": "1194px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/6e2a9f1b8f61485f8d1884d288e8029d.png",
+                  "caption": "",
+                  "media_id": 156,
+                  "media_type": "IMAGE"
+                }
+              }
+            ],
+            "media_id": 153,
+            "alignment": "Center",
+            "media_url": "/media/media_library/eb0ddccaee2841a2ae19ad4ab14469bb.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/eb0ddccaee2841a2ae19ad4ab14469bb.mp3",
+            "image": "assets/images/6e2a9f1b8f61485f8d1884d288e8029d.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 153,
+              "type": "AUDIO",
+              "url": "assets/audio/eb0ddccaee2841a2ae19ad4ab14469bb.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 154,
+              "type": "AUDIO",
+              "url": "assets/audio/4a20bd8f38bb457c9fe20f460d48dce7.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 155,
+              "type": "AUDIO",
+              "url": "assets/audio/0bcd3607c5494962a469679228512989.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 156,
+              "type": "IMAGE",
+              "url": "assets/images/6e2a9f1b8f61485f8d1884d288e8029d.png",
+              "missing": false
+            },
+            {
+              "media_id": 154,
+              "type": "AUDIO",
+              "url": "assets/audio/4a20bd8f38bb457c9fe20f460d48dce7.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 156,
+              "type": "IMAGE",
+              "url": "assets/images/6e2a9f1b8f61485f8d1884d288e8029d.png",
+              "missing": false
+            },
+            {
+              "media_id": 155,
+              "type": "AUDIO",
+              "url": "assets/audio/0bcd3607c5494962a469679228512989.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 153,
+              "type": "AUDIO",
+              "url": "assets/audio/eb0ddccaee2841a2ae19ad4ab14469bb.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

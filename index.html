@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; object-src 'none';">
-    <title>Language Lab - World Level Map</title>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' media-loader:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net https://*.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: media-loader: file: http: https:; media-src 'self' blob: data: media-loader: file: http: https:; connect-src 'self' media-loader: http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://esm.sh https://huggingface.co https://*.huggingface.co https://hf.co https://*.hf.co https://cdn-lfs.huggingface.co https://cdn.jsdelivr.net https://*.jsdelivr.net data: blob:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; object-src 'none';">
+    <title>English Adventure - World Level Map</title>
+    <link rel="icon" type="image/png" href="assets/Icon/labIcon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="src/components/TravelBuddy/TravelBuddy.css">
 </head>
+
 <body>
+
+    <!-- Top Left Game HUD (Exit Button) -->
+    <div id="top-left-hud" class="top-left-hud">
+        <button id="hud-exit-btn" class="hud-circle-btn exit-btn" title="Exit Game" aria-label="Exit Game">
+            <svg class="exit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
 
     <!-- Top Right Game HUD (Notifications, Profile & AI Helper) -->
     <div id="top-right-hud" class="top-right-hud">
@@ -18,7 +32,8 @@
         <div class="hud-btn-group">
             <button id="hud-notif-btn" class="hud-circle-btn notif-btn" title="Notifications">
                 <svg class="notif-bell-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+                    <path
+                        d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
                 </svg>
                 <span class="notif-badge">12</span>
             </button>
@@ -34,7 +49,8 @@
                             <div class="notif-title">Daily Challenge Active</div>
                             <div class="notif-desc">Complete Level 2 with 1 star to earn 50 XP!</div>
                         </div>
-                        <button class="notif-delete-btn" title="Delete notification" onclick="deleteHUDNotification(event, 'n1')">✕</button>
+                        <button class="notif-delete-btn" title="Delete notification"
+                            onclick="deleteHUDNotification(event, 'n1')">✕</button>
                     </div>
                     <div class="notif-item unread">
                         <div class="notif-icon">🏆</div>
@@ -42,7 +58,8 @@
                             <div class="notif-title">Badge Unlocked</div>
                             <div class="notif-desc">Unlocked "Forest Realm Master" achievement!</div>
                         </div>
-                        <button class="notif-delete-btn" title="Delete notification" onclick="deleteHUDNotification(event, 'n2')">✕</button>
+                        <button class="notif-delete-btn" title="Delete notification"
+                            onclick="deleteHUDNotification(event, 'n2')">✕</button>
                     </div>
                     <div class="notif-item">
                         <div class="notif-icon">⭐</div>
@@ -50,11 +67,13 @@
                             <div class="notif-title">Zone 1 Leaderboard</div>
                             <div class="notif-desc">You are currently ranked #1 in your group.</div>
                         </div>
-                        <button class="notif-delete-btn" title="Delete notification" onclick="deleteHUDNotification(event, 'n3')">✕</button>
+                        <button class="notif-delete-btn" title="Delete notification"
+                            onclick="deleteHUDNotification(event, 'n3')">✕</button>
                     </div>
                 </div>
                 <div class="dropdown-footer">
-                    <a href="notifications.html" id="view-all-notif-btn" class="view-all-notif-btn">View All Notifications &rarr;</a>
+                    <a href="notifications.html" id="view-all-notif-btn" class="view-all-notif-btn">View All
+                        Notifications &rarr;</a>
                 </div>
             </div>
         </div>
@@ -63,18 +82,27 @@
         <div class="hud-btn-group profile-group">
             <a href="profile.html" id="hud-profile-btn" class="hud-profile-trigger" title="Student Profile">
                 <div class="profile-avatar-circle">
-                    <img src="avatars/boy1.png" alt="Student Avatar" class="profile-avatar-img" onerror="this.src='avatars/boy1.png'">
+                    <img src="avatars/boy1.png" alt="Student Avatar" class="profile-avatar-img"
+                        onerror="this.src='avatars/boy1.png'">
                 </div>
             </a>
         </div>
 
 
-        <!-- 4. AI Buddy Evolution Puzzle Button -->
+        <!-- 3. AI Buddy Evolution Puzzle Button -->
         <div class="hud-btn-group">
-            <a href="evolution.html" id="hud-puzzle-btn" class="hud-circle-btn puzzle-btn" title="AI-Buddy Evolution Chamber">
+            <a href="evolution.html" id="hud-puzzle-btn" class="hud-circle-btn puzzle-btn"
+                title="AI-Buddy Evolution Chamber">
                 <span class="puzzle-hud-icon">🧩</span>
                 <span id="hud-puzzle-badge" class="notif-badge puzzle-badge">0/6</span>
             </a>
+        </div>
+
+        <!-- 4. Manual Sync Now Button -->
+        <div class="hud-btn-group">
+            <button id="hud-sync-btn" class="hud-circle-btn sync-hud-btn" title="Sync with CMS (Sync Now)">
+                <span class="sync-hud-icon">🔄</span>
+            </button>
         </div>
     </div>
 
@@ -99,8 +127,27 @@
         <!-- Dragon Peak Lava Flow, Smoke & Embers Animation Container (Zone 6 Volcanic Portion) -->
         <div id="dragon-lava-effects"></div>
 
+        <!-- Boss Level Reveal Animation FX Container (Map-Integrated) -->
+        <div id="boss-reveal-fx-layer" class="boss-reveal-fx-layer" aria-hidden="true"></div>
+
         <!-- Dynamic Level Node Buttons Container -->
         <div id="level-nodes"></div>
+    </div>
+
+    <!-- Exit Game Confirmation Modal -->
+    <div id="exit-confirm-modal" class="modal-overlay hidden" aria-hidden="true">
+        <div class="modal-card exit-modal-card">
+            <button id="exit-modal-close-btn" class="close-btn" title="Cancel">&times;</button>
+            <div class="exit-modal-icon-circle">
+                <span class="exit-modal-emoji">🚪</span>
+            </div>
+            <h2 class="exit-modal-title">Exit Game?</h2>
+            <p class="exit-modal-desc">Are you sure you want to exit English Adventure?</p>
+            <div class="modal-actions exit-modal-actions">
+                <button id="exit-cancel-btn" class="btn-exit-cancel">No, Stay</button>
+                <button id="exit-confirm-btn" class="btn-exit-confirm">Yes, Exit</button>
+            </div>
+        </div>
     </div>
 
     <!-- Level Start / Details Modal -->
@@ -133,10 +180,11 @@
                 <img src="avatars/boy1.png" alt="Student Profile" class="modal-avatar-img">
                 <div class="modal-user-meta">
                     <h2 class="modal-user-name">Student Profile</h2>
-                    <p class="modal-roll-no">Roll Number: <span id="modal-student-id-tag" class="highlight-gold">STU-101</span></p>
+                    <p class="modal-roll-no">Roll Number: <span id="modal-student-id-tag"
+                            class="highlight-gold">STU-101</span></p>
                 </div>
             </div>
-            
+
             <div class="profile-modal-body">
                 <div class="profile-stat-card">
                     <div class="stat-icon">⭐</div>
@@ -145,7 +193,7 @@
                         <div class="stat-value" id="modal-stat-stars">0 ⭐</div>
                     </div>
                 </div>
-                
+
                 <div class="profile-stat-card">
                     <div class="stat-icon">🗺️</div>
                     <div class="stat-info">
@@ -164,39 +212,48 @@
             </div>
 
             <!-- Step 6 Real-Time Browser Event Test Playground -->
-            <div style="margin-top: 24px; padding: 16px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px;">
-                <h3 style="color: #38BDF8; font-size: 14px; margin-bottom: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+            <div
+                style="margin-top: 24px; padding: 16px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px;">
+                <h3
+                    style="color: #38BDF8; font-size: 14px; margin-bottom: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
                     <span>⚡</span> Step 6 Browser Reaction Test Playground
                 </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
                     <!-- Tracked Hotel Card (Look on Hover) -->
-                    <div id="test-hotel-card" data-buddy-target="true" data-buddy-reaction="look" style="padding: 12px; background: rgba(30, 41, 59, 0.8); border: 1px solid #38BDF8; border-radius: 8px; cursor: pointer; transition: transform 0.2s;">
+                    <div id="test-hotel-card" data-buddy-target="true" data-buddy-reaction="look"
+                        style="padding: 12px; background: rgba(30, 41, 59, 0.8); border: 1px solid #38BDF8; border-radius: 8px; cursor: pointer; transition: transform 0.2s;">
                         <div style="font-weight: bold; color: #FFF; font-size: 12px;">🏨 Grand Luxury Resort</div>
                         <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Hover to trigger Gaze Look</div>
                     </div>
 
                     <!-- Tracked Point Action Button -->
-                    <button id="test-point-btn" data-buddy-target="true" data-buddy-reaction="point" style="padding: 10px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
+                    <button id="test-point-btn" data-buddy-target="true" data-buddy-reaction="point"
+                        style="padding: 10px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
                         👉 Point at View Details
                     </button>
 
                     <!-- Success Event Trigger -->
-                    <button id="test-success-btn" data-buddy-target="true" data-buddy-reaction="success" style="padding: 10px; background: linear-gradient(135deg, #10b981, #059669); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
+                    <button id="test-success-btn" data-buddy-target="true" data-buddy-reaction="success"
+                        style="padding: 10px; background: linear-gradient(135deg, #10b981, #059669); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
                         🎉 Test Success Reaction
                     </button>
 
                     <!-- Error Event Trigger -->
-                    <button id="test-error-btn" data-buddy-target="true" data-buddy-reaction="error" style="padding: 10px; background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
+                    <button id="test-error-btn" data-buddy-target="true" data-buddy-reaction="error"
+                        style="padding: 10px; background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer;">
                         ⚠️ Test Error Reaction
                     </button>
 
                     <!-- Momo AI Buddy Login Greeting Trigger -->
-                    <button id="test-momo-greeting-btn" onclick="if (window.buddyEvents) { window.buddyEvents.emit('LOGIN_SUCCESS', { type: 'LOGIN_SUCCESS', studentId: 'TEST_STUDENT' }); } else if (window.momoController) { window.momoController.triggerTestGreeting(); }" style="padding: 10px; background: linear-gradient(135deg, #ec4899, #be185d); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer; grid-column: span 2;">
+                    <button id="test-momo-greeting-btn"
+                        onclick="if (window.buddyEvents) { window.buddyEvents.emit('LOGIN_SUCCESS', { type: 'LOGIN_SUCCESS', studentId: 'TEST_STUDENT' }); } else if (window.momoController) { window.momoController.triggerTestGreeting(); }"
+                        style="padding: 10px; background: linear-gradient(135deg, #ec4899, #be185d); border: none; border-radius: 8px; color: #FFF; font-weight: bold; font-size: 11px; cursor: pointer; grid-column: span 2;">
                         👋 [ TEST MOMO GREETING ]
                     </button>
 
                     <!-- Ignored Element (No Reaction) -->
-                    <div id="test-ignored-zone" data-buddy-ignore="true" style="padding: 12px; background: rgba(51, 65, 85, 0.5); border: 1px dashed #64748B; border-radius: 8px;">
+                    <div id="test-ignored-zone" data-buddy-ignore="true"
+                        style="padding: 12px; background: rgba(51, 65, 85, 0.5); border: 1px dashed #64748B; border-radius: 8px;">
                         <div style="font-size: 11px; color: #94A3B8;">🚫 Ignored Zone (data-buddy-ignore)</div>
                     </div>
                 </div>
@@ -205,15 +262,18 @@
     </div>
 
     <!-- AI-Buddy Season Evolution Puzzle Modal (Exact First Image Card Stage) -->
-    <div id="buddy-puzzle-modal" class="modal-overlay hidden" onclick="if(event.target === this) closeBuddyPuzzleModal()">
+    <div id="buddy-puzzle-modal" class="modal-overlay hidden"
+        onclick="if(event.target === this) closeBuddyPuzzleModal()">
         <div class="modal-card buddy-puzzle-modal-card evo-card-stage">
-            <button id="buddy-puzzle-close" class="close-btn evo-modal-close" onclick="closeBuddyPuzzleModal()" title="Close">&times;</button>
+            <button id="buddy-puzzle-close" class="close-btn evo-modal-close" onclick="closeBuddyPuzzleModal()"
+                title="Close">&times;</button>
             <div class="radiant-halo" id="radiant-halo"></div>
-            
+
             <div class="evo-zone-header">
                 <span class="evo-zone-tag" id="puzzle-zone-tag">ZONE 1 • FOREST REALM</span>
                 <h2 class="evo-companion-title" id="puzzle-title">Ice Blue AI-Buddy</h2>
-                <p class="evo-companion-desc" id="puzzle-subtitle">Assemble all 6 pieces of the Ice Blue Guardian to evolve your AI-Buddy for Frozen Glacier!</p>
+                <p class="evo-companion-desc" id="puzzle-subtitle">Assemble all 6 pieces of the Ice Blue Guardian to
+                    evolve your AI-Buddy for Frozen Glacier!</p>
             </div>
 
             <!-- 6-Piece Assembly Board (Exact Match to First Image) -->
@@ -279,7 +339,7 @@
                             <span class="cr-lock-icon slot-lock-icon">👑</span>
                             <span class="cr-lock-lvl slot-lvl-tag">Boss Core</span>
                         </div>
-                        <span class="cr-part-badge boss-badge slot-part-badge">Final Part</span>
+                        <span class="cr-part-badge boss-badge slot-part-badge">Part 6</span>
                     </div>
 
                     <!-- Full Assembled Fusion Glow Layer -->
@@ -307,7 +367,21 @@
 
             <!-- Modal Action Buttons -->
             <div class="puzzle-modal-actions">
-                <button id="puzzle-action-btn" class="btn-primary evo-continue-btn" onclick="closeBuddyPuzzleModal()">▶ Continue Journey</button>
+                <button id="puzzle-action-btn" class="btn-primary evo-continue-btn" onclick="closeBuddyPuzzleModal()">▶
+                    Continue Journey</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Level Entry: Boss Awakening / Boss Activation Overlay (Grade 3 In-Map Experience) -->
+    <div id="boss-awakening-overlay" class="boss-awakening-overlay hidden" aria-hidden="true">
+        <!-- Compact Floating Announcement Banner (Reveals during Phase 4) -->
+        <div id="boss-awakening-banner" class="boss-awakening-banner hidden">
+            <div class="boss-banner-glow-halo"></div>
+            <div class="boss-banner-content">
+                <div class="boss-banner-tag" id="boss-banner-tag">👑 BOSS CHALLENGE</div>
+                <h2 class="boss-banner-title" id="boss-banner-title">BOSS LEVEL</h2>
+                <p class="boss-banner-subtitle" id="boss-banner-subtitle">Are you ready? <span class="banner-sparkle">⭐</span></p>
             </div>
         </div>
     </div>
@@ -380,4 +454,5 @@
 
     <script src="game.js"></script>
 </body>
+
 </html>

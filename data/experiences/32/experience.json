@@ -1,0 +1,515 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "52",
+  "title": "WHAT HAPPENED NEXT?",
+  "description": "listen to a short story and identify important events\nunderstand what happened first, next, and finally\npredict what might happen next",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "143",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "150",
+          "title": "The Lost Kite",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "The Lost Kite",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789016251055-ro7d7kdaj",
+                "type": "video",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/f6bb1c7b48364b1398431376e7724cb6.mp4",
+                  "media_id": 173,
+                  "media_type": "VIDEO"
+                }
+              },
+              {
+                "id": "block-1789016261570-25u8uf6tx",
+                "type": "quiz",
+                "styles": {
+                  "top": "574px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Kabir found the kite."
+                        },
+                        {
+                          "text": "Kabir went home."
+                        },
+                        {
+                          "text": "Kabir bought a ball."
+                        }
+                      ],
+                      "question": "What happened next?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 173,
+            "alignment": "Center",
+            "media_url": "/media/media_library/f6bb1c7b48364b1398431376e7724cb6.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "video": "assets/video/f6bb1c7b48364b1398431376e7724cb6.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 173,
+              "type": "VIDEO",
+              "url": "assets/video/f6bb1c7b48364b1398431376e7724cb6.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 173,
+              "type": "VIDEO",
+              "url": "assets/video/f6bb1c7b48364b1398431376e7724cb6.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "144",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 2,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "151",
+          "title": "Tell Me What Happened",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "What happened at the park?",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "Respond to the waiter",
+                "speaker": "user",
+                "expectedResponse": "I lost my kite",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "What did you do?",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "First, I looked near the trees"
+              },
+              {
+                "prompt": "Then what happened?",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "“I saw my kite in a tree."
+              }
+            ],
+            "title": "Tell Me What Happened",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789016344730-ecg33yl20",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "You are ordering food at a restaurant",
+                  "userRole": "Kabir",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "What happened at the park?",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "Respond to the waiter",
+                      "speaker": "user",
+                      "expectedResponse": "I lost my kite",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "What did you do?",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "First, I looked near the trees"
+                    },
+                    {
+                      "prompt": "Then what happened?",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "“I saw my kite in a tree."
+                    }
+                  ],
+                  "npcCharacter": "Riya"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "145",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "152",
+          "title": "The Little Seed",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "The Little Seed",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789016477650-4cg32s5ol",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "The Little Seed",
+                      "passage": "First, Tara found a little seed in her garden.\n\nNext, she put the seed in the soil.\n\nThen, she gave it some water.\n\nAfter that, Tara waited for a few days.\n\nOne morning, she saw a tiny green plant.\n\nFinally, the little plant grew bigger.\n\nTara was very happy",
+                      "question": ""
+                    }
+                  ],
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1789016500916-cm478urxx",
+                "type": "quiz",
+                "styles": {
+                  "top": "257px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "A flower"
+                        },
+                        {
+                          "text": "A little seed"
+                        },
+                        {
+                          "text": "A bird"
+                        }
+                      ],
+                      "question": "What did Tara find?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "In a box"
+                        },
+                        {
+                          "text": "In the soil"
+                        },
+                        {
+                          "text": "On a table"
+                        }
+                      ],
+                      "question": "Where did Tara put the seed?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Water"
+                        },
+                        {
+                          "text": "Juice"
+                        },
+                        {
+                          "text": "Milk"
+                        }
+                      ],
+                      "question": "What did Tara give the seed?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "146",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 5,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "153",
+          "title": "My Story in Order",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Story in Order",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789016728045-3apuxlowj",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/d253ebe3395a4510b8a848c1911131f6.png",
+                  "caption": "",
+                  "media_id": 174,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1789016741246-qp76cu6rf",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "694px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Look at the four pictures of a child planting a seed. Write one sentence for each picture.",
+                  "minWords": 10,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": 174,
+            "alignment": "Center",
+            "media_url": "/media/media_library/d253ebe3395a4510b8a848c1911131f6.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/d253ebe3395a4510b8a848c1911131f6.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 174,
+              "type": "IMAGE",
+              "url": "assets/images/d253ebe3395a4510b8a848c1911131f6.png",
+              "missing": false
+            },
+            {
+              "media_id": 174,
+              "type": "IMAGE",
+              "url": "assets/images/d253ebe3395a4510b8a848c1911131f6.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

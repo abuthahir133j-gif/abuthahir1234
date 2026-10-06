@@ -1,0 +1,457 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "38",
+  "title": "Where Is My Pencil?",
+  "description": "Ask and tell where things are using in, on, under, near and other simple position words.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "93",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "100",
+          "title": "Where Did It Go?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Where Did It Go?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788844078470-cjog4qb8u",
+                "type": "video",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/38caaaf58efb4b6a9754396f967ece49.mp4",
+                  "media_id": 137,
+                  "media_type": "VIDEO"
+                }
+              },
+              {
+                "id": "block-1788844101329-i0lpa79gh",
+                "type": "quiz",
+                "styles": {
+                  "top": "613px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "book"
+                        },
+                        {
+                          "text": "table"
+                        },
+                        {
+                          "text": "board"
+                        },
+                        {
+                          "text": "bag"
+                        }
+                      ],
+                      "question": "where is the pencil found ?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 137,
+            "alignment": "Center",
+            "media_url": "/media/media_library/38caaaf58efb4b6a9754396f967ece49.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "video": "assets/video/38caaaf58efb4b6a9754396f967ece49.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 137,
+              "type": "VIDEO",
+              "url": "assets/video/38caaaf58efb4b6a9754396f967ece49.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 137,
+              "type": "VIDEO",
+              "url": "assets/video/38caaaf58efb4b6a9754396f967ece49.mp4",
+              "missing": false
+            }
+          ]
+        },
+        {
+          "id": "101",
+          "title": "“Help Me Find My Pencil!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "“Help Me Find My Pencil!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788858136281-f0dv9s0oe",
+                "type": "audio",
+                "styles": {
+                  "top": "360px",
+                  "left": "203px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "url": "",
+                  "title": "Audio Clip"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "94",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "102",
+          "title": "HElp ME",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "HElp ME",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788844457776-bwbax4ayr",
+                "type": "pronunciation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "word": "pencil",
+                      "phonetic": ""
+                    },
+                    {
+                      "id": "item-1788844501846",
+                      "word": "Classroom",
+                      "phonetic": "/phonetic/"
+                    },
+                    {
+                      "id": "item-1788844509878",
+                      "word": "eraser",
+                      "phonetic": "/phonetic/"
+                    }
+                  ],
+                  "question": "Practice pronouncing words correctly"
+                }
+              },
+              {
+                "id": "block-1788844552104-m3lwlyy09",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "218px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "95",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "103",
+          "title": "Look and Find",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Look and Find",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788844673640-43kxo2ozn",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "mcq",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "What is the date on the document?",
+                      "correctAnswer": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentType": "poster"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "96",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "104",
+          "title": "Put It Together",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Put It Together",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788844868626-jg58wgiuv",
+                "type": "sequence",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    "I cannot find my pencil.",
+                    "I look on my desk.",
+                    "I look under the book.",
+                    "I find my pencil.",
+                    "I pick up my pencil."
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
-    <title>One Tutor - Student Login</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' media-loader:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net https://*.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: media-loader: file: http: https:; media-src 'self' blob: data: media-loader: file: http: https:; connect-src 'self' media-loader: http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://esm.sh https://huggingface.co https://*.huggingface.co https://hf.co https://*.hf.co https://cdn-lfs.huggingface.co https://cdn.jsdelivr.net https://*.jsdelivr.net data: blob:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; object-src 'none';">
+    <title>English Adventure - Student Login</title>
+    <link rel="icon" type="image/png" href="assets/Icon/labIcon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -50,7 +51,7 @@
                     <!-- Authentication Form -->
                     <form id="auth-form" onsubmit="return false;">
                         <div class="form-group">
-                            <label for="roll-number-input" class="form-label">Enter LMS Login Code</label>
+                            <label for="roll-number-input" class="form-label">Enter Your RollNo</label>
                             <div class="input-wrapper">
                                 <input 
                                     type="text" 
@@ -63,27 +64,10 @@
                         </div>
 
                         <button type="submit" id="login-submit-btn" class="continue-btn" disabled>
-                            <span>Start Learning</span>
+                            <span>ENTER WORLD</span>
                             <span class="btn-arrow">›</span>
                         </button>
                     </form>
-
-                    <!-- Authenticated ENTER Section -->
-                    <div id="authenticated-enter-section" class="authenticated-enter-section hidden">
-                        <div class="student-welcome-badge">
-                            <span class="welcome-label">READY TO EXPLORE</span>
-                            <h3 id="student-welcome-name" class="student-welcome-name">Adventurer</h3>
-                            <p class="student-welcome-code" id="student-welcome-code">LMS: ABU001</p>
-                        </div>
-                        <button type="button" id="enter-world-btn" class="enter-world-btn">
-                            <span class="enter-btn-glow"></span>
-                            <span class="enter-btn-text">ENTER WORLD</span>
-                            <span class="enter-btn-icon">✦</span>
-                        </button>
-                        <button type="button" id="switch-account-btn" class="switch-account-btn">
-                            Switch Student Code
-                        </button>
-                    </div>
                 </div>
 
             </div>
@@ -98,7 +82,17 @@
             preload="auto" 
             playsinline
         ></video>
-        <!-- Cinematic Curtain for Seamless Atmospheric Fade -->
+
+        <!-- Skip Intro Button & Keyboard Hint -->
+        <div id="cinematic-skip-container" class="cinematic-skip-container">
+            <button type="button" id="skip-cinematic-btn" class="skip-cinematic-btn" title="Skip Intro Video (Press any key)">
+                <span class="skip-btn-text">Skip Intro</span>
+                <span class="skip-btn-icon">➔</span>
+                <span class="skip-btn-badge">Press any key</span>
+            </button>
+        </div>
+
+        <!-- Cinematic Curtain for Seamless Atmospheric Fade --> 
         <div id="cinematic-curtain" class="cinematic-curtain"></div>
     </div>
 

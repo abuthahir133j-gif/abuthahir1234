@@ -1,0 +1,31 @@
+{
+  "package_name": "things-i-like",
+  "experience_id": 34,
+  "experience_title": "Things I Like",
+  "version": "6",
+  "build_number": 1,
+  "created_at": "2026-09-08T09:07:34.792283+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 13028,
+      "checksum": "5f534c77bb158dbc2090a80b25964b9786540b905ba57338c00afcc0acbd74f2"
+    },
+    {
+      "path": "metadata.json",
+      "size": 188,
+      "checksum": "9294b4fbc8ac7898a791cac8da62f72311e391ba9a21b8be232e39bb5fc71f2b"
+    },
+    {
+      "path": "assets/images/5dbac5588aad4281b4eb83304c61e82d.jpg",
+      "size": 37225,
+      "checksum": "f8836b0be25c4838a07de6729df7f2a135f79df53ae12f377fb8ca96a42dcede"
+    }
+  ],
+  "checksums": {
+    "experience_json": "5f534c77bb158dbc2090a80b25964b9786540b905ba57338c00afcc0acbd74f2",
+    "metadata_json": "9294b4fbc8ac7898a791cac8da62f72311e391ba9a21b8be232e39bb5fc71f2b"
+  }
+}

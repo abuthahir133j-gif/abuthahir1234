@@ -1,0 +1,41 @@
+{
+  "package_name": "welcome-to-my-home",
+  "experience_id": 43,
+  "experience_title": "Welcome to My Home",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:30:43.821428+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 11274,
+      "checksum": "e10b0858e9972bf582cd263dda2d6a651fb3cdb2e995361e3fdd6842ce6fabb4"
+    },
+    {
+      "path": "metadata.json",
+      "size": 189,
+      "checksum": "36303d3981a90ac4575255288550b1b46038de0771a41193d4b2e1aa7cfc109c"
+    },
+    {
+      "path": "assets/video/c0aa46798b75481a8121b82a2a1a71a6.mp4",
+      "size": 1987141,
+      "checksum": "98bfbfc41fbfd1985f38cf0996e083dda42eb90069032629e1e1ca20969808ac"
+    },
+    {
+      "path": "assets/images/b81dd452fc3143d89a1d15eb6cbf543a.png",
+      "size": 2852727,
+      "checksum": "bdcfe69266d214833f0fb755d9bb935ba8ca03837a4d9723c2f333db8dda8a91"
+    },
+    {
+      "path": "assets/images/94ee295b4bff4bdebf6ea3340b640894.png",
+      "size": 2446733,
+      "checksum": "932acf214c63e50b844b1d5e41eff7c6f1349b1f2f096acb57e490259e1fdba3"
+    }
+  ],
+  "checksums": {
+    "experience_json": "e10b0858e9972bf582cd263dda2d6a651fb3cdb2e995361e3fdd6842ce6fabb4",
+    "metadata_json": "36303d3981a90ac4575255288550b1b46038de0771a41193d4b2e1aa7cfc109c"
+  }
+}

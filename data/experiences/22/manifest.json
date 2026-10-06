@@ -1,0 +1,36 @@
+{
+  "package_name": "stories-messages-ideas",
+  "experience_id": 63,
+  "experience_title": "STORIES, MESSAGES & IDEAS",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:25:00.689003+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 6842,
+      "checksum": "435f386f9512af012dc34cc557d2c71c1a10a4b2ce625b3354e9436ec0854ea4"
+    },
+    {
+      "path": "metadata.json",
+      "size": 200,
+      "checksum": "a727376ae9575ab22f543708aaaac88224f24702bd657f7a8785919d3c82f37b"
+    },
+    {
+      "path": "assets/images/155fc9ddd64d4ef2a4be03acb7fba8f6.png",
+      "size": 2044163,
+      "checksum": "92001fc056e5a9bb4b48875a23f92dd9ea12f9f9d9f62246cb5f42d1245a3dcd"
+    },
+    {
+      "path": "assets/images/140a3d5e744a4486aac33876a9d031b5.png",
+      "size": 1728165,
+      "checksum": "a42de766dc28b8f87931936851484cad12712f7d7d272cfd0124f3702c524bb5"
+    }
+  ],
+  "checksums": {
+    "experience_json": "435f386f9512af012dc34cc557d2c71c1a10a4b2ce625b3354e9436ec0854ea4",
+    "metadata_json": "a727376ae9575ab22f543708aaaac88224f24702bd657f7a8785919d3c82f37b"
+  }
+}

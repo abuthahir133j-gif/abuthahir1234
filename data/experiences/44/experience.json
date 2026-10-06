@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "53",
+  "title": "My Everyday Life",
+  "description": "This assessment is heavily grammar-based, with grammar integrated into Listening, Speaking, Reading and Writing.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "147",
+      "title": "Activity",
+      "description": "Default assessment activity",
+      "sequence": 1,
+      "estimatedDuration": 15,
+      "skills": [],
+      "activityType": "ASSESSMENT",
+      "masteryThreshold": 70,
+      "screens": [
+        {
+          "id": "154",
+          "title": "Test",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "/media/media_library/ee58bb561c66481bb6927a17ae9ee4aa.wav",
+                "prompt": "What do u want to have?",
+                "speaker": "npc",
+                "audioUrl": "/media/media_library/ee58bb561c66481bb6927a17ae9ee4aa.wav",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "Respond to the waiter",
+                "speaker": "user",
+                "recordingRequired": true
+              }
+            ],
+            "title": "Test",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789017176939-na4oqg2cc",
+                "slot": "left",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "minHeight": "384px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "text",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "What does the child do every day?",
+                      "targetAnswer": "He brushes his teeth.",
+                      "correctAnswer": "He brushes his teeth."
+                    },
+                    {
+                      "id": "q_1789017201483",
+                      "type": "text",
+                      "question": "What is he doing today?",
+                      "targetAnswer": "He is eating a banana.",
+                      "correctAnswer": "He is eating a banana."
+                    },
+                    {
+                      "id": "q_1789739301323",
+                      "type": "text",
+                      "question": "New Question?",
+                      "targetAnswer": ""
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "“I wake up at seven o’clock every day. I brush my teeth and eat breakfast. My mother makes breakfast for me. I like milk and bananas.\n\nToday, I am sitting at the table. I am eating a banana and drinking milk.\n\nYesterday, I played with my friends. We walked to the park and played football. We were very happy.”",
+                  "documentType": "text"
+                }
+              },
+              {
+                "id": "block-1789017486636-lj3b4ogob",
+                "slot": "left",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "514px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "She [plays] football every day."
+                    },
+                    {
+                      "id": "item-1789017500840",
+                      "text": "They [are] (are\\is) eating lunch."
+                    },
+                    {
+                      "id": "item-1789017533682",
+                      "text": "He [is] (are\\is) reading a book."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              },
+              {
+                "id": "block-1789017584607-0ho9171cd",
+                "slot": "left",
+                "type": "sentence_builder",
+                "styles": {
+                  "top": "777px",
+                  "left": "0px",
+                  "minHeight": "232px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "sentences": [
+                    {
+                      "words": [
+                        "I",
+                        "play",
+                        "football",
+                        "every",
+                        "day."
+                      ],
+                      "question": "Reorder the words to make a correct sentence.",
+                      "sentence": "I play football every day."
+                    },
+                    {
+                      "words": [
+                        "She",
+                        "is",
+                        "reading",
+                        "now."
+                      ],
+                      "question": "",
+                      "sentence": "She is reading now."
+                    },
+                    {
+                      "words": [
+                        "I",
+                        "played",
+                        "football",
+                        "yesterday."
+                      ],
+                      "question": "",
+                      "sentence": "I played football yesterday."
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1789708650422-pxd5csmgl",
+                "slot": "left",
+                "type": "grammar_correction",
+                "styles": {
+                  "top": "1025px",
+                  "left": "20px",
+                  "minHeight": "202px"
+                },
+                "content": {
+                  "pairs": [
+                    {
+                      "correctedSentence": "They are going to schoo",
+                      "incorrectSentence": "They is going to school"
+                    },
+                    {
+                      "correctedSentence": "Chidren are playing in the park",
+                      "incorrectSentence": "Chidren is playing in the park"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1789709081525-j8isy09lh",
+                "slot": "left",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "1243px",
+                  "left": "20px"
+                },
+                "content": {
+                  "passages": [
+                    {
+                      "title": "",
+                      "passage": "Trees are one of the most important parts of our environment. They provide us with oxygen, which is necessary for humans and animals to live. Trees also give us fruits, wood, medicine, and shade. Their roots hold the soil together and help prevent soil erosion. Trees provide homes for many birds, insects, and animals.\n\nHowever, many trees are being cut down to build houses, roads, and factories. This can cause problems such as air pollution, loss of wildlife, and changes in the climate. Therefore, it is important for everyone to protect existing trees and plant new ones. Even a small effort, such as planting a tree in our neighbourhood, can make a difference.",
+                      "question": "Why are trees important to humans and animals?\nName three things that trees provide us.\nHow do tree roots help the soil?\nWhy are many trees being cut down?\nWhat problems can be caused by cutting down too many trees?\nWhat can people do to protect the environment?"
+                    },
+                    {
+                      "title": "",
+                      "passage": "",
+                      "question": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1789710157636-jrfobllfm",
+                "slot": "left",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "1562px",
+                  "left": "20px",
+                  "minHeight": "285px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "You are ordering food at a restaurant",
+                  "userRole": "Ram",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "/media/media_library/ee58bb561c66481bb6927a17ae9ee4aa.wav",
+                      "prompt": "What do u want to have?",
+                      "speaker": "npc",
+                      "audioUrl": "/media/media_library/ee58bb561c66481bb6927a17ae9ee4aa.wav",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "Respond to the waiter",
+                      "speaker": "user",
+                      "recordingRequired": true
+                    }
+                  ],
+                  "npcAvatarUrl": "/media/media_library/446dc0cc54f44a3c8f10fd44e181878e.png",
+                  "npcCharacter": "Waiter",
+                  "userAvatarUrl": "/media/media_library/fb760525e97d499f85a62424176c2d22.png",
+                  "speakerAAvatarUrl": "/media/media_library/446dc0cc54f44a3c8f10fd44e181878e.png",
+                  "speakerBAvatarUrl": "/media/media_library/fb760525e97d499f85a62424176c2d22.png"
+                }
+              },
+              {
+                "id": "block-1789739325763-syivqxt8b",
+                "slot": "left",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "1863px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "mcq",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "What is the date on the document?",
+                      "targetAnswer": "15 th April",
+                      "correctAnswer": "15 th April"
+                    },
+                    {
+                      "id": "q_1789739349762",
+                      "type": "text",
+                      "question": "what is the colour of her t shirt?",
+                      "targetAnswer": "orange",
+                      "correctAnswer": "orange"
+                    },
+                    {
+                      "id": "q_1789739350994",
+                      "type": "text",
+                      "question": "New Question?",
+                      "targetAnswer": ""
+                    }
+                  ],
+                  "documentUrl": "/media/media_library/a7bcc3cd183648a5880ae1e4df2e500f.png",
+                  "documentType": "poster"
+                }
+              },
+              {
+                "id": "block-1789740783947-cazxv727i",
+                "slot": "left",
+                "type": "word_search",
+                "styles": {
+                  "top": "2410px",
+                  "left": "162px",
+                  "blockWidth": "606px"
+                },
+                "content": {
+                  "words": [],
+                  "gridSize": 8,
+                  "question": "Find the hidden words in the grid."
+                }
+              },
+              {
+                "id": "block-1789752181666-6ff3kvdle",
+                "slot": "left",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "2791px",
+                  "left": "0px",
+                  "minHeight": "266px",
+                  "blockWidth": "551px"
+                },
+                "content": {
+                  "prompt": "Write a short story about a fun day you had at the park. Describe what you saw, what you did, and how you felt.",
+                  "minWords": 10,
+                  "placeholder": "Start writing here..."
+                }
+              },
+              {
+                "id": "block-1790060348627-o9l7f42qi",
+                "slot": "left",
+                "type": "sequence",
+                "styles": {
+                  "top": "3073px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    "brush ur teeth",
+                    "take a bath",
+                    "Have a breakfast"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/a7bcc3cd183648a5880ae1e4df2e500f.png",
+            "audio": "assets/audio/ee58bb561c66481bb6927a17ae9ee4aa.wav"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 241,
+              "type": "IMAGE",
+              "url": "assets/images/a7bcc3cd183648a5880ae1e4df2e500f.png",
+              "missing": false
+            },
+            {
+              "media_id": 210,
+              "type": "AUDIO",
+              "url": "assets/audio/ee58bb561c66481bb6927a17ae9ee4aa.wav",
+              "missing": false
+            },
+            {
+              "media_id": 209,
+              "type": "IMAGE",
+              "url": "assets/images/fb760525e97d499f85a62424176c2d22.png",
+              "missing": false
+            },
+            {
+              "media_id": 208,
+              "type": "IMAGE",
+              "url": "assets/images/446dc0cc54f44a3c8f10fd44e181878e.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

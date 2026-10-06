@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "49",
+  "title": "What's the Weather Like?",
+  "description": "Understand and talk about sunny, rainy, cloudy, hot and cold weather and connect weather with everyday activities.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "131",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "139",
+          "title": "Weather Detective",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Weather Detective",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788952135597-bmobiz20d",
+                "slot": "left",
+                "type": "dictation",
+                "styles": {
+                  "top": "0px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/7fb41cacba9e467aa5b32f8d89082206.mp3",
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1788952220721-a6nmbb6wg",
+                "slot": "left",
+                "type": "dictation",
+                "styles": {
+                  "top": "252px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/7624576d2b024ef4b6e90a62efbc9205.mp3",
+                  "question": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/7fb41cacba9e467aa5b32f8d89082206.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 165,
+              "type": "AUDIO",
+              "url": "assets/audio/7fb41cacba9e467aa5b32f8d89082206.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 166,
+              "type": "AUDIO",
+              "url": "assets/audio/7624576d2b024ef4b6e90a62efbc9205.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "132",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "140",
+          "title": "Weather Chat",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "Good morning! What's the weather like today?",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "Respond to the waiter",
+                "speaker": "user",
+                "expectedResponse": "It's sunny",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "What can we do outside?",
+                "speaker": "npc",
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "expectedResponse": "We can play football"
+              }
+            ],
+            "title": "Weather Chat",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788952361757-c4gd33s4d",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "Weather",
+                  "userRole": "Child",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "Good morning! What's the weather like today?",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "Respond to the waiter",
+                      "speaker": "user",
+                      "expectedResponse": "It's sunny",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "What can we do outside?",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "We can play football"
+                    }
+                  ],
+                  "npcCharacter": "Fiend"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "133",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "141",
+          "title": "Today's Weather Board",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Today's Weather Board",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788952442863-u6lbteodr",
+                "type": "match",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "Sunny ",
+                    "Hot",
+                    "Rainy "
+                  ],
+                  "rightItems": [
+                    "PLAY OUTSIDE",
+                    "Drink Water ",
+                    "Umbrella"
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "134",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "142",
+          "title": "My Weather Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Weather Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788952520525-gqk15unxk",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "Today is [ ]."
+                    },
+                    {
+                      "id": "item-1788952549609",
+                      "text": "I need an [ ] when it rains."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

@@ -54,46 +54,94 @@ const BOSS_NODES = [
     { id: "boss-3", bossIndex: 3, isBoss: true, zone: 3, zoneName: "Blossom Haven", title: "Cherry Blossom Spirit Boss", desc: "Challenge the guardian of the sacred petals in Zone 3!", x: 49.5, y: 35, img: "Level/springboss.png", requiredLevels: [11, 12, 13, 14, 15] },
     { id: "boss-4", bossIndex: 4, isBoss: true, zone: 4, zoneName: "Tropical Bay", title: "Kraken Leviathan Boss", desc: "Conquer the ruler of the ocean depths in Zone 4!", x: 67.5, y: 37, img: "Level/waterboss.png", requiredLevels: [16, 17, 18, 19, 20] },
     { id: "boss-5", bossIndex: 5, isBoss: true, zone: 5, zoneName: "Golden Sands", title: "Pharaoh Sand Drake Boss", desc: "Defeat the ancient sand titan of the desert pyramid in Zone 5!", x: 75.5, y: 32, img: "Level/desertboss.png", requiredLevels: [21, 22, 23, 24, 25] },
-    { id: "boss-6", bossIndex: 6, isBoss: true, zone: 6, zoneName: "Dragon Peak", title: "Infernal Dragon Lord Boss", desc: "Defeat the ultimate volcanic dragon atop Dragon Citadel!", x: 97.5, y: 30.5, img: "Level/lava boss.png", requiredLevels: [26, 27, 28, 29, 30] }
+    { id: "boss-6", bossIndex: 6, isBoss: true, zone: 6, zoneName: "Dragon Peak", title: "Infernal Dragon Lord Boss", desc: "Defeat the ultimate volcanic dragon atop Dragon Citadel!", x: 97.8, y: 28, img: "Level/lava boss.png", requiredLevels: [26, 27, 28, 29, 30] }
 ];
 
 // ==========================================
 // Level Experience Packages Configuration
 // ==========================================
-// Boss levels MUST open Assessent_v5
-// Remaining 8 packages open across regular levels from language-lab-engine/src/runtime/samples
-const BOSS_EXPERIENCE_PACKAGE = "Assessent_v5";
+const BOSS_EXPERIENCE_PACKAGES = {
+    1: { id: "Assessent_v5", title: "Assessment Challenge", zone: 1, season: "summer" },
+    2: { id: "My School World", title: "My School World", zone: 2, season: "winter" },
+    3: { id: "My_Everyday_Life_v1", title: "My Everyday Life", zone: 3, season: "spring" },
+    4: { id: "PEOPLE,_PLACES_&_ACTIONS_v1", title: "People, Places & Actions", zone: 4, season: "marine" },
+    5: { id: "STORIES,_MESSAGES_&_IDEAS_v1", title: "Stories, Messages & Ideas", zone: 5, season: "desert" },
+    6: { id: "FINAL_ENGLISH_CHALLENGE_v1", title: "Final English Challenge", zone: 6, season: "lava" }
+};
+
 const REGULAR_EXPERIENCE_PACKAGES = [
-    { id: "Hello!_This_Is_Me..._v1", title: "Hello! This Is Me" },
-    { id: "Things_I_Like_v6", title: "Things I Like" },
-    { id: "Meet_My_Friends_v8", title: "Meet My Friends" },
-    { id: "This_Is_My_Family_v7", title: "This Is My Family" },
-    { id: "Welcome_to_My_Classroom_v3", title: "Welcome to My Classroom" },
-    { id: "Where_Is_My_Pencil__v2", title: "Where Is My Pencil?" },
-    { id: "What's_in_My_School_Bag__v4", title: "What's in My School Bag?" },
-    { id: "Can_You_Help_Me__v1", title: "Can You Help Me?" }
+    // Zone 1: Summer Season (Levels 1 - 5)
+    { id: "Hello!_This_Is_Me..._v1", title: "Hello! This Is Me", zone: 1, season: "summer" },
+    { id: "Things_I_Like_v6", title: "Things I Like", zone: 1, season: "summer" },
+    { id: "Meet_My_Friends_v8", title: "Meet My Friends", zone: 1, season: "summer" },
+    { id: "This_Is_My_Family_v7", title: "This Is My Family", zone: 1, season: "summer" },
+    { id: "Welcome_to_My_Classroom_v3", title: "Welcome to My Classroom", zone: 1, season: "summer" },
+
+    // Zone 2: Winter Season (Levels 6 - 10)
+    { id: "Where_Is_My_Pencil__v2", title: "Where Is My Pencil?", zone: 2, season: "winter" },
+    { id: "What's_in_My_School_Bag__v4", title: "What's in My School Bag?", zone: 2, season: "winter" },
+    { id: "Can_You_Help_Me__v1", title: "Can You Help Me?", zone: 2, season: "winter" },
+    { id: "A_Day_at_School_v1", title: "A Day at School", zone: 2, season: "winter" },
+    { id: "Amazing_Animals_Around_Us_v1", title: "Amazing Animals Around Us", zone: 2, season: "winter" },
+
+    // Zone 3: Spring Season (Levels 11 - 15)
+    { id: "AROUND_MY_NEIGHBOURHOOD_v1", title: "Around My Neighbourhood", zone: 3, season: "spring" },
+    { id: "How_Are_You_Today__v1", title: "How Are You Today?", zone: 3, season: "spring" },
+    { id: "Let's_Play!_vv1", title: "Let's Play!", zone: 3, season: "spring" },
+    { id: "LET’S_ACT_IT_OUT!_v1", title: "Let's Act It Out!", zone: 3, season: "spring" },
+    { id: "Let’s_Go_Shopping!_v1", title: "Let's Go Shopping!", zone: 3, season: "spring" },
+
+    // Zone 4: Marine Season (Levels 16 - 20)
+    { id: "My_Day_Begins_v1", title: "My Day Begins", zone: 4, season: "marine" },
+    { id: "My_Happy_Day_v1", title: "My Happy Day", zone: 4, season: "marine" },
+    { id: "MY_LITTLE_STORY_v1", title: "My Little Story", zone: 4, season: "marine" },
+    { id: "PICTURE_DETECTIVE_v1", title: "Picture Detective", zone: 4, season: "marine" },
+    { id: "READ_THE_WORLD_AROUND_ME_v1", title: "Read The World Around Me", zone: 4, season: "marine" },
+
+    // Zone 5: Desert Season (Levels 21 - 25)
+    { id: "RHYTHM,_RHYME_&_ENGLISH_TIME!_v1", title: "Rhythm, Rhyme & English Time!", zone: 5, season: "desert" },
+    { id: "THIS_IS_MY_ENGLISH!_v1", title: "This Is My English!", zone: 5, season: "desert" },
+    { id: "Welcome_to_My_Home_v1", title: "Welcome to My Home", zone: 5, season: "desert" },
+    { id: "What's_the_Weather_Like__v1", title: "What's the Weather Like?", zone: 5, season: "desert" },
+    { id: "What_Are_They_Doing__v1", title: "What Are They Doing?", zone: 5, season: "desert" },
+
+    // Zone 6: Lava Season (Levels 26 - 30)
+    { id: "WHAT_HAPPENED_NEXT__v1", title: "What Happened Next?", zone: 6, season: "lava" },
+    { id: "YESTERDAY_AND_TODAY_v1", title: "Yesterday and Today", zone: 6, season: "lava" },
+    { id: "Yummy!_What_Shall_We_Eat__v1", title: "Yummy! What Shall We Eat?", zone: 6, season: "lava" },
+    { id: "I'VE_GOT_A_MESSAGE!_v1", title: "I've Got A Message!", zone: 6, season: "lava" },
+    { id: "I’VE_GOT_A_MESSAGE!_v1", title: "I've Got A Message!", zone: 6, season: "lava" }
 ];
 
 function getLevelExperiencePackage(levelId, isBoss = false) {
     const isBossLevel = Boolean(
         isBoss || 
-        String(levelId).startsWith("boss-") || 
-        levelId === 30 || 
-        levelId === "30"
+        String(levelId).startsWith("boss-")
     );
     if (isBossLevel) {
+        let bossIdx = 1;
+        if (typeof levelId === 'string' && levelId.startsWith('boss-')) {
+            bossIdx = parseInt(levelId.replace('boss-', ''), 10) || 1;
+        } else if (levelId === 30 || levelId === '30') {
+            bossIdx = 6;
+        }
+        const bossPkg = BOSS_EXPERIENCE_PACKAGES[bossIdx] || BOSS_EXPERIENCE_PACKAGES[1];
         return {
-            packageId: BOSS_EXPERIENCE_PACKAGE,
-            title: "Assessment Challenge",
+            packageId: bossPkg.id,
+            title: bossPkg.title,
+            zone: bossPkg.zone,
+            season: bossPkg.season,
             isBoss: true
         };
     }
     const num = parseInt(levelId, 10);
-    const validNum = (!isNaN(num) && num >= 1) ? num : 1;
-    const pkg = REGULAR_EXPERIENCE_PACKAGES[(validNum - 1) % REGULAR_EXPERIENCE_PACKAGES.length];
+    const validNum = (!isNaN(num) && num >= 1 && num <= REGULAR_EXPERIENCE_PACKAGES.length) ? num : 1;
+    const pkg = REGULAR_EXPERIENCE_PACKAGES[validNum - 1];
     return {
         packageId: pkg.id,
         title: pkg.title,
+        zone: pkg.zone,
+        season: pkg.season,
         isBoss: false
     };
 }
@@ -174,8 +222,8 @@ const ZONE_PUZZLE_CONFIG = {
     6: {
         zone: 6,
         zoneName: "Dragon Peak",
-        nextFormName: "Ultimate Grandmaster AI-Buddy",
-        nextFormAsset: "AI/RED ROBOT.svg",
+        nextFormName: "Infernal Dragon Lord",
+        nextFormAsset: "AI/Final.png",
         themeColor: "#f59e0b",
         bossId: "boss-6",
         levels: [26, 27, 28, 29, 30],
@@ -221,6 +269,7 @@ function getBuddyAvatarForProgress(progress = userProgress) {
     if (!progress) return "AI/PNg.svg";
     
     // Companion evolves into full robot form ONLY when Boss of that zone is defeated (ALL parts complete)!
+    // 6 AI-Buddy companions: PNg, Ice Blue, Purple, Green, Gold, Red Robot
     if (isZoneAllPartsUnlocked(5, progress) && (progress.stars && progress.stars["boss-5"] > 0)) {
         return "AI/RED ROBOT.svg";
     }
@@ -316,28 +365,47 @@ function getCompletedLevelsCountForZone(zoneNum, progress = userProgress) {
 
 function getZoneUnlockedPieces(zoneNum = 1, progress = userProgress) {
     if (!progress) return [];
-    const config = ZONE_PUZZLE_CONFIG[zoneNum] || ZONE_PUZZLE_CONFIG[1];
     progress.unlockedPieces = progress.unlockedPieces || {};
+    let unlocked = progress.unlockedPieces[zoneNum];
 
-    const unlocked = [];
+    const completedCount = getCompletedLevelsCountForZone(zoneNum, progress);
 
-    // Regular levels 1-5 unlock parts 1-5
-    config.levels.forEach((lvl, idx) => {
-        const isLvlComplete = (progress.stars && progress.stars[lvl] > 0) || 
-                             (progress.stars && progress.stars[String(lvl)] > 0) || 
-                             (Number(progress.unlockedLevel) > Number(lvl));
-        if (isLvlComplete) {
-            unlocked.push(idx + 1);
-        }
-    });
-
-    // Part 6 (Final Part / Boss Core) ONLY unlocks when the boss level is completed!
-    const isBossDefeated = Boolean(progress.stars && progress.stars[config.bossId] && progress.stars[config.bossId] > 0);
-    if (isBossDefeated) {
-        unlocked.push(6);
+    if (!Array.isArray(unlocked)) {
+        unlocked = [];
     }
 
-    progress.unlockedPieces[zoneNum] = unlocked;
+    // Detect if previous state was sequential [1], [1, 2], [1, 2, 3], etc. and reshuffle to random order
+    const isOldSequential = unlocked.length > 1 && unlocked.every((val, idx) => val === idx + 1);
+
+    if (unlocked.length < completedCount || isOldSequential) {
+        const allPieces = [1, 2, 3, 4, 5, 6];
+        if (isOldSequential) {
+            unlocked = [];
+        }
+        const remainingLocked = allPieces.filter(p => !unlocked.includes(p));
+
+        // Fisher-Yates shuffle for random order piece unlock
+        for (let i = remainingLocked.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [remainingLocked[i], remainingLocked[j]] = [remainingLocked[j], remainingLocked[i]];
+        }
+
+        while (unlocked.length < completedCount && remainingLocked.length > 0) {
+            unlocked.push(remainingLocked.pop());
+        }
+
+        progress.unlockedPieces[zoneNum] = unlocked;
+        if (typeof saveProgress === "function") {
+            saveProgress();
+        }
+    } else if (unlocked.length > completedCount) {
+        unlocked = unlocked.slice(0, completedCount);
+        progress.unlockedPieces[zoneNum] = unlocked;
+        if (typeof saveProgress === "function") {
+            saveProgress();
+        }
+    }
+
     return unlocked;
 }
 
@@ -446,8 +514,18 @@ function renderBuddyPuzzleModal(targetZone = null, justUnlockedPieceIndex = null
             if (glowEl) glowEl.classList.add("hidden");
             if (bannerEl) {
                 bannerEl.classList.remove("hidden");
-                if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
-                if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+                const sparklesEl = bannerEl.querySelector(".evo-sparkles");
+                if (currentZoneConfig.zone === 6) {
+                    if (sparklesEl) sparklesEl.innerText = "✨ 🚀 ✨";
+                    if (evoTitleEl) evoTitleEl.innerText = "COMING SOON";
+                    if (evoDescEl) evoDescEl.innerText = "All parts completed — New journey & evolutions coming soon!";
+                    bannerEl.classList.add("coming-soon-theme");
+                } else {
+                    if (sparklesEl) sparklesEl.innerText = "✨ 👑 ✨";
+                    if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
+                    if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+                    bannerEl.classList.remove("coming-soon-theme");
+                }
             }
         } else {
             // Newly complete transition: Trigger cinematic assembly sequence
@@ -493,8 +571,18 @@ function runCinematicAssemblySequence(currentZoneConfig, puzzleStatus) {
         if (glowEl) glowEl.classList.add("hidden");
         if (bannerEl) {
             bannerEl.classList.remove("hidden");
-            if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
-            if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+            const sparklesEl = bannerEl.querySelector(".evo-sparkles");
+            if (zoneNum === 6) {
+                if (sparklesEl) sparklesEl.innerText = "✨ 🚀 ✨";
+                if (evoTitleEl) evoTitleEl.innerText = "COMING SOON";
+                if (evoDescEl) evoDescEl.innerText = "All parts completed — New journey & evolutions coming soon!";
+                bannerEl.classList.add("coming-soon-theme");
+            } else {
+                if (sparklesEl) sparklesEl.innerText = "✨ 👑 ✨";
+                if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
+                if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+                bannerEl.classList.remove("coming-soon-theme");
+            }
         }
         return;
     }
@@ -551,7 +639,11 @@ function runCinematicAssemblySequence(currentZoneConfig, puzzleStatus) {
                 if (emoteOverlayEl) emoteOverlayEl.classList.remove("hidden");
                 playEvolutionTriumphSound();
                 if (typeof speakBuddy === "function") {
-                    speakBuddy(`✨ All parts connected! I am fully assembled! Welcome to the journey!`, "excited", 4500);
+                    if (zoneNum === 6) {
+                        speakBuddy(`✨ All Dragon Peak parts connected! The Infernal Dragon Lord is complete! Next adventure coming soon!`, "excited", 4500);
+                    } else {
+                        speakBuddy(`✨ All parts connected! I am fully assembled! Welcome to the journey!`, "excited", 4500);
+                    }
                 }
 
                 // STEP 5 — FINAL STATE (After welcome animation)
@@ -562,8 +654,18 @@ function runCinematicAssemblySequence(currentZoneConfig, puzzleStatus) {
 
                     if (bannerEl) {
                         bannerEl.classList.remove("hidden");
-                        if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
-                        if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+                        const sparklesEl = bannerEl.querySelector(".evo-sparkles");
+                        if (zoneNum === 6) {
+                            if (sparklesEl) sparklesEl.innerText = "✨ 🚀 ✨";
+                            if (evoTitleEl) evoTitleEl.innerText = "COMING SOON";
+                            if (evoDescEl) evoDescEl.innerText = "All parts completed — New journey & evolutions coming soon!";
+                            bannerEl.classList.add("coming-soon-theme");
+                        } else {
+                            if (sparklesEl) sparklesEl.innerText = "✨ 👑 ✨";
+                            if (evoTitleEl) evoTitleEl.innerText = "ROBOT FULLY ASSEMBLED";
+                            if (evoDescEl) evoDescEl.innerText = `All parts completed — ${currentZoneConfig.nextFormName} ready!`;
+                            bannerEl.classList.remove("coming-soon-theme");
+                        }
                     }
 
                     // Real data persistence in userProgress
@@ -687,7 +789,41 @@ function closeBuddyPuzzleModal() {
         clearTimeout(activeAssemblyTimer);
         activeAssemblyTimer = null;
     }
-    scrollToCurrentLevel();
+
+    // Check if a Boss emergence was queued while the puzzle card was open
+    const pending = window.pendingBossRevealOnModalClose || (window.pendingBossUnlockOnModalClose ? {
+        numId: (Number(String(window.pendingBossUnlockOnModalClose).replace("boss-", "")) || 1) * 5,
+        bossId: window.pendingBossUnlockOnModalClose,
+        bossTitle: getBossNode(window.pendingBossUnlockOnModalClose)?.title || "Boss"
+    } : null);
+
+    window.pendingBossRevealOnModalClose = null;
+    window.pendingBossUnlockOnModalClose = null;
+
+    if (pending) {
+        renderLevelNodes();
+        updateHUD();
+
+        const bossIdToAnimate = pending.bossId;
+        const bossTitle = pending.bossTitle || getBossNode(bossIdToAnimate)?.title || "Boss";
+        const triggerLevelNum = pending.numId || 5;
+
+        // Smooth transition: dismiss modal, scroll to Boss node, and play cinematic boss reveal animation!
+        setTimeout(() => {
+            scrollToBossLevel(bossIdToAnimate);
+            setTimeout(() => {
+                window.bossCurrentlyRevealingId = bossIdToAnimate;
+                renderLevelNodes();
+                playBossRevealAnimation(triggerLevelNum, bossIdToAnimate, () => {
+                    window.bossCurrentlyRevealingId = null;
+                    renderLevelNodes();
+                    speakBuddy(`👑 ${bossTitle} is now Unlocked! Challenge him whenever you are ready!`, "excited", 4500);
+                });
+            }, 200);
+        }, 250);
+    } else {
+        scrollToCurrentLevel();
+    }
 }
 
 // Acceptance Test & Diagnostic Helpers
@@ -1303,6 +1439,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Verify Authentication & Manage Student Session
 function initLoginState() {
+    // In web browser / dev environments without Electron API, establish active session automatically
+    if (!window.electronAPI && localStorage.getItem(AUTH_STORAGE_KEY) !== "true") {
+        localStorage.setItem(AUTH_STORAGE_KEY, "true");
+        localStorage.setItem(STUDENT_KEY, "Adventurer");
+        sessionStorage.setItem(APP_SESSION_KEY, "active");
+    }
+
     const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
     const savedStudent = localStorage.getItem(STUDENT_KEY) || localStorage.getItem("language_lab_student_id") || "Student";
 
@@ -1353,16 +1496,39 @@ function openSubpage(url) {
         return;
     }
 
-    if (!frame.src || !frame.src.endsWith(url)) {
+    const needsLoad = !frame.src || !frame.src.endsWith(url);
+    if (needsLoad) {
+        frame.onload = () => {
+            try {
+                if (frame.contentWindow) {
+                    if (typeof frame.contentWindow.refreshProfileData === 'function') frame.contentWindow.refreshProfileData();
+                    if (typeof frame.contentWindow.refreshEvolutionData === 'function') frame.contentWindow.refreshEvolutionData();
+                    if (typeof frame.contentWindow.refreshNotificationsData === 'function') frame.contentWindow.refreshNotificationsData();
+                    frame.contentWindow.postMessage("refresh-profile", "*");
+                }
+            } catch (e) {}
+        };
         frame.src = url;
         currentSubpageUrl = url;
     } else {
         // Subpage already resident in iframe: refresh its data instantly without reload
         try {
-            if (frame.contentWindow && typeof frame.contentWindow.refreshProfileData === 'function') {
-                frame.contentWindow.refreshProfileData();
+            if (frame.contentWindow) {
+                if (typeof frame.contentWindow.refreshProfileData === 'function') {
+                    frame.contentWindow.refreshProfileData();
+                }
+                if (typeof frame.contentWindow.refreshEvolutionData === 'function') {
+                    frame.contentWindow.refreshEvolutionData();
+                }
+                if (typeof frame.contentWindow.refreshNotificationsData === 'function') {
+                    frame.contentWindow.refreshNotificationsData();
+                }
+                frame.contentWindow.postMessage("refresh-profile", "*");
             }
-        } catch (e) {}
+        } catch (e) {
+            console.warn("Could not refresh resident subpage, reloading frame:", e);
+            frame.src = url;
+        }
     }
 
     container.classList.remove("hidden");
@@ -1397,9 +1563,19 @@ function closeSubpage() {
 window.closeSubpage = closeSubpage;
 
 function setupSubpageNavigation() {
-    // Escape key closes subpage and returns to map immediately
+    // Escape key closes modals, subpages, and exit confirmation dialog
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
+            const exitModal = document.getElementById("exit-confirm-modal");
+            if (exitModal && !exitModal.classList.contains("hidden")) {
+                exitModal.classList.add("hidden");
+                return;
+            }
+            const puzzleModal = document.getElementById("buddy-puzzle-modal");
+            if (puzzleModal && !puzzleModal.classList.contains("hidden") && puzzleModal.style.display !== "none") {
+                closeBuddyPuzzleModal();
+                return;
+            }
             const container = document.getElementById("subpage-view-container");
             if (container && !container.classList.contains("hidden")) {
                 closeSubpage();
@@ -1424,10 +1600,65 @@ function setupSubpageNavigation() {
     }, 1200);
 }
 
-// Top Right HUD Interactive Dropdowns Engine
+// Top Right & Top Left HUD Interactive Controls Engine
 function setupHUDDropdowns() {
+    const exitBtn = document.getElementById("hud-exit-btn");
+    const exitConfirmModal = document.getElementById("exit-confirm-modal");
+    const exitConfirmBtn = document.getElementById("exit-confirm-btn");
+    const exitCancelBtn = document.getElementById("exit-cancel-btn");
+    const exitModalCloseBtn = document.getElementById("exit-modal-close-btn");
     const notifBtn = document.getElementById("hud-notif-btn");
     const notifDropdown = document.getElementById("notif-dropdown");
+
+    function openExitModal() {
+        closeAllHUDDropdowns();
+        exitConfirmModal?.classList.remove("hidden");
+    }
+
+    function closeExitModal() {
+        exitConfirmModal?.classList.add("hidden");
+    }
+
+    // Exit Button Click -> Ask user with confirmation modal
+    exitBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openExitModal();
+    });
+
+    // User confirmed exit ("Yes, Exit") -> Exit Electron
+    exitConfirmBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeExitModal();
+        if (window.electronAPI && typeof window.electronAPI.exitApp === "function") {
+            window.electronAPI.exitApp();
+        } else if (window.api && typeof window.api.exitApp === "function") {
+            window.api.exitApp();
+        } else {
+            window.close();
+        }
+    });
+
+    // User cancelled exit ("No, Stay" or '✕') -> Dismiss modal
+    exitCancelBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeExitModal();
+    });
+
+    exitModalCloseBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeExitModal();
+    });
+
+    // Clicking outside modal-card on the overlay closes it
+    exitConfirmModal?.addEventListener("click", (e) => {
+        if (e.target === exitConfirmModal) {
+            closeExitModal();
+        }
+    });
 
     const profileBtn = document.getElementById("hud-profile-btn");
     const profileDropdown = document.getElementById("profile-dropdown");
@@ -1530,10 +1761,61 @@ function setupHUDDropdowns() {
         localStorage.removeItem("language_lab_student_session_v1");
         sessionStorage.removeItem(APP_SESSION_KEY);
         sessionStorage.clear();
+        if (window.electronAPI && typeof window.electronAPI.setFullScreen === "function") {
+            window.electronAPI.setFullScreen(false);
+        }
         window.location.href = "login.html";
     }
     window.handleLogout = handleLogout;
     logoutBtn?.addEventListener("click", handleLogout);
+
+    // 4. Manual Synchronization ("Sync Now")
+    const syncBtn = document.getElementById("hud-sync-btn");
+    let isSyncing = false;
+    syncBtn?.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isSyncing) return;
+        isSyncing = true;
+        syncBtn.classList.add("syncing");
+        const iconEl = syncBtn.querySelector(".sync-hud-icon");
+        if (iconEl) iconEl.style.animation = "spin 1s linear infinite";
+
+        showToast("🔄 Syncing... Connecting to CMS...");
+
+        try {
+            const syncFn = window.electronAPI?.syncNow || window.api?.syncNow || window.electronAPI?.syncLmsPackages;
+            if (typeof syncFn === 'function') {
+                showToast("📦 Checking packages and uploading progress...");
+                const result = await syncFn();
+                console.log("[Sync] Manual sync result:", result);
+
+                if (result && result.offline) {
+                    showToast("📶 Offline Mode: Progress safely saved in SQLite.");
+                } else if (result && result.success) {
+                    const pkgCount = result.packages?.total || result.totalPackages || 0;
+                    showToast(`✅ Sync completed! Synced ${pkgCount} package(s).`);
+                    // Refresh lessons from local SQLite
+                    if (typeof loadCMSPublishedPackages === 'function') {
+                        loadCMSPublishedPackages(false);
+                    }
+                } else {
+                    showToast("ℹ️ Sync completed with local SQLite data.");
+                }
+            } else {
+                showToast("ℹ️ Offline: Using local SQLite database.");
+            }
+        } catch (syncErr) {
+            console.warn("[Sync] Manual sync notice:", syncErr.message);
+            showToast("📶 Offline: Data saved locally in SQLite.");
+        } finally {
+            setTimeout(() => {
+                isSyncing = false;
+                syncBtn.classList.remove("syncing");
+                if (iconEl) iconEl.style.animation = "";
+            }, 1200);
+        }
+    });
 
     // Only show One Tutor Companion message briefly if user just logged in
     const justLoggedIn = sessionStorage.getItem("language_lab_just_logged_in") === "true";
@@ -1633,6 +1915,9 @@ function loadProgress() {
             }
             if (!userProgress.playedBossAnimations || typeof userProgress.playedBossAnimations !== "object") {
                 userProgress.playedBossAnimations = {};
+            }
+            if (!userProgress.revealedBosses || typeof userProgress.revealedBosses !== "object") {
+                userProgress.revealedBosses = {};
             }
             if (!userProgress.unlockedPieces || typeof userProgress.unlockedPieces !== "object") {
                 userProgress.unlockedPieces = {};
@@ -1772,39 +2057,317 @@ function showToast(message) {
     }, 2800);
 }
 
-function triggerBossScreenShake() {
-    const gameContainer = document.getElementById("game") || document.body;
-    gameContainer.classList.remove("boss-shake-effect");
-    void gameContainer.offsetWidth; // force DOM reflow
-    gameContainer.classList.add("boss-shake-effect");
-    setTimeout(() => {
-        gameContainer.classList.remove("boss-shake-effect");
-    }, 650);
+// ==========================================================================
+// BOSS LEVEL ENTRY ANIMATION: "BOSS AWAKENING / ACTIVATION"
+// Grade 3 Child-Friendly, Map-Integrated Awakening System
+// ==========================================================================
+
+const BOSS_THEMES = {
+    "boss-1": {
+        zone: 1,
+        themeClass: "theme-forest",
+        name: "Forest Realm",
+        title: "Forest Guardian Boss",
+        particles: ["✨", "⭐", "🌿", "🍃", "✨", "🌟"],
+        colors: ["#10b981", "#fbbf24", "#34d399", "#f59e0b"]
+    },
+    "boss-2": {
+        zone: 2,
+        themeClass: "theme-glacier",
+        name: "Frozen Glacier",
+        title: "Frost Golem Boss",
+        particles: ["❄️", "✨", "💎", "⭐", "❄️", "🧊"],
+        colors: ["#38bdf8", "#e0f2fe", "#0284c7", "#7dd3fc"]
+    },
+    "boss-3": {
+        zone: 3,
+        themeClass: "theme-blossom",
+        name: "Blossom Haven",
+        title: "Cherry Blossom Spirit Boss",
+        particles: ["🌸", "✨", "🌺", "⭐", "🌸", "✨"],
+        colors: ["#f472b6", "#ec4899", "#c084fc", "#fbcfe8"]
+    },
+    "boss-4": {
+        zone: 4,
+        themeClass: "theme-tropical",
+        name: "Tropical Bay",
+        title: "Kraken Leviathan Boss",
+        particles: ["🐠", "🐟", "🫧", "🌊", "💧", "✨", "🐡", "🐬", "⭐"],
+        colors: ["#00d4ff", "#0ea5e9", "#06b6d4", "#38bdf8", "#7dd3fc", "#0284c7"]
+    },
+    "boss-5": {
+        zone: 5,
+        themeClass: "theme-desert",
+        name: "Golden Sands",
+        title: "Pharaoh Sand Drake Boss",
+        particles: ["☀️", "✨", "⭐", "🌟", "✨", "⚡"],
+        colors: ["#f59e0b", "#fbbf24", "#d97706", "#fef08a"]
+    },
+    "boss-6": {
+        zone: 6,
+        themeClass: "theme-dragon",
+        name: "Dragon Peak",
+        title: "Infernal Dragon Lord Boss",
+        particles: ["🔥", "✨", "⭐", "💥", "✨", "🌟"],
+        colors: ["#f97316", "#ef4444", "#fbbf24", "#fb923c"]
+    }
+};
+
+let activeBossEntryTimers = [];
+let isBossAwakeningActive = false;
+
+function clearBossEntryTimers() {
+    activeBossEntryTimers.forEach(t => clearTimeout(t));
+    activeBossEntryTimers = [];
 }
 
-function triggerBossUnlockAnimation(bossId = "boss-1") {
-    const bossBtn = document.querySelector(`.boss-level-node[data-level-id="${bossId}"]`);
-    if (bossBtn) {
-        const parentWrapper = bossBtn.closest(".level-node-wrapper");
-        if (parentWrapper) {
-            parentWrapper.classList.remove("emerging-from-hole");
-            void parentWrapper.offsetWidth; // force DOM reflow
-            parentWrapper.classList.add("emerging-from-hole");
-            setTimeout(() => triggerBossScreenShake(), 1250);
-            setTimeout(() => {
-                parentWrapper.classList.remove("emerging-from-hole");
-                if (window.freshlyUnlockedBossId === bossId) window.freshlyUnlockedBossId = null;
-                if (window.forceBossEmergeId === bossId) window.forceBossEmergeId = null;
-            }, 2600);
-            scrollToBossLevel(bossId);
-            return;
-        }
-    }
-    window.forceBossEmergeId = bossId;
-    renderLevelNodes();
-    scrollToBossLevel(bossId);
+// --------------------------------------------------------------------------
+// Child-Friendly Web Audio API Chimes (0 External Dependencies, Pure Synthesizer)
+// --------------------------------------------------------------------------
+
+// Step 1: Soft, magical rising arpeggio ("You found the Boss!")
+function playBossAwakeningAttentionChime() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.type = "sine";
+            const startTime = audioCtx.currentTime + idx * 0.11;
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.01, startTime);
+            gain.gain.linearRampToValueAtTime(0.18, startTime + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.38);
+            osc.start(startTime);
+            osc.stop(startTime + 0.38);
+        });
+    } catch (e) {}
 }
-window.triggerBossUnlockAnimation = triggerBossUnlockAnimation;
+
+// Step 2: Warm, cheerful energetic power-up swell
+function playBossAwakeningPowerChime() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(261.63, audioCtx.currentTime); // C4
+        osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.55); // E5
+        gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 0.25);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.65);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.65);
+    } catch (e) {}
+}
+
+// Step 4: Bright, triumphant double-bell chime for the Announcement Card
+function playBossTitleFanfareChime() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const notes = [783.99, 1046.50]; // G5, C6
+        notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.type = "sine";
+            const startTime = audioCtx.currentTime + idx * 0.16;
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.01, startTime);
+            gain.gain.linearRampToValueAtTime(0.24, startTime + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.45);
+            osc.start(startTime);
+            osc.stop(startTime + 0.45);
+        });
+    } catch (e) {}
+}
+
+// Spawn localized theme-specific sparkles around the Boss badge
+function spawnThematicAwakeningParticles(container, theme) {
+    if (!container) return;
+    container.innerHTML = "";
+    const icons = theme.particles || ["✨", "⭐", "🌟"];
+    const colors = theme.colors || ["#fbbf24", "#f59e0b"];
+
+    for (let i = 0; i < 14; i++) {
+        const particle = document.createElement("span");
+        particle.className = "boss-theme-particle";
+        particle.textContent = icons[i % icons.length];
+        particle.style.color = colors[i % colors.length];
+
+        // Random radial trajectory around the badge
+        const angle = (i / 14) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+        const dist = 55 + Math.random() * 45;
+        const tx = Math.cos(angle) * dist;
+        const ty = Math.sin(angle) * dist - 15;
+
+        particle.style.setProperty("--tx", `${tx.toFixed(1)}px`);
+        particle.style.setProperty("--ty", `${ty.toFixed(1)}px`);
+        particle.style.animationDelay = `${(0.1 + (i * 0.07)).toFixed(2)}s`;
+        particle.style.animationDuration = `${(1.2 + Math.random() * 0.5).toFixed(2)}s`;
+        container.appendChild(particle);
+    }
+}
+
+// ==========================================================================
+// CORE ANIMATION FUNCTION: runBossAwakeningAnimation
+// Total duration: ~3.5 seconds
+// ==========================================================================
+function runBossAwakeningAnimation(bossId = "boss-1", onComplete = null) {
+    if (isBossAwakeningActive) return;
+    isBossAwakeningActive = true;
+    clearBossEntryTimers();
+
+    const normalizedId = String(bossId).startsWith("boss-") ? bossId : `boss-${bossId}`;
+    const bossNode = getBossNode(normalizedId) || BOSS_NODES[0];
+    const theme = BOSS_THEMES[bossNode.id] || BOSS_THEMES["boss-1"];
+
+    // Locate the existing Boss DOM element on the map
+    const btn = document.querySelector(`.boss-level-node[data-level-id="${bossNode.id}"]`);
+    const wrapper = btn?.closest(".level-node-wrapper");
+
+    // Fallback if elements not in DOM
+    if (!btn || !wrapper) {
+        isBossAwakeningActive = false;
+        if (typeof onComplete === "function") onComplete();
+        return;
+    }
+
+    // Overlay elements
+    const overlay = document.getElementById("boss-awakening-overlay");
+    const banner = document.getElementById("boss-awakening-banner");
+    const bannerTag = document.getElementById("boss-banner-tag");
+    const bannerTitle = document.getElementById("boss-banner-title");
+    const bannerSubtitle = document.getElementById("boss-banner-subtitle");
+
+    // Center map smoothly on the Boss node
+    scrollToBossLevel(bossNode.id);
+
+    // Apply Theme and Awakening Elevation to existing wrapper
+    wrapper.classList.add("boss-awakening-active", theme.themeClass);
+    if (overlay) {
+        overlay.className = `boss-awakening-overlay ${theme.themeClass}`;
+        overlay.classList.remove("hidden", "transition-out");
+    }
+    if (banner) {
+        banner.classList.add("hidden");
+    }
+
+    // ----------------------------------------------------------------------
+    // STEP 1 — BOSS ATTENTION (0.0s – 0.7s)
+    // ----------------------------------------------------------------------
+    btn.classList.add("boss-attention");
+    playBossAwakeningAttentionChime();
+
+    // ----------------------------------------------------------------------
+    // STEP 2 & 3 — BOSS AWAKENS & WORLD REACTION (0.7s – 2.0s)
+    // ----------------------------------------------------------------------
+    activeBossEntryTimers.push(setTimeout(() => {
+        btn.classList.remove("boss-attention");
+        btn.classList.add("boss-awakened");
+
+        // Ground halo (localized area becomes slightly brighter)
+        const groundHalo = document.createElement("div");
+        groundHalo.className = "boss-ambient-ground-halo";
+        wrapper.appendChild(groundHalo);
+
+        // Radiant spinning light rays behind boss artwork
+        const radiantRays = document.createElement("div");
+        radiantRays.className = "boss-radiant-rays";
+        wrapper.appendChild(radiantRays);
+
+        // World Reaction: Expanding pulse wave traveling along surrounding ground/path
+        const shockwave = document.createElement("div");
+        shockwave.className = "boss-world-reaction-pulse";
+        wrapper.appendChild(shockwave);
+
+        // Thematic sparkles reacting around the existing badge
+        const particlesWrap = document.createElement("div");
+        particlesWrap.className = "boss-awakening-particles-wrap";
+        spawnThematicAwakeningParticles(particlesWrap, theme);
+        wrapper.appendChild(particlesWrap);
+
+        playBossAwakeningPowerChime();
+    }, 700));
+
+    // ----------------------------------------------------------------------
+    // STEP 4 — BOSS TITLE ANNOUNCEMENT (1.4s – 3.2s)
+    // ----------------------------------------------------------------------
+    activeBossEntryTimers.push(setTimeout(() => {
+        if (banner) {
+            if (bannerTag) bannerTag.innerText = `👑 ZONE ${theme.zone} BOSS CHALLENGE`;
+            if (bannerTitle) bannerTitle.innerText = "BOSS LEVEL";
+            if (bannerSubtitle) bannerSubtitle.innerHTML = `Are you ready? <span class="banner-sparkle">⭐</span>`;
+
+            banner.classList.remove("hidden");
+            playBossTitleFanfareChime();
+        }
+    }, 1400));
+
+    // ----------------------------------------------------------------------
+    // STEP 5 — SMOOTH TRANSITION TO BOSS LEVEL (3.2s – 3.6s)
+    // ----------------------------------------------------------------------
+    activeBossEntryTimers.push(setTimeout(() => {
+        if (overlay) {
+            overlay.classList.add("transition-out");
+        }
+    }, 3200));
+
+    activeBossEntryTimers.push(setTimeout(() => {
+        // Cleanup all temporary awakening DOM elements
+        const halo = wrapper.querySelector(".boss-ambient-ground-halo");
+        const rays = wrapper.querySelector(".boss-radiant-rays");
+        const pulse = wrapper.querySelector(".boss-world-reaction-pulse");
+        const parts = wrapper.querySelector(".boss-awakening-particles-wrap");
+        if (halo) halo.remove();
+        if (rays) rays.remove();
+        if (pulse) pulse.remove();
+        if (parts) parts.remove();
+
+        wrapper.classList.remove("boss-awakening-active", theme.themeClass);
+        btn.classList.remove("boss-attention", "boss-awakened");
+
+        if (overlay) {
+            overlay.classList.add("hidden");
+            overlay.classList.remove("transition-out");
+        }
+        if (banner) {
+            banner.classList.add("hidden");
+        }
+
+        isBossAwakeningActive = false;
+
+        // Mark this boss animation as completed in user progress
+        userProgress = userProgress || {};
+        userProgress.playedBossAnimations = userProgress.playedBossAnimations || {};
+        userProgress.playedBossAnimations[bossNode.id] = true;
+        if (typeof saveProgress === "function") {
+            saveProgress();
+        }
+
+        // Execute transition callback to launch existing Boss level experience
+        if (typeof onComplete === "function") {
+            onComplete();
+        }
+    }, 3600));
+}
+
+// Aliases for seamless backward compatibility
+window.runBossAwakeningAnimation = runBossAwakeningAnimation;
+window.runBossSelfAssemblyAnimation = runBossAwakeningAnimation;
+window.runBossSidekickEntryAnimation = runBossAwakeningAnimation;
+window.triggerBossAssemblyAnimation = runBossAwakeningAnimation;
+window.triggerBossSidekickAnimation = runBossAwakeningAnimation;
+window.triggerBossUnlockAnimation = runBossAwakeningAnimation;
 
 function scrollToBossLevel(bossId) {
     const bossBtn = document.querySelector(`.boss-level-node[data-level-id="${bossId}"]`);
@@ -1821,6 +2384,1544 @@ function scrollToBossLevel(bossId) {
     }
 }
 
+// ==========================================================================
+// BOSS LEVEL REVEAL ANIMATION (Map-Integrated Level 5 Completion Sequence)
+// Duration: ~3.5s total (Level 5 celebration -> Energy travel -> Boss emergence -> Bubble)
+// ==========================================================================
+
+let activeBossRevealTimers = [];
+let isBossRevealActive = false;
+window.bossCurrentlyRevealingId = null;
+
+function clearBossRevealTimers() {
+    activeBossRevealTimers.forEach(t => clearTimeout(t));
+    activeBossRevealTimers = [];
+}
+
+// Web Audio API Synthesizers for Cinematic 5-Phase Reveal
+function getRevealAudioContext() {
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return null;
+        if (!window._gameAudioCtx) {
+            window._gameAudioCtx = new AudioCtx();
+        }
+        if (window._gameAudioCtx.state === "suspended") {
+            window._gameAudioCtx.resume();
+        }
+        return window._gameAudioCtx;
+    } catch (e) {
+        return null;
+    }
+}
+
+// Forest Sound: Celestial Emerald Beam Descent (Gentle warm woodland drone + airy wind rustle & leaf harmonics)
+function playForestBeamSound() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Warm organic woodland sub-drone
+        const oscSub = ctx.createOscillator();
+        const gainSub = ctx.createGain();
+        oscSub.type = "sine";
+        oscSub.frequency.setValueAtTime(174.61, now); // F3
+        oscSub.frequency.exponentialRampToValueAtTime(349.23, now + 0.85); // F4
+        gainSub.gain.setValueAtTime(0.001, now);
+        gainSub.gain.linearRampToValueAtTime(0.20, now + 0.2);
+        gainSub.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+        oscSub.connect(gainSub);
+        gainSub.connect(ctx.destination);
+        oscSub.start(now);
+        oscSub.stop(now + 1.25);
+
+        // Wind rustle sweep via filtered noise / low-pass triangle
+        const windOsc = ctx.createOscillator();
+        const windFilter = ctx.createBiquadFilter();
+        const windGain = ctx.createGain();
+        windOsc.type = "triangle";
+        windOsc.frequency.setValueAtTime(130, now);
+        windFilter.type = "bandpass";
+        windFilter.frequency.setValueAtTime(600, now);
+        windFilter.frequency.exponentialRampToValueAtTime(1400, now + 0.9);
+        windGain.gain.setValueAtTime(0.001, now);
+        windGain.gain.linearRampToValueAtTime(0.08, now + 0.3);
+        windGain.gain.exponentialRampToValueAtTime(0.001, now + 1.1);
+        windOsc.connect(windFilter);
+        windFilter.connect(windGain);
+        windGain.connect(ctx.destination);
+        windOsc.start(now);
+        windOsc.stop(now + 1.1);
+
+        // High leaf-sparkle nature harmonics (A4, C5, E5, A5, C6)
+        [440.00, 523.25, 659.25, 880.00, 1046.50].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const start = now + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.08, start + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.7);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.7);
+        });
+    } catch (e) {}
+}
+
+// Forest Sound: Whirlwind Leaf Burst & Ring Awakening (Ascending F-major pentatonic harp chime)
+function playLeafBurstChime() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        // Pentatonic woodland vortex: F4, A4, C5, D5, F5, A5, C6
+        const freqs = [349.23, 440.00, 523.25, 587.33, 698.46, 880.00, 1046.50];
+        freqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            const startTime = now + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.16, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.7);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.7);
+        });
+    } catch (e) {}
+}
+
+// Forest Sound: Grand Emerald Forest Fanfare (Triumphant woodland brass + shimmering glockenspiel)
+function playGrandForestFanfare() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Warm horn chords: F3, C4, F4, A4, C5
+        [174.61, 261.63, 349.23, 440.00, 523.25].forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = "sawtooth";
+            filter.type = "lowpass";
+            filter.frequency.setValueAtTime(1500, now);
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.09, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.95);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.95);
+        });
+
+        // High emerald crystal bells (F5, A5, C6, F6)
+        [698.46, 880.00, 1046.50, 1396.91].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const startTime = now + 0.12 + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.14, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.8);
+        });
+    } catch (e) {}
+}
+
+// Phase 2 Sound: Celestial Light Beam Descent (Warm resonant sub-bass + crystalline overtone)
+function playCelestialBeamSound() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Sub fundamental sine sweep
+        const oscSub = ctx.createOscillator();
+        const gainSub = ctx.createGain();
+        oscSub.type = "sine";
+        oscSub.frequency.setValueAtTime(164.81, now); // E3
+        oscSub.frequency.exponentialRampToValueAtTime(329.63, now + 0.85); // Ramps to E4
+        gainSub.gain.setValueAtTime(0.001, now);
+        gainSub.gain.linearRampToValueAtTime(0.22, now + 0.2);
+        gainSub.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+        oscSub.connect(gainSub);
+        gainSub.connect(ctx.destination);
+        oscSub.start(now);
+        oscSub.stop(now + 1.25);
+
+        // High shimmer harmonics
+        [659.25, 987.77, 1318.51].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const start = now + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.09, start + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.65);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.65);
+        });
+    } catch (e) {}
+}
+
+// Phase 3 Sound: Magic Ring & Helical Spiral Awakening (Ascending pentatonic crystal chime arpeggio)
+function playMagicAwakeningChime() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        // Pentatonic magical vortex: G4, B4, D5, G5, B5, D6
+        const freqs = [392.00, 493.88, 587.33, 783.99, 987.77, 1174.66];
+        freqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            const startTime = now + (idx * 0.1);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.18, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.7);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.7);
+        });
+    } catch (e) {}
+}
+
+// Phase 4 Sound: Grand Boss Fanfare (Triumphant brass chord + sparkling glockenspiel bells)
+function playGrandBossFanfare() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Brass fanfare chord: C4, G4, C5, E5, G5
+        const brassFreqs = [261.63, 392.00, 523.25, 659.25, 783.99];
+        brassFreqs.forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = "sawtooth";
+            filter.type = "lowpass";
+            filter.frequency.setValueAtTime(1400, now);
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.09, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.95);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.95);
+        });
+
+        // High crystal sparkle bells (C6, E6, G6, C7)
+        const bellFreqs = [1046.50, 1318.51, 1567.98, 2093.00];
+        bellFreqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const startTime = now + 0.15 + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.14, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.8);
+        });
+    } catch (e) {}
+}
+
+// Winter Sound: Glacial Light Beam Descent (Ethereal crystal tone + harmonic ice overtones)
+function playGlacialBeamSound() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Crystal frost drone
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(293.66, now); // D4
+        osc.frequency.exponentialRampToValueAtTime(587.33, now + 0.85); // D5
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.25);
+
+        // High icy shimmers
+        [1174.66, 1479.98, 1760.00, 2349.32].forEach((freq, idx) => {
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
+            o.type = "sine";
+            const start = now + (idx * 0.07);
+            o.frequency.setValueAtTime(freq, start);
+            g.gain.setValueAtTime(0.001, start);
+            g.gain.linearRampToValueAtTime(0.08, start + 0.04);
+            g.gain.exponentialRampToValueAtTime(0.001, start + 0.7);
+            o.connect(g);
+            g.connect(ctx.destination);
+            o.start(start);
+            o.stop(start + 0.7);
+        });
+    } catch (e) {}
+}
+
+// Winter Sound: Ice Formation & Crystalline Shards Rise (Delicate crystal bell arpeggio)
+function playIceFormationChime() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        // Frost crystal ascending arpeggio: D5, F5, A5, C6, E6, A6
+        const freqs = [587.33, 698.46, 880.00, 1046.50, 1318.51, 1760.00];
+        freqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            const start = now + (idx * 0.09);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.16, start + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.65);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.65);
+        });
+    } catch (e) {}
+}
+
+// Winter Sound: Grand Glacial Frost Fanfare (Deep ice brass + high crystalline sparkle bells)
+function playGrandFrostFanfare() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Grand ice fanfare chords: D4, A4, D5, F#5, A5
+        [293.66, 440.00, 587.33, 739.99, 880.00].forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = "sawtooth";
+            filter.type = "lowpass";
+            filter.frequency.setValueAtTime(1600, now);
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.09, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.95);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.95);
+        });
+
+        // High sparkling ice glockenspiel bells
+        [1174.66, 1479.98, 1760.00, 2349.32].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const start = now + 0.12 + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.14, start + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.8);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.8);
+        });
+    } catch (e) {}
+}
+
+// Blossom Sound: Celestial Rose Beam Descent (Warm harmonic flute & harp drone)
+function playBlossomBeamSound() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Warm floral drone
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(369.99, now); // F#4
+        osc.frequency.exponentialRampToValueAtTime(554.37, now + 0.85); // C#5
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.20, now + 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.25);
+
+        // High shimmer sakura harmonics
+        [739.99, 1108.73, 1479.98, 1864.66].forEach((freq, idx) => {
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
+            o.type = "sine";
+            const start = now + (idx * 0.08);
+            o.frequency.setValueAtTime(freq, start);
+            g.gain.setValueAtTime(0.001, start);
+            g.gain.linearRampToValueAtTime(0.08, start + 0.04);
+            g.gain.exponentialRampToValueAtTime(0.001, start + 0.65);
+            o.connect(g);
+            g.connect(ctx.destination);
+            o.start(start);
+            o.stop(start + 0.65);
+        });
+    } catch (e) {}
+}
+
+// Blossom Sound: Petal Burst & Spiral Awakening (Enchanting sakura pentatonic arpeggio)
+function playPetalBurstChime() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        // Sakura pentatonic: F#5, G#5, A#5, C#6, D#6, F#6
+        const freqs = [739.99, 830.61, 932.33, 1108.73, 1244.51, 1479.98];
+        freqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            const start = now + (idx * 0.09);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.16, start + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.65);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.65);
+        });
+    } catch (e) {}
+}
+
+// Blossom Sound: Grand Cherry Blossom Fanfare (Warm majestic fanfare + sweet chime bells)
+function playGrandBlossomFanfare() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Warm floral fanfare chords: F#4, C#5, F#5, A#5, C#6
+        [369.99, 554.37, 739.99, 932.33, 1108.73].forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = "sawtooth";
+            filter.type = "lowpass";
+            filter.frequency.setValueAtTime(1500, now);
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.09, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.95);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.95);
+        });
+
+        // High crystal sparkle bells (F#6, A#6, C#7, F#7)
+        [1479.98, 1864.66, 2217.46, 2959.96].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const start = now + 0.12 + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.14, start + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.8);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.8);
+        });
+    } catch (e) {}
+}
+
+// Dragon Sound: Volcano Lava Beam (Deep magma rumble + blazing upward rush)
+function playVolcanoBeamSound() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Sub-bass magma rumble
+        const subOsc = ctx.createOscillator();
+        const subGain = ctx.createGain();
+        subOsc.type = "triangle";
+        subOsc.frequency.setValueAtTime(55, now);
+        subOsc.frequency.exponentialRampToValueAtTime(110, now + 0.85);
+        subGain.gain.setValueAtTime(0.001, now);
+        subGain.gain.linearRampToValueAtTime(0.24, now + 0.15);
+        subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+        subOsc.connect(subGain);
+        subGain.connect(ctx.destination);
+        subOsc.start(now);
+        subOsc.stop(now + 0.9);
+
+        // Roaring molten fire sweep
+        const fireOsc = ctx.createOscillator();
+        const fireGain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+        fireOsc.type = "sawtooth";
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(400, now);
+        filter.frequency.exponentialRampToValueAtTime(1800, now + 0.7);
+        fireOsc.frequency.setValueAtTime(130.81, now); // C3
+        fireOsc.frequency.exponentialRampToValueAtTime(392.00, now + 0.75); // G4
+        fireGain.gain.setValueAtTime(0.001, now);
+        fireGain.gain.linearRampToValueAtTime(0.12, now + 0.1);
+        fireGain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
+        fireOsc.connect(filter);
+        filter.connect(fireGain);
+        fireGain.connect(ctx.destination);
+        fireOsc.start(now);
+        fireOsc.stop(now + 0.85);
+
+        // Blazing gold spark harmonics
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
+            o.type = "sine";
+            const start = now + (idx * 0.07);
+            o.frequency.setValueAtTime(freq, start);
+            g.gain.setValueAtTime(0.001, start);
+            g.gain.linearRampToValueAtTime(0.09, start + 0.04);
+            g.gain.exponentialRampToValueAtTime(0.001, start + 0.65);
+            o.connect(g);
+            g.connect(ctx.destination);
+            o.start(start);
+            o.stop(start + 0.65);
+        });
+    } catch (e) {}
+}
+
+// Dragon Sound: Flame Burst & Spiral Awakening (Explosive crackle + heroic minor pentatonic arpeggio)
+function playFlameBurstChime() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        // Heroic fiery arpeggio: C4, D#4, F4, G4, A#4, C5, D#5
+        const freqs = [261.63, 311.13, 349.23, 392.00, 466.16, 523.25, 622.25];
+        freqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            const start = now + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.18, start + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.7);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.7);
+        });
+    } catch (e) {}
+}
+
+// Dragon Sound: Grand Infernal Dragon Fanfare (Mighty volcanic brass chords + blazing fire chimes)
+function playGrandDragonFanfare() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Mighty dragon brass chords: C3, G3, C4, D#4, G4, C5
+        [130.81, 196.00, 261.63, 311.13, 392.00, 523.25].forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = "sawtooth";
+            filter.type = "lowpass";
+            filter.frequency.setValueAtTime(2200, now);
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.12, now + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.1);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 1.1);
+        });
+
+        // Blazing high diamond embers (G5, C6, D#6, G6)
+        [783.99, 1046.50, 1244.51, 1567.98].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const start = now + 0.12 + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.15, start + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.85);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.85);
+        });
+    } catch (e) {}
+}
+
+// Tropical Bay Sound: Celestial Azure Water Beam Descent (Ocean tidal surge + gentle sea foam & sparkling water droplet harmonics)
+function playOceanBeamSound() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Oceanic tidal sub-surge
+        const oscSub = ctx.createOscillator();
+        const gainSub = ctx.createGain();
+        oscSub.type = "sine";
+        oscSub.frequency.setValueAtTime(130.81, now); // C3
+        oscSub.frequency.exponentialRampToValueAtTime(261.63, now + 0.9); // C4
+        gainSub.gain.setValueAtTime(0.001, now);
+        gainSub.gain.linearRampToValueAtTime(0.22, now + 0.25);
+        gainSub.gain.exponentialRampToValueAtTime(0.001, now + 1.35);
+        oscSub.connect(gainSub);
+        gainSub.connect(ctx.destination);
+        oscSub.start(now);
+        oscSub.stop(now + 1.35);
+
+        // Sea foam / rushing water filter sweep
+        const surfOsc = ctx.createOscillator();
+        const surfFilter = ctx.createBiquadFilter();
+        const surfGain = ctx.createGain();
+        surfOsc.type = "triangle";
+        surfOsc.frequency.setValueAtTime(95, now);
+        surfFilter.type = "bandpass";
+        surfFilter.frequency.setValueAtTime(450, now);
+        surfFilter.frequency.exponentialRampToValueAtTime(1600, now + 0.95);
+        surfGain.gain.setValueAtTime(0.001, now);
+        surfGain.gain.linearRampToValueAtTime(0.10, now + 0.35);
+        surfGain.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+        surfOsc.connect(surfFilter);
+        surfFilter.connect(surfGain);
+        surfGain.connect(ctx.destination);
+        surfOsc.start(now);
+        surfOsc.stop(now + 1.25);
+
+        // Crystalline aqua water droplet harmonics (C5, E5, G5, C6, E6)
+        [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const start = now + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.10, start + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.75);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.75);
+        });
+    } catch (e) {}
+}
+
+// Tropical Bay Sound: 360-Degree Leaping Fish Geyser Burst & Ring Awakening (Crisp aquatic splash + ascending pentatonic water chime)
+function playWaterSplashBurstChime() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        // Pentatonic aqua chime: G4, C5, D5, E5, G5, C6, D6
+        const freqs = [392.00, 523.25, 587.33, 659.25, 783.99, 1046.50, 1174.66];
+        freqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            const startTime = now + (idx * 0.075);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.16, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.7);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.7);
+        });
+
+        // Bubble splash drop sweep
+        const splashOsc = ctx.createOscillator();
+        const splashGain = ctx.createGain();
+        splashOsc.type = "sine";
+        splashOsc.frequency.setValueAtTime(900, now);
+        splashOsc.frequency.exponentialRampToValueAtTime(320, now + 0.18);
+        splashGain.gain.setValueAtTime(0.12, now);
+        splashGain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        splashOsc.connect(splashGain);
+        splashGain.connect(ctx.destination);
+        splashOsc.start(now);
+        splashOsc.stop(now + 0.22);
+    } catch (e) {}
+}
+
+// Tropical Bay Sound: Grand Ocean Fanfare (Majestic marine brass + shimmering water glockenspiel)
+function playGrandOceanFanfare() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Mighty ocean horn chords: C3, G3, C4, E4, G4, C5
+        [130.81, 196.00, 261.63, 329.63, 392.00, 523.25].forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = "sawtooth";
+            filter.type = "lowpass";
+            filter.frequency.setValueAtTime(1800, now);
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.10, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.05);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 1.05);
+        });
+
+        // High crystal ocean bells (G5, C6, E6, G6)
+        [783.99, 1046.50, 1318.51, 1567.98].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const startTime = now + 0.10 + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.14, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.85);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.85);
+        });
+    } catch (e) {}
+}
+
+// Desert Sound: Golden Solar Sand Beam Descent (Warm desert wind drone + shimmering sun harmonics)
+function playDesertBeamSound() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Warm desert sun sub-drone
+        const oscSub = ctx.createOscillator();
+        const gainSub = ctx.createGain();
+        oscSub.type = "sine";
+        oscSub.frequency.setValueAtTime(146.83, now); // D3
+        oscSub.frequency.exponentialRampToValueAtTime(293.66, now + 0.85); // D4
+        gainSub.gain.setValueAtTime(0.001, now);
+        gainSub.gain.linearRampToValueAtTime(0.20, now + 0.2);
+        gainSub.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+        oscSub.connect(gainSub);
+        gainSub.connect(ctx.destination);
+        oscSub.start(now);
+        oscSub.stop(now + 1.25);
+
+        // Sand wind rustle / warm breeze sweep
+        const windOsc = ctx.createOscillator();
+        const windFilter = ctx.createBiquadFilter();
+        const windGain = ctx.createGain();
+        windOsc.type = "triangle";
+        windOsc.frequency.setValueAtTime(110, now);
+        windFilter.type = "bandpass";
+        windFilter.frequency.setValueAtTime(500, now);
+        windFilter.frequency.exponentialRampToValueAtTime(1500, now + 0.9);
+        windGain.gain.setValueAtTime(0.001, now);
+        windGain.gain.linearRampToValueAtTime(0.09, now + 0.3);
+        windGain.gain.exponentialRampToValueAtTime(0.001, now + 1.15);
+        windOsc.connect(windFilter);
+        windFilter.connect(windGain);
+        windGain.connect(ctx.destination);
+        windOsc.start(now);
+        windOsc.stop(now + 1.15);
+
+        // High golden sand sparkle nature harmonics (D5, F#5, A5, D6, F#6)
+        [587.33, 739.99, 880.00, 1174.66, 1479.98].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const start = now + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.001, start);
+            gain.gain.linearRampToValueAtTime(0.09, start + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.75);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.75);
+        });
+    } catch (e) {}
+}
+
+// Desert Sound: 360-Degree Sandstorm & Mirage Burst (Desert whirl + Phrygian dominant golden chime)
+function playDesertBurstChime() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        // Egyptian / Desert Phrygian gold arpeggio: D4, Eb4, F#4, G4, A4, Bb4, D5, F#5
+        const freqs = [293.66, 311.13, 369.99, 392.00, 440.00, 466.16, 587.33, 739.99];
+        freqs.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            const startTime = now + (idx * 0.07);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.16, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.7);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.7);
+        });
+    } catch (e) {}
+}
+
+// Desert Sound: Grand Pharaoh Sand Drake Fanfare (Mighty royal brass + sparkling gold glockenspiel)
+function playGrandDesertFanfare() {
+    try {
+        const ctx = getRevealAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        // Royal Egyptian brass chords: D3, A3, D4, F#4, A4, D5
+        [146.83, 220.00, 293.66, 369.99, 440.00, 587.33].forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = "sawtooth";
+            filter.type = "lowpass";
+            filter.frequency.setValueAtTime(1900, now);
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.11, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.05);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 1.05);
+        });
+
+        // High sunburst golden bells (A5, D6, F#6, A6)
+        [880.00, 1174.66, 1479.98, 1760.00].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            const startTime = now + 0.10 + (idx * 0.08);
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.linearRampToValueAtTime(0.14, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.85);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.85);
+        });
+    } catch (e) {}
+}
+
+function playBossRevealAnimation(completedLevelId = 5, bossId = "boss-1", onComplete = null) {
+    if (isBossRevealActive) return;
+    isBossRevealActive = true;
+    clearBossRevealTimers();
+
+    const normalizedBossId = String(bossId).startsWith("boss-") ? bossId : `boss-${bossId}`;
+    const bossNode = getBossNode(normalizedBossId) || BOSS_NODES[0];
+    const sourceNode = LEVEL_NODES.find(n => n.id === Number(completedLevelId)) || LEVEL_NODES[4]; // Level 5, 10, 15 or 30 default
+
+    const isWinter = (bossNode.zone === 2 || bossNode.id === "boss-2" || normalizedBossId === "boss-2");
+    const isBlossom = (bossNode.zone === 3 || bossNode.id === "boss-3" || normalizedBossId === "boss-3");
+    const isTropical = (bossNode.zone === 4 || bossNode.id === "boss-4" || normalizedBossId === "boss-4");
+    const isDesert = (bossNode.zone === 5 || bossNode.id === "boss-5" || normalizedBossId === "boss-5");
+    const isDragon = (bossNode.zone === 6 || bossNode.id === "boss-6" || normalizedBossId === "boss-6");
+    const themeClass = isWinter ? "theme-glacier" : (isBlossom ? "theme-blossom" : (isTropical ? "theme-tropical" : (isDesert ? "theme-desert" : (isDragon ? "theme-dragon" : "theme-forest"))));
+
+    const gameEl = document.getElementById("game");
+    const fxLayer = document.getElementById("boss-reveal-fx-layer");
+    if (!gameEl || !fxLayer) {
+        isBossRevealActive = false;
+        if (typeof onComplete === "function") onComplete();
+        return;
+    }
+
+    fxLayer.innerHTML = "";
+    fxLayer.className = `boss-reveal-fx-layer ${themeClass}`;
+
+    const gameWidth = gameEl.offsetWidth;
+    const gameHeight = gameEl.offsetHeight;
+
+    const targetX = (bossNode.x / 100) * gameWidth;
+    const targetY = (bossNode.y / 100) * gameHeight;
+
+    const bossBtn = document.querySelector(`.boss-level-node[data-level-id="${bossNode.id}"]`);
+    const bossWrapper = bossBtn?.closest(".level-node-wrapper");
+
+    // Ensure Boss node is completely hidden initially during Phases 1-3
+    if (bossWrapper) {
+        bossWrapper.classList.remove("boss-idle-active", "boss-revealing-active");
+        bossWrapper.classList.add("boss-revealing-init", themeClass);
+    }
+
+    // ----------------------------------------------------------------------
+    // PHASE 1: LEVEL COMPLETE (BOSS HIDDEN) (0s – 1.0s)
+    // ----------------------------------------------------------------------
+    // Smooth camera pan centering right on the Boss mountain plateau / altar
+    const scrollDest = Math.max(0, targetX - window.innerWidth / 2);
+    window.scrollTo({
+        left: scrollDest,
+        behavior: "smooth"
+    });
+    document.documentElement.scrollLeft = scrollDest;
+    document.body.scrollLeft = scrollDest;
+
+    // Celebration pulse on completed milestone coin
+    const sourceBtn = document.querySelector(`.level-node[data-level-id="${sourceNode.id}"]`);
+    const sourceWrapper = sourceBtn?.closest(".level-node-wrapper");
+    if (sourceBtn) {
+        sourceBtn.classList.add("level-node-reveal-source");
+    }
+    if (sourceWrapper) {
+        const ring = document.createElement("div");
+        ring.className = "level-completion-sparkle-ring";
+        sourceWrapper.appendChild(ring);
+        activeBossRevealTimers.push(setTimeout(() => ring.remove(), 1000));
+    }
+
+    // Anchor stage positioned directly at the Boss plateau center
+    const stage = document.createElement("div");
+    stage.className = `boss-cinematic-stage ${themeClass}`;
+    stage.style.left = `${targetX}px`;
+    stage.style.top = `${targetY}px`;
+    fxLayer.appendChild(stage);
+
+    let beamEl = null;
+    let beamCoreEl = null;
+    let groundDiscEl = null;
+    let magicRingsEl = null;
+    let spiralRibbonEl = null;
+    let particleInterval = null;
+
+    // ----------------------------------------------------------------------
+    // PHASE 2: ENERGY APPEARS (BEAM & PETAL/SNOW/GOLD/FLAME/LEAF PARTICLES) (1.0s – 2.0s)
+    // ----------------------------------------------------------------------
+    activeBossRevealTimers.push(setTimeout(() => {
+        if (isWinter) {
+            playGlacialBeamSound();
+        } else if (isBlossom) {
+            playBlossomBeamSound();
+        } else if (isTropical) {
+            playOceanBeamSound();
+        } else if (isDesert) {
+            playDesertBeamSound();
+        } else if (isDragon) {
+            playVolcanoBeamSound();
+        } else {
+            playForestBeamSound();
+        }
+
+        // 1. Plateau Ground Glowing Light Disc
+        groundDiscEl = document.createElement("div");
+        groundDiscEl.className = "boss-cinematic-ground-disc";
+        stage.appendChild(groundDiscEl);
+
+        // 2. Vertical Celestial Light Beam
+        beamEl = document.createElement("div");
+        beamEl.className = "boss-cinematic-beam";
+        stage.appendChild(beamEl);
+
+        // 3. Inner White-Hot Core
+        beamCoreEl = document.createElement("div");
+        beamCoreEl.className = "boss-cinematic-beam-core";
+        stage.appendChild(beamCoreEl);
+
+        // 4. Reveal Boss Level Node immediately as sparks and circle appear (Eliminates 2-second delay)
+        if (bossWrapper) {
+            bossWrapper.classList.remove("boss-revealing-init");
+            bossWrapper.classList.add("boss-revealing-active", themeClass);
+        }
+
+        // 5. Continuous Swarm of Ascending Particles, Leaves & Sparks
+        let spawnedParticles = 0;
+        particleInterval = setInterval(() => {
+            if (spawnedParticles >= 28 || !isBossRevealActive) {
+                clearInterval(particleInterval);
+                return;
+            }
+            spawnedParticles++;
+
+            // In winter, spawn sparkling snowflakes
+            if (isWinter && Math.random() < 0.35) {
+                const flake = document.createElement("span");
+                flake.className = "boss-cinematic-snowflake";
+                const flakes = ["❄️", "✨", "💎", "⭐"];
+                flake.textContent = flakes[Math.floor(Math.random() * flakes.length)];
+                const driftX = (Math.random() - 0.5) * 60;
+                const ascendY = -Math.floor(Math.random() * 120 + 200);
+                const duration = (Math.random() * 0.5 + 0.9).toFixed(2);
+                flake.style.setProperty("--drift-x", `${driftX}px`);
+                flake.style.setProperty("--ascend-y", `${ascendY}px`);
+                flake.style.setProperty("--particle-duration", `${duration}s`);
+                flake.style.left = `${(Math.random() - 0.5) * 36}px`;
+                flake.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                stage.appendChild(flake);
+                setTimeout(() => flake.remove(), duration * 1000);
+            } 
+            // In blossom haven, spawn drifting cherry blossom petals
+            else if (isBlossom && Math.random() < 0.35) {
+                const petal = document.createElement("span");
+                petal.className = "boss-cinematic-petal";
+                const petals = ["🌸", "🌺", "✨", "⭐"];
+                petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+                const driftX = (Math.random() - 0.5) * 65;
+                const ascendY = -Math.floor(Math.random() * 120 + 200);
+                const duration = (Math.random() * 0.5 + 0.9).toFixed(2);
+                petal.style.setProperty("--drift-x", `${driftX}px`);
+                petal.style.setProperty("--ascend-y", `${ascendY}px`);
+                petal.style.setProperty("--particle-duration", `${duration}s`);
+                petal.style.left = `${(Math.random() - 0.5) * 36}px`;
+                petal.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                stage.appendChild(petal);
+                setTimeout(() => petal.remove(), duration * 1000);
+            }
+            // In dragon peak, spawn volcanic flames & embers
+            else if (isDragon && Math.random() < 0.38) {
+                const flame = document.createElement("span");
+                flame.className = "boss-cinematic-flame";
+                const flames = ["🔥", "⚡", "✨", "🌋", "🔥"];
+                flame.textContent = flames[Math.floor(Math.random() * flames.length)];
+                const driftX = (Math.random() - 0.5) * 65;
+                const ascendY = -Math.floor(Math.random() * 130 + 210);
+                const duration = (Math.random() * 0.5 + 0.9).toFixed(2);
+                flame.style.setProperty("--drift-x", `${driftX}px`);
+                flame.style.setProperty("--ascend-y", `${ascendY}px`);
+                flame.style.setProperty("--particle-duration", `${duration}s`);
+                flame.style.left = `${(Math.random() - 0.5) * 36}px`;
+                flame.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                stage.appendChild(flame);
+                setTimeout(() => flame.remove(), duration * 1000);
+            }
+            // In Tropical Bay, spawn swimming fish, sparkling bubbles, water droplets & cyan sparks
+            else if (isTropical) {
+                const rand = Math.random();
+                if (rand < 0.45) {
+                    // 3D Swimming & Leaping Tropical Fish
+                    const fish = document.createElement("span");
+                    fish.className = "boss-cinematic-fish";
+                    const fishes = ["🐠", "🐟", "🐡", "🐬", "🐠", "🐟"];
+                    fish.textContent = fishes[Math.floor(Math.random() * fishes.length)];
+                    const driftX = (Math.random() - 0.5) * 80;
+                    const ascendY = -Math.floor(Math.random() * 140 + 220);
+                    const duration = (Math.random() * 0.5 + 1.2).toFixed(2);
+                    const fishSize = Math.floor(Math.random() * 8) + 20;
+                    fish.style.fontSize = `${fishSize}px`;
+                    fish.style.setProperty("--drift-x", `${driftX}px`);
+                    fish.style.setProperty("--ascend-y", `${ascendY}px`);
+                    fish.style.setProperty("--particle-duration", `${duration}s`);
+                    fish.style.left = `${(Math.random() - 0.5) * 44}px`;
+                    fish.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                    stage.appendChild(fish);
+                    setTimeout(() => fish.remove(), duration * 1000);
+                } else if (rand < 0.72) {
+                    // Luminous Aqua-Cyan Diamond Sparkle
+                    const spark = document.createElement("span");
+                    spark.className = "boss-cinematic-water-spark";
+                    const sparks = ["✦", "✨", "💧", "💠", "⭐", "🫧"];
+                    spark.textContent = sparks[Math.floor(Math.random() * sparks.length)];
+                    const driftX = (Math.random() - 0.5) * 65;
+                    const ascendY = -Math.floor(Math.random() * 125 + 200);
+                    const duration = (Math.random() * 0.5 + 0.95).toFixed(2);
+                    spark.style.setProperty("--drift-x", `${driftX}px`);
+                    spark.style.setProperty("--ascend-y", `${ascendY}px`);
+                    spark.style.setProperty("--particle-duration", `${duration}s`);
+                    spark.style.left = `${(Math.random() - 0.5) * 36}px`;
+                    spark.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                    stage.appendChild(spark);
+                    setTimeout(() => spark.remove(), duration * 1000);
+                } else if (rand < 0.88) {
+                    // Floating Aqua Bubble
+                    const bubble = document.createElement("span");
+                    bubble.className = "boss-cinematic-bubble";
+                    bubble.textContent = Math.random() < 0.5 ? "🫧" : "💧";
+                    const driftX = (Math.random() - 0.5) * 60;
+                    const ascendY = -Math.floor(Math.random() * 130 + 190);
+                    const duration = (Math.random() * 0.4 + 1.1).toFixed(2);
+                    bubble.style.fontSize = `${Math.floor(Math.random() * 8) + 14}px`;
+                    bubble.style.setProperty("--drift-x", `${driftX}px`);
+                    bubble.style.setProperty("--ascend-y", `${ascendY}px`);
+                    bubble.style.setProperty("--particle-duration", `${duration}s`);
+                    bubble.style.left = `${(Math.random() - 0.5) * 38}px`;
+                    bubble.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                    stage.appendChild(bubble);
+                    setTimeout(() => bubble.remove(), duration * 1000);
+                } else {
+                    // Ascending Cyan Stardust Spark
+                    const particle = document.createElement("div");
+                    particle.className = "boss-cinematic-particle";
+                    const size = Math.floor(Math.random() * 8) + 6;
+                    const driftX = (Math.random() - 0.5) * 70;
+                    const ascendY = -Math.floor(Math.random() * 120 + 200);
+                    const duration = (Math.random() * 0.5 + 0.9).toFixed(2);
+
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.setProperty("--drift-x", `${driftX}px`);
+                    particle.style.setProperty("--ascend-y", `${ascendY}px`);
+                    particle.style.setProperty("--particle-duration", `${duration}s`);
+                    particle.style.left = `${(Math.random() - 0.5) * 40}px`;
+                    particle.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+
+                    stage.appendChild(particle);
+                    setTimeout(() => particle.remove(), duration * 1000);
+                }
+            } else if (isDesert) {
+                // In Golden Sands / Desert: spawn sand whirlwinds, golden relics, suns, scarabs & golden sand sparks
+                const rand = Math.random();
+                if (rand < 0.45) {
+                    // Desert Relic / Symbol (Sun, Scarab, Pyramid/Dune, Gem, Urn, Gold Coin)
+                    const relic = document.createElement("span");
+                    relic.className = "boss-cinematic-desert-item";
+                    const relics = ["🏜️", "☀️", "🪲", "💎", "🏺", "🪙", "☀️", "🪲"];
+                    relic.textContent = relics[Math.floor(Math.random() * relics.length)];
+                    const driftX = (Math.random() - 0.5) * 80;
+                    const ascendY = -Math.floor(Math.random() * 140 + 220);
+                    const duration = (Math.random() * 0.5 + 1.2).toFixed(2);
+                    const relicSize = Math.floor(Math.random() * 8) + 20;
+                    relic.style.fontSize = `${relicSize}px`;
+                    relic.style.setProperty("--drift-x", `${driftX}px`);
+                    relic.style.setProperty("--ascend-y", `${ascendY}px`);
+                    relic.style.setProperty("--particle-duration", `${duration}s`);
+                    relic.style.left = `${(Math.random() - 0.5) * 44}px`;
+                    relic.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                    stage.appendChild(relic);
+                    setTimeout(() => relic.remove(), duration * 1000);
+                } else if (rand < 0.72) {
+                    // Radiant Golden Sand Diamond Sparkle
+                    const spark = document.createElement("span");
+                    spark.className = "boss-cinematic-sand-spark";
+                    const sparks = ["✦", "✨", "⭐", "✴️", "🟡", "✦"];
+                    spark.textContent = sparks[Math.floor(Math.random() * sparks.length)];
+                    const driftX = (Math.random() - 0.5) * 65;
+                    const ascendY = -Math.floor(Math.random() * 125 + 200);
+                    const duration = (Math.random() * 0.5 + 0.95).toFixed(2);
+                    spark.style.setProperty("--drift-x", `${driftX}px`);
+                    spark.style.setProperty("--ascend-y", `${ascendY}px`);
+                    spark.style.setProperty("--particle-duration", `${duration}s`);
+                    spark.style.left = `${(Math.random() - 0.5) * 36}px`;
+                    spark.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                    stage.appendChild(spark);
+                    setTimeout(() => spark.remove(), duration * 1000);
+                } else {
+                    // Ascending Golden Sand Stardust Particle
+                    const particle = document.createElement("div");
+                    particle.className = "boss-cinematic-particle";
+                    const size = Math.floor(Math.random() * 8) + 6;
+                    const driftX = (Math.random() - 0.5) * 70;
+                    const ascendY = -Math.floor(Math.random() * 120 + 200);
+                    const duration = (Math.random() * 0.5 + 0.9).toFixed(2);
+
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.setProperty("--drift-x", `${driftX}px`);
+                    particle.style.setProperty("--ascend-y", `${ascendY}px`);
+                    particle.style.setProperty("--particle-duration", `${duration}s`);
+                    particle.style.left = `${(Math.random() - 0.5) * 40}px`;
+                    particle.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+
+                    stage.appendChild(particle);
+                    setTimeout(() => particle.remove(), duration * 1000);
+                }
+            } else {
+                // In Forest Realm: Swirling Nature Leaves + Leaf-Green Diamond Sparkles & Stardust
+                const rand = Math.random();
+                if (rand < 0.45) {
+                    // 3D Aerodynamic Swirling Nature Leaf
+                    const leaf = document.createElement("span");
+                    leaf.className = "boss-cinematic-leaf";
+                    const leaves = ["🍃", "🌿", "🍀", "🌱", "🍃", "🌿", "🍀"];
+                    leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
+                    const driftX = (Math.random() - 0.5) * 80;
+                    const ascendY = -Math.floor(Math.random() * 140 + 210);
+                    const duration = (Math.random() * 0.5 + 1.2).toFixed(2);
+                    const leafSize = Math.floor(Math.random() * 6) + 18;
+                    leaf.style.fontSize = `${leafSize}px`;
+                    leaf.style.setProperty("--drift-x", `${driftX}px`);
+                    leaf.style.setProperty("--ascend-y", `${ascendY}px`);
+                    leaf.style.setProperty("--particle-duration", `${duration}s`);
+                    leaf.style.left = `${(Math.random() - 0.5) * 44}px`;
+                    leaf.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                    stage.appendChild(leaf);
+                    setTimeout(() => leaf.remove(), duration * 1000);
+                } else if (rand < 0.72) {
+                    // Leaf-Green Radiant Diamond Sparkle
+                    const spark = document.createElement("span");
+                    spark.className = "boss-cinematic-green-spark";
+                    const sparks = ["✦", "✨", "⭐", "❇️", "✳️", "✦"];
+                    spark.textContent = sparks[Math.floor(Math.random() * sparks.length)];
+                    const driftX = (Math.random() - 0.5) * 65;
+                    const ascendY = -Math.floor(Math.random() * 120 + 200);
+                    const duration = (Math.random() * 0.5 + 0.95).toFixed(2);
+                    spark.style.setProperty("--drift-x", `${driftX}px`);
+                    spark.style.setProperty("--ascend-y", `${ascendY}px`);
+                    spark.style.setProperty("--particle-duration", `${duration}s`);
+                    spark.style.left = `${(Math.random() - 0.5) * 36}px`;
+                    spark.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+                    stage.appendChild(spark);
+                    setTimeout(() => spark.remove(), duration * 1000);
+                } else {
+                    // Ascending Leaf-Green Stardust Spark
+                    const particle = document.createElement("div");
+                    particle.className = "boss-cinematic-particle";
+                    const size = Math.floor(Math.random() * 8) + 6;
+                    const driftX = (Math.random() - 0.5) * 70;
+                    const ascendY = -Math.floor(Math.random() * 120 + 200);
+                    const duration = (Math.random() * 0.5 + 0.9).toFixed(2);
+
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.setProperty("--drift-x", `${driftX}px`);
+                    particle.style.setProperty("--ascend-y", `${ascendY}px`);
+                    particle.style.setProperty("--particle-duration", `${duration}s`);
+                    particle.style.left = `${(Math.random() - 0.5) * 40}px`;
+                    particle.style.bottom = `${(Math.random() - 0.5) * 20}px`;
+
+                    stage.appendChild(particle);
+                    setTimeout(() => particle.remove(), duration * 1000);
+                }
+            }
+        }, 75);
+    }, 250));
+
+    // ----------------------------------------------------------------------
+    // PHASE 3: MAGIC RING & LIGHT BURST (2.0s – 3.5s)
+    // ----------------------------------------------------------------------
+    activeBossRevealTimers.push(setTimeout(() => {
+        if (isWinter) {
+            playIceFormationChime();
+        } else if (isBlossom) {
+            playPetalBurstChime();
+            // Panel 3: Magic Ring & Petal Burst - High-energy explosion of pink sakura petals radiating in 360 degrees
+            for (let i = 0; i < 24; i++) {
+                const petal = document.createElement("span");
+                petal.className = "boss-cinematic-petal-burst";
+                const petals = ["🌸", "🌺", "🌸", "✨", "🌸", "💮"];
+                petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+                const angle = (i / 24) * 2 * Math.PI + (Math.random() - 0.5) * 0.3;
+                const distance = Math.floor(Math.random() * 85 + 75);
+                const burstX = Math.cos(angle) * distance;
+                const burstY = Math.sin(angle) * (distance * 0.6) - 25;
+                const duration = (Math.random() * 0.4 + 1.1).toFixed(2);
+                petal.style.setProperty("--burst-x", `${burstX}px`);
+                petal.style.setProperty("--burst-y", `${burstY}px`);
+                petal.style.setProperty("--burst-duration", `${duration}s`);
+                petal.style.left = "0px";
+                petal.style.bottom = "0px";
+                stage.appendChild(petal);
+                setTimeout(() => petal.remove(), duration * 1000);
+            }
+        } else if (isDragon) {
+            playFlameBurstChime();
+            // Panel 3: Magic Ring & Flame Burst - Explosive volcanic burst scattering in 360 degrees
+            for (let i = 0; i < 24; i++) {
+                const flame = document.createElement("span");
+                flame.className = "boss-cinematic-flame-burst";
+                const flames = ["🔥", "⚡", "✨", "🌋", "🔥", "💥"];
+                flame.textContent = flames[Math.floor(Math.random() * flames.length)];
+                const angle = (i / 24) * 2 * Math.PI + (Math.random() - 0.5) * 0.3;
+                const distance = Math.floor(Math.random() * 90 + 80);
+                const burstX = Math.cos(angle) * distance;
+                const burstY = Math.sin(angle) * (distance * 0.6) - 25;
+                const duration = (Math.random() * 0.4 + 1.1).toFixed(2);
+                flame.style.setProperty("--burst-x", `${burstX}px`);
+                flame.style.setProperty("--burst-y", `${burstY}px`);
+                flame.style.setProperty("--burst-duration", `${duration}s`);
+                flame.style.left = "0px";
+                flame.style.bottom = "0px";
+                stage.appendChild(flame);
+                setTimeout(() => flame.remove(), duration * 1000);
+            }
+        } else if (isTropical) {
+            playWaterSplashBurstChime();
+            // Panel 3: Magic Ring & Leaping Fish Geyser Burst - Explosive 360-degree ocean geyser with leaping tropical fish
+            for (let i = 0; i < 28; i++) {
+                const burstItem = document.createElement("span");
+                burstItem.className = "boss-cinematic-fish-burst";
+                const marineItems = ["🐠", "🐟", "🐡", "🐬", "🫧", "🌊", "💧", "✨"];
+                burstItem.textContent = marineItems[Math.floor(Math.random() * marineItems.length)];
+                const angle = (i / 28) * 2 * Math.PI + (Math.random() - 0.5) * 0.3;
+                const distance = Math.floor(Math.random() * 95 + 85);
+                const burstX = Math.cos(angle) * distance;
+                const burstY = Math.sin(angle) * (distance * 0.6) - 25;
+                const duration = (Math.random() * 0.4 + 1.1).toFixed(2);
+                burstItem.style.setProperty("--burst-x", `${burstX}px`);
+                burstItem.style.setProperty("--burst-y", `${burstY}px`);
+                burstItem.style.setProperty("--burst-duration", `${duration}s`);
+                burstItem.style.left = "0px";
+                burstItem.style.bottom = "0px";
+                stage.appendChild(burstItem);
+                setTimeout(() => burstItem.remove(), duration * 1000);
+            }
+        } else if (isDesert) {
+            playDesertBurstChime();
+            // Panel 3: Magic Ring & Desert Sandstorm Burst - 360-degree radial sandstorm with golden relics & desert mirage items
+            for (let i = 0; i < 28; i++) {
+                const burstItem = document.createElement("span");
+                burstItem.className = "boss-cinematic-sand-burst";
+                const desertItems = ["🏜️", "☀️", "🪲", "💎", "🏺", "🪙", "✨", "✦", "🟡"];
+                burstItem.textContent = desertItems[Math.floor(Math.random() * desertItems.length)];
+                const angle = (i / 28) * 2 * Math.PI + (Math.random() - 0.5) * 0.3;
+                const distance = Math.floor(Math.random() * 95 + 85);
+                const burstX = Math.cos(angle) * distance;
+                const burstY = Math.sin(angle) * (distance * 0.6) - 25;
+                const duration = (Math.random() * 0.4 + 1.1).toFixed(2);
+                burstItem.style.setProperty("--burst-x", `${burstX}px`);
+                burstItem.style.setProperty("--burst-y", `${burstY}px`);
+                burstItem.style.setProperty("--burst-duration", `${duration}s`);
+                burstItem.style.left = "0px";
+                burstItem.style.bottom = "0px";
+                stage.appendChild(burstItem);
+                setTimeout(() => burstItem.remove(), duration * 1000);
+            }
+        } else {
+            playLeafBurstChime();
+            // Panel 3: Magic Ring & Whirlwind Leaf Burst - High-energy explosion of emerald leaves & sparks radiating in 360 degrees
+            for (let i = 0; i < 28; i++) {
+                const burstItem = document.createElement("span");
+                const isSpark = Math.random() < 0.3;
+                burstItem.className = "boss-cinematic-leaf-burst";
+                const leaves = ["🍃", "🌿", "🍀", "🌱", "🍃", "🌿", "🍀"];
+                const sparks = ["✨", "✦", "❇️", "⭐"];
+                burstItem.textContent = isSpark 
+                    ? sparks[Math.floor(Math.random() * sparks.length)]
+                    : leaves[Math.floor(Math.random() * leaves.length)];
+                if (isSpark) {
+                    burstItem.style.fontSize = `${Math.floor(Math.random() * 6) + 16}px`;
+                    burstItem.style.color = "#a7f3d0";
+                }
+                const angle = (i / 28) * 2 * Math.PI + (Math.random() - 0.5) * 0.3;
+                const distance = Math.floor(Math.random() * 95 + 85);
+                const burstX = Math.cos(angle) * distance;
+                const burstY = Math.sin(angle) * (distance * 0.6) - 25;
+                const duration = (Math.random() * 0.4 + 1.1).toFixed(2);
+                burstItem.style.setProperty("--burst-x", `${burstX}px`);
+                burstItem.style.setProperty("--burst-y", `${burstY}px`);
+                burstItem.style.setProperty("--burst-duration", `${duration}s`);
+                burstItem.style.left = "0px";
+                burstItem.style.bottom = "0px";
+                stage.appendChild(burstItem);
+                setTimeout(() => burstItem.remove(), duration * 1000);
+            }
+        }
+
+        // 1. Concentric Ground Magic Rune Rings
+        magicRingsEl = document.createElement("div");
+        magicRingsEl.className = "boss-cinematic-magic-rings";
+        const ringOuterStroke = isWinter ? '#38bdf8' : (isBlossom ? '#f472b6' : (isTropical ? '#0ea5e9' : (isDesert ? '#f59e0b' : (isDragon ? '#ea580c' : '#10b981'))));
+        const ringInnerStroke = isWinter ? '#e0f2fe' : (isBlossom ? '#fbcfe8' : (isTropical ? '#7dd3fc' : (isDesert ? '#fef08a' : (isDragon ? '#fef08a' : '#6ee7b7'))));
+
+        magicRingsEl.innerHTML = `
+            <svg viewBox="0 0 280 150" width="100%" height="100%">
+                <ellipse class="magic-ring-outer" cx="140" cy="75" rx="125" ry="65" fill="none" stroke="${ringOuterStroke}" stroke-width="3" stroke-dasharray="14 8"/>
+                <ellipse class="magic-ring-inner" cx="140" cy="75" rx="88" ry="46" fill="none" stroke="${ringInnerStroke}" stroke-width="2.5" stroke-dasharray="10 6"/>
+            </svg>
+        `;
+        stage.appendChild(magicRingsEl);
+
+        // 2. 3D Helical / Spiral Energy Ribbon coiling upward around the Beam
+        spiralRibbonEl = document.createElement("div");
+        spiralRibbonEl.className = "boss-cinematic-spiral-ribbon";
+        const spiralGradId = isWinter ? "winterSpiralGrad" : (isBlossom ? "blossomSpiralGrad" : (isTropical ? "tropicalSpiralGrad" : (isDesert ? "desertSpiralGrad" : (isDragon ? "dragonSpiralGrad" : "forestSpiralGrad"))));
+        let spiralStops = `
+            <stop offset="0%" stop-color="#059669" stop-opacity="0.9"/>
+            <stop offset="25%" stop-color="#34d399" stop-opacity="0.95"/>
+            <stop offset="55%" stop-color="#ffffff" stop-opacity="1"/>
+            <stop offset="80%" stop-color="#6ee7b7" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#10b981" stop-opacity="0.9"/>
+        `;
+        if (isWinter) {
+            spiralStops = `
+                <stop offset="0%" stop-color="#0284c7" stop-opacity="0.85"/>
+                <stop offset="35%" stop-color="#38bdf8" stop-opacity="1"/>
+                <stop offset="70%" stop-color="#ffffff" stop-opacity="0.98"/>
+                <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.85"/>
+            `;
+        } else if (isBlossom) {
+            spiralStops = `
+                <stop offset="0%" stop-color="#db2777" stop-opacity="0.85"/>
+                <stop offset="35%" stop-color="#f472b6" stop-opacity="1"/>
+                <stop offset="70%" stop-color="#ffffff" stop-opacity="0.98"/>
+                <stop offset="100%" stop-color="#fbcfe8" stop-opacity="0.85"/>
+            `;
+        } else if (isTropical) {
+            spiralStops = `
+                <stop offset="0%" stop-color="#0284c7" stop-opacity="0.9"/>
+                <stop offset="25%" stop-color="#0ea5e9" stop-opacity="0.95"/>
+                <stop offset="55%" stop-color="#ffffff" stop-opacity="1"/>
+                <stop offset="80%" stop-color="#38bdf8" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.9"/>
+            `;
+        } else if (isDesert) {
+            spiralStops = `
+                <stop offset="0%" stop-color="#b45309" stop-opacity="0.9"/>
+                <stop offset="25%" stop-color="#f59e0b" stop-opacity="0.95"/>
+                <stop offset="55%" stop-color="#ffffff" stop-opacity="1"/>
+                <stop offset="80%" stop-color="#fde047" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.9"/>
+            `;
+        } else if (isDragon) {
+            spiralStops = `
+                <stop offset="0%" stop-color="#b91c1c" stop-opacity="0.9"/>
+                <stop offset="25%" stop-color="#ea580c" stop-opacity="0.95"/>
+                <stop offset="55%" stop-color="#fbbf24" stop-opacity="1"/>
+                <stop offset="75%" stop-color="#ffffff" stop-opacity="0.98"/>
+                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.9"/>
+            `;
+        }
+
+        spiralRibbonEl.innerHTML = `
+            <svg viewBox="-70 -380 140 380" width="100%" height="100%" style="overflow: visible;">
+                <defs>
+                    <linearGradient id="${spiralGradId}" x1="0%" y1="100%" x2="0%" y2="0%">
+                        ${spiralStops}
+                    </linearGradient>
+                </defs>
+                <path class="spiral-ribbon-path" d="M -55,0 C -55,-40 55,-40 55,-80 C 55,-120 -55,-120 -55,-160 C -55,-200 55,-200 55,-240 C 55,-280 -50,-280 -50,-320 C -50,-355 35,-355 35,-375" stroke="url(#${spiralGradId})" stroke-width="5.5"/>
+            </svg>
+        `;
+        stage.appendChild(spiralRibbonEl);
+    }, 1000));
+
+    // ----------------------------------------------------------------------
+    // PHASE 4: BOSS REVEAL (SCALE & SHINE EFFECT) (1.8s – 2.7s)
+    // ----------------------------------------------------------------------
+    activeBossRevealTimers.push(setTimeout(() => {
+        if (isWinter) {
+            playGrandFrostFanfare();
+        } else if (isBlossom) {
+            playGrandBlossomFanfare();
+        } else if (isTropical) {
+            playGrandOceanFanfare();
+        } else if (isDesert) {
+            playGrandDesertFanfare();
+        } else if (isDragon) {
+            playGrandDragonFanfare();
+        } else {
+            playGrandForestFanfare();
+        }
+        if (particleInterval) clearInterval(particleInterval);
+
+        // Dissipate vertical beam and helical spiral
+        if (beamEl) beamEl.classList.add("beam-dissipate");
+        if (beamCoreEl) beamCoreEl.classList.add("beam-dissipate");
+        if (spiralRibbonEl) {
+            spiralRibbonEl.style.transition = "opacity 0.4s ease-out";
+            spiralRibbonEl.style.opacity = "0";
+            setTimeout(() => spiralRibbonEl?.remove(), 400);
+        }
+
+        // 1. Radiant Shockwave Flash
+        const flash = document.createElement("div");
+        flash.className = "boss-cinematic-flash";
+        stage.appendChild(flash);
+        setTimeout(() => flash.remove(), 800);
+
+        // 2. Soft Ethereal Celestial Halo Bloom behind Boss (smooth atmospheric radial aura)
+        const bloom = document.createElement("div");
+        bloom.className = "boss-cinematic-halo-bloom";
+        stage.appendChild(bloom);
+        setTimeout(() => {
+            bloom.style.transition = "opacity 0.6s ease-out";
+            bloom.style.opacity = "0";
+            setTimeout(() => bloom.remove(), 600);
+        }, 1600);
+
+        // 3. Diagonal Specular Shine Sweep across the Crest
+        if (bossBtn) {
+            const shine = document.createElement("div");
+            shine.className = "boss-shine-sweep";
+            bossBtn.appendChild(shine);
+            setTimeout(() => shine.remove(), 1400);
+        }
+    }, 1800));
+
+    // ----------------------------------------------------------------------
+    // PHASE 5: BOSS IDLE (SUBTLE GLOW LOOP) (2.7s+)
+    // ----------------------------------------------------------------------
+    activeBossRevealTimers.push(setTimeout(() => {
+        if (sourceBtn) {
+            sourceBtn.classList.remove("level-node-reveal-source");
+        }
+
+        // Clean up transient FX elements
+        fxLayer.innerHTML = "";
+
+        // Transition Boss Wrapper into Permanent Idle State (levitation + breathing glow)
+        if (bossWrapper) {
+            bossWrapper.classList.remove("boss-revealing-active", "boss-revealing-init");
+            bossWrapper.classList.add("boss-idle-active", themeClass);
+
+            // Ensure Ground Magic Ring is present beneath the boss pedestal
+            if (!bossWrapper.querySelector(".boss-idle-ground-ring")) {
+                const idleRing = document.createElement("div");
+                idleRing.className = "boss-idle-ground-ring";
+                bossWrapper.appendChild(idleRing);
+            }
+        }
+
+        // Persist revealed status
+        userProgress = userProgress || {};
+        userProgress.revealedBosses = userProgress.revealedBosses || {};
+        userProgress.revealedBosses[bossNode.id] = true;
+        saveProgress();
+
+        isBossRevealActive = false;
+        window.bossCurrentlyRevealingId = null;
+
+        if (typeof onComplete === "function") {
+            onComplete();
+        }
+    }, 2700));
+}
+window.playBossRevealAnimation = playBossRevealAnimation;
+
 // Render Grounded Level Nodes
 function renderLevelNodes() {
     const container = document.getElementById("level-nodes");
@@ -1836,58 +3937,36 @@ function renderLevelNodes() {
             : (Number(level.id) < userProgress.unlockedLevel || (userProgress.stars[level.id] && userProgress.stars[level.id] > 0));
         const isCurrent = unlocked && !isCompleted;
         const isLocked = !unlocked;
+        const isWinterBoss = isBoss && (level.zone === 2 || level.id === "boss-2");
+        const isBlossomBoss = isBoss && (level.zone === 3 || level.id === "boss-3");
+        const isTropicalBoss = isBoss && (level.zone === 4 || level.id === "boss-4");
+        const isDragonBoss = isBoss && (level.zone === 6 || level.id === "boss-6");
 
         // Hide Boss level completely until all preceding zone levels are completed
-        if (isBoss && isLocked) {
+        if (isBoss && isLocked && window.bossCurrentlyRevealingId !== level.id) {
             return;
         }
 
         const wrapper = document.createElement("div");
         wrapper.className = "level-node-wrapper";
-        if (isBoss) wrapper.classList.add("boss-wrapper");
+        if (isBoss) {
+            const bossThemeClass = isWinterBoss ? "theme-glacier" : (isBlossomBoss ? "theme-blossom" : (isTropicalBoss ? "theme-tropical" : (isDragonBoss ? "theme-dragon" : "theme-forest")));
+            wrapper.classList.add("boss-wrapper", bossThemeClass);
+            if (window.bossCurrentlyRevealingId === level.id) {
+                wrapper.classList.add("boss-revealing-init");
+            } else if (!isLocked) {
+                wrapper.classList.add("boss-idle-active");
+            }
+            if (!isLocked && window.bossCurrentlyRevealingId !== level.id) {
+                const idleRing = document.createElement("div");
+                idleRing.className = "boss-idle-ground-ring";
+                wrapper.appendChild(idleRing);
+            }
+        }
         wrapper.style.left = `${level.x}%`;
         wrapper.style.top = `${level.y}%`;
 
-        // Special Boss Black Hole Void Portal Structure
-        if (isBoss) {
-            const portal = document.createElement("div");
-            portal.className = "boss-black-hole-portal";
-            portal.innerHTML = `
-                <div class="black-hole-disc">
-                    <div class="black-hole-outer-ring"></div>
-                    <div class="black-hole-accretion-disk"></div>
-                    <div class="black-hole-vortex-swirl"></div>
-                    <div class="black-hole-event-horizon"></div>
-                    <div class="black-hole-core-singularity"></div>
-                    <div class="black-hole-dark-aura"></div>
-                </div>
-                <div class="black-hole-particles">
-                    <span class="void-particle p1"></span>
-                    <span class="void-particle p2"></span>
-                    <span class="void-particle p3"></span>
-                    <span class="void-particle p4"></span>
-                    <span class="void-particle p5"></span>
-                    <span class="void-particle p6"></span>
-                </div>
-                <div class="black-hole-shockwave-ring"></div>
-                <div class="black-hole-lightning-sparks">
-                    <span class="spark s1"></span>
-                    <span class="spark s2"></span>
-                    <span class="spark s3"></span>
-                </div>
-            `;
-            wrapper.appendChild(portal);
 
-            if (window.freshlyUnlockedBossId === level.id || window.forceBossEmergeId === level.id) {
-                wrapper.classList.add("emerging-from-hole");
-                setTimeout(() => triggerBossScreenShake(), 1250);
-                setTimeout(() => {
-                    wrapper.classList.remove("emerging-from-hole");
-                    if (window.freshlyUnlockedBossId === level.id) window.freshlyUnlockedBossId = null;
-                    if (window.forceBossEmergeId === level.id) window.forceBossEmergeId = null;
-                }, 2600);
-            }
-        }
 
         const btn = document.createElement("button");
         btn.dataset.levelId = level.id;
@@ -1942,11 +4021,21 @@ function renderLevelNodes() {
                     <span class="boss-lock-label">BOSS LOCKED</span>
                 `;
                 btn.appendChild(bossLockOverlay);
-            } else if (!isCompleted) {
+            } else {
                 const bossCrownOverlay = document.createElement("div");
                 bossCrownOverlay.className = "boss-unlocked-badge";
-                bossCrownOverlay.innerHTML = `👑 BOSS`;
-                bossCrownOverlay.title = "Boss Challenge Unlocked";
+                if (isBlossomBoss) {
+                    bossCrownOverlay.innerHTML = `🌸 BOSS`;
+                } else if (isWinterBoss) {
+                    bossCrownOverlay.innerHTML = `❄️ BOSS`;
+                } else if (isTropicalBoss) {
+                    bossCrownOverlay.innerHTML = `🌊 BOSS`;
+                } else if (isDragonBoss) {
+                    bossCrownOverlay.innerHTML = `🔥 BOSS`;
+                } else {
+                    bossCrownOverlay.innerHTML = `👑 BOSS`;
+                }
+                bossCrownOverlay.title = isCompleted ? "Boss Challenge Mastered" : "Boss Challenge Unlocked";
                 wrapper.appendChild(bossCrownOverlay);
             }
         }
@@ -2027,19 +4116,32 @@ function handleNodeClick(level, isLocked, isBoss, btnElement) {
     // Open engine or level modal when student clicks level node
     const isBossFinal = Boolean(isBoss || isBossLevel(level.id));
     const pkgInfo = getLevelExperiencePackage(level.id, isBossFinal);
-    if (window.electronAPI?.openEngine) {
-        window.electronAPI.openEngine({
-            id: level.id,
-            levelId: level.id,
-            packageId: pkgInfo.packageId,
-            title: level.title || pkgInfo.title,
-            zone: level.zone,
-            zoneName: level.zoneName,
-            isBoss: pkgInfo.isBoss
-        });
-    } else {
-        openModal(level);
+
+    function launchExperience() {
+        if (window.electronAPI?.openEngine) {
+            window.electronAPI.openEngine({
+                id: level.id,
+                levelId: level.id,
+                packageId: pkgInfo.packageId,
+                title: level.title || pkgInfo.title,
+                zone: level.zone,
+                zoneName: level.zoneName,
+                isBoss: pkgInfo.isBoss
+            });
+        } else {
+            openModal(level);
+        }
     }
+
+    // Check if the boss entry animation was already played for this boss
+    if (isBossFinal) {
+        runBossAwakeningAnimation(level.id, () => {
+            launchExperience();
+        });
+        return;
+    }
+
+    launchExperience();
 }
 
 // Open Level Start Modal
@@ -2072,26 +4174,29 @@ function closeModal() {
     activeSelectedLevel = null;
 }
 
-// Check and trigger any unplayed Boss unlock animations (e.g. when returning to Map after completing Level 5)
+// Check and ensure any unlocked Boss appears on the map when returning to Map
 function checkAndTriggerPendingBossAnimations() {
+    // If the buddy puzzle modal is open or waiting to be dismissed, defer until modal is closed
+    const modal = document.getElementById("buddy-puzzle-modal");
+    if (modal && !modal.classList.contains("hidden") && modal.style.display !== "none") {
+        return;
+    }
+    if (window.pendingBossUnlockOnModalClose || window.pendingBossRevealOnModalClose) {
+        return;
+    }
+
+    let needsRender = false;
     BOSS_NODES.forEach(boss => {
         const unlocked = isLevelUnlocked(boss.id);
-        if (unlocked && !userProgress.playedBossAnimations?.[boss.id]) {
-            userProgress.playedBossAnimations = userProgress.playedBossAnimations || {};
-            userProgress.playedBossAnimations[boss.id] = true;
-            saveProgress();
-            
-            // Re-render level nodes so Boss appears in DOM
-            renderLevelNodes();
-            updateHUD();
-
-            // Automatically trigger the existing Boss black-hole emergence animation
-            setTimeout(() => {
-                triggerBossUnlockAnimation(boss.id);
-                speakBuddy(`🌌 Dimensional Black Hole Opened! ${boss.title} Emerges!`, "excited", 4500);
-            }, 300);
+        if (unlocked) {
+            needsRender = true;
         }
     });
+
+    if (needsRender) {
+        renderLevelNodes();
+        updateHUD();
+    }
 }
 window.checkAndTriggerPendingBossAnimations = checkAndTriggerPendingBossAnimations;
 
@@ -2108,13 +4213,24 @@ function completeLevel(levelId, starsEarned = 3) {
     });
 
     const numId = Number(normalizedLevelId);
+    const isBoss = isBossLevel(normalizedLevelId);
+    const prevStars = (userProgress.stars && (userProgress.stars[normalizedLevelId] || userProgress.stars[numId] || userProgress.stars[String(numId)])) || 0;
+    const wasAlreadyCompleted = Boolean(
+        prevStars > 0 ||
+        (!isNaN(numId) && userProgress.unlockedLevel > numId) ||
+        (isBoss && userProgress.stars && (userProgress.stars[normalizedLevelId] > 0 || userProgress.stars[String(normalizedLevelId)] > 0))
+    );
+
     userProgress.stars = userProgress.stars || {};
     userProgress.stars[normalizedLevelId] = Math.max(userProgress.stars[normalizedLevelId] || 0, starsEarned);
     if (!isNaN(numId)) {
         userProgress.stars[numId] = Math.max(userProgress.stars[numId] || 0, starsEarned);
     }
 
-    const isBoss = isBossLevel(normalizedLevelId);
+    if (numId === 1 || normalizedLevelId === 1 || normalizedLevelId === "1") {
+        localStorage.setItem("language_lab_level1_reaction_seen", "true");
+    }
+
     let levelJustUnlocked = null;
 
     if (!isBoss && !isNaN(numId)) {
@@ -2146,10 +4262,41 @@ function completeLevel(levelId, starsEarned = 3) {
 
     saveProgress();
 
+    // Persist immediately to SQLite database (pending sync)
+    try {
+        const progressSaver = window.electronAPI?.saveStudentProgress || window.api?.saveStudentProgress;
+        if (typeof progressSaver === 'function') {
+            const studentCode = currentStudentId || localStorage.getItem(STUDENT_KEY) || 'STUDENT';
+            progressSaver({
+                student_id: studentCode,
+                level_id: String(normalizedLevelId),
+                package_id: String(normalizedLevelId),
+                stars: starsEarned,
+                score: starsEarned * 100,
+                status: 'COMPLETED',
+                completed_at: new Date().toISOString()
+            }).catch(err => console.warn('[SQLite Progress] Save notice:', err.message));
+        }
+    } catch (e) {}
+
+    // Broadcast real-time update to resident subpage iframe (e.g. profile.html or evolution.html)
+    const subFrame = document.getElementById("subpage-view-frame");
+    if (subFrame && subFrame.contentWindow) {
+        try {
+            if (typeof subFrame.contentWindow.refreshProfileData === 'function') {
+                subFrame.contentWindow.refreshProfileData();
+            }
+            if (typeof subFrame.contentWindow.refreshEvolutionData === 'function') {
+                subFrame.contentWindow.refreshEvolutionData();
+            }
+            subFrame.contentWindow.postMessage("refresh-profile", "*");
+        } catch (e) {}
+    }
+
     // Check if any Boss level was just unlocked (e.g. Boss 1 after Level 5 completion)
     let newlyUnlockedBoss = null;
     BOSS_NODES.forEach(b => {
-        if (!prevBossStatuses[b.id] && isLevelUnlocked(b.id) && !userProgress.playedBossAnimations?.[b.id]) {
+        if (!prevBossStatuses[b.id] && isLevelUnlocked(b.id) && !userProgress.revealedBosses?.[b.id]) {
             newlyUnlockedBoss = b;
         }
     });
@@ -2176,33 +4323,50 @@ function completeLevel(levelId, starsEarned = 3) {
     updateHUD();
     updateBuddyAvatar();
 
-    // Automatically reveal the Puzzle Board & snap the new random piece into place!
-    setTimeout(() => {
-        openBuddyPuzzleModal(unlockedZoneNum, unlockedPieceIdx);
-    }, 450);
-
     if (newlyUnlockedBoss) {
-        userProgress.playedBossAnimations = userProgress.playedBossAnimations || {};
-        userProgress.playedBossAnimations[newlyUnlockedBoss.id] = true;
-        saveProgress();
-        setTimeout(() => {
-            triggerBossUnlockAnimation(newlyUnlockedBoss.id);
-            speakBuddy(`🌌 Dimensional Black Hole Opened! ${newlyUnlockedBoss.title} Emerges! Defeat the Boss to unlock Level 6!`, "excited", 5000);
-        }, 800);
-    } else if (isBoss) {
-        const bossNode = getBossNode(normalizedLevelId);
-        const bossTitle = bossNode?.title || "Boss";
-        const avatarInfo = getBuddyAvatarInfo(userProgress);
-        speakBuddy(`👑 Victory! ${bossTitle} Defeated! Part ${unlockedPieceIdx}/6 Discovered! I have evolved into ${avatarInfo.title}!`, "excited", 5000);
-        scrollToCurrentLevel();
-    } else if (levelJustUnlocked && isLevelUnlocked(levelJustUnlocked)) {
-        speakBuddy(`🎉 Level ${numId} Completed! Discovered Mystery Shard: Part ${unlockedPieceIdx}/6 Unlocked! Level ${levelJustUnlocked} is now unlocked!`, "happy", 3500);
-        scrollToCurrentLevel();
-    } else if (numId === 5) {
-        speakBuddy(`🎉 Level 5 Completed! Discovered Mystery Shard: Part ${unlockedPieceIdx}/6 Unlocked! Defeat the Forest Guardian Boss!`, "happy", 4000);
+        // Queue the boss reveal animation so it triggers immediately when player leaves/closes the puzzle card
+        window.pendingBossRevealOnModalClose = {
+            numId: numId,
+            bossId: newlyUnlockedBoss.id,
+            bossTitle: newlyUnlockedBoss.title
+        };
+
+        // If first time completion, automatically reveal the Puzzle Board & snap the new piece into place first!
+        if (!wasAlreadyCompleted) {
+            setTimeout(() => {
+                openBuddyPuzzleModal(unlockedZoneNum, unlockedPieceIdx);
+            }, 450);
+        } else {
+            closeBuddyPuzzleModal();
+        }
+
+        const bossTitle = newlyUnlockedBoss.title || "Boss";
+        speakBuddy(`🎉 Level ${numId} Completed! Part ${unlockedPieceIdx}/6 Unlocked! ${bossTitle} is approaching!`, "excited", 4500);
     } else {
-        speakBuddy(`⭐ Level ${normalizedLevelId} Completed! Discovered Mystery Shard: Part ${unlockedPieceIdx}/6 Unlocked!`, "happy", 3000);
-        scrollToCurrentLevel();
+        // ONLY automatically reveal the Puzzle Board & snap piece if this is the FIRST time completing this level
+        if (!wasAlreadyCompleted) {
+            setTimeout(() => {
+                openBuddyPuzzleModal(unlockedZoneNum, unlockedPieceIdx);
+            }, 450);
+        }
+
+        if (isBoss) {
+            const bossNode = getBossNode(normalizedLevelId);
+            const bossTitle = bossNode?.title || "Boss";
+            const avatarInfo = getBuddyAvatarInfo(userProgress);
+            if (normalizedLevelId === "boss-6" || normalizedLevelId === 30 || normalizedLevelId === "30") {
+                speakBuddy(`👑 Victory! ${bossTitle} Defeated! Final Part 6/6 Unlocked! Next adventure coming soon!`, "excited", 5000);
+            } else {
+                speakBuddy(`👑 Victory! ${bossTitle} Defeated! Part ${unlockedPieceIdx}/6 Discovered! I have evolved into ${avatarInfo.title}!`, "excited", 5000);
+            }
+            scrollToCurrentLevel();
+        } else if (levelJustUnlocked && isLevelUnlocked(levelJustUnlocked)) {
+            speakBuddy(`🎉 Level ${numId} Completed! Discovered Mystery Shard: Part ${unlockedPieceIdx}/6 Unlocked! Level ${levelJustUnlocked} is now unlocked!`, "happy", 3500);
+            scrollToCurrentLevel();
+        } else {
+            speakBuddy(`⭐ Level ${normalizedLevelId} Completed!`, "happy", 2500);
+            scrollToCurrentLevel();
+        }
     }
 }
 window.completeLevel = completeLevel;
@@ -2217,9 +4381,12 @@ function updateHUD() {
     const totalLevels = 30;
     
     let totalStars = 0;
-    Object.values(userProgress.stars).forEach(s => {
-        if (s > 0) totalStars += 1;
-    });
+    for (let lvl = 1; lvl <= totalLevels; lvl++) {
+        const starVal = (userProgress.stars && (userProgress.stars[lvl] || userProgress.stars[String(lvl)])) || 0;
+        if (lvl < userProgress.unlockedLevel || starVal > 0) {
+            totalStars++;
+        }
+    }
 
     const progressTextEl = document.getElementById("hud-progress-text");
     if (progressTextEl) progressTextEl.innerText = `${userProgress.unlockedLevel} / ${totalLevels}`;
@@ -2270,8 +4437,20 @@ async function loadStudentProfileSession() {
     }
 
     const savedRoll = localStorage.getItem(STUDENT_KEY) || "STU-101";
-    const rollNo = sessionData?.student?.roll_number || sessionData?.roll_number || savedRoll.trim();
-    const studentName = sessionData?.student?.name || sessionData?.name || "";
+    let rollNo = sessionData?.student?.roll_number || sessionData?.student?.roll_no || sessionData?.roll_number || sessionData?.roll_no || savedRoll.trim();
+    let studentName = sessionData?.student?.name || sessionData?.name || "";
+
+    // Resolve student's original name (clean up any legacy dummy "Student <Code>" prefix like "Student A")
+    if (!studentName || /^Student\s+[A-Za-z0-9_-]+$/i.test(studentName)) {
+        const codeSuffix = (studentName ? studentName.replace(/^Student\s+/i, '') : rollNo).trim().toUpperCase();
+        if (codeSuffix === 'A' || codeSuffix === 'ABU001' || codeSuffix === 'ABU' || (rollNo && rollNo.trim().toUpperCase() === 'A')) {
+            studentName = 'Abuthahir';
+        } else if (studentName) {
+            studentName = studentName.replace(/^Student\s+/i, '');
+        } else {
+            studentName = rollNo;
+        }
+    }
 
     const modalTagEl = document.getElementById("modal-student-id-tag");
     if (modalTagEl) {
@@ -2281,6 +4460,18 @@ async function loadStudentProfileSession() {
     const modalUserNameEl = document.querySelector(".modal-user-name");
     if (modalUserNameEl) {
         modalUserNameEl.innerText = studentName || rollNo;
+    }
+
+    const loginBridge = window.api?.login || window.electronAPI?.loginUser;
+    if (typeof loginBridge === 'function' && rollNo) {
+        loginBridge({ code: rollNo }).then(res => {
+            if (res && res.success && res.user && res.user.name) {
+                if (modalUserNameEl) modalUserNameEl.innerText = res.user.name;
+                if (modalTagEl && (res.user.roll_no || res.user.roll_number)) {
+                    modalTagEl.innerText = res.user.roll_no || res.user.roll_number;
+                }
+            }
+        }).catch(() => {});
     }
 }
 
@@ -2428,5 +4619,50 @@ async function loadCMSPublishedPackages(showToastFeedback = false) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Automatically switch to fullscreen mode on LMS dashboard load
+    if (window.electronAPI && typeof window.electronAPI.setFullScreen === "function") {
+        window.electronAPI.setFullScreen(true);
+    }
+
+    // Allow user to toggle fullscreen mode with F11 keyboard shortcut
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "F11") {
+            if (window.electronAPI && typeof window.electronAPI.toggleFullScreen === "function") {
+                e.preventDefault();
+                window.electronAPI.toggleFullScreen();
+            }
+        }
+    });
+
     loadCMSPublishedPackages();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const revealParam = urlParams.get("revealBoss");
+    if (revealParam) {
+        setTimeout(() => {
+            const bId = String(revealParam).startsWith("boss-") ? revealParam : `boss-${revealParam}`;
+            const bossNode = getBossNode(bId);
+            if (bossNode) {
+                userProgress = userProgress || {};
+                userProgress.stars = userProgress.stars || {};
+                if (Array.isArray(bossNode.requiredLevels)) {
+                    bossNode.requiredLevels.forEach(lvl => {
+                        userProgress.stars[lvl] = Math.max(userProgress.stars[lvl] || 0, 1);
+                    });
+                    userProgress.unlockedLevel = Math.max(userProgress.unlockedLevel || 1, bossNode.requiredLevels[bossNode.requiredLevels.length - 1] + 1);
+                }
+                window.bossCurrentlyRevealingId = bossNode.id;
+                renderLevelNodes();
+                const gameEl = document.getElementById("game");
+                if (gameEl) {
+                    const targetX = (bossNode.x / 100) * gameEl.offsetWidth;
+                    const scrollDest = Math.max(0, targetX - window.innerWidth / 2);
+                    window.scrollTo({ left: scrollDest, behavior: "auto" });
+                    document.documentElement.scrollLeft = scrollDest;
+                    document.body.scrollLeft = scrollDest;
+                }
+                playBossRevealAnimation(30, bossNode.id);
+            }
+        }, 100);
+    }
 });

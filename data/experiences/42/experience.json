@@ -1,0 +1,397 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "31",
+  "title": "How Are  You Today?",
+  "description": "Understand and express feelings such as happy, sad, fine, tired and \nexcited through listening, speaking, reading and simple writing.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "60",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 3,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "69",
+          "title": "Happy",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Happy",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788504208352-tsi665guz",
+                "slot": "left",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "599px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "How does Mia feel[ ]."
+                    },
+                    {
+                      "id": "item-1788504346383",
+                      "text": "what's the Gift[ ] ."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              },
+              {
+                "id": "block-1788504231698-rzbcc6m08",
+                "slot": "left",
+                "type": "heading",
+                "styles": {
+                  "top": "0px",
+                  "left": "0px",
+                  "color": "#1F2937",
+                  "fontSize": "32px",
+                  "alignment": "Center",
+                  "blockWidth": "934px",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Bold"
+                },
+                "content": {
+                  "tag": "H2",
+                  "text": "Birthday "
+                }
+              },
+              {
+                "id": "block-1788506351376-gq51beogi",
+                "slot": "right",
+                "type": "video",
+                "styles": {
+                  "top": "98px",
+                  "left": "0px",
+                  "minHeight": "482px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/0986073c79bc4bdaa756c7347d5d0e66.mp4",
+                  "media_id": 118,
+                  "media_type": "VIDEO"
+                }
+              }
+            ],
+            "media_id": 118,
+            "alignment": "Center",
+            "media_url": "/media/media_library/0986073c79bc4bdaa756c7347d5d0e66.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "video": "assets/video/0986073c79bc4bdaa756c7347d5d0e66.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 118,
+              "type": "VIDEO",
+              "url": "assets/video/0986073c79bc4bdaa756c7347d5d0e66.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 118,
+              "type": "VIDEO",
+              "url": "assets/video/0986073c79bc4bdaa756c7347d5d0e66.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "70",
+          "title": "Feeling",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Feeling",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788504521526-7vgh586j4",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "minHeight": "325px"
+                },
+                "content": {
+                  "url": "",
+                  "caption": ""
+                }
+              },
+              {
+                "id": "block-1788504553262-1ihhelr1b",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "361px",
+                  "left": "20px",
+                  "minHeight": "160px"
+                },
+                "content": {
+                  "prompt": "Tell me about the Picture."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "62",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "71",
+          "title": "Find the feeling",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Find the feeling",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788504857630-l94mkzvct",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "minHeight": "333px"
+                },
+                "content": {
+                  "title": "Reading Passage",
+                  "passage": "Read this text carefully...",
+                  "passages": [
+                    {
+                      "title": "Reading Passage",
+                      "passage": "I am happy.\nI am sad.\nI am fine.\nI am tired.\nI am excited.",
+                      "question": "Choose the Correct Answer?"
+                    }
+                  ],
+                  "question": "Did you understand the text?"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "63",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 4,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "72",
+          "title": "Tell Mia",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Tell Mia",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788505048349-ijjdl8iq5",
+                "type": "sentence_builder",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "minHeight": "169px"
+                },
+                "content": {
+                  "words": [
+                    "Learning",
+                    "English",
+                    "is",
+                    "fun",
+                    "and",
+                    "easy"
+                  ],
+                  "question": "Reorder the words to make a correct sentence.",
+                  "sentence": "Learning English is fun and easy",
+                  "sentences": [
+                    {
+                      "words": [
+                        "Mia",
+                        "got",
+                        "a",
+                        "gift",
+                        "from",
+                        "her",
+                        "freiend"
+                      ],
+                      "question": "Reorder the words to make a correct sentence.",
+                      "sentence": "Mia got a gift from her freiend"
+                    }
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

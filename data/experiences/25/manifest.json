@@ -1,0 +1,36 @@
+{
+  "package_name": "picture-detective",
+  "experience_id": 60,
+  "experience_title": "PICTURE DETECTIVE",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:25:14.859568+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 6847,
+      "checksum": "8ccb04d1e2ab9e386338dc0e460cffef1bed9a3a4e81a5471b1f2357dfbadb01"
+    },
+    {
+      "path": "metadata.json",
+      "size": 192,
+      "checksum": "4db38432468dbc3d5005c92eb7730176cb7b52e6e02ddb76753d52d3cd3c8f69"
+    },
+    {
+      "path": "assets/video/b883de7bc9fa48aea5a1079b117ee55a.mp4",
+      "size": 5348771,
+      "checksum": "25b240a86c330ca3174cca9228f0d7a7942d02cf1f3f6cccca8450bab3ad6884"
+    },
+    {
+      "path": "assets/images/0dc1f8d0c7704ac0a710f0a6573d6af3.png",
+      "size": 3005080,
+      "checksum": "f438881c449935c55fcf654662b68711f8ecd6d13010e1a476f0ad5986ffb0c9"
+    }
+  ],
+  "checksums": {
+    "experience_json": "8ccb04d1e2ab9e386338dc0e460cffef1bed9a3a4e81a5471b1f2357dfbadb01",
+    "metadata_json": "4db38432468dbc3d5005c92eb7730176cb7b52e6e02ddb76753d52d3cd3c8f69"
+  }
+}

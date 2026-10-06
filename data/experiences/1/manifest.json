@@ -1,0 +1,26 @@
+{
+  "package_name": "demo-english-conversation-at-the-market",
+  "experience_id": 1,
+  "experience_title": "Demo English Conversation: At the Market",
+  "version": "1.0",
+  "build_number": 2,
+  "created_at": "2026-08-18T06:01:59.850290+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 2754,
+      "checksum": "43e2615294309ea8c9f580a3671f8c7557277d321fdf8d6df86cde47ddffa3d4"
+    },
+    {
+      "path": "metadata.json",
+      "size": 213,
+      "checksum": "169a0dce73b3c6046e57c0f38113b027956b10fa4c4c0acbd69709989cc46303"
+    }
+  ],
+  "checksums": {
+    "experience_json": "43e2615294309ea8c9f580a3671f8c7557277d321fdf8d6df86cde47ddffa3d4",
+    "metadata_json": "169a0dce73b3c6046e57c0f38113b027956b10fa4c4c0acbd69709989cc46303"
+  }
+}

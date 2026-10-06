@@ -1,0 +1,387 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "48",
+  "title": "Amazing Animals Around Us",
+  "description": "Listen to, read about, and describe familiar animals using names, actions, and simple describing words while building EVS-linked vocabulary.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "127",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "135",
+          "title": "Animal Sounds",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Animal Sounds",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788951194077-gayjx4ol3",
+                "type": "audio_mystery",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "clues": [
+                    {
+                      "audio": "/media/media_library/3b46c258529943f5a3c9c02b045efc65.mp3",
+                      "duration": 5,
+                      "description": "Short introductory sound"
+                    },
+                    {
+                      "audio": "/media/media_library/18b6eddae5be4a9da0ed291a7b2d3730.mp3",
+                      "duration": 10,
+                      "description": "Clearer clue"
+                    }
+                  ],
+                  "hints": {
+                    "replay": "Listen again carefully",
+                    "visualClue": "Look at the pattern in the sound",
+                    "modelAnswer": "The correct answer is Option A",
+                    "sentenceStarter": "The sound indicates..."
+                  },
+                  "options": [
+                    "horse and elepahnt",
+                    "cat and dog"
+                  ],
+                  "question": "What is being described?",
+                  "correctAnswer": 0
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/3b46c258529943f5a3c9c02b045efc65.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 161,
+              "type": "AUDIO",
+              "url": "assets/audio/3b46c258529943f5a3c9c02b045efc65.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 162,
+              "type": "AUDIO",
+              "url": "assets/audio/18b6eddae5be4a9da0ed291a7b2d3730.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "128",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "136",
+          "title": "Be an Animal Expert",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Child: “What animal is this?”\n\nExpert: “It is a tiger.”\n\nChild: “What can it do?”\n\nExpert: “It can run and jump.”",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Be an Animal Expert",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788951260609-4awuxryr1",
+                "type": "text",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "color": "#334155",
+                  "fontSize": "16px",
+                  "alignment": "Left",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Child: “What animal is this?”\n\nExpert: “It is a tiger.”\n\nChild: “What can it do?”\n\nExpert: “It can run and jump.”"
+                }
+              },
+              {
+                "id": "block-1788951281362-ameili3qr",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "256px",
+                  "left": "0px",
+                  "minHeight": "105px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Ask question reagrding this\n"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "129",
+      "title": "Writing",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 4,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "137",
+          "title": "Meet the Animals",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Meet the Animals",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788951670696-73yvxdi2v",
+                "slot": "left",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [],
+                  "documentUrl": "/media/media_library/d25c4ed3380c4f0c90bed0971e1cd5db.png",
+                  "documentType": "form"
+                }
+              },
+              {
+                "id": "block-1788951689357-kflx3ieko",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "321px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Monkey"
+                        },
+                        {
+                          "text": "Elephant"
+                        },
+                        {
+                          "text": "Fish"
+                        }
+                      ],
+                      "question": "Which animal has a long trunk?",
+                      "correctAnswerIndex": 1
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Giraffe"
+                        },
+                        {
+                          "text": "Fish"
+                        },
+                        {
+                          "text": "Monkey"
+                        }
+                      ],
+                      "question": "Which animal likes to eat leaves?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Elephant"
+                        },
+                        {
+                          "text": "Monkey"
+                        },
+                        {
+                          "text": "Fish"
+                        }
+                      ],
+                      "question": "Which animal lives in water?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "image": "assets/images/d25c4ed3380c4f0c90bed0971e1cd5db.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 163,
+              "type": "IMAGE",
+              "url": "assets/images/d25c4ed3380c4f0c90bed0971e1cd5db.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "130",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 3,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "138",
+          "title": "My Animal Card",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Animal Card",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788951899430-zgt59gqnv",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "prompt": "Choose your favourite animal and write 3–4 sentences about it.",
+                  "minWords": 50,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

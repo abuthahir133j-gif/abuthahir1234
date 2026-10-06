@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' media-loader:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net https://*.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: media-loader: file: http: https:; media-src 'self' blob: data: media-loader: file: http: https:; connect-src 'self' media-loader: http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://esm.sh https://huggingface.co https://*.huggingface.co https://hf.co https://*.hf.co https://cdn-lfs.huggingface.co https://cdn.jsdelivr.net https://*.jsdelivr.net data: blob:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; object-src 'none';">
     <title>AI-Buddy Evolution Chamber - One Tutor Language Lab</title>
+    <link rel="icon" type="image/png" href="assets/Icon/labIcon.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -421,6 +422,9 @@
 
         /* Image Slicing (302px width x 402px height content) */
         .cr-piece-crop {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             background-size: 302px 402px;
@@ -1008,7 +1012,7 @@
                                 <span class="cr-lock-icon">👑</span>
                                 <span class="cr-lock-lvl">Boss Core</span>
                             </div>
-                            <span class="cr-part-badge">Final Part</span>
+                            <span class="cr-part-badge">Part 6</span>
                         </div>
                     </div>
                 </div>
@@ -1198,8 +1202,8 @@
                 zone: 6,
                 zoneName: "Dragon Peak",
                 icon: "🌋",
-                nextFormName: "Ultimate Grandmaster AI-Buddy",
-                nextFormAsset: "AI/RED ROBOT.svg",
+                nextFormName: "Infernal Dragon Lord",
+                nextFormAsset: "AI/Final.png",
                 themeColor: "#f59e0b",
                 bossId: "boss-6",
                 levels: [26, 27, 28, 29, 30],
@@ -1321,6 +1325,27 @@
         function saveProgressToStorage() {
             localStorage.setItem("language_lab_level_progress_v2", JSON.stringify(userProgress));
         }
+
+        function refreshEvolutionData() {
+            try {
+                loadUserData();
+                renderZoneTabs();
+                if (typeof renderZonePuzzleChamber === 'function') {
+                    renderZonePuzzleChamber(currentActiveZone);
+                }
+            } catch (e) {
+                console.error("[Evolution] Error refreshing data:", e);
+            }
+        }
+        window.refreshEvolutionData = refreshEvolutionData;
+        window.addEventListener("storage", refreshEvolutionData);
+        window.addEventListener("focus", refreshEvolutionData);
+        window.addEventListener("pageshow", refreshEvolutionData);
+        window.addEventListener("message", (event) => {
+            if (event.data === "refresh-profile" || event.data === "refresh-evolution") {
+                refreshEvolutionData();
+            }
+        });
 
         function renderZoneTabs() {
             const tabsContainer = document.getElementById("zone-tabs");
@@ -1561,7 +1586,7 @@
         function launchPieceLevel(levelId, isBoss) {
             const isBossBool = String(isBoss) === 'true' || String(levelId).startsWith('boss-') || levelId === 30 || levelId === '30';
             const regularPackages = [
-                "Hello!_This_Is_Me..._v1",
+                "Hello!_This_Is_Me..._v233",
                 "Things_I_Like_v6",
                 "Meet_My_Friends_v8",
                 "This_Is_My_Family_v7",
@@ -1694,7 +1719,11 @@
             if (piece.unlocked) {
                 pill.className = "shard-detail-status-pill status-unlocked";
                 pill.innerHTML = `<span>✅</span> Socketed & Active`;
-                desc.innerHTML = `This shard is fully energized! Powers the <strong>${config.nextFormName}</strong> system with +50 XP bonus.`;
+                if (currentActiveZone === 6 && status.isComplete) {
+                    desc.innerHTML = `All 6 Dragon Peak shards assembled! <strong>Coming Soon</strong> — Next realm adventure and evolutions are coming soon!`;
+                } else {
+                    desc.innerHTML = `This shard is fully energized! Powers the <strong>${config.nextFormName}</strong> system with +50 XP bonus.`;
+                }
             } else {
                 pill.className = "shard-detail-status-pill status-locked";
                 pill.innerHTML = `<span>🔒</span> Locked`;

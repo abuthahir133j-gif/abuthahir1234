@@ -1,0 +1,411 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "36",
+  "title": "What's in My School Bag?",
+  "description": "Name, identify, read and write familiar school objects and use simple sentences to talk about belongings.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "85",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 3,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "92",
+          "title": "What's in the Bag?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "What's in the Bag?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788841158518-c5nfm6dxj",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/025baec596d044ff946a19c2eab4f3aa.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 134,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788841176802-1yzz1f4z7",
+                "type": "match",
+                "styles": {
+                  "top": "214px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "Bag",
+                    "Notebook"
+                  ],
+                  "rightItems": [
+                    "Bottle",
+                    "pencil"
+                  ]
+                }
+              }
+            ],
+            "media_id": 134,
+            "alignment": "Center",
+            "media_url": "/media/media_library/025baec596d044ff946a19c2eab4f3aa.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/025baec596d044ff946a19c2eab4f3aa.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 134,
+              "type": "AUDIO",
+              "url": "assets/audio/025baec596d044ff946a19c2eab4f3aa.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 134,
+              "type": "AUDIO",
+              "url": "assets/audio/025baec596d044ff946a19c2eab4f3aa.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "86",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "93",
+          "title": "Show Me Your Bag",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Friend: What's in your school bag?\nChild: I have a book.\nFriend: What else do you have?\nChild: I have a pencil and a ruler.",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Show Me Your Bag",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788841327260-5u9f4wc1i",
+                "type": "text",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "color": "#334155",
+                  "fontSize": "16px",
+                  "alignment": "Left",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Friend: What's in your school bag?\nChild: I have a book.\nFriend: What else do you have?\nChild: I have a pencil and a ruler."
+                }
+              },
+              {
+                "id": "block-1788841348081-59z8q932g",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "170px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Tell me three things in your school bag"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "87",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "94",
+          "title": "What's in Sam's Bag?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "What's in Sam's Bag?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788841636918-xr5w9zzfk",
+                "type": "hotspot_explorer",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "hotspots": [
+                    {
+                      "x": 133,
+                      "y": 188,
+                      "id": "hotspot_1",
+                      "hint": "Click on the highlighted object",
+                      "info": "Exploration description here...",
+                      "name": "pencil",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 167,
+                      "y": 214,
+                      "id": "hotspot_1788841667242",
+                      "hint": "",
+                      "info": "",
+                      "name": "eraser",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 231,
+                      "y": 124,
+                      "id": "hotspot_1788841729897",
+                      "hint": "",
+                      "info": "",
+                      "name": "crayons",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 278,
+                      "y": 178,
+                      "id": "hotspot_1788841765150",
+                      "hint": "",
+                      "info": "",
+                      "name": "sharpner",
+                      "width": 80,
+                      "height": 80
+                    }
+                  ],
+                  "imageUrl": "/media/media_library/e6f5b1fe45464368830cb9cec8963307.png"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/e6f5b1fe45464368830cb9cec8963307.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 135,
+              "type": "IMAGE",
+              "url": "assets/images/e6f5b1fe45464368830cb9cec8963307.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "88",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 4,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "95",
+          "title": "My School Bag",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "My School Bag",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788842198690-n36l1acix",
+                "type": "sentence_builder",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "sentences": [
+                    {
+                      "words": [
+                        "My",
+                        "School",
+                        "Bag"
+                      ],
+                      "question": "Reorder the words to make a correct sentence.",
+                      "sentence": "My School Bag"
+                    },
+                    {
+                      "words": [
+                        "I",
+                        "have",
+                        "a",
+                        "pencil."
+                      ],
+                      "question": "",
+                      "sentence": "I have  a pencil."
+                    }
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

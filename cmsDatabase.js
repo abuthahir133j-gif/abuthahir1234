@@ -98,20 +98,7 @@ function upsertPackage(pkgData) {
 }
 
 // In-Memory CMS Student Registry (No reliance on mock JSON files)
-const cmsStudentsStore = {
-    "stu-101": { id: 1, roll_number: "STU-101", name: "Student STU-101" },
-    "stu-102": { id: 2, roll_number: "STU-102", name: "Student STU-102" },
-    "stu-103": { id: 3, roll_number: "STU-103", name: "Student STU-103" },
-    "101": { id: 4, roll_number: "101", name: "Student 101" },
-    "102": { id: 5, roll_number: "102", name: "Student 102" },
-    "103": { id: 6, roll_number: "103", name: "Student 103" },
-    "a": { id: 7, roll_number: "a", name: "Student A" },
-    "student1": { id: 8, roll_number: "STUDENT1", name: "Student One" },
-    "demo": { id: 9, roll_number: "DEMO", name: "Demo Student" },
-    "arj001": { id: 10, roll_number: "ARJ001", name: "arjun" },
-    "abu001": { id: 11, roll_number: "ABU001", name: "Abuthahir" },
-    "mas002": { id: 12, roll_number: "MAS002", name: "Master Student 002" }
-};
+const cmsStudentsStore = {};
 
 function loadStudentsDatabase() {
     return cmsStudentsStore;

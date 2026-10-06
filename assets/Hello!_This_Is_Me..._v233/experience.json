@@ -1,0 +1,1475 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "24",
+  "title": "Hello! This Is Me...",
+  "description": "“I can greet someone and introduce myself in English.”",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 45,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "44",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 7,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "55",
+          "title": "A New Friend!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "prompt": "Good morning!",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "Good morning!"
+              },
+              {
+                "prompt": "My name is Maya.What is your name?",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "My name is Arun"
+              },
+              {
+                "prompt": "How are you?",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "I am fine, thank you"
+              },
+              {
+                "prompt": "Nice to meet you!",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "Nice to meet you too"
+              }
+            ],
+            "title": "A New Friend!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1787826283374-vniirp51p",
+                "slot": "left",
+                "type": "heading",
+                "styles": {
+                  "top": "0px",
+                  "left": "325px",
+                  "color": "#1F2937",
+                  "fontSize": "32px",
+                  "alignment": "Center",
+                  "blockWidth": "319px",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Bold"
+                },
+                "content": {
+                  "tag": "H2",
+                  "text": "A New Friend! "
+                }
+              },
+              {
+                "id": "block-1789639971022-4inpxx7no",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "157px",
+                  "left": "178px",
+                  "minHeight": "324px",
+                  "blockWidth": "580px"
+                },
+                "content": {
+                  "audioUrl": "",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "/media/media_library/dd84d63344584451b53384f04c237b53.mp4",
+                  "mediaType": "video",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "fill_blank",
+                      "options": [
+                        {
+                          "text": "Option A",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "Option B",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "pauseAt": 35,
+                      "imageUrl": "",
+                      "question": "what is your name?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              },
+              {
+                "id": "block-1789640131631-2oep761qz",
+                "slot": "left",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "510px",
+                  "left": "197px",
+                  "minHeight": "382px",
+                  "blockWidth": "621px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "You are ordering food at a restaurant",
+                  "userRole": "Arun",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "prompt": "Good morning!",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "Good morning!"
+                    },
+                    {
+                      "prompt": "My name is Maya.What is your name?",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "My name is Arun"
+                    },
+                    {
+                      "prompt": "How are you?",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "I am fine, thank you"
+                    },
+                    {
+                      "prompt": "Nice to meet you!",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "Nice to meet you too"
+                    }
+                  ],
+                  "npcCharacter": "Maya"
+                }
+              },
+              {
+                "id": "block-1789718128489-jddsom5q9",
+                "slot": "left",
+                "type": "drag_drop",
+                "styles": {
+                  "top": "1311px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "pairs": [
+                    {
+                      "id": "pair-1",
+                      "source": "School",
+                      "target": "",
+                      "sourceImage": "/media/media_library/43d41f32ac704680b8b6ae5256ab4367.png",
+                      "source_image": "/media/media_library/43d41f32ac704680b8b6ae5256ab4367.png"
+                    },
+                    {
+                      "id": "pair-1789718208700",
+                      "source": "Good morning",
+                      "target": "New Destination",
+                      "sourceImage": "/media/media_library/0c197647b4da48e8943763d60595d1ae.png",
+                      "targetImage": "",
+                      "source_image": "/media/media_library/0c197647b4da48e8943763d60595d1ae.png"
+                    }
+                  ],
+                  "question": "Drag the correct items to their destinations."
+                }
+              }
+            ],
+            "media_id": 215,
+            "alignment": "Center",
+            "media_url": "/media/media_library/761fc128998e4aedabae295f6fa3bdea.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/761fc128998e4aedabae295f6fa3bdea.mp3",
+            "video": "assets/video/dd84d63344584451b53384f04c237b53.mp4",
+            "image": "assets/images/0c197647b4da48e8943763d60595d1ae.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 215,
+              "type": "AUDIO",
+              "url": "assets/audio/761fc128998e4aedabae295f6fa3bdea.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 194,
+              "type": "VIDEO",
+              "url": "assets/video/dd84d63344584451b53384f04c237b53.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 215,
+              "type": "AUDIO",
+              "url": "assets/audio/761fc128998e4aedabae295f6fa3bdea.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 217,
+              "type": "IMAGE",
+              "url": "assets/images/0c197647b4da48e8943763d60595d1ae.png",
+              "missing": false
+            },
+            {
+              "media_id": 216,
+              "type": "IMAGE",
+              "url": "assets/images/43d41f32ac704680b8b6ae5256ab4367.png",
+              "missing": false
+            }
+          ]
+        },
+        {
+          "id": "188",
+          "title": "Listen & Find",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Listen & Find",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789640349490-exi3xah29",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "52px",
+                  "left": "256px",
+                  "minHeight": "261px",
+                  "blockWidth": "475px"
+                },
+                "content": {
+                  "audioUrl": "/media/media_library/ae719af6e8c142a1807ae26814e695a2.mp3",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "",
+                  "mediaType": "multimedia",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "options": [
+                        {
+                          "text": "",
+                          "imageUrl": "/media/media_library/0be9cc2fcd784527ac4eb2e42cb10f20.png"
+                        },
+                        {
+                          "text": "none",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "pauseAt": 0,
+                      "imageUrl": "",
+                      "question": "when do we say this",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              },
+              {
+                "id": "block-1789640502128-2b9xdbvwo",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "393px",
+                  "left": "264px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "audioUrl": "/media/media_library/ddabaf9181b042068ad4967c22ee10ac.mp3",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "",
+                  "mediaType": "multimedia",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "options": [
+                        {
+                          "text": "",
+                          "imageUrl": "/media/media_library/74a6848577be44029e60c66b1fdd9b2c.png"
+                        },
+                        {
+                          "text": "Option B",
+                          "imageUrl": "/media/media_library/b226fdf8df3146558f162a2e26b62e78.png"
+                        }
+                      ],
+                      "pauseAt": 0,
+                      "imageUrl": "",
+                      "question": "find me",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              },
+              {
+                "id": "block-1789640518121-e890l9hmw",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "725px",
+                  "left": "277px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "audioUrl": "/media/media_library/5b366b8600ac46179c0e3e962ccab3a6.mp3",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "",
+                  "mediaType": "multimedia",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "fill_blank",
+                      "options": [
+                        {
+                          "text": "Name",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "Age",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "pauseAt": 0,
+                      "imageUrl": "",
+                      "question": "My name is ",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              },
+              {
+                "id": "block-1789640542704-j79djh8lj",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "1006px",
+                  "left": "273px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "audioUrl": "/media/media_library/8cb97dffb2cd4b368f470b9ba2b45e0d.mp3",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "",
+                  "mediaType": "multimedia",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "fill_blank",
+                      "options": [
+                        {
+                          "text": "Option A",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "Option B",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "imageUrl": "",
+                      "question": "How are you",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              },
+              {
+                "id": "block-1789640551297-bt8i8ouvl",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "1305px",
+                  "left": "281px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "audioUrl": "/media/media_library/b5b0f61e5ca04c9ca7f21579d8c37046.mp3",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "",
+                  "mediaType": "multimedia",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "options": [
+                        {
+                          "text": "7",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "9",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "8",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "pauseAt": 0,
+                      "imageUrl": "",
+                      "question": "How old is Arun?",
+                      "correctAnswerIndex": 2
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/74a6848577be44029e60c66b1fdd9b2c.png",
+            "audio": "assets/audio/ddabaf9181b042068ad4967c22ee10ac.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 231,
+              "type": "IMAGE",
+              "url": "assets/images/74a6848577be44029e60c66b1fdd9b2c.png",
+              "missing": false
+            },
+            {
+              "media_id": 230,
+              "type": "AUDIO",
+              "url": "assets/audio/ddabaf9181b042068ad4967c22ee10ac.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 233,
+              "type": "AUDIO",
+              "url": "assets/audio/5b366b8600ac46179c0e3e962ccab3a6.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 227,
+              "type": "IMAGE",
+              "url": "assets/images/0be9cc2fcd784527ac4eb2e42cb10f20.png",
+              "missing": false
+            },
+            {
+              "media_id": 234,
+              "type": "AUDIO",
+              "url": "assets/audio/8cb97dffb2cd4b368f470b9ba2b45e0d.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 235,
+              "type": "AUDIO",
+              "url": "assets/audio/b5b0f61e5ca04c9ca7f21579d8c37046.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 232,
+              "type": "IMAGE",
+              "url": "assets/images/b226fdf8df3146558f162a2e26b62e78.png",
+              "missing": false
+            },
+            {
+              "media_id": 226,
+              "type": "AUDIO",
+              "url": "assets/audio/ae719af6e8c142a1807ae26814e695a2.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "182",
+      "title": "Reading",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 7,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "189",
+          "title": "Read & Discover",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Read & Discover",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789640601139-6uvtebbd4",
+                "slot": "left",
+                "type": "match",
+                "styles": {
+                  "top": "27px",
+                  "left": "215px",
+                  "minHeight": "163px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "arun",
+                    "maya"
+                  ],
+                  "rightItems": [
+                    "boy",
+                    "girl"
+                  ]
+                }
+              },
+              {
+                "id": "block-1789640665831-mojfegxqz",
+                "slot": "left",
+                "type": "match",
+                "styles": {
+                  "top": "271px",
+                  "left": "200px",
+                  "minHeight": "190px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "my name is arun",
+                    "i am eight year old",
+                    "i am happy"
+                  ],
+                  "rightItems": [
+                    "Name",
+                    "Age",
+                    "Feeling"
+                  ]
+                }
+              },
+              {
+                "id": "block-1789641174805-65635vlij",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "540px",
+                  "left": "200px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "audioUrl": "",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "/media/media_library/b02efeaea606493d8a168bb22bffd8bb.mp4",
+                  "mediaType": "video",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "options": [
+                        {
+                          "text": "arun",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "maya",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "imageUrl": "",
+                      "question": "What is his name?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "id": "q_1789641182326",
+                      "type": "mcq",
+                      "options": [
+                        {
+                          "text": "8",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "6",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "pauseAt": 0,
+                      "question": " How old is Arun? ",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "id": "q_1789641251806",
+                      "type": "mcq",
+                      "options": [
+                        {
+                          "text": "",
+                          "imageUrl": "/media/media_library/987c7b189ff340dfbae7dfd1756b55f1.png"
+                        },
+                        {
+                          "text": "",
+                          "imageUrl": "/media/media_library/2ef641b972b84f2aac0ac453aa5484d4.jpeg"
+                        }
+                      ],
+                      "pauseAt": 35,
+                      "question": "How does he feel? ",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/2ef641b972b84f2aac0ac453aa5484d4.jpeg",
+            "video": "assets/video/b02efeaea606493d8a168bb22bffd8bb.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 198,
+              "type": "IMAGE",
+              "url": "assets/images/2ef641b972b84f2aac0ac453aa5484d4.jpeg",
+              "missing": false
+            },
+            {
+              "media_id": 197,
+              "type": "IMAGE",
+              "url": "assets/images/987c7b189ff340dfbae7dfd1756b55f1.png",
+              "missing": false
+            },
+            {
+              "media_id": 199,
+              "type": "VIDEO",
+              "url": "assets/video/b02efeaea606493d8a168bb22bffd8bb.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "179",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 8,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "190",
+          "title": "Choose the Right Response",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Choose the Right Response",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789643054190-jda0s2x0s",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "169px",
+                  "left": "245px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "My name is _____."
+                        },
+                        {
+                          "text": "I am eight years old."
+                        },
+                        {
+                          "text": "I am fine."
+                        }
+                      ],
+                      "question": "Hello! My name is Kavin. What is your name?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "My name is _____."
+                        },
+                        {
+                          "text": "I am eight years old."
+                        },
+                        {
+                          "text": "I am fine."
+                        }
+                      ],
+                      "question": "How old are you?",
+                      "correctAnswerIndex": 1
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "I am fine."
+                        },
+                        {
+                          "text": "My name is _____."
+                        },
+                        {
+                          "text": "I am eight years old."
+                        }
+                      ],
+                      "question": "How are you?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1789643089045-z9gompckr",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "812px",
+                  "left": "248px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "audioUrl": "",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "",
+                  "mediaType": "multimedia",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "options": [
+                        {
+                          "text": "Option A",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "Option B",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "imageUrl": "",
+                      "question": "What is the main topic of the presentation?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "191",
+          "title": "Now It's My Turn!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "Hello!",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "",
+                "speaker": "user",
+                "expectedResponse": "My name is Maya",
+                "recordingRequired": true
+              }
+            ],
+            "title": "Now It's My Turn!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789643664377-tht2bxtg0",
+                "slot": "left",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "0px",
+                  "left": "199px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "Teacher and Maya ",
+                  "userRole": "Maya",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "Hello!",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "My name is Maya",
+                      "recordingRequired": true
+                    }
+                  ],
+                  "npcAvatarUrl": "/media/media_library/90a4e4b4025e457998b0f1cce34c6552.png",
+                  "npcCharacter": "Teacher",
+                  "userAvatarUrl": "/media/media_library/4358371bfce5453a8aed319e0bbe15ed.png",
+                  "speakerAAvatarUrl": "/media/media_library/90a4e4b4025e457998b0f1cce34c6552.png",
+                  "speakerBAvatarUrl": "/media/media_library/4358371bfce5453a8aed319e0bbe15ed.png"
+                }
+              },
+              {
+                "id": "block-1789643676800-17ent7yxu",
+                "slot": "left",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "313px",
+                  "left": "275px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "My name is [dia]. "
+                    },
+                    {
+                      "id": "item-1789643719619",
+                      "text": "I am [8 ]years old. "
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              },
+              {
+                "id": "block-1789725243029-y1t6cds12",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "515px",
+                  "left": "20px"
+                },
+                "content": {
+                  "prompt": "Tell me about yourself",
+                  "question": "Tell me about yourself",
+                  "maxDuration": 35,
+                  "targetAnswer": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/90a4e4b4025e457998b0f1cce34c6552.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 236,
+              "type": "IMAGE",
+              "url": "assets/images/90a4e4b4025e457998b0f1cce34c6552.png",
+              "missing": false
+            },
+            {
+              "media_id": 237,
+              "type": "IMAGE",
+              "url": "assets/images/4358371bfce5453a8aed319e0bbe15ed.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "183",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 8,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "192",
+          "title": "My Little Introduction",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Little Introduction",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789643839367-o0ut3sdfk",
+                "slot": "left",
+                "type": "sentence_builder",
+                "styles": {
+                  "top": "67px",
+                  "left": "194px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "sentences": [
+                    {
+                      "words": [
+                        "My",
+                        "name",
+                        "is",
+                        "kavin"
+                      ],
+                      "question": "Reorder the words to make a correct sentence.",
+                      "sentence": "My name is kavin"
+                    },
+                    {
+                      "words": [
+                        "my",
+                        "age",
+                        "is",
+                        "eight"
+                      ],
+                      "question": "",
+                      "sentence": "my age is eight"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1789725300874-565ko60yy",
+                "slot": "left",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "284px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "My name is [ ]."
+                    },
+                    {
+                      "id": "item-1789725316626",
+                      "text": "I am [eight]years old."
+                    },
+                    {
+                      "id": "item-1789725339618",
+                      "text": "I am [happy] today."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              },
+              {
+                "id": "block-1789725390313-kxz9cyxym",
+                "slot": "left",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "544px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Write two sentences about yourself. ",
+                  "minWords": 30,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "180",
+      "title": "Grammar",
+      "description": "",
+      "sequence": 5,
+      "estimatedDuration": 5,
+      "skills": [
+        "grammar"
+      ],
+      "activityType": "GRAMMAR",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "193",
+          "title": "Meet My New Friend",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "Hello , how are you?",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "",
+                "speaker": "user",
+                "expectedResponse": "I'm fine ",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "how old are you ?",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "eight years old"
+              }
+            ],
+            "title": "Meet My New Friend",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789644001772-ddhbj27wp",
+                "slot": "left",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "151px",
+                  "left": "215px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "Anu Meeting Arun",
+                  "userRole": "Arun",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "Hello , how are you?",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "I'm fine ",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "how old are you ?",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "eight years old"
+                    }
+                  ],
+                  "npcCharacter": "Anu",
+                  "allowAudioRecord": false
+                }
+              },
+              {
+                "id": "block-1789725577361-b204zkajv",
+                "type": "input",
+                "styles": {
+                  "top": "537px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "“Ask Anu one question",
+                  "placeholder": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "194",
+          "title": "Look What I Can Do!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Look What I Can Do!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789644049434-4vjxde0bq",
+                "slot": "left",
+                "type": "multimedia_reading_assessment",
+                "styles": {
+                  "top": "20px",
+                  "left": "261px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "audioUrl": "/media/media_library/2720f248cb104cf3a0de2e9d5d14f8f7.mp3",
+                  "scenario": "Analyze the multimedia material and answer the interactive questions.",
+                  "videoUrl": "",
+                  "mediaType": "multimedia",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "options": [
+                        {
+                          "text": "8 ",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "10",
+                          "imageUrl": ""
+                        },
+                        {
+                          "text": "9",
+                          "imageUrl": ""
+                        }
+                      ],
+                      "pauseAt": 0,
+                      "imageUrl": "",
+                      "question": "How old is Riya?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Read, listen, or view the media carefully before completing the assessment questions below."
+                }
+              },
+              {
+                "id": "block-1789644061614-hapkpf4u2",
+                "slot": "left",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "318px",
+                  "left": "266px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "text",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "How does Sam feel?",
+                      "targetAnswer": "Happy",
+                      "correctAnswer": "Happy"
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Hello! My name is Sam.\n I am eight years old. \nI am happy.",
+                  "documentType": "text"
+                }
+              },
+              {
+                "id": "block-1789644074507-8r4s27zm0",
+                "slot": "left",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "711px",
+                  "left": "238px",
+                  "minHeight": "140px",
+                  "blockWidth": "400px"
+                },
+                "content": {
+                  "prompt": "“Write your name and one sentence about yourself",
+                  "minWords": 10,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/2720f248cb104cf3a0de2e9d5d14f8f7.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 239,
+              "type": "AUDIO",
+              "url": "assets/audio/2720f248cb104cf3a0de2e9d5d14f8f7.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

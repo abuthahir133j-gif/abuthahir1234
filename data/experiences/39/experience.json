@@ -1,0 +1,381 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "43",
+  "title": "Welcome to My Home",
+  "description": "Talk about rooms and familiar things at home, describe where objects are, and read a simple home description.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "110",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "118",
+          "title": "A Tour of My Home",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "A Tour of My Home",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788933516673-objkc3ws6",
+                "type": "video",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/c0aa46798b75481a8121b82a2a1a71a6.mp4",
+                  "media_id": 144,
+                  "media_type": "VIDEO"
+                }
+              },
+              {
+                "id": "block-1788933732881-eusmdb1fi",
+                "type": "hotspot_explorer",
+                "styles": {
+                  "top": "562px",
+                  "left": "20px",
+                  "minHeight": "150px"
+                },
+                "content": {
+                  "hotspots": [
+                    {
+                      "x": 101,
+                      "y": 109,
+                      "id": "hotspot_1",
+                      "hint": "Click on the highlighted object",
+                      "info": "Exploration description here...",
+                      "name": "Sofa",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 248,
+                      "y": 119,
+                      "id": "hotspot_1788933802638",
+                      "hint": "",
+                      "info": "",
+                      "name": "Fridge",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 142,
+                      "y": 51,
+                      "id": "hotspot_1788933827028",
+                      "hint": "",
+                      "info": "",
+                      "name": "Bed",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 51,
+                      "y": 113,
+                      "id": "hotspot_1788933856595",
+                      "hint": "",
+                      "info": "",
+                      "name": "Window",
+                      "width": 80,
+                      "height": 80
+                    },
+                    {
+                      "x": 200,
+                      "y": 138,
+                      "id": "hotspot_1788933884296",
+                      "hint": "",
+                      "info": "",
+                      "name": "Table",
+                      "width": 80,
+                      "height": 80
+                    }
+                  ],
+                  "imageUrl": "/media/media_library/b81dd452fc3143d89a1d15eb6cbf543a.png"
+                }
+              }
+            ],
+            "media_id": 144,
+            "alignment": "Center",
+            "media_url": "/media/media_library/c0aa46798b75481a8121b82a2a1a71a6.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "video": "assets/video/c0aa46798b75481a8121b82a2a1a71a6.mp4",
+            "image": "assets/images/b81dd452fc3143d89a1d15eb6cbf543a.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 144,
+              "type": "VIDEO",
+              "url": "assets/video/c0aa46798b75481a8121b82a2a1a71a6.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 144,
+              "type": "VIDEO",
+              "url": "assets/video/c0aa46798b75481a8121b82a2a1a71a6.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 145,
+              "type": "IMAGE",
+              "url": "assets/images/b81dd452fc3143d89a1d15eb6cbf543a.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "111",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "119",
+          "title": "Show Me Your Home",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Tell me about your home",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Show Me Your Home",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788933979415-4bs20oyw2",
+                "type": "text",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "color": "#334155",
+                  "fontSize": "32px",
+                  "alignment": "Left",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Tell me about your home"
+                }
+              },
+              {
+                "id": "block-1788933999880-436yor2ry",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "prompt": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "112",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "120",
+          "title": "My Home Map",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Home Map",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788934226855-fj0ieogev",
+                "slot": "left",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "text",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "I am in the room where you sleep. I am soft and big.",
+                      "correctAnswer": 0
+                    },
+                    {
+                      "id": "q_1788934261749",
+                      "type": "text",
+                      "question": "I keep food cold."
+                    },
+                    {
+                      "id": "q_1788934309628",
+                      "type": "text",
+                      "question": "You sit on me in the living room."
+                    }
+                  ],
+                  "documentUrl": "/media/media_library/94ee295b4bff4bdebf6ea3340b640894.png",
+                  "documentType": "form"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/94ee295b4bff4bdebf6ea3340b640894.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 146,
+              "type": "IMAGE",
+              "url": "assets/images/94ee295b4bff4bdebf6ea3340b640894.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "113",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "121",
+          "title": "My Favourite Room",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Favourite Room",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788934374039-cfyhbv7hk",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "prompt": "Write 3 sentences about your favourite room.",
+                  "minWords": 53,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

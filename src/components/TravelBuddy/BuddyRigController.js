@@ -52,7 +52,8 @@
                 'AI/PURPLE ROBOT.svg',
                 'AI/GREEN.svg',
                 'AI/GOLD ROBOT.svg',
-                'AI/RED ROBOT.svg'
+                'AI/RED ROBOT.svg',
+                'AI/Final.png'
             ];
             if (assetPath && !validAssets.includes(assetPath)) {
                 console.warn(`[BuddyRigController] Character asset unrecognized: ${assetPath}`);

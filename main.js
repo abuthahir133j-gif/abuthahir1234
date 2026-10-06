@@ -1,6 +1,25 @@
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
+process.env.ELECTRON_ENABLE_SECURITY_WARNINGS = 'false';
+
 const path = require('path');
 const fs = require('fs'); // Explicit Node.js core filesystem module import
-const { app, BrowserWindow, ipcMain, shell, session } = require('electron');
+const { pathToFileURL } = require('url');
+const { app, BrowserWindow, ipcMain, shell, session, protocol, net } = require('electron');
+
+// Register custom media scheme for secure local asset delivery
+protocol.registerSchemesAsPrivileged([
+    {
+        scheme: 'media-loader',
+        privileges: {
+            standard: true,
+            secure: true,
+            supportFetchAPI: true,
+            bypassCSP: true,
+            corsEnabled: true,
+            stream: true
+        }
+    }
+]);
 
 // Allow Electron's net module (Chromium) to connect to localhost without TLS/CORS issues
 app.commandLine.appendSwitch('allow-insecure-localhost');
@@ -8,22 +27,69 @@ app.commandLine.appendSwitch('host-resolver-rules', 'MAP localhost 127.0.0.1');
 // Prevent Windows Chromium GPUCache / disk_cache file-lock permission errors & silence noise
 app.commandLine.appendSwitch('disable-gpu-shader-disk-cache');
 app.commandLine.appendSwitch('log-level', '3');
+// Ensure Chromium automatically allows microphone stream capture without browser prompt UI
+app.commandLine.appendSwitch('use-fake-ui-for-media-stream');
+app.commandLine.appendSwitch('enable-features', 'AudioServiceOutOfProcess');
 
 let mainWindow = null;
 let engineWindow = null;
 
+const APP_ICON = process.platform === 'win32' && fs.existsSync(path.join(__dirname, "assets", "Icon", "labIcon.ico"))
+    ? path.join(__dirname, "assets", "Icon", "labIcon.ico")
+    : path.join(__dirname, "assets", "Icon", "labIcon.png");
+
+if (process.platform === 'win32') {
+    app.setAppUserModelId("com.english.adventure");
+}
+
 function createMainWindow() {
     mainWindow = new BrowserWindow({
+        title: "English Adventure",
         width: 1280,
         height: 720,
         show: false,
         backgroundColor: '#6366f1',
+        icon: APP_ICON,
+        autoHideMenuBar: true,
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: false,
             nodeIntegrationInSubFrames: true,
             sandbox: true,
             preload: path.join(__dirname, "preload.js")
+        }
+    });
+
+    mainWindow.setMenu(null);
+    mainWindow.setMenuBarVisibility(false);
+
+    // Shortcuts: F11 (Fullscreen), F12 / Ctrl+Shift+I (DevTools/Console), F5 / Ctrl+R (Reload), Ctrl+Shift+R (Hard Reload)
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+        if (input.type === 'keyDown') {
+            if (input.key === 'F11') {
+                mainWindow.setFullScreen(!mainWindow.isFullScreen());
+                event.preventDefault();
+            } else if (input.key === 'F12' || (input.control && input.shift && (input.key.toLowerCase() === 'i' || input.key.toLowerCase() === 'c'))) {
+                mainWindow.webContents.toggleDevTools();
+                event.preventDefault();
+            } else if ((input.control && input.shift && input.key.toLowerCase() === 'r') || (input.control && input.key === 'F5')) {
+                mainWindow.webContents.reloadIgnoringCache();
+                event.preventDefault();
+            } else if (input.key === 'F5' || (input.control && input.key.toLowerCase() === 'r')) {
+                mainWindow.webContents.reload();
+                event.preventDefault();
+            }
+        }
+    });
+
+    // Automatically enter fullscreen when navigating to the LMS game map (index.html),
+    // and exit fullscreen when returning to the login page (login.html)
+    mainWindow.webContents.on('did-navigate', (event, url) => {
+        if (!mainWindow || mainWindow.isDestroyed()) return;
+        if (url && (url.includes('index.html') || url.endsWith('/index.html'))) {
+            mainWindow.setFullScreen(true);
+        } else if (url && (url.includes('login.html') || url.endsWith('/login.html'))) {
+            mainWindow.setFullScreen(false);
         }
     });
 
@@ -92,37 +158,88 @@ function resolvePackageMediaUrls(data, basePath) {
     return resolveValue(data);
 }
 
+const BOSS_EXPERIENCE_PACKAGES = {
+    1: { id: "Assessent_v5", title: "Assessment Challenge", zone: 1, season: "summer" },
+    2: { id: "My School World", title: "My School World", zone: 2, season: "winter" },
+    3: { id: "My_Everyday_Life_v1", title: "My Everyday Life", zone: 3, season: "spring" },
+    4: { id: "PEOPLE,_PLACES_&_ACTIONS_v1", title: "People, Places & Actions", zone: 4, season: "marine" },
+    5: { id: "STORIES,_MESSAGES_&_IDEAS_v1", title: "Stories, Messages & Ideas", zone: 5, season: "desert" },
+    6: { id: "FINAL_ENGLISH_CHALLENGE_v1", title: "Final English Challenge", zone: 6, season: "lava" }
+};
+
 const SAMPLES_REGULAR_PACKAGES = [
-    { id: "Hello!_This_Is_Me..._v1", title: "Hello! This Is Me" },
-    { id: "Things_I_Like_v6", title: "Things I Like" },
-    { id: "Meet_My_Friends_v8", title: "Meet My Friends" },
-    { id: "This_Is_My_Family_v7", title: "This Is My Family" },
-    { id: "Welcome_to_My_Classroom_v3", title: "Welcome to My Classroom" },
-    { id: "Where_Is_My_Pencil__v2", title: "Where Is My Pencil?" },
-    { id: "What's_in_My_School_Bag__v4", title: "What's in My School Bag?" },
-    { id: "Can_You_Help_Me__v1", title: "Can You Help Me?" }
+    // Zone 1: Summer Season (Levels 1 - 5)
+    { id: "Hello!_This_Is_Me..._v1", title: "Hello! This Is Me", zone: 1, season: "summer" },
+    { id: "Things_I_Like_v6", title: "Things I Like", zone: 1, season: "summer" },
+    { id: "Meet_My_Friends_v8", title: "Meet My Friends", zone: 1, season: "summer" },
+    { id: "This_Is_My_Family_v7", title: "This Is My Family", zone: 1, season: "summer" },
+    { id: "Welcome_to_My_Classroom_v3", title: "Welcome to My Classroom", zone: 1, season: "summer" },
+
+    // Zone 2: Winter Season (Levels 6 - 10)
+    { id: "Where_Is_My_Pencil__v2", title: "Where Is My Pencil?", zone: 2, season: "winter" },
+    { id: "What's_in_My_School_Bag__v4", title: "What's in My School Bag?", zone: 2, season: "winter" },
+    { id: "Can_You_Help_Me__v1", title: "Can You Help Me?", zone: 2, season: "winter" },
+    { id: "A_Day_at_School_v1", title: "A Day at School", zone: 2, season: "winter" },
+    { id: "Amazing_Animals_Around_Us_v1", title: "Amazing Animals Around Us", zone: 2, season: "winter" },
+
+    // Zone 3: Spring Season (Levels 11 - 15)
+    { id: "AROUND_MY_NEIGHBOURHOOD_v1", title: "Around My Neighbourhood", zone: 3, season: "spring" },
+    { id: "How_Are_You_Today__v1", title: "How Are You Today?", zone: 3, season: "spring" },
+    { id: "Let's_Play!_vv1", title: "Let's Play!", zone: 3, season: "spring" },
+    { id: "LET’S_ACT_IT_OUT!_v1", title: "Let's Act It Out!", zone: 3, season: "spring" },
+    { id: "Let’s_Go_Shopping!_v1", title: "Let's Go Shopping!", zone: 3, season: "spring" },
+
+    // Zone 4: Marine Season (Levels 16 - 20)
+    { id: "My_Day_Begins_v1", title: "My Day Begins", zone: 4, season: "marine" },
+    { id: "My_Happy_Day_v1", title: "My Happy Day", zone: 4, season: "marine" },
+    { id: "MY_LITTLE_STORY_v1", title: "My Little Story", zone: 4, season: "marine" },
+    { id: "PICTURE_DETECTIVE_v1", title: "Picture Detective", zone: 4, season: "marine" },
+    { id: "READ_THE_WORLD_AROUND_ME_v1", title: "Read The World Around Me", zone: 4, season: "marine" },
+
+    // Zone 5: Desert Season (Levels 21 - 25)
+    { id: "RHYTHM,_RHYME_&_ENGLISH_TIME!_v1", title: "Rhythm, Rhyme & English Time!", zone: 5, season: "desert" },
+    { id: "THIS_IS_MY_ENGLISH!_v1", title: "This Is My English!", zone: 5, season: "desert" },
+    { id: "Welcome_to_My_Home_v1", title: "Welcome to My Home", zone: 5, season: "desert" },
+    { id: "What's_the_Weather_Like__v1", title: "What's the Weather Like?", zone: 5, season: "desert" },
+    { id: "What_Are_They_Doing__v1", title: "What Are They Doing?", zone: 5, season: "desert" },
+
+    // Zone 6: Lava Season (Levels 26 - 30)
+    { id: "WHAT_HAPPENED_NEXT__v1", title: "What Happened Next?", zone: 6, season: "lava" },
+    { id: "YESTERDAY_AND_TODAY_v1", title: "Yesterday and Today", zone: 6, season: "lava" },
+    { id: "Yummy!_What_Shall_We_Eat__v1", title: "Yummy! What Shall We Eat?", zone: 6, season: "lava" },
+    { id: "I'VE_GOT_A_MESSAGE!_v1", title: "I've Got A Message!", zone: 6, season: "lava" },
+    { id: "I’VE_GOT_A_MESSAGE!_v1", title: "I've Got A Message!", zone: 6, season: "lava" }
 ];
 
 function getSamplePackageForLevel(levelId, isBoss = false) {
     const isBossLevel = Boolean(
         isBoss || 
-        String(levelId).startsWith("boss-") || 
-        levelId === 30 || 
-        levelId === "30"
+        String(levelId).startsWith("boss-")
     );
     if (isBossLevel) {
+        let bossIdx = 1;
+        if (typeof levelId === 'string' && levelId.startsWith('boss-')) {
+            bossIdx = parseInt(levelId.replace('boss-', ''), 10) || 1;
+        } else if (levelId === 30 || levelId === '30') {
+            bossIdx = 6;
+        }
+        const bossPkg = BOSS_EXPERIENCE_PACKAGES[bossIdx] || BOSS_EXPERIENCE_PACKAGES[1];
         return {
-            packageId: "Assessent_v5",
-            packageTitle: "Assessment Challenge",
+            packageId: bossPkg.id,
+            packageTitle: bossPkg.title,
+            zone: bossPkg.zone,
+            season: bossPkg.season,
             isBoss: true
         };
     }
     const num = parseInt(levelId, 10);
-    const validNum = (!isNaN(num) && num >= 1) ? num : 1;
-    const pkg = SAMPLES_REGULAR_PACKAGES[(validNum - 1) % SAMPLES_REGULAR_PACKAGES.length];
+    const validNum = (!isNaN(num) && num >= 1 && num <= SAMPLES_REGULAR_PACKAGES.length) ? num : 1;
+    const pkg = SAMPLES_REGULAR_PACKAGES[validNum - 1];
     return {
         packageId: pkg.id,
         packageTitle: pkg.title,
+        zone: pkg.zone,
+        season: pkg.season,
         isBoss: false
     };
 }
@@ -138,6 +255,7 @@ function findPackageExperience(requestedId) {
         rawId.replace(/\.zip$/i, ''),
         'Assessent_v5',
         'Hello!_This_Is_Me..._v1',
+        'Hello!_This_Is_Me..._v233',
         'Things_I_Like_v6',
         'Meet_My_Friends_v8',
         'This_Is_My_Family_v7',
@@ -148,10 +266,13 @@ function findPackageExperience(requestedId) {
     ].filter(Boolean);
 
     const baseSearchDirs = [
-        path.join(__dirname, 'language-lab-engine', 'src', 'runtime', 'samples'),
-        path.join(__dirname, 'language-lab-engine', 'src', 'packages'),
-        path.join(__dirname, 'language-lab-engine', 'public', 'packages'),
-        path.join(__dirname, 'assets', 'packages')
+        path.join(__dirname, 'LMS Engine', 'src', 'runtime', 'samples', 'Lession'),
+        path.join(__dirname, 'LMS Engine', 'src', 'runtime', 'samples', 'Assigment'),
+        path.join(__dirname, 'LMS Engine', 'src', 'runtime', 'samples'),
+        path.join(__dirname, 'LMS Engine', 'src', 'packages'),
+        path.join(__dirname, 'LMS Engine', 'public', 'packages'),
+        path.join(__dirname, 'assets', 'packages'),
+        path.join(__dirname, 'assets')
     ];
 
     for (const baseDir of baseSearchDirs) {
@@ -177,6 +298,8 @@ async function openEngine(packageData) {
     const mapped = getSamplePackageForLevel(originalLevelId, isBossExplicit);
     let packageId = mapped.packageId;
     let packageTitle = mapped.packageTitle;
+    let zone = mapped.zone;
+    let season = mapped.season;
     let isBoss = mapped.isBoss;
 
     if (typeof packageData === 'object' && packageData?.packageId && !['1', 1, 'big_house_v4.elab', 'asses_v6'].includes(packageData.packageId)) {
@@ -185,35 +308,108 @@ async function openEngine(packageData) {
     if (typeof packageData === 'object' && packageData?.title && !['asses', 'big house'].includes(packageData.title)) {
         packageTitle = packageData.title;
     }
-    if (isBoss || String(packageId).toLowerCase().includes('asses')) {
-        packageId = 'Assessent_v5';
-        packageTitle = 'Assessment Challenge';
-        isBoss = true;
+    if (typeof packageData === 'object' && packageData?.zone) {
+        zone = packageData.zone;
+    }
+    if (typeof packageData === 'object' && packageData?.season) {
+        season = packageData.season;
     }
 
     try {
         console.log('[Main Process] Attempting to open engine for level:', originalLevelId, 'Package:', packageId, 'Title:', packageTitle, 'isBoss:', isBoss);
 
-        const indexPath = path.join(__dirname, 'language-lab-engine', 'dist', 'index.html');
+        const possibleIndexPaths = [
+            path.join(__dirname, 'LMS Engine', 'dist', 'index.html'),
+            path.join(__dirname, 'dist', 'index.html')
+        ];
+        let indexPath = possibleIndexPaths.find(p => fs.existsSync(p)) || possibleIndexPaths[0];
         console.log('[Main Process] Engine Renderer Target:', indexPath);
 
-        // Launch Engine Window
+        // Launch Engine Window in Fullscreen Mode
         if (engineWindow && !engineWindow.isDestroyed()) {
+            engineWindow.setFullScreen(true);
             engineWindow.focus();
         } else {
             engineWindow = new BrowserWindow({
                 width: 1280,
                 height: 800,
-                fullscreen: false,
-                parent: mainWindow || undefined,
+                fullscreen: true,
                 modal: false,
-                title: `Language Lab Experience Engine - ${packageTitle}`,
+                title: `LMS Engine - ${packageTitle}`,
+                icon: APP_ICON,
+                autoHideMenuBar: true,
                 webPreferences: {
                     contextIsolation: true,
                     nodeIntegration: false,
                     webSecurity: false,
+                    allowRunningInsecureContent: true,
                     preload: path.join(__dirname, "preload.js")
                 }
+            });
+
+            engineWindow.setMenu(null);
+            engineWindow.setMenuBarVisibility(false);
+            engineWindow.setFullScreen(true);
+
+            engineWindow.once('ready-to-show', () => {
+                if (engineWindow && !engineWindow.isDestroyed()) {
+                    engineWindow.setFullScreen(true);
+                    engineWindow.show();
+                }
+            });
+
+            engineWindow.webContents.on('did-finish-load', () => {
+                if (engineWindow && !engineWindow.isDestroyed()) {
+                    engineWindow.setFullScreen(true);
+                }
+            });
+
+            // Shortcuts: F11 (Fullscreen), F12 / Ctrl+Shift+I (DevTools/Console), F5 / Ctrl+R (Reload), Ctrl+Shift+R (Hard Reload)
+            engineWindow.webContents.on('before-input-event', (event, input) => {
+                if (!engineWindow || engineWindow.isDestroyed()) return;
+                if (input.type === 'keyDown') {
+                    if (input.key === 'F11') {
+                        engineWindow.setFullScreen(!engineWindow.isFullScreen());
+                        event.preventDefault();
+                    } else if (input.key === 'F12' || (input.control && input.shift && (input.key.toLowerCase() === 'i' || input.key.toLowerCase() === 'c'))) {
+                        if (engineWindow && !engineWindow.isDestroyed() && engineWindow.webContents && !engineWindow.webContents.isDestroyed()) {
+                            engineWindow.webContents.toggleDevTools();
+                        }
+                        event.preventDefault();
+                    } else if ((input.control && input.shift && input.key.toLowerCase() === 'r') || (input.control && input.key === 'F5')) {
+                        if (engineWindow && !engineWindow.isDestroyed() && engineWindow.webContents && !engineWindow.webContents.isDestroyed()) {
+                            engineWindow.webContents.reloadIgnoringCache();
+                        }
+                        event.preventDefault();
+                    } else if (input.key === 'F5' || (input.control && input.key.toLowerCase() === 'r')) {
+                        if (engineWindow && !engineWindow.isDestroyed() && engineWindow.webContents && !engineWindow.webContents.isDestroyed()) {
+                            engineWindow.webContents.reload();
+                        }
+                        event.preventDefault();
+                    }
+                }
+            });
+
+            // Diagnostics: Log engine render errors and console messages
+            engineWindow.webContents.on('did-fail-load', (e, errorCode, errorDescription, validatedURL) => {
+                if (errorCode === -21 || errorDescription === 'ERR_NETWORK_CHANGED' || errorCode === -3) {
+                    return; // Ignore transient network route changes or aborted requests
+                }
+                console.error('[Engine Window] Load Failed:', errorCode, errorDescription, validatedURL);
+            });
+            engineWindow.webContents.on('console-message', (e, level, message, line, sourceId) => {
+                if (
+                    message.includes('CleanUnusedInitializersAndNodeArgs') ||
+                    message.includes('Removing initializer') ||
+                    message.includes('Electron Security Warning') ||
+                    message.includes('Speech recognition status: network') ||
+                    message.includes('ERR_NETWORK_CHANGED') ||
+                    message.includes('Failed to load resource') ||
+                    message.includes('DEBUG: experienceType is:')
+                ) {
+                    return;
+                }
+                console.log(`[Engine Console] ${message} (${sourceId}:${line})`);
             });
 
             // Guard: Prevent unauthorized external popups from engine window
@@ -227,13 +423,14 @@ async function openEngine(packageData) {
             engineWindow.on('closed', () => {
                 engineWindow = null;
                 if (mainWindow && !mainWindow.isDestroyed()) {
+                    mainWindow.setFullScreen(true);
                     mainWindow.focus();
                 }
             });
         }
 
         // Load target into engine window
-        const queryParams = `levelId=${encodeURIComponent(originalLevelId)}&title=${encodeURIComponent(packageTitle)}&packageId=${encodeURIComponent(packageId)}`;
+        const queryParams = `levelId=${encodeURIComponent(originalLevelId)}&title=${encodeURIComponent(packageTitle)}&packageId=${encodeURIComponent(packageId)}&zone=${encodeURIComponent(zone || '')}&season=${encodeURIComponent(season || '')}&isBoss=${encodeURIComponent(isBoss ? 'true' : 'false')}`;
 
         if (indexPath.startsWith('http') || indexPath.includes('?')) {
             const targetUrl = indexPath.includes('?') ? `${indexPath}&${queryParams}` : `${indexPath}?${queryParams}`;
@@ -249,6 +446,9 @@ async function openEngine(packageData) {
 
     } catch (err) {
         console.error('[Main Process] Exception in openEngine:', err.message);
+        if (engineWindow && !engineWindow.isDestroyed()) {
+            engineWindow.close();
+        }
         engineWindow = null;
         return { success: false, error: err.message };
     }
@@ -262,20 +462,56 @@ const { initDatabase } = require("./src/main/db/sqlite");
 const { initIpcHandlers } = require("./src/main/ipcHandlers");
 
 app.whenReady().then(() => {
+    // Automatically grant media/microphone permissions to renderers
+    session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+        if (['media', 'microphone', 'audio-capture'].includes(permission)) {
+            return callback(true);
+        }
+        callback(true);
+    });
+
+    session.defaultSession.setPermissionCheckHandler((webContents, permission) => {
+        if (['media', 'microphone', 'audio-capture'].includes(permission)) {
+            return true;
+        }
+        return true;
+    });
+
+    // Protocol handler for secure local media loading without disabling webSecurity
+    protocol.handle('media-loader', (request) => {
+        try {
+            const parsed = new URL(request.url);
+            let decodedPath = decodeURIComponent(parsed.pathname);
+            if (parsed.host && parsed.host !== 'local') {
+                decodedPath = decodeURIComponent(parsed.host + parsed.pathname);
+            }
+            if (process.platform === 'win32' && decodedPath.startsWith('/')) {
+                decodedPath = decodedPath.slice(1);
+            }
+            return net.fetch(pathToFileURL(decodedPath).toString());
+        } catch (err) {
+            console.error('[Protocol media-loader] Failed to load:', request.url, err);
+            return new Response('Not Found', { status: 404 });
+        }
+    });
+
     // Intercept root-relative requests (e.g., /arrrow.png, /quiz images/...) from engine and map to engine dist
-    const engineDistDir = path.join(__dirname, 'language-lab-engine', 'dist');
+    const possibleDistDirs = [
+        path.join(__dirname, 'LMS Engine', 'dist'),
+        path.join(__dirname, 'dist')
+    ];
+    let engineDistDir = possibleDistDirs.find(d => fs.existsSync(d)) || possibleDistDirs[0];
     session.defaultSession.webRequest.onBeforeRequest((details, callback) => {
         const url = details.url;
         if (url && url.startsWith('file:///')) {
             const decoded = decodeURIComponent(url.replace('file:///', ''));
-            const match = decoded.match(/^[a-zA-Z]:\/([^/].*)$/);
-            if (match) {
-                const subPath = match[1];
-                const candidate = path.join(engineDistDir, subPath);
-                if (fs.existsSync(candidate)) {
+            const subPath = decoded.replace(/^[a-zA-Z]:\//, '').replace(/^\/+/, '');
+            const candidate = path.join(engineDistDir, subPath);
+            try {
+                if (fs.existsSync(candidate) && !fs.statSync(candidate).isDirectory()) {
                     return callback({ redirectURL: `file:///${candidate.replace(/\\/g, '/')}` });
                 }
-            }
+            } catch (e) {}
         }
         callback({});
     });
@@ -291,7 +527,7 @@ app.whenReady().then(() => {
             responseHeaders: {
                 ...details.responseHeaders,
                 'Content-Security-Policy': [
-                    `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://esm.sh${devScript}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com${devStyle}; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file: http: https:; media-src 'self' blob: data: file: http: https:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://esm.sh https://huggingface.co https://cdn-lfs.huggingface.co${devConnect}; worker-src 'self' blob:; object-src 'none'; base-uri 'self';`
+                    `default-src 'self' media-loader:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net https://*.jsdelivr.net${devScript}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com${devStyle}; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: media-loader: file: http: https:; media-src 'self' blob: data: media-loader: file: http: https:; connect-src 'self' media-loader: http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://esm.sh https://huggingface.co https://*.huggingface.co https://hf.co https://*.hf.co https://cdn-lfs.huggingface.co https://cdn.jsdelivr.net https://*.jsdelivr.net data: blob:${devConnect}; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';`
                 ]
             }
         });
@@ -324,7 +560,11 @@ app.whenReady().then(() => {
             if (row && row.payload_json) {
                 const data = typeof row.payload_json === 'string' ? JSON.parse(row.payload_json) : row.payload_json;
                 if (data.activities) {
-                    return { success: true, data, basePath: path.join(__dirname, 'language-lab-engine', 'src', 'packages', requestedId) };
+                    const candidatePkgs = [
+                        path.join(__dirname, 'LMS Engine', 'src', 'packages', requestedId)
+                    ];
+                    const pkgBasePath = candidatePkgs.find(p => fs.existsSync(p)) || candidatePkgs[0];
+                    return { success: true, data, basePath: pkgBasePath };
                 }
             }
 
@@ -364,6 +604,40 @@ app.whenReady().then(() => {
     });
 
     ipcMain.on("complete-level", (event, data) => {
+        try {
+            const { saveStudentProgress } = require("./src/main/db/sqlite");
+            const levelId = (typeof data === 'object' && data?.levelId) ? data.levelId : data;
+            const stars = (typeof data === 'object' && data?.stars) ? data.stars : 3;
+            const score = (typeof data === 'object' && data?.score) ? data.score : stars * 100;
+            
+            // Read active student from saved session if available
+            let studentId = 'STUDENT';
+            try {
+                const sessionPath = path.join(app.getPath("userData"), "student_session.json");
+                if (fs.existsSync(sessionPath)) {
+                    const session = JSON.parse(fs.readFileSync(sessionPath, 'utf-8'));
+                    studentId = session.roll_number || session.student?.roll_number || session.student?.roll_no || 'STUDENT';
+                }
+            } catch (e) {}
+
+            saveStudentProgress({
+                student_id: studentId,
+                level_id: String(levelId),
+                package_id: String(levelId),
+                stars: stars,
+                score: score,
+                status: 'COMPLETED'
+            });
+
+            // Trigger background progress sync
+            const { pushPendingProgressToCms } = require("./src/main/services/syncService");
+            setImmediate(() => {
+                pushPendingProgressToCms(null, null, studentId).catch(() => {});
+            });
+        } catch (e) {
+            console.warn('[main.js] Complete-level progress save notice:', e.message);
+        }
+
         if (mainWindow && !mainWindow.isDestroyed()) {
             mainWindow.webContents.send("level-completed-signal", data);
         }
@@ -448,8 +722,21 @@ app.whenReady().then(() => {
             const sessionPath = path.join(app.getPath("userData"), "student_session.json");
             if (!sessionData) {
                 if (fs.existsSync(sessionPath)) fs.unlinkSync(sessionPath);
+                try {
+                    const { clearCmsSession } = require("./src/main/services/cmsAuthService");
+                    clearCmsSession();
+                } catch (e) {}
                 return { success: true };
             }
+
+            const rollNo = sessionData.roll_number || sessionData.student?.roll_number || sessionData.student?.roll_no;
+            if (rollNo) {
+                try {
+                    const { setActiveStudent } = require("./src/main/services/cmsAuthService");
+                    setActiveStudent(rollNo, sessionData.student || sessionData);
+                } catch (e) {}
+            }
+
             fs.writeFileSync(sessionPath, JSON.stringify(sessionData, null, 2), "utf-8");
             return { success: true, path: sessionPath };
         } catch (err) {
@@ -651,6 +938,78 @@ app.whenReady().then(() => {
             console.error("[IPC] open-external failed:", e);
         }
         return { success: false };
+    });
+
+    // IPC handlers for Window Fullscreen Controls (Engine and Dashboard)
+    ipcMain.handle("set-fullscreen", (event, flag) => {
+        const targetWin = (engineWindow && !engineWindow.isDestroyed()) ? engineWindow : mainWindow;
+        if (targetWin && !targetWin.isDestroyed()) {
+            targetWin.setFullScreen(Boolean(flag));
+            return targetWin.isFullScreen();
+        }
+        return false;
+    });
+
+    ipcMain.handle("toggle-fullscreen", (event) => {
+        const targetWin = (engineWindow && !engineWindow.isDestroyed()) ? engineWindow : mainWindow;
+        if (targetWin && !targetWin.isDestroyed()) {
+            const nextState = !targetWin.isFullScreen();
+            targetWin.setFullScreen(nextState);
+            return nextState;
+        }
+        return false;
+    });
+
+    ipcMain.handle("is-fullscreen", (event) => {
+        const targetWin = (engineWindow && !engineWindow.isDestroyed()) ? engineWindow : mainWindow;
+        if (targetWin && !targetWin.isDestroyed()) {
+            return targetWin.isFullScreen();
+        }
+        return false;
+    });
+
+    ipcMain.on("close-engine", () => {
+        if (engineWindow && !engineWindow.isDestroyed()) {
+            engineWindow.close();
+        }
+    });
+
+    ipcMain.handle("close-engine", () => {
+        if (engineWindow && !engineWindow.isDestroyed()) {
+            engineWindow.close();
+            return true;
+        }
+        return false;
+    });
+
+    // IPC handlers to cleanly close all windows and exit Electron
+    ipcMain.handle("exit-app", () => {
+        try {
+            if (engineWindow && !engineWindow.isDestroyed()) {
+                engineWindow.close();
+            }
+            if (mainWindow && !mainWindow.isDestroyed()) {
+                mainWindow.close();
+            }
+        } catch (e) {
+            console.error("[Exit App] Error closing windows:", e);
+        }
+        app.quit();
+        return true;
+    });
+
+    ipcMain.on("exit-app", () => {
+        try {
+            if (engineWindow && !engineWindow.isDestroyed()) {
+                engineWindow.close();
+            }
+            if (mainWindow && !mainWindow.isDestroyed()) {
+                mainWindow.close();
+            }
+        } catch (e) {
+            console.error("[Exit App] Error closing windows:", e);
+        }
+        app.quit();
     });
 
 });

@@ -1,0 +1,36 @@
+{
+  "package_name": "what-are-they-doing",
+  "experience_id": 47,
+  "experience_title": "What Are They Doing?",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:28:03.785893+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 10361,
+      "checksum": "c9a64051c63beaec7857620d161998f1af3558de95174ce8a036ee6bcb609092"
+    },
+    {
+      "path": "metadata.json",
+      "size": 195,
+      "checksum": "03e6d90e0acbb552220a93f81beae7da81aa41cd66f3a143ee17d2cda3f3af3d"
+    },
+    {
+      "path": "assets/audio/b4af66ff16c74b3aaa8a388b445abf2f.mp3",
+      "size": 121137,
+      "checksum": "7488a434b559d91adcbc38f5bfb6193f5be82fdc4bc01538c633c123477f3938"
+    },
+    {
+      "path": "assets/images/33df6b546154409caade19160877b6f8.png",
+      "size": 2894758,
+      "checksum": "52bb38dbf42577b2836387c3e2612c2953856990519d62e2883c03ec38a622a0"
+    }
+  ],
+  "checksums": {
+    "experience_json": "c9a64051c63beaec7857620d161998f1af3558de95174ce8a036ee6bcb609092",
+    "metadata_json": "03e6d90e0acbb552220a93f81beae7da81aa41cd66f3a143ee17d2cda3f3af3d"
+  }
+}

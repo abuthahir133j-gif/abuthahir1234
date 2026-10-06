@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "58",
+  "title": "YESTERDAY AND TODAY",
+  "description": "nderstand the difference between today and yesterday\nread simple sentences about past and present actions\ntalk about what they do today and what they did yesterday",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "158",
+      "title": "Reading",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "165",
+          "title": "Yesterday or Today?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Yesterday or Today?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789021197847-iy90k8sdv",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "passages": [
+                    {
+                      "title": "",
+                      "passage": "TODAY\n\n“Today is Saturday.\nI wake up at seven o’clock.\nI eat breakfast with my family.\nThen I go to the park.\nI play football with my brother.\nI am happy.”\n\n🌙 YESTERDAY\n\n“Yesterday was Friday.\nI went to school.\nI studied with my friends.\nAfter school, I walked home.\nI watched a cartoon in the evening.\nI was happy.”",
+                      "question": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1789021215981-5hrusdkjp",
+                "type": "match",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "Went to school",
+                    "Watched a cartoon",
+                    "Played football",
+                    "Ate breakfast with family"
+                  ],
+                  "rightItems": [
+                    "Yesterday",
+                    "Yesterday",
+                    "Today",
+                    "Today"
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "159",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "166",
+          "title": "My Yesterday, My Today",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Yesterday, My Today",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789021486250-45wqxoy5a",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/de1eedc8ad504a63be708cd1a3767c51.png",
+                  "caption": "",
+                  "media_id": 178,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1789021521192-g4b7qw3ou",
+                "type": "quiz",
+                "styles": {
+                  "top": "695px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "He went to school."
+                        },
+                        {
+                          "text": "He watched TV."
+                        }
+                      ],
+                      "question": "“What did the child do yesterday?",
+                      "correctAnswerIndex": 1
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "He is riding a bicycle"
+                        },
+                        {
+                          "text": "He is playing football"
+                        }
+                      ],
+                      "question": "“He is playing football",
+                      "correctAnswerIndex": 1
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 178,
+            "alignment": "Center",
+            "media_url": "/media/media_library/de1eedc8ad504a63be708cd1a3767c51.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "image": "assets/images/de1eedc8ad504a63be708cd1a3767c51.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 178,
+              "type": "IMAGE",
+              "url": "assets/images/de1eedc8ad504a63be708cd1a3767c51.png",
+              "missing": false
+            },
+            {
+              "media_id": 178,
+              "type": "IMAGE",
+              "url": "assets/images/de1eedc8ad504a63be708cd1a3767c51.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

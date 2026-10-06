@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "63",
+  "title": "STORIES, MESSAGES & IDEAS",
+  "description": "Test",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "167",
+      "title": "Activity",
+      "description": "Default assessment activity",
+      "sequence": 1,
+      "estimatedDuration": 15,
+      "skills": [],
+      "activityType": "ASSESSMENT",
+      "masteryThreshold": 70,
+      "screens": [
+        {
+          "id": "174",
+          "title": "TEST",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "TEST",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789023895409-d355feoqa",
+                "type": "quiz",
+                "styles": {
+                  "top": "793.3333333333334px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Park"
+                        },
+                        {
+                          "text": "Library"
+                        },
+                        {
+                          "text": "Shop"
+                        }
+                      ],
+                      "question": "Where did Riya go?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "A storybook"
+                        },
+                        {
+                          "text": "A pencil"
+                        },
+                        {
+                          "text": "A ball"
+                        }
+                      ],
+                      "question": "What was Riya looking for?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Near the window"
+                        },
+                        {
+                          "text": "Under a chair"
+                        },
+                        {
+                          "text": "On the table"
+                        }
+                      ],
+                      "question": "Where did she find the book?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1789024023831-f8dw8lv2t",
+                "type": "sequence",
+                "styles": {
+                  "top": "1405.3333333333335px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    "Riya went to the library.",
+                    "Riya looked near the window.",
+                    "Riya found the book under a chair.",
+                    "Riya gave the book to the librarian."
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              },
+              {
+                "id": "block-1789024061690-7obiwzegt",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "1740px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "text",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "What should you do in the library?",
+                      "targetAnswer": "Keep quiet",
+                      "correctAnswer": "Keep quiet"
+                    }
+                  ],
+                  "documentUrl": "/media/media_library/140a3d5e744a4486aac33876a9d031b5.png",
+                  "documentType": "form"
+                }
+              },
+              {
+                "id": "block-1789024292625-5cbfokee4",
+                "type": "image",
+                "styles": {
+                  "top": "174.19998168945312px",
+                  "left": "126px",
+                  "minHeight": "548.6666666666667px",
+                  "blockWidth": "620px"
+                },
+                "content": {
+                  "url": "/media/media_library/155fc9ddd64d4ef2a4be03acb7fba8f6.png",
+                  "caption": "",
+                  "media_id": 186,
+                  "media_type": "IMAGE"
+                }
+              }
+            ],
+            "media_id": 186,
+            "alignment": "Center",
+            "media_url": "/media/media_library/155fc9ddd64d4ef2a4be03acb7fba8f6.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "image": "assets/images/155fc9ddd64d4ef2a4be03acb7fba8f6.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 186,
+              "type": "IMAGE",
+              "url": "assets/images/155fc9ddd64d4ef2a4be03acb7fba8f6.png",
+              "missing": false
+            },
+            {
+              "media_id": 185,
+              "type": "IMAGE",
+              "url": "assets/images/140a3d5e744a4486aac33876a9d031b5.png",
+              "missing": false
+            },
+            {
+              "media_id": 186,
+              "type": "IMAGE",
+              "url": "assets/images/155fc9ddd64d4ef2a4be03acb7fba8f6.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

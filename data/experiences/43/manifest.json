@@ -1,0 +1,31 @@
+{
+  "package_name": "yummy-what-shall-we-eat",
+  "experience_id": 42,
+  "experience_title": "Yummy! What Shall We Eat?",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:32:46.012968+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 14642,
+      "checksum": "6483610992900d8c0f107accce07c4f8fb33463619dab0a6c3dd237406a613cb"
+    },
+    {
+      "path": "metadata.json",
+      "size": 196,
+      "checksum": "078502434b91019dfba5cd680a507273ec72bbfea31538e30b0cb87be7a29ab3"
+    },
+    {
+      "path": "assets/audio/6add02a4cacd4da79032c0669f51d57e.mp3",
+      "size": 382780,
+      "checksum": "3e51c50afbc306a723f1f04a3c08aa8743268b2eca36b77336b51b1c65d631f0"
+    }
+  ],
+  "checksums": {
+    "experience_json": "6483610992900d8c0f107accce07c4f8fb33463619dab0a6c3dd237406a613cb",
+    "metadata_json": "078502434b91019dfba5cd680a507273ec72bbfea31538e30b0cb87be7a29ab3"
+  }
+}

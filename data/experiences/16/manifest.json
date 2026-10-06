@@ -1,0 +1,36 @@
+{
+  "package_name": "assessent",
+  "experience_id": 35,
+  "experience_title": "Assessent",
+  "version": "5",
+  "build_number": 1,
+  "created_at": "2026-09-08T09:06:53.501964+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 5496,
+      "checksum": "db2525101ca95c79d1d667d0681330135a0a2c6f4fae059478ec59850e2cba0e"
+    },
+    {
+      "path": "metadata.json",
+      "size": 180,
+      "checksum": "c59e611728e11c8546660e34c2bad60f11589d9a519e23cbc6e7acb842f39bd0"
+    },
+    {
+      "path": "assets/audio/ed46f75ec31347c2b56731d6a6387dd8.mp3",
+      "size": 244435,
+      "checksum": "d88e3448635cc9ea513c173c422ba7818ae7e250e954b8aaf744cfa7366fc5ed"
+    },
+    {
+      "path": "assets/images/e9d076cd06c84536996d5e2613d8c7cd.png",
+      "size": 1709422,
+      "checksum": "3cc287bb69ee09c4aa617a6b1ec9684038cf042d594aa0350207f2dceb541a89"
+    }
+  ],
+  "checksums": {
+    "experience_json": "db2525101ca95c79d1d667d0681330135a0a2c6f4fae059478ec59850e2cba0e",
+    "metadata_json": "c59e611728e11c8546660e34c2bad60f11589d9a519e23cbc6e7acb842f39bd0"
+  }
+}

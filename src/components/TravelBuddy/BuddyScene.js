@@ -125,7 +125,17 @@
             }
             const svgPath = newPath || this.config.character?.asset || this.config.asset?.path || 'AI/PNg.svg';
             try {
-                const response = await fetch(svgPath);
+                if (svgPath.toLowerCase().endsWith('.png') || svgPath.toLowerCase().endsWith('.jpg') || svgPath.toLowerCase().endsWith('.webp')) {
+                    this.characterElement.innerHTML = `<img src="${encodeURI(svgPath)}" class="buddy-img-canvas" alt="AI Buddy" style="width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; display: block; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));" />`;
+                    if (this.orbitControls) {
+                        this.orbitControls.attach(this.characterElement, this.rootElement);
+                    }
+                    if (global.travelBuddy && global.travelBuddy.pngAmbientController) {
+                        global.travelBuddy.pngAmbientController.onCharacterAssetChanged(svgPath);
+                    }
+                    return;
+                }
+                const response = await fetch(encodeURI(svgPath));
                 if (!response.ok) {
                     throw new Error(`Buddy asset not found: ${svgPath}`);
                 }

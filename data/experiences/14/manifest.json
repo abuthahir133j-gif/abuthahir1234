@@ -1,0 +1,31 @@
+{
+  "package_name": "welcome-to-my-classroom",
+  "experience_id": 37,
+  "experience_title": "Welcome to My Classroom",
+  "version": "3",
+  "build_number": 1,
+  "created_at": "2026-09-08T09:05:06.232128+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 9780,
+      "checksum": "d76cf7a3b151ca90956d4f3e229a7ecae8416605f4f273c8fbe917e94f322bd0"
+    },
+    {
+      "path": "metadata.json",
+      "size": 198,
+      "checksum": "a0a8af641796c783baf2da00172aa7167d489df335b9907c1bf49a357e6881b1"
+    },
+    {
+      "path": "assets/audio/2b8146b881c94aca8b7482bd6e65c1e8.mp3",
+      "size": 89372,
+      "checksum": "c2e175d969c1099a8448f710b703c81211e9b83b3e59d050e8c6c375857ff0b0"
+    }
+  ],
+  "checksums": {
+    "experience_json": "d76cf7a3b151ca90956d4f3e229a7ecae8416605f4f273c8fbe917e94f322bd0",
+    "metadata_json": "a0a8af641796c783baf2da00172aa7167d489df335b9907c1bf49a357e6881b1"
+  }
+}

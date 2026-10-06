@@ -58,11 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const errorBanner = document.getElementById("auth-error-banner");
     const errorMsgEl = document.getElementById("auth-error-msg");
-    const enterSection = document.getElementById("authenticated-enter-section");
-    const enterWorldBtn = document.getElementById("enter-world-btn");
-    const switchAccountBtn = document.getElementById("switch-account-btn");
-    const studentWelcomeName = document.getElementById("student-welcome-name");
-    const studentWelcomeCode = document.getElementById("student-welcome-code");
     const cardTitle = document.querySelector(".card-title");
     const cardSubtitle = document.querySelector(".card-subtitle");
 
@@ -152,9 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const curtain = document.getElementById("cinematic-curtain");
         const loginPage = document.querySelector(".login-page-container");
 
-        if (enterWorldBtn) {
-            enterWorldBtn.disabled = true;
-            enterWorldBtn.style.pointerEvents = "none";
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.pointerEvents = "none";
         }
 
         if (!cinematicContainer || !video) {
@@ -188,6 +183,10 @@ document.addEventListener("DOMContentLoaded", () => {
         video.src = uniqueCandidates[fallbackIndex++];
         video.load();
 
+        if (window.electronAPI && typeof window.electronAPI.setFullScreen === "function") {
+            window.electronAPI.setFullScreen(true);
+        }
+
         // 2. Hide Login UI and display cinematic full-window container
         if (loginPage) {
             loginPage.style.transition = "opacity 0.45s ease";
@@ -204,11 +203,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         let transitionInitiated = false;
+        const skipBtn = document.getElementById("skip-cinematic-btn");
+        const skipContainer = document.getElementById("cinematic-skip-container");
 
-        // Transition to existing game dashboard ONLY after video finishes or if load error
+        // Clean up listeners when transition starts
+        function removeSkipListeners() {
+            window.removeEventListener("keydown", handleKeydown, true);
+        }
+
+        // Transition to existing game dashboard ONLY after video finishes, is skipped, or if load error
         function transitionToDashboard(reason) {
             if (transitionInitiated) return;
             transitionInitiated = true;
+            removeSkipListeners();
+
+            if (video) {
+                try {
+                    video.pause();
+                } catch (e) {}
+            }
+
+            if (window.electronAPI && typeof window.electronAPI.setFullScreen === "function") {
+                window.electronAPI.setFullScreen(true);
+            }
 
             console.log(`[Story Cinematic] Transitioning to Game Dashboard (${reason})...`);
 
@@ -216,12 +233,36 @@ document.addEventListener("DOMContentLoaded", () => {
             if (curtain) {
                 curtain.classList.add("fade-out");
             }
+            if (skipContainer) {
+                skipContainer.style.opacity = "0";
+                skipContainer.style.pointerEvents = "none";
+            }
 
-            // Smooth transition delay to let black fade settle before loading existing dashboard
+            // If skipped by user, transition fast (300ms); otherwise let natural 750ms fade settle
+            const delay = (reason && reason.includes("skip")) ? 300 : 750;
             setTimeout(() => {
                 window.location.href = "index.html";
-            }, 750);
+            }, delay);
         }
+
+        // Keyboard handler: ANY key press on the keyboard skips the video immediately
+        function handleKeydown(e) {
+            console.log(`[Story Cinematic] Keyboard key pressed (${e.key || e.code}), skipping entry video.`);
+            e.preventDefault();
+            e.stopPropagation();
+            transitionToDashboard(`user_keyboard_skip_${e.key || "key"}`);
+        }
+
+        // Register window-level keydown event
+        window.addEventListener("keydown", handleKeydown, true);
+
+        // Register Skip Intro button click event
+        skipBtn?.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('[Story Cinematic] Skip Intro button clicked.');
+            transitionToDashboard("user_button_skip");
+        });
 
         // 3. LISTEN STRICTLY TO THE REAL 'ended' EVENT (Requirement 4)
         // No fixed setTimeout is used; the dashboard only appears after the video actually ends
@@ -272,117 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 200);
     }
 
-    // =========================================================================
-    // SHOW AUTHENTICATED "ENTER" ACTION STATE
-    // =========================================================================
-    function showAuthenticatedEnterState(studentUser) {
-        hideError();
-
-        if (authForm) {
-            authForm.classList.add("hidden");
-            authForm.style.display = "none";
-        }
-
-        if (enterSection) {
-            enterSection.classList.remove("hidden");
-        }
-
-        if (cardTitle) {
-            cardTitle.innerText = "Welcome Adventurer";
-        }
-
-        if (cardSubtitle) {
-            cardSubtitle.innerText = "Your journey into the Language Lab awaits!";
-        }
-
-        const displayName = studentUser ? (studentUser.name || studentUser.roll_number || studentUser.code || 'Adventurer') : 'Adventurer';
-        const displayCode = studentUser ? (studentUser.roll_number || studentUser.code || '') : '';
-
-        if (studentWelcomeName) {
-            studentWelcomeName.innerText = displayName;
-        }
-
-        if (studentWelcomeCode) {
-            studentWelcomeCode.innerText = displayCode ? `LMS Code: ${displayCode}` : '';
-        }
-
-        // Preload dynamic entry story video for the student's progress
-        const video = document.getElementById("story-video");
-        if (video) {
-            const targetVideoInfo = getDynamicEntryVideo();
-            video.src = targetVideoInfo.path;
-            video.load();
-        }
-    }
-
-    // Reset back to code entry form
-    function resetToLoginForm() {
-        localStorage.removeItem(AUTH_STORAGE_KEY);
-        localStorage.removeItem(STUDENT_ID_KEY);
-        localStorage.removeItem("currentUser");
-        localStorage.removeItem("language_lab_student_session_v1");
-        sessionStorage.removeItem(APP_SESSION_KEY);
-
-        if (enterSection) {
-            enterSection.classList.add("hidden");
-        }
-
-        if (authForm) {
-            authForm.classList.remove("hidden");
-            authForm.style.display = "block";
-        }
-
-        if (cardTitle) {
-            cardTitle.innerText = "Student Login";
-        }
-
-        if (cardSubtitle) {
-            cardSubtitle.innerText = "Enter your LMS Login Code to begin";
-        }
-
-        if (lmsInput) {
-            lmsInput.value = "";
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.innerText = "Start Learning";
-            }
-            lmsInput.focus();
-        }
-    }
-
-    // Wire ENTER WORLD button
-    if (enterWorldBtn) {
-        enterWorldBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            startStoryIntro();
-        });
-    }
-
-    // Wire Switch Student Account button
-    if (switchAccountBtn) {
-        switchAccountBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            resetToLoginForm();
-        });
-    }
-
-    // 1. Check existing active session
-    const isAuthenticated = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
-    const existingStudentId = localStorage.getItem(STUDENT_ID_KEY);
-    const lastLoginDate = localStorage.getItem(LAST_LOGIN_DATE_KEY);
-    const isAppSessionActive = sessionStorage.getItem(APP_SESSION_KEY) === "active";
-    const today = getTodayDateString();
-
-    if (isAuthenticated && existingStudentId && isAppSessionActive && lastLoginDate === today) {
-        let savedUser = null;
-        try {
-            savedUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-        } catch (e) {}
-        showAuthenticatedEnterState(savedUser || { roll_number: existingStudentId, name: existingStudentId });
-        return;
-    }
-
-    // 2. Real-time Input Validation: Enable button when LMS Code is typed & clear error on edit/focus
+    // 1. Real-time Input Validation: Enable button when LMS Code is typed & clear error on edit/focus
     if (lmsInput && submitBtn) {
         lmsInput.addEventListener("input", () => {
             const val = lmsInput.value.trim();
@@ -395,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Single-Code Authentication Handler (Electron IPC)
+    // 2. Single-Code Authentication Handler (Electron IPC)
     async function handleAuthentication(code) {
         hideError();
 
@@ -473,10 +404,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     window.electronAPI.saveStudentSession(activeSession).catch(err => console.warn('[Session] Save error:', err));
                 }
 
-                // Show authenticated ENTER action button
-                showAuthenticatedEnterState(studentUser);
+                if (window.electronAPI && typeof window.electronAPI.setFullScreen === "function") {
+                    window.electronAPI.setFullScreen(true);
+                }
+
+                // Directly proceed to the entry video intro -> dashboard
+                startStoryIntro();
             } else {
-                showError(result.error || `Invalid LMS Code '${cleanCode}'. Please check with your teacher.`);
+                showError(result.error || `Invalid Roll Number '${cleanCode}'. Please check with your teacher.`);
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.innerText = "Start Learning";

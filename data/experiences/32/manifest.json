@@ -1,0 +1,36 @@
+{
+  "package_name": "what-happened-next",
+  "experience_id": 52,
+  "experience_title": "WHAT HAPPENED NEXT?",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:27:47.290082+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 16037,
+      "checksum": "76fc8635174833639b10a869840703331ccd825ac81110ccd73aaca223176176"
+    },
+    {
+      "path": "metadata.json",
+      "size": 190,
+      "checksum": "7533d11b76e0f68670d75f9c6ad02fccffb8da21ba4d80a7d23da2253f986867"
+    },
+    {
+      "path": "assets/video/f6bb1c7b48364b1398431376e7724cb6.mp4",
+      "size": 5778924,
+      "checksum": "557f9b13831400d7f2276e149e92b43f304e61a41705367a3c594856160dea92"
+    },
+    {
+      "path": "assets/images/d253ebe3395a4510b8a848c1911131f6.png",
+      "size": 1888725,
+      "checksum": "bc204f6450467464405d5ddded11d3487c0617fcb51c81c65e294453983458f8"
+    }
+  ],
+  "checksums": {
+    "experience_json": "76fc8635174833639b10a869840703331ccd825ac81110ccd73aaca223176176",
+    "metadata_json": "7533d11b76e0f68670d75f9c6ad02fccffb8da21ba4d80a7d23da2253f986867"
+  }
+}

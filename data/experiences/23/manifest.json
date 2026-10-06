@@ -1,0 +1,36 @@
+{
+  "package_name": "people-places-actions",
+  "experience_id": 62,
+  "experience_title": "PEOPLE, PLACES & ACTIONS",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:25:04.785658+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 4439,
+      "checksum": "8ef77335bc51178c509ebc1e96f8bc24a34c6f870e166c22a96386e2f205a9c7"
+    },
+    {
+      "path": "metadata.json",
+      "size": 199,
+      "checksum": "9afa5286533a2253cda655ff3be8fd464c4c387e420801d8b57b0066697086cd"
+    },
+    {
+      "path": "assets/images/623e37286c084a559928ae92a8c2f3c3.png",
+      "size": 2883512,
+      "checksum": "d000e5a7404715661f9c3532534d4059fcc2c5b373dc21673682eedfb86c35f0"
+    },
+    {
+      "path": "assets/audio/cbc11b91986f4e4daac0519683a5a324.mp3",
+      "size": 374003,
+      "checksum": "b3d3532124d97a1d934520f68761bcb349cc6d0f0a43621611815de335eb0802"
+    }
+  ],
+  "checksums": {
+    "experience_json": "8ef77335bc51178c509ebc1e96f8bc24a34c6f870e166c22a96386e2f205a9c7",
+    "metadata_json": "9afa5286533a2253cda655ff3be8fd464c4c387e420801d8b57b0066697086cd"
+  }
+}

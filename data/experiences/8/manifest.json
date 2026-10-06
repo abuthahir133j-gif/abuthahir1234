@@ -1,0 +1,31 @@
+{
+  "package_name": "phonics",
+  "experience_id": 16,
+  "experience_title": "phonics",
+  "version": "V1",
+  "build_number": 1,
+  "created_at": "2026-08-24T07:38:17.417525+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 5836,
+      "checksum": "6a26a3796f43af1136bf8fc9f988b37f9f90c0847dec8b55f3ff04e1ade3b50c"
+    },
+    {
+      "path": "metadata.json",
+      "size": 179,
+      "checksum": "49ae0a20072a65d3ff2fc0ef9ef9cb36f471057afc22b3aed9d1d8a0dca09281"
+    },
+    {
+      "path": "assets/images/48e0f146d7704ca3b82d02f724066e6c.jpeg",
+      "size": 42315,
+      "checksum": "dcf40b1e77d00865ab054e47a45b002c1fd4ec7fd86d673e9442c45ce80e8f84"
+    }
+  ],
+  "checksums": {
+    "experience_json": "6a26a3796f43af1136bf8fc9f988b37f9f90c0847dec8b55f3ff04e1ade3b50c",
+    "metadata_json": "49ae0a20072a65d3ff2fc0ef9ef9cb36f471057afc22b3aed9d1d8a0dca09281"
+  }
+}

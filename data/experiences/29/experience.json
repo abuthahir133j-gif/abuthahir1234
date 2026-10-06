@@ -1,0 +1,315 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "56",
+  "title": "LET’S ACT IT OUT!",
+  "description": "listen and respond to a short conversation\nuse polite expressions in everyday situations",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "153",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 3,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "160",
+          "title": "A Little Role-Play",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "A Little Role-Play",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789020406923-di8mgynmw",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/dd11770df2d2457c8214506c8693787a.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 177,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1789020425735-gzkba74rv",
+                "type": "sequence",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    "“Excuse me. Where is the park?”",
+                    "“Go straight and turn left.”",
+                    "“Thank you!”"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              }
+            ],
+            "media_id": 177,
+            "alignment": "Center",
+            "media_url": "/media/media_library/dd11770df2d2457c8214506c8693787a.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/dd11770df2d2457c8214506c8693787a.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 177,
+              "type": "AUDIO",
+              "url": "assets/audio/dd11770df2d2457c8214506c8693787a.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 177,
+              "type": "AUDIO",
+              "url": "assets/audio/dd11770df2d2457c8214506c8693787a.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "154",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "161",
+          "title": "Be the Character",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "“Hello! What would you like?”",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "two apples, please",
+                "speaker": "user",
+                "expectedResponse": "I would like two apples, please",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "Here you are",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "Thank you"
+              }
+            ],
+            "title": "Be the Character",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789020478309-hsuf5sida",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "At the Shop",
+                  "userRole": "customer",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "“Hello! What would you like?”",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "two apples, please",
+                      "speaker": "user",
+                      "expectedResponse": "I would like two apples, please",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "Here you are",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "Thank you"
+                    }
+                  ],
+                  "npcCharacter": "Shopkeeper"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "155",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "162",
+          "title": "Read the Mini-Skits",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Read the Mini-Skits",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789020584291-lq90z7flw",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "minHeight": "292px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "At the Bus Stop",
+                      "passage": "Maya:\n\n“Excuse me. Is this bus going to the school?”\n\nMan:\n\n“Yes, it is.”\n\nMaya:\n\n“Thank you.”\n\nMan:\n\n“You’re welcome.”",
+                      "question": "Where does Maya want to go?\nWhat does Maya say first?"
+                    }
+                  ],
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1789020639820-wx5iwsgsv",
+                "type": "input",
+                "styles": {
+                  "top": "328px",
+                  "left": "20px"
+                },
+                "content": {
+                  "placeholder": "",
+                  "correctAnswer": "School , Excuse me."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

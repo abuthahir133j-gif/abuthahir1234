@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "16",
+  "title": "phonics",
+  "description": "phonics for beginners",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 25,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "30",
+      "title": "Phonetics",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 7,
+      "skills": [
+        "phonetics"
+      ],
+      "activityType": "PHONETICS",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "41",
+          "title": "phonics_basics",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Phonics is a method of teaching reading and writing by matching the sounds of spoken language (phonemes) with individual letters or groups of letters (graphemes). It acts as a decoder key for the English language.The 4 Core Pillars of PhonicsTo introduce phonics effectively, focus on these four foundational concepts:Letter-Sound Correspondence: Learning the specific sound each letter makes (e.g., the letter b represents the /b/ sound).Blending: Pushing individual sounds together to read a whole word (e.g., blending /c/ - /a/ - /t/ to say cat).Segmenting:",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "phonics_basics",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1787556530160-n9laaikok",
+                "type": "heading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "color": "#FFA500",
+                  "fontSize": "64px",
+                  "alignment": "Center",
+                  "fontFamily": "Inter",
+                  "fontWeight": "Bold"
+                },
+                "content": {
+                  "tag": "H1",
+                  "text": "Phonics"
+                }
+              },
+              {
+                "id": "block-1787556594937-ndn5c3mag",
+                "type": "text",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px",
+                  "color": "#334155",
+                  "fontSize": "16px",
+                  "alignment": "Left",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "Phonics is a method of teaching reading and writing by matching the sounds of spoken language (phonemes) with individual letters or groups of letters (graphemes). It acts as a decoder key for the English language.The 4 Core Pillars of PhonicsTo introduce phonics effectively, focus on these four foundational concepts:Letter-Sound Correspondence: Learning the specific sound each letter makes (e.g., the letter b represents the /b/ sound).Blending: Pushing individual sounds together to read a whole word (e.g., blending /c/ - /a/ - /t/ to say cat).Segmenting:"
+                }
+              },
+              {
+                "id": "block-1787556630104-fgykbv144",
+                "type": "image",
+                "styles": {
+                  "top": "252px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/48e0f146d7704ca3b82d02f724066e6c.jpeg",
+                  "caption": "Phonics",
+                  "media_id": 56,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1787556705696-860alolg5",
+                "type": "quiz",
+                "styles": {
+                  "top": "368px",
+                  "left": "20px",
+                  "color": "#17084f",
+                  "fontFamily": "Inter"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": "book"
+                    },
+                    {
+                      "text": "Moon"
+                    },
+                    {
+                      "text": "ship"
+                    },
+                    {
+                      "text": "king"
+                    }
+                  ],
+                  "question": "select the words that begins with 'a' sound?",
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 56,
+            "alignment": "Center",
+            "media_url": "/media/media_library/48e0f146d7704ca3b82d02f724066e6c.jpeg",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "book",
+              "Moon",
+              "ship",
+              "king"
+            ],
+            "quiz_question": "select the words that begins with 'a' sound?",
+            "quiz_correct_index": 0,
+            "image": "assets/images/48e0f146d7704ca3b82d02f724066e6c.jpeg"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 56,
+              "type": "IMAGE",
+              "url": "assets/images/48e0f146d7704ca3b82d02f724066e6c.jpeg",
+              "missing": false
+            },
+            {
+              "media_id": 56,
+              "type": "IMAGE",
+              "url": "assets/images/48e0f146d7704ca3b82d02f724066e6c.jpeg",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

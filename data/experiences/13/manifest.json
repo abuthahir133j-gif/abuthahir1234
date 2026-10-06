@@ -1,0 +1,31 @@
+{
+  "package_name": "where-is-my-pencil",
+  "experience_id": 38,
+  "experience_title": "Where Is My Pencil?",
+  "version": "2",
+  "build_number": 1,
+  "created_at": "2026-09-08T09:03:53.549237+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 12908,
+      "checksum": "432844567274cf58c4ab04119392376a4b03b95d372ca6b324717771bc6bf8d4"
+    },
+    {
+      "path": "metadata.json",
+      "size": 194,
+      "checksum": "b896306eac98168c7aff5d797e2741b1750a90306f9a09cdfbd9aac0ac9b66c1"
+    },
+    {
+      "path": "assets/video/38caaaf58efb4b6a9754396f967ece49.mp4",
+      "size": 3190389,
+      "checksum": "a11bc406f0bc7c931d0a0d51855b7a405654edb3d3a0e71bb18f31f1a047097d"
+    }
+  ],
+  "checksums": {
+    "experience_json": "432844567274cf58c4ab04119392376a4b03b95d372ca6b324717771bc6bf8d4",
+    "metadata_json": "b896306eac98168c7aff5d797e2741b1750a90306f9a09cdfbd9aac0ac9b66c1"
+  }
+}

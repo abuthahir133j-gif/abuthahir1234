@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "60",
+  "title": "PICTURE DETECTIVE",
+  "description": "listen carefully to descriptions\nfind specific details in a picture\nidentify people, objects, actions and places\nanswer who, what, where, and how questions",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "162",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "169",
+          "title": "Listen and Spot It!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Listen and Spot It!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789022676462-utxwsfvp6",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "840.3333333333334px",
+                  "left": "0px",
+                  "minHeight": "197px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "The boy"
+                        },
+                        {
+                          "text": "The girl"
+                        },
+                        {
+                          "text": "The dog"
+                        }
+                      ],
+                      "question": "Who is reading a book?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1789022783615-b0l22mso4",
+                "type": "video",
+                "styles": {
+                  "top": "0px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/b883de7bc9fa48aea5a1079b117ee55a.mp4",
+                  "media_id": 181,
+                  "media_type": "VIDEO"
+                }
+              }
+            ],
+            "media_id": 181,
+            "alignment": "Center",
+            "media_url": "/media/media_library/b883de7bc9fa48aea5a1079b117ee55a.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "video": "assets/video/b883de7bc9fa48aea5a1079b117ee55a.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 181,
+              "type": "VIDEO",
+              "url": "assets/video/b883de7bc9fa48aea5a1079b117ee55a.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 181,
+              "type": "VIDEO",
+              "url": "assets/video/b883de7bc9fa48aea5a1079b117ee55a.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "163",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "170",
+          "title": "Be the Picture Detective!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Be the Picture Detective!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789022759159-y038vq7zl",
+                "slot": "left",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "716.3333333333334px",
+                  "left": "0px",
+                  "minHeight": "153.33333333333334px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "",
+                  "maxDuration": 10
+                }
+              },
+              {
+                "id": "block-1789022848085-bzqk4aoha",
+                "type": "image",
+                "styles": {
+                  "top": "0px",
+                  "left": "0px",
+                  "minHeight": "671.6666666666667px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/0dc1f8d0c7704ac0a710f0a6573d6af3.png",
+                  "caption": "What do u See?",
+                  "media_id": 182,
+                  "media_type": "IMAGE",
+                  "hasQuestion": false
+                }
+              }
+            ],
+            "media_id": 182,
+            "alignment": "Center",
+            "media_url": "/media/media_library/0dc1f8d0c7704ac0a710f0a6573d6af3.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/0dc1f8d0c7704ac0a710f0a6573d6af3.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 182,
+              "type": "IMAGE",
+              "url": "assets/images/0dc1f8d0c7704ac0a710f0a6573d6af3.png",
+              "missing": false
+            },
+            {
+              "media_id": 182,
+              "type": "IMAGE",
+              "url": "assets/images/0dc1f8d0c7704ac0a710f0a6573d6af3.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

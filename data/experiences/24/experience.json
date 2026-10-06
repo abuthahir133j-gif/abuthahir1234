@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "61",
+  "title": "THIS IS MY ENGLISH!",
+  "description": "read a short text about themselves\nidentify key information from a personal profile\nconnect ideas from different lessons",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "164",
+      "title": "Reading",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "171",
+          "title": "Meet Aarav!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Meet Aarav!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789023077463-wl7zipom3",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "minHeight": "204px"
+                },
+                "content": {
+                  "passages": [
+                    {
+                      "title": "My English Book",
+                      "passage": "My name is Aarav. I am eight years old. I live with my family. I have one sister.\nI go to school every day. My favourite subject is English. I like reading stories and playing football.\n\nMy favourite animal is a dog. Dogs can run and play.\n\nToday, I am reading a storybook. Yesterday, I played football with my friends.\nI like learning English because I can talk to people, read stories and write about my ideas.",
+                      "question": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1789023207692-n41uc5fnk",
+                "type": "hotspot_explorer",
+                "styles": {
+                  "top": "240px",
+                  "left": "20px"
+                },
+                "content": {
+                  "hotspots": [
+                    {
+                      "x": 100,
+                      "y": 100,
+                      "id": "hotspot_1",
+                      "hint": "Click on the highlighted object",
+                      "info": "Exploration description here...",
+                      "name": "Target 1",
+                      "width": 80,
+                      "height": 80
+                    }
+                  ],
+                  "imageUrl": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "165",
+      "title": "Writing",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "172",
+          "title": "This Is My English",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "This Is My English",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789023308088-1pj9ppe1g",
+                "type": "sentence_builder",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "sentences": [
+                    {
+                      "words": [
+                        "My",
+                        "name",
+                        "is",
+                        "Riya."
+                      ],
+                      "question": "Reorder the words to make a correct sentence.",
+                      "sentence": "My name is Riya."
+                    },
+                    {
+                      "words": [
+                        "I",
+                        "am",
+                        "eight",
+                        "years",
+                        "old."
+                      ],
+                      "question": "",
+                      "sentence": "I am eight years old."
+                    },
+                    {
+                      "words": [
+                        "I",
+                        "like",
+                        "football."
+                      ],
+                      "question": "",
+                      "sentence": "I like football."
+                    },
+                    {
+                      "words": [
+                        "My",
+                        "favourite",
+                        "food",
+                        "is",
+                        "dosa."
+                      ],
+                      "question": "",
+                      "sentence": "My favourite food is dosa."
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1789023359350-z4ncdqdmm",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "331px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Write About YOU",
+                  "minWords": 10,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

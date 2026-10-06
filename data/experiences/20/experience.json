@@ -1,0 +1,377 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "44",
+  "title": "Let's Play!",
+  "description": "Talk about games and abilities, understand simple rules and instructions, interact with friends, and describe play activities.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "114",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "122",
+          "title": "Ready, Set, Play!",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Ready, Set, Play!",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788934534845-4dv07dp07",
+                "slot": "right",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/e98c5fc27e454379a252672ba9c290e6.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 148,
+                  "media_type": "AUDIO"
+                }
+              }
+            ],
+            "media_id": 148,
+            "alignment": "Center",
+            "media_url": "/media/media_library/e98c5fc27e454379a252672ba9c290e6.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/e98c5fc27e454379a252672ba9c290e6.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 148,
+              "type": "AUDIO",
+              "url": "assets/audio/e98c5fc27e454379a252672ba9c290e6.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 148,
+              "type": "AUDIO",
+              "url": "assets/audio/e98c5fc27e454379a252672ba9c290e6.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "115",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "123",
+          "title": "Can You Play?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "Do you like playing games?",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "Respond to the waiter",
+                "speaker": "user",
+                "expectedResponse": "Yes, I do.",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "Can you play football?",
+                "speaker": "npc",
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "expectedResponse": "Yes, I can."
+              }
+            ],
+            "title": "Can You Play?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788934574116-mem3odmv2",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "You are ordering food at a restaurant",
+                  "userRole": "child",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "Do you like playing games?",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "Respond to the waiter",
+                      "speaker": "user",
+                      "expectedResponse": "Yes, I do.",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "Can you play football?",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "Yes, I can."
+                    }
+                  ],
+                  "npcCharacter": "friend 1 "
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "116",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "124",
+          "title": "Game Rules",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Game Rules",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788934772640-ymwivnbrt",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [],
+                  "documentUrl": "/media/media_library/24af0852d7c44feeb94c568a35df9171.png",
+                  "documentType": "form"
+                }
+              },
+              {
+                "id": "block-1788934798492-pqp7eaf6t",
+                "type": "word_search",
+                "styles": {
+                  "top": "305px",
+                  "left": "0px",
+                  "minHeight": "233px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "words": [
+                    "BALL",
+                    "GOAL",
+                    "FRIEND",
+                    "PLAY"
+                  ],
+                  "gridSize": 10,
+                  "question": "Find the hidden words in the grid.",
+                  "wordsRawText": "BALL,GOAL,FRIEND,PLAY"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/24af0852d7c44feeb94c568a35df9171.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 149,
+              "type": "IMAGE",
+              "url": "assets/images/24af0852d7c44feeb94c568a35df9171.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "117",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "125",
+          "title": "My Favourite Game",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Favourite Game",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788934887794-sp9bswgq3",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "My favourite game is  [ ]."
+                    },
+                    {
+                      "id": "item-1788934902920",
+                      "text": "I play it with  [ ]."
+                    },
+                    {
+                      "id": "item-1788934915858",
+                      "text": "I can [ ]."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

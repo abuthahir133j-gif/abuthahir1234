@@ -1,0 +1,31 @@
+{
+  "package_name": "yesterday-and-today",
+  "experience_id": 58,
+  "experience_title": "YESTERDAY AND TODAY",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:25:22.518393+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 7057,
+      "checksum": "e0de75f66494d89282c22505257297f86c3ff18d80c55a8903b322a346ada163"
+    },
+    {
+      "path": "metadata.json",
+      "size": 194,
+      "checksum": "1c04c7d985897e35c7d2063d6cfef17eeb0a7bbe6fc93ae75528571741d2db35"
+    },
+    {
+      "path": "assets/images/de1eedc8ad504a63be708cd1a3767c51.png",
+      "size": 2293524,
+      "checksum": "0216790bc36598006d74c83a1c1f3504399f0aa760d4f9d65f1d9a5b8440ee33"
+    }
+  ],
+  "checksums": {
+    "experience_json": "e0de75f66494d89282c22505257297f86c3ff18d80c55a8903b322a346ada163",
+    "metadata_json": "1c04c7d985897e35c7d2063d6cfef17eeb0a7bbe6fc93ae75528571741d2db35"
+  }
+}

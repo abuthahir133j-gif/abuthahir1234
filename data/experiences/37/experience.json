@@ -1,0 +1,346 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "47",
+  "title": "What Are They Doing?",
+  "description": "Observe people in action, understand common action words, and describe what one or more people are doing using simple present continuous sentences.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "123",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "131",
+          "title": "Guess the Action",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Guess the Action",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788950510658-4yr1mygxl",
+                "type": "audio_mystery",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "clues": [
+                    {
+                      "audio": "/media/media_library/b4af66ff16c74b3aaa8a388b445abf2f.mp3",
+                      "duration": 5,
+                      "description": "Short introductory sound"
+                    }
+                  ],
+                  "hints": {
+                    "replay": "Listen again carefully",
+                    "visualClue": "Look at the pattern in the sound",
+                    "modelAnswer": "The correct answer is Option A",
+                    "sentenceStarter": "The sound indicates..."
+                  },
+                  "options": [
+                    "Running",
+                    "Reading"
+                  ],
+                  "question": "What am I doing?",
+                  "correctAnswer": 1
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/b4af66ff16c74b3aaa8a388b445abf2f.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 157,
+              "type": "AUDIO",
+              "url": "assets/audio/b4af66ff16c74b3aaa8a388b445abf2f.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "124",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "132",
+          "title": "Action Reporter",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Action Reporter",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788950716644-v3hlvnqsg",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/33df6b546154409caade19160877b6f8.png",
+                  "caption": "",
+                  "media_id": 158,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1788950730721-4ua5ilwym",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "704px",
+                  "left": "20px",
+                  "minHeight": "84px"
+                },
+                "content": {
+                  "prompt": "Look carefully. Tell me what one person is doing.”"
+                }
+              }
+            ],
+            "media_id": 158,
+            "alignment": "Center",
+            "media_url": "/media/media_library/33df6b546154409caade19160877b6f8.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/33df6b546154409caade19160877b6f8.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 158,
+              "type": "IMAGE",
+              "url": "assets/images/33df6b546154409caade19160877b6f8.png",
+              "missing": false
+            },
+            {
+              "media_id": 158,
+              "type": "IMAGE",
+              "url": "assets/images/33df6b546154409caade19160877b6f8.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "125",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "133",
+          "title": "Busy at the Park",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Busy at the Park",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788950772287-tbm1ovp2m",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "A Busy Afternoon",
+                      "passage": "It is a sunny afternoon at the park.\nRohan is riding his bicycle near the trees.\nMeera is sitting on a bench and reading a book.\nTwo boys are playing football on the grass.\nA little girl is running after a butterfly.\nNear the playground, three children are talking and laughing.\nEveryone is busy having fun!",
+                      "question": ""
+                    }
+                  ],
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1788950796670-r4ftyib4n",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "265px",
+                  "left": "0px",
+                  "minHeight": "232px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "Rohan is [ ] his bicycle."
+                    },
+                    {
+                      "id": "item-1788950813949",
+                      "text": "The little girl is [ ] after a butterfly."
+                    },
+                    {
+                      "id": "item-1788950832580",
+                      "text": "Sentence with [blank]."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "126",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "134",
+          "title": "What Are They Doing?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "What Are They Doing?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788950931407-l09p5bg9k",
+                "type": "drag_drop",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "pairs": [
+                    {
+                      "id": "pair-1",
+                      "source": "The boy is",
+                      "target": "running."
+                    },
+                    {
+                      "id": "pair-1788950946617",
+                      "source": "The girl is ______ a book.",
+                      "target": "reading"
+                    }
+                  ],
+                  "question": "Drag the correct items to their destinations."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

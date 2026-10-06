@@ -10,9 +10,13 @@ const {
     getSyncMeta,
     getAllApprovedLessons,
     getLessonsForStudent,
-    getUsersCount
+    getUsersCount,
+    saveStudentProgress,
+    getAllStudentProgress,
+    getSyncSummary
 } = require('./db/sqlite');
 const { syncWithCms, setCmsHost, getCmsHost } = require('./services/syncService');
+const cmsAuth = require('./services/cmsAuthService');
 
 /**
  * Auto-load CMS host from data/config.json (set once via terminal).
@@ -20,13 +24,24 @@ const { syncWithCms, setCmsHost, getCmsHost } = require('./services/syncService'
  */
 function loadCmsHostFromConfig() {
     try {
-        const configPath = path.join(process.cwd(), 'data', 'config.json');
-        if (fs.existsSync(configPath)) {
-            const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-            if (config.cms_host) {
-                setCmsHost(config.cms_host);
-                console.log(`[Config] CMS host loaded from config.json: ${config.cms_host}`);
-                return config.cms_host;
+        const candidatePaths = [
+            path.join(process.cwd(), 'data', 'config.json'),
+            path.join(__dirname, '..', '..', 'data', 'config.json')
+        ];
+        try {
+            if (app && typeof app.getPath === 'function') {
+                candidatePaths.unshift(path.join(app.getPath('userData'), 'data', 'config.json'));
+            }
+        } catch (e) {}
+
+        for (const configPath of candidatePaths) {
+            if (fs.existsSync(configPath)) {
+                const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+                if (config.cms_host) {
+                    setCmsHost(config.cms_host);
+                    console.log(`[Config] CMS host loaded from config.json: ${config.cms_host}`);
+                    return config.cms_host;
+                }
             }
         }
     } catch (e) {
@@ -189,11 +204,15 @@ function initIpcHandlers() {
             let student = findUserByCode(cleanCode);
 
             if (!student) {
+                const originalName = (cleanCode === 'A' || cleanCode === 'ABU' || cleanCode === 'ABU001')
+                    ? 'Abuthahir'
+                    : cleanCode.replace(/^STU-?/i, '');
+
                 const newStudent = {
                     id: cleanCode,
                     username: cleanCode,
                     lms_code: cleanCode,
-                    name: cleanCode.startsWith('STU') ? `Student ${cleanCode}` : (cleanCode === 'ABU001' ? 'Abuthahir' : `Student ${cleanCode}`),
+                    name: originalName,
                     grade: 'Class 7',
                     section: 'A',
                     role: 'student',
@@ -203,22 +222,41 @@ function initIpcHandlers() {
                 student = findUserByCode(cleanCode) || newStudent;
             }
 
-            // 2. Perform CMS Package & Lesson Sync asynchronously in the background (non-blocking)
-            setImmediate(() => {
-                syncWithCms(rawCmsHost).catch(syncErr => {
+            const studentRollNo = student.roll_no || student.lms_code || student.username || cleanCode;
+            const studentOriginalName = (student.name && !/^Student\s+[A-Za-z0-9_-]+$/i.test(student.name))
+                ? student.name
+                : ((cleanCode === 'A' || cleanCode === 'ABU001' || student.username === 'A' || student.username === 'ABU001' || student.lms_code === 'A') ? 'Abuthahir' : (student.name || cleanCode));
+
+            // Set active student session in central auth service
+            cmsAuth.setActiveStudent(studentRollNo, {
+                id: student.id,
+                name: studentOriginalName,
+                roll_number: studentRollNo,
+                grade: student.grade
+            });
+
+            // 2. Perform CMS online login & package sync asynchronously in the background (non-blocking)
+            setImmediate(async () => {
+                try {
+                    await cmsAuth.loginStudentWithCms(studentRollNo, rawCmsHost);
+                } catch (authErr) {
+                    console.warn(`[LMS Auth] Online CMS auth notice: ${authErr.message}`);
+                }
+                syncWithCms(rawCmsHost, studentRollNo).catch(syncErr => {
                     console.warn(`[LMS] Background CMS sync notice: ${syncErr.message}`);
                 });
             });
 
-            console.log(`[LMS] ⚡ Instant Login SUCCESS: ${student.name} | code: ${cleanCode} | Total DB users: ${getUsersCount()}`);
+            console.log(`[LMS] ⚡ Instant Login SUCCESS: ${studentOriginalName} | roll_no: ${studentRollNo} | Total DB users: ${getUsersCount()}`);
             return {
                 success: true,
                 user: {
                     id: student.id,
                     lms_code: student.lms_code || student.username,
-                    code: student.lms_code || student.username,
-                    name: student.name,
-                    roll_no: student.roll_no || student.lms_code || '',
+                    code: studentRollNo,
+                    roll_number: studentRollNo,
+                    name: studentOriginalName,
+                    roll_no: studentRollNo,
                     grade: student.grade || 'Class 7',
                     section: student.section || 'A',
                     role: student.role || 'student'
@@ -239,11 +277,58 @@ function initIpcHandlers() {
     // IPC Handler: get-sync-status
     // -----------------------------------------------------------------
     ipcMain.handle('get-sync-status', async () => {
-        return {
-            lastSyncedAt: getSyncMeta('last_synced_at'),
-            cmsHost: getSyncMeta('cms_host') || getCmsHost(),
-            userCount: getUsersCount()
-        };
+        try {
+            const summary = getSyncSummary();
+            return {
+                success: true,
+                lastSyncedAt: summary.lastSyncedAt || getSyncMeta('last_synced_at'),
+                cmsHost: summary.cmsHost || getSyncMeta('cms_host') || getCmsHost(),
+                userCount: summary.totalUsers,
+                totalLessons: summary.totalLessons,
+                pendingProgressCount: summary.pendingProgressCount,
+                totalProgressCount: summary.totalProgressCount
+            };
+        } catch (err) {
+            return {
+                success: false,
+                lastSyncedAt: getSyncMeta('last_synced_at'),
+                cmsHost: getSyncMeta('cms_host') || getCmsHost(),
+                userCount: getUsersCount()
+            };
+        }
+    });
+
+    // -----------------------------------------------------------------
+    // IPC Handler: save-student-progress
+    // -----------------------------------------------------------------
+    ipcMain.handle('save-student-progress', async (event, progressData = {}) => {
+        try {
+            const saved = saveStudentProgress(progressData);
+            const studentId = progressData.student_id || progressData.studentId || progressData.roll_no || progressData.rollNumber;
+            // Non-blocking trigger to upload pending progress in background
+            setImmediate(() => {
+                const { pushPendingProgressToCms } = require('./services/syncService');
+                pushPendingProgressToCms(null, null, studentId).catch(err => {
+                    console.warn(`[IPC Progress] Background upload notice: ${err.message}`);
+                });
+            });
+            return { success: true, progress: saved };
+        } catch (err) {
+            console.error('[IPC save-student-progress] Error:', err.message);
+            return { success: false, error: err.message };
+        }
+    });
+
+    // -----------------------------------------------------------------
+    // IPC Handler: get-student-progress
+    // -----------------------------------------------------------------
+    ipcMain.handle('get-student-progress', async (event, studentId) => {
+        try {
+            const list = getAllStudentProgress(studentId);
+            return { success: true, progress: list };
+        } catch (err) {
+            return { success: false, error: err.message };
+        }
     });
 
     // -----------------------------------------------------------------

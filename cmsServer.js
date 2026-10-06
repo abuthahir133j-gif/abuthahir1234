@@ -259,8 +259,17 @@ const server = http.createServer((req, res) => {
         });
     }
 
-    // Route: LMS Offline Sync & Analytics POST APIs (/api/lms/sync/)
-    if (req.method === "POST" && pathname.startsWith("/api/lms/sync/")) {
+    // In-memory / temporary progress store on CMS for test verification
+    if (!global.cmsProgressStore) global.cmsProgressStore = [];
+
+    // Route: POST /api/progress/sync/, /api/v1/progress/sync/, /api/lms/sync/progress/, /api/lms/sync/
+    if (req.method === "POST" && (
+        pathname === "/api/progress/sync" ||
+        pathname === "/api/v1/progress/sync" ||
+        pathname === "/api/sync" ||
+        pathname === "/api/v1/sync" ||
+        pathname.startsWith("/api/lms/sync/")
+    )) {
         let body = "";
         req.on("data", chunk => body += chunk.toString());
         req.on("end", () => {
@@ -268,16 +277,36 @@ const server = http.createServer((req, res) => {
             try { data = JSON.parse(body); } catch (e) {}
 
             const subEndpoint = pathname.replace("/api/lms/sync/", "");
-            console.log(`[CMS Server] Sync event received [${subEndpoint}]:`, data);
+            console.log(`[CMS Server] Sync event received [${subEndpoint || pathname}]:`, data);
+
+            // Store student progress items
+            if (data && Array.isArray(data.progress)) {
+                data.progress.forEach(p => {
+                    global.cmsProgressStore.push({
+                        ...p,
+                        received_at: new Date().toISOString()
+                    });
+                });
+                console.log(`[CMS Server] 💾 Processed and stored ${data.progress.length} progress record(s).`);
+            }
 
             return sendJSONResponse(res, 200, {
                 success: true,
-                endpoint: subEndpoint,
+                endpoint: subEndpoint || pathname,
                 syncedAt: new Date().toISOString(),
+                syncedCount: Array.isArray(data.progress) ? data.progress.length : 1,
                 status: "RECEIVED"
             });
         });
         return;
+    }
+
+    // Route: GET /api/progress/, /api/v1/progress/
+    if (req.method === "GET" && (pathname === "/api/progress" || pathname === "/api/v1/progress" || pathname === "/api/lms/progress")) {
+        return sendJSONResponse(res, 200, {
+            success: true,
+            progress: global.cmsProgressStore || []
+        });
     }
 
     if (req.method === "GET" && (pathname === "/api/lms/sync/pull-updates" || pathname === "/api/v1/lms/sync/pull-updates")) {

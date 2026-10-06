@@ -1,0 +1,236 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "55",
+  "title": "READ THE WORLD AROUND ME",
+  "description": "read and understand common signs\nidentify information from posters and notices\nunderstand labels and simple instructions",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "151",
+      "title": "Reading",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "158",
+          "title": "What Does the Sign Say?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "What Does the Sign Say?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789019741004-a3phn3ssf",
+                "slot": "right",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/574c68a574764b3dac45f59d8a7dea2e.png",
+                  "caption": "",
+                  "media_id": 176,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1789020057508-yx6x1vznb",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "684px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "We can enter."
+                        },
+                        {
+                          "text": "We can't enter."
+                        }
+                      ],
+                      "question": "What does OPEN mean?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "In a library."
+                        },
+                        {
+                          "text": "park"
+                        }
+                      ],
+                      "question": "Where might you see this sign?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 176,
+            "alignment": "Center",
+            "media_url": "/media/media_library/574c68a574764b3dac45f59d8a7dea2e.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "image": "assets/images/574c68a574764b3dac45f59d8a7dea2e.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 176,
+              "type": "IMAGE",
+              "url": "assets/images/574c68a574764b3dac45f59d8a7dea2e.png",
+              "missing": false
+            },
+            {
+              "media_id": 176,
+              "type": "IMAGE",
+              "url": "assets/images/574c68a574764b3dac45f59d8a7dea2e.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "152",
+      "title": "Writing",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "159",
+          "title": "Make a Notice",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Make a Notice",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789020181746-opacq60ke",
+                "type": "drag_drop",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "pairs": [
+                    {
+                      "id": "pair-1",
+                      "source": "KEEP",
+                      "target": "CLEAN"
+                    },
+                    {
+                      "id": "pair-1789020193227",
+                      "source": "PLEASE BE",
+                      "target": "QUIET",
+                      "sourceImage": "",
+                      "targetImage": ""
+                    },
+                    {
+                      "id": "pair-1789020211369",
+                      "source": "WASH YOUR",
+                      "target": "HANDS",
+                      "sourceImage": "",
+                      "targetImage": ""
+                    }
+                  ],
+                  "question": "Drag the correct items to their destinations."
+                }
+              },
+              {
+                "id": "block-1789020240282-jl0gnqdoy",
+                "type": "input",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "prompt": "Imagine you are making a notice for your school or park. Write 3 short lines.",
+                  "inputType": "textarea",
+                  "placeholder": "",
+                  "correctAnswer": "Please be quiet. Keep the library clean."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: file:; media-src 'self' blob: data: file:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' media-loader:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net https://*.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: media-loader: file: http: https:; media-src 'self' blob: data: media-loader: file: http: https:; connect-src 'self' media-loader: http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https://esm.sh https://huggingface.co https://*.huggingface.co https://hf.co https://*.hf.co https://cdn-lfs.huggingface.co https://cdn.jsdelivr.net https://*.jsdelivr.net data: blob:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; object-src 'none';">
     <title>Student Profile - One Tutor Language Lab</title>
+    <link rel="icon" type="image/png" href="assets/Icon/labIcon.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -454,26 +455,28 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            cursor: pointer;
+            cursor: default;
             user-select: none;
             font-size: 13.5px;
             font-weight: 600;
             color: #334155;
+            pointer-events: none; /* Prevents user from unticking */
         }
 
         .settings-checkbox {
             position: absolute;
             opacity: 0;
-            cursor: pointer;
+            cursor: default;
             height: 0;
             width: 0;
+            pointer-events: none;
         }
 
         .custom-checkbox {
             height: 20px;
             width: 20px;
-            background-color: #ffffff;
-            border: 2px solid #cbd5e1;
+            background-color: #a855f7 !important;
+            border: 2px solid #a855f7 !important;
             border-radius: 6px;
             display: inline-flex;
             align-items: center;
@@ -482,16 +485,16 @@
             flex-shrink: 0;
         }
 
-        .checkbox-item:hover .custom-checkbox {
-            border-color: #a855f7;
+        .settings-checkbox:checked ~ .custom-checkbox,
+        .settings-checkbox:disabled ~ .custom-checkbox,
+        .custom-checkbox {
+            background-color: #a855f7 !important;
+            border-color: #a855f7 !important;
         }
 
-        .settings-checkbox:checked ~ .custom-checkbox {
-            background-color: #a855f7;
-            border-color: #a855f7;
-        }
-
-        .settings-checkbox:checked ~ .custom-checkbox::after {
+        .settings-checkbox:checked ~ .custom-checkbox::after,
+        .settings-checkbox:disabled ~ .custom-checkbox::after,
+        .custom-checkbox::after {
             content: "✓";
             color: #ffffff;
             font-size: 13px;
@@ -673,10 +676,10 @@
             </div>
 
             <div class="stat-card">
-                <div class="card-icon">🔥</div>
+                <div class="card-icon">👑</div>
                 <div class="card-details">
-                    <div class="card-label">Learning Streak</div>
-                    <div class="card-value">5 Days</div>
+                    <div class="card-label">Unlocked Boss Levels</div>
+                    <div class="card-value" id="stat-boss-levels">0 / 6</div>
                 </div>
             </div>
 
@@ -684,7 +687,7 @@
                 <div class="card-icon">🎯</div>
                 <div class="card-details">
                     <div class="card-label">Accuracy Rate</div>
-                    <div class="card-value">94%</div>
+                    <div class="card-value" id="stat-accuracy">94%</div>
                 </div>
             </div>
         </div>
@@ -756,24 +759,24 @@
                     <div class="settings-subcard">
                         <h3 class="settings-subcard-title">🔔 Notification Preferences</h3>
                         <div class="checkbox-group">
-                            <label class="checkbox-item">
+                            <label class="checkbox-item locked-checked">
                                 <span>Assignment &amp; Homework Reminders</span>
-                                <input type="checkbox" checked class="settings-checkbox">
+                                <input type="checkbox" checked disabled class="settings-checkbox" onclick="return false;">
                                 <span class="custom-checkbox"></span>
                             </label>
-                            <label class="checkbox-item">
+                            <label class="checkbox-item locked-checked">
                                 <span>Daily Scheduled Lesson Notifications</span>
-                                <input type="checkbox" checked class="settings-checkbox">
+                                <input type="checkbox" checked disabled class="settings-checkbox" onclick="return false;">
                                 <span class="custom-checkbox"></span>
                             </label>
-                            <label class="checkbox-item">
+                            <label class="checkbox-item locked-checked">
                                 <span>Quiz &amp; Exam Alerts</span>
-                                <input type="checkbox" checked class="settings-checkbox">
+                                <input type="checkbox" checked disabled class="settings-checkbox" onclick="return false;">
                                 <span class="custom-checkbox"></span>
                             </label>
-                            <label class="checkbox-item">
+                            <label class="checkbox-item locked-checked">
                                 <span>System Announcements</span>
-                                <input type="checkbox" checked class="settings-checkbox">
+                                <input type="checkbox" checked disabled class="settings-checkbox" onclick="return false;">
                                 <span class="custom-checkbox"></span>
                             </label>
                         </div>
@@ -1585,8 +1588,20 @@
                 if (rawUser) currentUser = JSON.parse(rawUser);
             } catch (e) {}
 
-            const rollNo = sessionData?.student?.roll_number || sessionData?.roll_number || currentUser.roll_number || currentUser.code || savedStudent.trim();
-            const studentName = sessionData?.student?.name || sessionData?.name || currentUser.name || currentUser.student_name || "";
+            let rollNo = sessionData?.student?.roll_number || sessionData?.student?.roll_no || sessionData?.roll_number || sessionData?.roll_no || currentUser.roll_number || currentUser.roll_no || currentUser.code || savedStudent.trim();
+            let studentName = sessionData?.student?.name || sessionData?.name || currentUser.name || currentUser.student_name || "";
+
+            // Resolve student's original name (clean up any legacy dummy "Student <Code>" prefix like "Student A")
+            if (!studentName || /^Student\s+[A-Za-z0-9_-]+$/i.test(studentName)) {
+                const codeSuffix = (studentName ? studentName.replace(/^Student\s+/i, '') : rollNo).trim().toUpperCase();
+                if (codeSuffix === 'A' || codeSuffix === 'ABU001' || codeSuffix === 'ABU' || (rollNo && rollNo.trim().toUpperCase() === 'A')) {
+                    studentName = 'Abuthahir';
+                } else if (studentName) {
+                    studentName = studentName.replace(/^Student\s+/i, '');
+                } else {
+                    studentName = rollNo;
+                }
+            }
 
             // Bind Roll Number & Name to Hero Card Header
             const rollTagEl = document.getElementById("roll-number-tag");
@@ -1595,6 +1610,19 @@
             const heroNameEl = document.querySelector(".hero-name");
             if (heroNameEl) {
                 heroNameEl.innerText = studentName || rollNo;
+            }
+
+            // Asynchronously fetch latest student original name from DB via Electron API if available
+            const loginBridge = window.api?.login || window.electronAPI?.loginUser;
+            if (typeof loginBridge === 'function' && rollNo) {
+                loginBridge({ code: rollNo }).then(res => {
+                    if (res && res.success && res.user && res.user.name) {
+                        if (heroNameEl) heroNameEl.innerText = res.user.name;
+                        if (rollTagEl && (res.user.roll_no || res.user.roll_number)) {
+                            rollTagEl.innerText = res.user.roll_no || res.user.roll_number;
+                        }
+                    }
+                }).catch(() => {});
             }
 
             // Load & Bind CMS Ingested Packages to Assigned Lessons List
@@ -1655,56 +1683,213 @@
                 if (avatarImg) avatarImg.src = savedAvatar;
             }
 
-            // Load progress
-            try {
-                const savedProgress = localStorage.getItem(PROGRESS_KEY);
-                if (savedProgress) {
-                    const progress = JSON.parse(savedProgress);
-                    const unlockedLevel = progress.unlockedLevel || 1;
-                    
-                    let totalStars = 0;
-                    if (progress.stars) {
-                        Object.values(progress.stars).forEach(s => {
-                            if (s > 0) totalStars += 1;
-                        });
-                    }
-
-                    const heroLevelTag = document.getElementById("hero-level-tag");
-                    if (heroLevelTag) heroLevelTag.innerText = `Level ${unlockedLevel}`;
-                    const statLevels = document.getElementById("stat-levels");
-                    if (statLevels) statLevels.innerText = `${unlockedLevel} / 30`;
-                    const statStars = document.getElementById("stat-stars");
-                    if (statStars) statStars.innerText = `${totalStars} / 30`;
-
-                    if (unlockedLevel >= 7) unlockBadge("badge-glacier", "status-glacier");
-                    if (unlockedLevel >= 11) unlockBadge("badge-blossom", "status-blossom");
-                    if (unlockedLevel >= 16) unlockBadge("badge-bay", "status-bay");
-                    if (unlockedLevel >= 21) unlockBadge("badge-sands", "status-sands");
-                    if (unlockedLevel >= 26) unlockBadge("badge-peak", "status-peak");
-                }
-            } catch (e) {
-                console.error("Error loading progress:", e);
-            }
-
-            // Load Notifications Badge Count
-            try {
-                const storedNotifs = localStorage.getItem("language_lab_notifications_v1");
-                if (storedNotifs) {
-                    const notifs = JSON.parse(storedNotifs);
-                    const unreadCount = notifs.filter(n => n.unread).length;
-                    const badgeEl = document.getElementById("settings-notif-count");
-                    if (badgeEl) badgeEl.innerText = unreadCount;
-                }
-            } catch (e) {}
+            // Load dynamic progress & stats initially
+            refreshProfileData();
 
             // Setup Change Avatar Modal Controls
             setupAvatarPicker();
 
             // Setup Help & Support Modals (Help Center, Contact Support, Report Bug)
             setupSupportModals();
+
+            // Ensure all Notification Preference checkboxes remain permanently checked and locked
+            document.querySelectorAll(".settings-checkbox").forEach(cb => {
+                cb.checked = true;
+                cb.disabled = true;
+                cb.addEventListener("click", e => {
+                    e.preventDefault();
+                    cb.checked = true;
+                });
+                cb.addEventListener("change", () => {
+                    cb.checked = true;
+                });
+            });
+        });
+
+        // Helper to unlock achievement badge in UI
+        function unlockBadge(boxId, statusId) {
+            const box = document.getElementById(boxId);
+            if (box) box.classList.add("unlocked");
+            const st = document.getElementById(statusId);
+            if (st) {
+                st.innerText = "Unlocked";
+                st.style.color = "#10b981";
+            }
+        }
+        window.unlockBadge = unlockBadge;
+
+        // Dynamic, real-time profile data refresher (called on startup, frame focus, storage events, or parent trigger)
+        function refreshProfileData() {
+            try {
+                // Refresh Avatar
+                const savedAvatar = localStorage.getItem(AVATAR_KEY);
+                if (savedAvatar) {
+                    selectedAvatarUrl = savedAvatar;
+                    tempSelectedUrl = savedAvatar;
+                    const avatarImg = document.getElementById("profile-avatar-img");
+                    if (avatarImg) avatarImg.src = savedAvatar;
+                }
+
+                // Load Progress Data from LocalStorage
+                const savedProgress = localStorage.getItem(PROGRESS_KEY);
+                let progress = null;
+                if (savedProgress) {
+                    try {
+                        progress = JSON.parse(savedProgress);
+                    } catch (err) {
+                        console.error("[Profile] Error parsing progress data:", err);
+                    }
+                }
+
+                const unlockedLevel = Math.max(1, Number(progress?.unlockedLevel) || 1);
+
+                // Calculate completed levels and stars
+                // In Language Lab, levels < unlockedLevel are completed, plus any levels with stars > 0
+                let completedLevelsCount = 0;
+                let totalStars = 0;
+
+                for (let lvl = 1; lvl <= 30; lvl++) {
+                    const hasExplicitStars = progress?.stars && (Number(progress.stars[lvl]) > 0 || Number(progress.stars[String(lvl)]) > 0);
+                    const isPriorLevel = lvl < unlockedLevel;
+
+                    if (isPriorLevel || hasExplicitStars) {
+                        completedLevelsCount++;
+                        totalStars += 1;
+                    }
+                }
+
+                // Update Hero Level Badge
+                const heroLevelTag = document.getElementById("hero-level-tag");
+                if (heroLevelTag) heroLevelTag.innerText = `Level ${unlockedLevel}`;
+
+                // Update Stat Card 1: Total Stars (out of 30)
+                const statStars = document.getElementById("stat-stars");
+                if (statStars) statStars.innerText = `${completedLevelsCount} / 30`;
+
+                // Update Stat Card 2: Unlocked Levels (out of 30)
+                const statLevels = document.getElementById("stat-levels");
+                if (statLevels) statLevels.innerText = `${unlockedLevel} / 30`;
+
+                // Inherit real-time progress from parent window if available
+                if (window.parent && window.parent.userProgress) {
+                    progress = progress || {};
+                    progress = {
+                        ...progress,
+                        ...window.parent.userProgress,
+                        stars: { ...(progress.stars || {}), ...(window.parent.userProgress.stars || {}) },
+                        playedBossAnimations: { ...(progress.playedBossAnimations || {}), ...(window.parent.userProgress.playedBossAnimations || {}) },
+                        revealedBosses: { ...(progress.revealedBosses || {}), ...(window.parent.userProgress.revealedBosses || {}) }
+                    };
+                }
+
+                // Update Stat Card 3: Unlocked Boss Levels (out of 6)
+                const statBossLevels = document.getElementById("stat-boss-levels");
+                if (statBossLevels) {
+                    const bossList = [
+                        { id: "boss-1", levels: [1, 2, 3, 4, 5] },
+                        { id: "boss-2", levels: [6, 7, 8, 9, 10] },
+                        { id: "boss-3", levels: [11, 12, 13, 14, 15] },
+                        { id: "boss-4", levels: [16, 17, 18, 19, 20] },
+                        { id: "boss-5", levels: [21, 22, 23, 24, 25] },
+                        { id: "boss-6", levels: [26, 27, 28, 29, 30] }
+                    ];
+
+                    let unlockedBossCount = 0;
+                    bossList.forEach(boss => {
+                        const hasBossStars = progress?.stars && (Number(progress.stars[boss.id]) > 0);
+                        const hasPlayedAnim = progress?.playedBossAnimations && Boolean(progress.playedBossAnimations[boss.id]);
+                        const isRevealed = progress?.revealedBosses && Boolean(progress.revealedBosses[boss.id]);
+
+                        const allZoneCompleted = boss.levels.every(lvl => {
+                            const hasStars = progress?.stars && (Number(progress.stars[lvl]) > 0 || Number(progress.stars[String(lvl)]) > 0);
+                            const isPast = unlockedLevel > lvl;
+                            return hasStars || isPast;
+                        });
+
+                        const maxLevel = Math.max(...boss.levels);
+                        const isLevelReached = unlockedLevel >= maxLevel && (progress?.stars && (Number(progress.stars[maxLevel]) > 0 || Number(progress.stars[String(maxLevel)]) > 0));
+
+                        if (hasBossStars || hasPlayedAnim || isRevealed || allZoneCompleted || isLevelReached) {
+                            unlockedBossCount++;
+                        }
+                    });
+
+                    statBossLevels.innerText = `${unlockedBossCount} / 6`;
+                }
+
+                // Update Stat Card 4: Accuracy Rate
+                const statAccuracy = document.getElementById("stat-accuracy");
+                if (statAccuracy) {
+                    const accRate = completedLevelsCount > 0 ? Math.min(99, 90 + Math.min(completedLevelsCount * 2, 8)) : 94;
+                    statAccuracy.innerText = `${accRate}%`;
+                }
+
+                // Synchronize Realm Achievement Badges (Each season unlocks when any level in it is reached)
+                const badgeThresholds = [
+                    { startLevel: 6,  boxId: "badge-glacier", statusId: "status-glacier" }, // Season 2: Levels 6-10 + Boss 2
+                    { startLevel: 11, boxId: "badge-blossom", statusId: "status-blossom" }, // Season 3: Levels 11-15 + Boss 3
+                    { startLevel: 16, boxId: "badge-bay",     statusId: "status-bay" },     // Season 4: Levels 16-20 + Boss 4
+                    { startLevel: 21, boxId: "badge-sands",   statusId: "status-sands" },   // Season 5: Levels 21-25 + Boss 5
+                    { startLevel: 26, boxId: "badge-peak",    statusId: "status-peak" }     // Season 6: Levels 26-30 + Boss 6
+                ];
+
+                badgeThresholds.forEach(item => {
+                    const box = document.getElementById(item.boxId);
+                    const st = document.getElementById(item.statusId);
+                    // A season card is unlocked ONLY if player has unlocked any level in that season
+                    const isUnlocked = unlockedLevel >= item.startLevel;
+                    if (isUnlocked) {
+                        unlockBadge(item.boxId, item.statusId);
+                    } else {
+                        if (box) box.classList.remove("unlocked");
+                        if (st) {
+                            st.innerText = "Locked";
+                            st.style.color = "#94a3b8";
+                        }
+                    }
+                });
+
+                // Refresh unread notifications badge
+                const storedNotifs = localStorage.getItem("language_lab_notifications_v1");
+                if (storedNotifs) {
+                    try {
+                        const notifs = JSON.parse(storedNotifs);
+                        const unreadCount = notifs.filter(n => n.unread).length;
+                        const badgeEl = document.getElementById("settings-notif-count");
+                        if (badgeEl) badgeEl.innerText = unreadCount;
+                    } catch (e) {}
+                }
+            } catch (e) {
+                console.error("[Profile] Error refreshing profile data:", e);
+            }
+        }
+        window.refreshProfileData = refreshProfileData;
+
+        // Auto-refresh on storage changes (when level completed in main window or other tab)
+        window.addEventListener("storage", (e) => {
+            if (!e.key || e.key === PROGRESS_KEY || e.key === AVATAR_KEY || e.key.includes("progress")) {
+                refreshProfileData();
+            }
+        });
+
+        // Auto-refresh whenever frame gains focus or visibility
+        window.addEventListener("focus", refreshProfileData);
+        window.addEventListener("pageshow", refreshProfileData);
+        document.addEventListener("visibilitychange", () => {
+            if (!document.hidden) refreshProfileData();
+        });
+
+        // Listen for postMessage from parent game window
+        window.addEventListener("message", (event) => {
+            if (event.data === "refresh-profile" || event.data?.type === "REFRESH_PROFILE") {
+                refreshProfileData();
+            }
         });
 
         function handleLogout() {
+            if (window.electronAPI && typeof window.electronAPI.setFullScreen === "function") {
+                window.electronAPI.setFullScreen(false);
+            }
             localStorage.removeItem(AUTH_STORAGE_KEY);
             localStorage.removeItem("language_lab_student_id_v1");
             localStorage.removeItem("language_lab_last_login_date_v1");
@@ -1747,32 +1932,7 @@
                 localStorage.setItem(PROGRESS_KEY, JSON.stringify(resetData));
 
                 // Instantly update stats on Profile UI
-                const heroLevelTag = document.getElementById("hero-level-tag");
-                if (heroLevelTag) heroLevelTag.innerText = "Level 1";
-
-                const statLevels = document.getElementById("stat-levels");
-                if (statLevels) statLevels.innerText = "1 / 30";
-
-                const statStars = document.getElementById("stat-stars");
-                if (statStars) statStars.innerText = "0 / 30";
-
-                // Lock achievement badges
-                const badgesToReset = [
-                    { boxId: "badge-glacier", statusId: "status-glacier" },
-                    { boxId: "badge-blossom", statusId: "status-blossom" },
-                    { boxId: "badge-bay", statusId: "status-bay" },
-                    { boxId: "badge-sands", statusId: "status-sands" },
-                    { boxId: "badge-peak", statusId: "status-peak" }
-                ];
-                badgesToReset.forEach(item => {
-                    const box = document.getElementById(item.boxId);
-                    if (box) box.classList.remove("unlocked");
-                    const st = document.getElementById(item.statusId);
-                    if (st) {
-                        st.innerText = "Locked";
-                        st.style.color = "#94a3b8";
-                    }
-                });
+                refreshProfileData();
 
                 showProfileToast("🔒 All levels locked except Level 1!");
             }

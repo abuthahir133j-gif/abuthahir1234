@@ -1,0 +1,46 @@
+{
+  "package_name": "my-everyday-life",
+  "experience_id": 53,
+  "experience_title": "My Everyday Life",
+  "version": "1.00",
+  "build_number": 2,
+  "created_at": "2026-09-23T06:12:28.533086+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 15325,
+      "checksum": "061922e89a1f6d940a5073e5cce1fc72474eaa9f48ff7ac55b6f16bb562c5b9a"
+    },
+    {
+      "path": "metadata.json",
+      "size": 194,
+      "checksum": "fdb415192b52411af367fcd1df11713ca811bdaddd8027347b92673bfe9ef4ed"
+    },
+    {
+      "path": "assets/images/a7bcc3cd183648a5880ae1e4df2e500f.png",
+      "size": 3000000,
+      "checksum": "4171436d7c809a1ba09f9b86fe01cc0ff84555cd48d18514d4a7c799e9b75740"
+    },
+    {
+      "path": "assets/audio/ee58bb561c66481bb6927a17ae9ee4aa.wav",
+      "size": 1659714,
+      "checksum": "ae58b097fcae2084393931bb50f835135b0c8e23fd7e1f0d646e9557352ae72a"
+    },
+    {
+      "path": "assets/images/fb760525e97d499f85a62424176c2d22.png",
+      "size": 2084216,
+      "checksum": "932632fcef7f716e5ef985515fc964fb38eb597219115596243c36483dd66019"
+    },
+    {
+      "path": "assets/images/446dc0cc54f44a3c8f10fd44e181878e.png",
+      "size": 3000000,
+      "checksum": "4171436d7c809a1ba09f9b86fe01cc0ff84555cd48d18514d4a7c799e9b75740"
+    }
+  ],
+  "checksums": {
+    "experience_json": "061922e89a1f6d940a5073e5cce1fc72474eaa9f48ff7ac55b6f16bb562c5b9a",
+    "metadata_json": "fdb415192b52411af367fcd1df11713ca811bdaddd8027347b92673bfe9ef4ed"
+  }
+}

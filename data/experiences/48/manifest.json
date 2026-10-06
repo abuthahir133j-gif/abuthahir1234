@@ -1,0 +1,36 @@
+{
+  "package_name": "new-module",
+  "experience_id": 20,
+  "experience_title": "New module",
+  "version": "1.2",
+  "build_number": 1,
+  "created_at": "2026-09-25T08:03:45.047727+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 6363,
+      "checksum": "9416c0e75133738c9a727b116043471dbeec67c63dc4e294e4cee8b32d26b552"
+    },
+    {
+      "path": "metadata.json",
+      "size": 237,
+      "checksum": "d38f2ffe20b8e930aaa29d4a4585cc0c3bbc8eb236fd5e6fa4e6fb80e92cd31a"
+    },
+    {
+      "path": "assets/images/ed1cd33f6d8b4e70baac14190d6e6355.png",
+      "size": 2084216,
+      "checksum": "932632fcef7f716e5ef985515fc964fb38eb597219115596243c36483dd66019"
+    },
+    {
+      "path": "assets/images/ac66043d137d4f45bc4c7874ee942c5a.png",
+      "size": 2054966,
+      "checksum": "103ff28ef01e5f47213dc14ae24c1e0e5e5a28f2b85f327f3a7b7ac0c3a69232"
+    }
+  ],
+  "checksums": {
+    "experience_json": "9416c0e75133738c9a727b116043471dbeec67c63dc4e294e4cee8b32d26b552",
+    "metadata_json": "d38f2ffe20b8e930aaa29d4a4585cc0c3bbc8eb236fd5e6fa4e6fb80e92cd31a"
+  }
+}

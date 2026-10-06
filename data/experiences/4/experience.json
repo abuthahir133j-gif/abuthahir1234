@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "5",
+  "title": "Listening",
+  "description": "To improve the listeing skills",
+  "language": "English",
+  "grade": "Grade 4",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "5",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "7",
+          "title": "Listening challenge",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "To improve the listening skills",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Listening challenge",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1787129986627-1m3kdpq3l",
+                "type": "heading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "color": "#1F2937",
+                  "fontSize": "32px",
+                  "alignment": "Center",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Bold"
+                },
+                "content": {
+                  "tag": "H2",
+                  "text": "Listening"
+                }
+              },
+              {
+                "id": "block-1787129993398-884v3d5wq",
+                "type": "text",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px",
+                  "color": "#334155",
+                  "fontSize": "16px",
+                  "alignment": "Left",
+                  "fontFamily": "Poppins",
+                  "fontWeight": "Normal"
+                },
+                "content": {
+                  "text": "To improve the listening skills"
+                }
+              },
+              {
+                "id": "block-1787130007394-gdh0buswz",
+                "type": "image",
+                "styles": {
+                  "top": "252px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/de97e96a341344b0827087af7e14f5e0.png",
+                  "caption": "",
+                  "media_id": 7,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1787130022042-3tqw392o4",
+                "type": "video",
+                "styles": {
+                  "top": "368px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": ""
+                }
+              },
+              {
+                "id": "block-1787130555035-2gpoyf40w",
+                "type": "quiz",
+                "styles": {
+                  "top": "484px",
+                  "left": "20px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": "Red"
+                    },
+                    {
+                      "text": "Orange"
+                    },
+                    {
+                      "text": "yellow"
+                    },
+                    {
+                      "text": "Black"
+                    }
+                  ],
+                  "question": "Select the colour for apple",
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1787130609499-ra5hqyh2m",
+                "type": "dictation",
+                "styles": {
+                  "top": "600px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "",
+                  "question": "Listen and type what you hear."
+                }
+              },
+              {
+                "id": "block-1787130611604-suei956a4",
+                "type": "quiz",
+                "styles": {
+                  "top": "716px",
+                  "left": "20px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": "Option A"
+                    },
+                    {
+                      "text": "Option B"
+                    },
+                    {
+                      "text": "Option C"
+                    },
+                    {
+                      "text": "Option D"
+                    }
+                  ],
+                  "question": "Question text?",
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1787130622765-glcaharuq",
+                "type": "dictation",
+                "styles": {
+                  "top": "832px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "",
+                  "question": "Listen and type what you hear."
+                }
+              },
+              {
+                "id": "block-1787130637980-v0opnfslc",
+                "type": "sequence",
+                "styles": {
+                  "top": "948px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    "Step 1: Get out of bed",
+                    "Step 2: Brush your teeth",
+                    "Step 3: Eat breakfast",
+                    "step 4:GO to school"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              },
+              {
+                "id": "block-1787130708739-2ckc6qkyy",
+                "type": "quiz",
+                "styles": {
+                  "top": "1064px",
+                  "left": "20px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": "Option A"
+                    },
+                    {
+                      "text": "Option B"
+                    },
+                    {
+                      "text": "Option C"
+                    },
+                    {
+                      "text": "Option D"
+                    }
+                  ],
+                  "question": "Question text?",
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1787130711443-admpymqas",
+                "type": "sequence",
+                "styles": {
+                  "top": "1180px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    "Step 1: Get out of bed",
+                    "Step 2: Brush your teeth",
+                    "Step 3: Eat breakfast"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "Red",
+              "Orange",
+              "yellow",
+              "Black"
+            ],
+            "quiz_question": "Select the colour for apple",
+            "quiz_correct_index": 0,
+            "image": "assets/images/de97e96a341344b0827087af7e14f5e0.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 7,
+              "type": "IMAGE",
+              "url": "assets/images/de97e96a341344b0827087af7e14f5e0.png",
+              "missing": false
+            },
+            {
+              "media_id": 7,
+              "type": "IMAGE",
+              "url": "assets/images/de97e96a341344b0827087af7e14f5e0.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

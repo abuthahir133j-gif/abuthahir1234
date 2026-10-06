@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "64",
+  "title": "FINAL ENGLISH CHALLENGE",
+  "description": "Test",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "168",
+      "title": "Activity",
+      "description": "Default assessment activity",
+      "sequence": 1,
+      "estimatedDuration": 15,
+      "skills": [],
+      "activityType": "ASSESSMENT",
+      "masteryThreshold": 70,
+      "screens": [
+        {
+          "id": "175",
+          "title": "Test",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Test",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789024373037-0zd5z7qn7",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/01da89a73dec4bbcaeeef1208a75c85a.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 187,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1789024394224-pmf16dz1g",
+                "type": "quiz",
+                "styles": {
+                  "top": "181px",
+                  "left": "20px",
+                  "minHeight": "768.3333333333334px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "He played football."
+                        },
+                        {
+                          "text": "He flew a kite."
+                        },
+                        {
+                          "text": "He went shopping."
+                        }
+                      ],
+                      "question": "What did Aarav do yesterday?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "At school"
+                        },
+                        {
+                          "text": "At the park"
+                        },
+                        {
+                          "text": "At the library"
+                        }
+                      ],
+                      "question": "Where is Aarav today?",
+                      "correctAnswerIndex": 1
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Rainy"
+                        },
+                        {
+                          "text": "Snowy"
+                        },
+                        {
+                          "text": "Sunny"
+                        },
+                        {
+                          "text": "Option D"
+                        }
+                      ],
+                      "question": "What is the weather like?",
+                      "correctAnswerIndex": 2
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "A dog"
+                        },
+                        {
+                          "text": "A cat"
+                        },
+                        {
+                          "text": "A bird"
+                        },
+                        {
+                          "text": "Option D"
+                        }
+                      ],
+                      "question": "What animal does Aarav see?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1789024532786-82fm89zkg",
+                "type": "dictation",
+                "styles": {
+                  "top": "965px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "dict-1",
+                      "url": "/media/media_library/66393c71b57d4c709a72070d149d9778.mp3",
+                      "text": "I am studying ,I am playing ,I am reading.",
+                      "audioUrl": "/media/media_library/66393c71b57d4c709a72070d149d9778.mp3",
+                      "targetText": "I am studying ,I am playing ,I am reading."
+                    }
+                  ],
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1789024725729-lobnrxabj",
+                "type": "image",
+                "styles": {
+                  "top": "1081px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/3c852f4348b44952b5f380ca3b56bc02.png",
+                  "caption": "",
+                  "media_id": 189,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1789024739432-yapd12xt8",
+                "type": "input",
+                "styles": {
+                  "top": "1603.6666666666667px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Look at the pictures and tell me what happens.",
+                  "placeholder": "",
+                  "correctAnswer": "The child gets ready. She goes to the park and reads a book. Then she plays with her friends. Finally, she goes home"
+                }
+              }
+            ],
+            "media_id": 187,
+            "alignment": "Center",
+            "media_url": "/media/media_library/01da89a73dec4bbcaeeef1208a75c85a.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/01da89a73dec4bbcaeeef1208a75c85a.mp3",
+            "image": "assets/images/3c852f4348b44952b5f380ca3b56bc02.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 187,
+              "type": "AUDIO",
+              "url": "assets/audio/01da89a73dec4bbcaeeef1208a75c85a.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 189,
+              "type": "IMAGE",
+              "url": "assets/images/3c852f4348b44952b5f380ca3b56bc02.png",
+              "missing": false
+            },
+            {
+              "media_id": 188,
+              "type": "AUDIO",
+              "url": "assets/audio/66393c71b57d4c709a72070d149d9778.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 187,
+              "type": "AUDIO",
+              "url": "assets/audio/01da89a73dec4bbcaeeef1208a75c85a.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 189,
+              "type": "IMAGE",
+              "url": "assets/images/3c852f4348b44952b5f380ca3b56bc02.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

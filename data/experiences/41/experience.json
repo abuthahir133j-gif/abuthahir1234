@@ -1,0 +1,325 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "40",
+  "title": "A Day at School",
+  "description": "Talk, read and write about familiar school activities and understand the sequence of a simple school-day text.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "98",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "106",
+          "title": "My School Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My School Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788928111298-ntvrgdtih",
+                "type": "sequence",
+                "styles": {
+                  "top": "583px",
+                  "left": "0px",
+                  "minHeight": "230px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    "Come to school",
+                    "Study in class",
+                    "Eat lunch",
+                    "Go home"
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              },
+              {
+                "id": "block-1788928306295-zrifevjeu",
+                "type": "video",
+                "styles": {
+                  "top": "18px",
+                  "left": "0px",
+                  "minHeight": "538px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/79834e85c18a4ebaba49c81e76f20e10.mp4",
+                  "media_id": 139,
+                  "media_type": "VIDEO"
+                }
+              }
+            ],
+            "media_id": 139,
+            "alignment": "Center",
+            "media_url": "/media/media_library/79834e85c18a4ebaba49c81e76f20e10.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "video": "assets/video/79834e85c18a4ebaba49c81e76f20e10.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 139,
+              "type": "VIDEO",
+              "url": "assets/video/79834e85c18a4ebaba49c81e76f20e10.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 139,
+              "type": "VIDEO",
+              "url": "assets/video/79834e85c18a4ebaba49c81e76f20e10.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "99",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 3,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "107",
+          "title": "What Do You Do?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "What Do You Do?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788928444408-wa4vti0hu",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/2dfe896d45e741fa8fe5cde2048d937d.png",
+                  "caption": "What do u seee in the picture?",
+                  "media_id": 140,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1788928599814-9xjej0172",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "719px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": ""
+                }
+              }
+            ],
+            "media_id": 140,
+            "alignment": "Center",
+            "media_url": "/media/media_library/2dfe896d45e741fa8fe5cde2048d937d.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/2dfe896d45e741fa8fe5cde2048d937d.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 140,
+              "type": "IMAGE",
+              "url": "assets/images/2dfe896d45e741fa8fe5cde2048d937d.png",
+              "missing": false
+            },
+            {
+              "media_id": 140,
+              "type": "IMAGE",
+              "url": "assets/images/2dfe896d45e741fa8fe5cde2048d937d.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "100",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 4,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "108",
+          "title": "A Day at School",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "A Day at School",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788928929542-g9qb0hgus",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "My School Day",
+                      "passage": "I come to school in the morning.\nI say hello to my teacher and friends.\nI read and write in class.\nAt lunchtime, I eat with my friends.\nAfter lunch, I play outside.\nThen I go back to class.\nI go home in the afternoon.",
+                      "question": ""
+                    }
+                  ],
+                  "question": ""
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "101",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 3,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "109",
+          "title": "My School Day",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My School Day",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788928989633-np8ll1ukf",
+                "type": "sequence",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "items": [
+                    "I come to school in the morning.",
+                    "I read and write in class.",
+                    "I eat lunch with my friends.",
+                    "I play outside after lunch.",
+                    "I go home in the afternoon."
+                  ],
+                  "question": "Arrange the items in the correct order."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

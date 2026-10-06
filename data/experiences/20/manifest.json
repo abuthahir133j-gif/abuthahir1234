@@ -1,0 +1,36 @@
+{
+  "package_name": "lets-play",
+  "experience_id": 44,
+  "experience_title": "Let's Play!",
+  "version": "v1",
+  "build_number": 1,
+  "created_at": "2026-09-09T08:00:55.114813+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 11117,
+      "checksum": "d18f60e3944d7fa9a60b399947b78aa98745df090b0d1faaad021695e99454c4"
+    },
+    {
+      "path": "metadata.json",
+      "size": 183,
+      "checksum": "1597f5012a9e7894b33e686faef82b0b73d84828be05a6f9b9adaaba59509652"
+    },
+    {
+      "path": "assets/audio/e98c5fc27e454379a252672ba9c290e6.mp3",
+      "size": 167531,
+      "checksum": "823f93cb818a2144ef1cd30bcd241b46d2260307a6d9447f93b7ccdaa5d37219"
+    },
+    {
+      "path": "assets/images/24af0852d7c44feeb94c568a35df9171.png",
+      "size": 2050037,
+      "checksum": "b9b6cf499f385b1141b2408375d54a99eb924bd14059dc5b0be2291569348589"
+    }
+  ],
+  "checksums": {
+    "experience_json": "d18f60e3944d7fa9a60b399947b78aa98745df090b0d1faaad021695e99454c4",
+    "metadata_json": "1597f5012a9e7894b33e686faef82b0b73d84828be05a6f9b9adaaba59509652"
+  }
+}

@@ -11,7 +11,14 @@ let db = null;
 function initDatabase(customPath) {
     let dbPath = customPath;
     if (!dbPath) {
-        const dataDir = path.join(process.cwd(), 'data');
+        let baseDir = process.cwd();
+        try {
+            const { app } = require('electron');
+            if (app && app.isPackaged) {
+                baseDir = app.getPath('userData');
+            }
+        } catch (e) {}
+        const dataDir = path.join(baseDir, 'data');
         if (!fs.existsSync(dataDir)) {
             fs.mkdirSync(dataDir, { recursive: true });
         }
@@ -34,7 +41,8 @@ function initDatabase(customPath) {
             name TEXT,
             grade TEXT,
             section TEXT,
-            lms_code TEXT
+            lms_code TEXT,
+            roll_no TEXT
         );
 
         CREATE TABLE IF NOT EXISTS lessons (
@@ -52,6 +60,35 @@ function initDatabase(customPath) {
             key TEXT PRIMARY KEY,
             value TEXT
         );
+
+        CREATE TABLE IF NOT EXISTS sync_state (
+            package_id TEXT PRIMARY KEY,
+            server_version TEXT,
+            local_version TEXT,
+            last_synced_at DATETIME,
+            sync_status TEXT DEFAULT 'synced',
+            checksum TEXT,
+            file_path TEXT
+        );
+
+        CREATE TABLE IF NOT EXISTS student_progress (
+            progress_id TEXT PRIMARY KEY,
+            student_id TEXT NOT NULL,
+            package_id TEXT,
+            level_id TEXT NOT NULL,
+            score INTEGER DEFAULT 0,
+            stars INTEGER DEFAULT 0,
+            status TEXT DEFAULT 'COMPLETED',
+            details_json TEXT,
+            completed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            sync_status TEXT DEFAULT 'pending',
+            synced_at DATETIME,
+            device_id TEXT
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_progress_student ON student_progress(student_id);
+        CREATE INDEX IF NOT EXISTS idx_progress_sync ON student_progress(sync_status);
+        CREATE INDEX IF NOT EXISTS idx_progress_level ON student_progress(student_id, level_id);
     `);
 
     // Ensure columns exist if database was created with earlier schema
@@ -76,188 +113,20 @@ function initDatabase(customPath) {
 
     console.log(`[SQLite DB] Database initialized successfully at: ${dbPath}`);
     
-    // Auto-populate lessons and users if empty
-    ensureDefaultDataPopulated();
-
     return db;
 }
 
-const DEFAULT_CMS_PACKAGES = [
-    {
-        lesson_id: "PKG-ENG-101",
-        title: "Grammar Basics & Daily Vocabulary",
-        type: "EXPERIENCE",
-        grade: "Class 7",
-        difficulty: "Beginner",
-        status: "APPROVED",
-        payload_json: {
-            packageId: "PKG-ENG-101",
-            packageName: "Grammar Basics & Daily Vocabulary",
-            title: "Grammar Basics & Daily Vocabulary",
-            description: "Foundational English grammar, nouns, verbs, and daily conversational vocabulary.",
-            grade: "Class 7",
-            status: "published",
-            lessons: [
-                { lessonId: "L1", title: "Greeting & Introductions", duration: "15 mins" },
-                { lessonId: "L2", title: "Nouns & Action Verbs", duration: "20 mins" },
-                { lessonId: "L3", title: "Daily Conversation Starters", duration: "25 mins" }
-            ]
-        }
-    },
-    {
-        lesson_id: "PKG-ENG-102",
-        title: "Advanced English Conversation & Dialogue",
-        type: "EXPERIENCE",
-        grade: "Class 7",
-        difficulty: "Intermediate",
-        status: "APPROVED",
-        payload_json: {
-            packageId: "PKG-ENG-102",
-            packageName: "Advanced English Conversation & Dialogue",
-            title: "Advanced English Conversation & Dialogue",
-            description: "Interactive dialogue practice, sentence formation, and real-world travel conversations.",
-            grade: "Class 7",
-            status: "published",
-            lessons: [
-                { lessonId: "L4", title: "Travel Dialogue & Asking Directions", duration: "20 mins" },
-                { lessonId: "L5", title: "Ordering Food & Polite Requests", duration: "25 mins" },
-                { lessonId: "L6", title: "Storytelling & Expressing Opinions", duration: "30 mins" }
-            ]
-        }
-    },
-    {
-        lesson_id: "PKG-ENG-103",
-        title: "Language Masterclass: Fluency & Phonetics",
-        type: "EXPERIENCE",
-        grade: "Class 7",
-        difficulty: "Advanced",
-        status: "APPROVED",
-        payload_json: {
-            packageId: "PKG-ENG-103",
-            packageName: "Language Masterclass: Fluency & Phonetics",
-            title: "Language Masterclass: Fluency & Phonetics",
-            description: "Master English phonetics, clear pronunciation, listening comprehension, and fluency drills.",
-            grade: "Class 7",
-            status: "published",
-            lessons: [
-                { lessonId: "L7", title: "Phonetics & Pronunciation Drills", duration: "20 mins" },
-                { lessonId: "L8", title: "Listening Comprehension & Accents", duration: "25 mins" },
-                { lessonId: "L9", title: "Public Speaking & Speech Mastery", duration: "35 mins" }
-            ]
-        }
-    },
-    {
-        lesson_id: "PKG-ENG-104",
-        title: "Travel English & Global Expressions",
-        type: "EXPERIENCE",
-        grade: "Class 7",
-        difficulty: "Intermediate",
-        status: "APPROVED",
-        payload_json: {
-            packageId: "PKG-ENG-104",
-            packageName: "Travel English & Global Expressions",
-            title: "Travel English & Global Expressions",
-            description: "Practical language skills for airport navigation, hotel bookings, and global travel scenarios.",
-            grade: "Class 7",
-            status: "published",
-            lessons: [
-                { lessonId: "L10", title: "Airport & Transport Phrases", duration: "20 mins" },
-                { lessonId: "L11", title: "Hotel & Accommodation Check-in", duration: "25 mins" },
-                { lessonId: "L12", title: "Emergency & Assistance Dialogues", duration: "20 mins" }
-            ]
-        }
-    },
-    {
-        lesson_id: "PKG-ENG-105",
-        title: "Creative Writing & Advanced Comprehension",
-        type: "EXPERIENCE",
-        grade: "Class 7",
-        difficulty: "Advanced",
-        status: "APPROVED",
-        payload_json: {
-            packageId: "PKG-ENG-105",
-            packageName: "Creative Writing & Advanced Comprehension",
-            title: "Creative Writing & Advanced Comprehension",
-            description: "Express creative thoughts, write descriptive paragraphs, and analyze engaging short stories.",
-            grade: "Class 7",
-            status: "published",
-            lessons: [
-                { lessonId: "L13", title: "Creative Storytelling & Descriptive Words", duration: "25 mins" },
-                { lessonId: "L14", title: "Essay Structure & Logic Flow", duration: "30 mins" },
-                { lessonId: "L15", title: "Grand Championship Quiz & Showcase", duration: "40 mins" }
-            ]
-        }
-    }
-];
-
-const DEFAULT_STUDENTS = [
-    { id: "1", username: "ABU001", lms_code: "ABU001", name: "Abuthahir", grade: "Class 7", section: "A", role: "student" },
-    { id: "2", username: "ARJ001", lms_code: "ARJ001", name: "Arjun", grade: "Class 7", section: "A", role: "student" },
-    { id: "3", username: "STU-101", lms_code: "STU-101", name: "Student STU-101", grade: "Class 7", section: "B", role: "student" },
-    { id: "4", username: "STU-102", lms_code: "STU-102", name: "Student STU-102", grade: "Class 7", section: "B", role: "student" },
-    { id: "5", username: "STU-103", lms_code: "STU-103", name: "Student STU-103", grade: "Class 7", section: "B", role: "student" },
-    { id: "6", username: "101", lms_code: "101", name: "Student 101", grade: "Class 7", section: "C", role: "student" },
-    { id: "7", username: "102", lms_code: "102", name: "Student 102", grade: "Class 7", section: "C", role: "student" },
-    { id: "8", username: "103", lms_code: "103", name: "Student 103", grade: "Class 7", section: "C", role: "student" },
-    { id: "9", username: "STUDENT1", lms_code: "STUDENT1", name: "Student One", grade: "Class 7", section: "A", role: "student" },
-    { id: "10", username: "DEMO", lms_code: "DEMO", name: "Demo Student", grade: "Class 7", section: "A", role: "student" },
-    { id: "11", username: "MAS002", lms_code: "MAS002", name: "Master Student 002", grade: "Class 7", section: "A", role: "student" }
-];
+const DEFAULT_CMS_PACKAGES = [];
+const DEFAULT_STUDENTS = [];
 
 function ensureDefaultDataPopulated() {
-    try {
-        const database = getDb();
-        
-        // 1. Check if lessons table is empty
-        const lessonCount = database.prepare("SELECT COUNT(*) as count FROM lessons").get()?.count || 0;
-        if (lessonCount === 0) {
-            console.log("[SQLite DB] Seeding default CMS packages into SQLite lessons table...");
-            
-            // Try loading from data/packages.json first if available
-            let loadedPackages = [];
-            try {
-                const pkgJsonPath = path.join(process.cwd(), 'data', 'packages.json');
-                if (fs.existsSync(pkgJsonPath)) {
-                    const raw = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'));
-                    if (raw && raw.packages) {
-                        loadedPackages = Object.values(raw.packages).map((p, idx) => ({
-                            lesson_id: p.packageId || `PKG-${idx + 1}`,
-                            title: p.packageName || p.title || `Package ${idx + 1}`,
-                            type: "EXPERIENCE",
-                            grade: p.grade || "Class 7",
-                            difficulty: p.difficulty || "Intermediate",
-                            status: "APPROVED",
-                            payload_json: p
-                        }));
-                    }
-                }
-            } catch (e) {}
-
-            const packagesToSeed = (loadedPackages.length > 0) ? loadedPackages : DEFAULT_CMS_PACKAGES;
-            upsertLessons(packagesToSeed);
-            console.log(`[SQLite DB] Successfully populated ${packagesToSeed.length} CMS packages into lessons table.`);
-        }
-
-        // 2. Check if users table is empty
-        const userCount = database.prepare("SELECT COUNT(*) as count FROM users").get()?.count || 0;
-        if (userCount === 0) {
-            console.log("[SQLite DB] Seeding default student users into SQLite users table...");
-            upsertUsers(DEFAULT_STUDENTS);
-        }
-    } catch (err) {
-        console.error("[SQLite DB] Error ensuring default data population:", err.message);
-    }
+    // Left empty: database data should only come from CMS/LMS sync or live registrations
 }
 
 function ensureLessonsPopulated(customPackages = []) {
     const database = getDb();
     if (Array.isArray(customPackages) && customPackages.length > 0) {
         upsertLessons(customPackages);
-        return;
-    }
-    const lessonCount = database.prepare("SELECT COUNT(*) as count FROM lessons").get()?.count || 0;
-    if (lessonCount === 0) {
-        ensureDefaultDataPopulated();
     }
 }
 
@@ -482,17 +351,61 @@ function getSyncMeta(key) {
 }
 
 /**
- * Case-Insensitive SQLite Query: matches across username, id, or lms_code
+ * Case-Insensitive SQLite Query: matches across roll_no, lms_code, username, id, or name
+ * Prioritizes exact roll number and LMS code matches to return original student details
  * @param {string} code 
  */
 function findUserByCode(code) {
     if (!code) return null;
     const database = getDb();
     const clean = String(code).trim().toUpperCase();
-    return database.prepare(`
+
+    // 1. Direct query in SQLite checking roll_no, lms_code, username, id, name
+    const student = database.prepare(`
         SELECT * FROM users 
-        WHERE UPPER(username) = ? OR UPPER(id) = ? OR UPPER(lms_code) = ?
-    `).get(clean, clean, clean) || null;
+        WHERE UPPER(roll_no) = ? OR UPPER(lms_code) = ? OR UPPER(username) = ? OR UPPER(id) = ? OR UPPER(name) = ?
+        ORDER BY 
+            CASE 
+                WHEN UPPER(roll_no) = ? THEN 1
+                WHEN UPPER(lms_code) = ? THEN 2
+                WHEN UPPER(username) = ? THEN 3
+                WHEN UPPER(id) = ? THEN 4
+                ELSE 5
+            END
+        LIMIT 1
+    `).get(clean, clean, clean, clean, clean, clean, clean, clean, clean);
+
+    if (student) {
+        return student;
+    }
+
+    // 2. Fallback check against cmsDatabase in-memory store
+    try {
+        let cmsDbPath = path.join(process.cwd(), 'cmsDatabase.js');
+        if (!fs.existsSync(cmsDbPath)) {
+            cmsDbPath = path.join(__dirname, '..', '..', '..', 'cmsDatabase.js');
+        }
+        if (fs.existsSync(cmsDbPath)) {
+            const cmsDb = require(cmsDbPath);
+            const cmsStudent = cmsDb.getStudentByRollNo(clean);
+            if (cmsStudent) {
+                const newStudent = {
+                    id: String(cmsStudent.id || clean),
+                    username: String(cmsStudent.roll_number || clean).toUpperCase(),
+                    lms_code: String(cmsStudent.roll_number || clean).toUpperCase(),
+                    name: cmsStudent.name || clean,
+                    grade: 'Class 7',
+                    section: 'A',
+                    role: 'student',
+                    roll_no: String(cmsStudent.roll_number || clean)
+                };
+                upsertUsers([newStudent]);
+                return newStudent;
+            }
+        }
+    } catch (e) {}
+
+    return null;
 }
 
 function findUserByLmsCode(code) {
@@ -615,6 +528,229 @@ function getLessonsForGrade(grade) {
     return resultList;
 }
 
+/**
+ * Save student progress immediately into SQLite with pending sync status.
+ * Conflict resolution: Updates score/stars if higher, preserves history.
+ * @param {Object} data
+ * @returns {Object} Saved progress record
+ */
+function saveStudentProgress(data = {}) {
+    const database = getDb();
+    const studentId = String(data.student_id || data.studentId || data.roll_no || data.rollNumber || 'STUDENT').trim();
+    const levelId = String(data.level_id || data.levelId || data.level || '1').trim();
+    const packageId = String(data.package_id || data.packageId || levelId).trim();
+    const score = parseInt(data.score !== undefined ? data.score : 100, 10) || 0;
+    const stars = parseInt(data.stars !== undefined ? data.stars : 3, 10) || 0;
+    const status = String(data.status || 'COMPLETED').toUpperCase();
+    const completedAt = data.completed_at || new Date().toISOString();
+    const deviceId = data.device_id || data.deviceId || 'electron-win-lms';
+    const detailsJson = typeof data.details_json === 'object'
+        ? JSON.stringify(data.details_json)
+        : (data.details_json || (typeof data.details === 'object' ? JSON.stringify(data.details) : '{}'));
+
+    // Unique progress record key per student + level + completion timestamp
+    const progressId = String(data.progress_id || data.id || `PROG_${studentId}_${levelId}_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`);
+
+    const stmt = database.prepare(`
+        INSERT OR REPLACE INTO student_progress (
+            progress_id,
+            student_id,
+            package_id,
+            level_id,
+            score,
+            stars,
+            status,
+            details_json,
+            completed_at,
+            sync_status,
+            synced_at,
+            device_id
+        ) VALUES (
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', NULL, ?
+        )
+    `);
+
+    stmt.run(
+        progressId,
+        studentId,
+        packageId,
+        levelId,
+        score,
+        stars,
+        status,
+        detailsJson,
+        completedAt,
+        deviceId
+    );
+
+    console.log(`[SQLite DB] 💾 Progress saved offline (pending sync): Student=${studentId} Level=${levelId} Stars=${stars} Score=${score}`);
+
+    return {
+        progress_id: progressId,
+        student_id: studentId,
+        package_id: packageId,
+        level_id: levelId,
+        score,
+        stars,
+        status,
+        details_json: detailsJson,
+        completed_at: completedAt,
+        sync_status: 'pending',
+        device_id: deviceId
+    };
+}
+
+/**
+ * Retrieve all pending or failed progress records to push to CMS
+ * @param {number} [limit=100]
+ */
+function getPendingProgress(limit = 100) {
+    const database = getDb();
+    const stmt = database.prepare(`
+        SELECT * FROM student_progress
+        WHERE sync_status IN ('pending', 'failed')
+        ORDER BY completed_at ASC
+        LIMIT ?
+    `);
+    return stmt.all(limit);
+}
+
+/**
+ * Mark specified progress IDs as synchronized with server
+ * @param {Array<string>} progressIds
+ * @param {string} [syncedAt]
+ */
+function markProgressSynced(progressIds = [], syncedAt = new Date().toISOString()) {
+    if (!Array.isArray(progressIds) || progressIds.length === 0) return 0;
+    const database = getDb();
+    const updateStmt = database.prepare(`
+        UPDATE student_progress
+        SET sync_status = 'synced', synced_at = ?
+        WHERE progress_id = ?
+    `);
+
+    const batch = database.transaction((ids) => {
+        for (const id of ids) {
+            updateStmt.run(syncedAt, String(id));
+        }
+    });
+
+    batch(progressIds);
+    console.log(`[SQLite DB] ✅ Marked ${progressIds.length} progress record(s) as 'synced'.`);
+    return progressIds.length;
+}
+
+/**
+ * Mark specified progress IDs as failed (for retry later)
+ * @param {Array<string>} progressIds
+ */
+function markProgressFailed(progressIds = []) {
+    if (!Array.isArray(progressIds) || progressIds.length === 0) return 0;
+    const database = getDb();
+    const updateStmt = database.prepare(`
+        UPDATE student_progress
+        SET sync_status = 'failed'
+        WHERE progress_id = ?
+    `);
+
+    const batch = database.transaction((ids) => {
+        for (const id of ids) {
+            updateStmt.run(String(id));
+        }
+    });
+
+    batch(progressIds);
+    return progressIds.length;
+}
+
+/**
+ * Get all progress records for a student
+ * @param {string} studentId
+ */
+function getAllStudentProgress(studentId) {
+    const database = getDb();
+    if (!studentId) {
+        return database.prepare("SELECT * FROM student_progress ORDER BY completed_at DESC").all();
+    }
+    const cleanId = String(studentId).trim();
+    return database.prepare("SELECT * FROM student_progress WHERE UPPER(student_id) = UPPER(?) ORDER BY completed_at DESC").all(cleanId);
+}
+
+/**
+ * Upsert or update sync state for a package
+ * @param {Object} syncData
+ */
+function upsertSyncState(syncData = {}) {
+    const database = getDb();
+    const packageId = String(syncData.package_id || syncData.packageId || syncData.lesson_id || '').trim();
+    if (!packageId) return null;
+
+    const stmt = database.prepare(`
+        INSERT OR REPLACE INTO sync_state (
+            package_id,
+            server_version,
+            local_version,
+            last_synced_at,
+            sync_status,
+            checksum,
+            file_path
+        ) VALUES (
+            @package_id,
+            @server_version,
+            @local_version,
+            COALESCE(@last_synced_at, CURRENT_TIMESTAMP),
+            @sync_status,
+            @checksum,
+            @file_path
+        )
+    `);
+
+    stmt.run({
+        package_id: packageId,
+        server_version: String(syncData.server_version || syncData.version || '1.0.0'),
+        local_version: String(syncData.local_version || syncData.version || '1.0.0'),
+        last_synced_at: syncData.last_synced_at || new Date().toISOString(),
+        sync_status: String(syncData.sync_status || 'synced'),
+        checksum: String(syncData.checksum || ''),
+        file_path: String(syncData.file_path || '')
+    });
+
+    return syncData;
+}
+
+function getSyncState(packageId) {
+    const database = getDb();
+    const stmt = database.prepare("SELECT * FROM sync_state WHERE package_id = ?");
+    return stmt.get(String(packageId));
+}
+
+function getAllSyncStates() {
+    const database = getDb();
+    return database.prepare("SELECT * FROM sync_state ORDER BY package_id ASC").all();
+}
+
+/**
+ * Get comprehensive synchronization summary statistics
+ */
+function getSyncSummary() {
+    const database = getDb();
+    const totalUsers = database.prepare("SELECT COUNT(*) as count FROM users").get()?.count || 0;
+    const totalLessons = database.prepare("SELECT COUNT(*) as count FROM lessons").get()?.count || 0;
+    const pendingProgressCount = database.prepare("SELECT COUNT(*) as count FROM student_progress WHERE sync_status = 'pending'").get()?.count || 0;
+    const totalProgressCount = database.prepare("SELECT COUNT(*) as count FROM student_progress").get()?.count || 0;
+    const lastSyncedAt = getSyncMeta('last_synced_at') || null;
+    const cmsHost = getSyncMeta('cms_host') || null;
+
+    return {
+        totalUsers,
+        totalLessons,
+        pendingProgressCount,
+        totalProgressCount,
+        lastSyncedAt,
+        cmsHost
+    };
+}
+
 module.exports = {
     initDatabase,
     getDb,
@@ -635,6 +771,16 @@ module.exports = {
     ensureDefaultDataPopulated,
     ensureLessonsPopulated,
     syncUpsertLessons,
+    saveStudentProgress,
+    getPendingProgress,
+    markProgressSynced,
+    markProgressFailed,
+    getAllStudentProgress,
+    upsertSyncState,
+    getSyncState,
+    getAllSyncStates,
+    getSyncSummary,
     DEFAULT_CMS_PACKAGES,
     DEFAULT_STUDENTS
 };
+

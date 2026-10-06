@@ -9,3 +9,5 @@ data/temp_pkgs/
 !AI/video/
 !AI/video/*.mp4
 language-lab-engine/
+release/
+dist/

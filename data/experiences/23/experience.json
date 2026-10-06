@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "62",
+  "title": "PEOPLE, PLACES & ACTIONS",
+  "description": "Test",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "ASSESSMENT",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "166",
+      "title": "Activity",
+      "description": "Default assessment activity",
+      "sequence": 1,
+      "estimatedDuration": 15,
+      "skills": [],
+      "activityType": "ASSESSMENT",
+      "masteryThreshold": 70,
+      "screens": [
+        {
+          "id": "173",
+          "title": "Test",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Test",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789023536235-vpw1w3e2u",
+                "slot": "left",
+                "type": "audio_mystery",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "clues": [
+                    {
+                      "audio": "/media/media_library/cbc11b91986f4e4daac0519683a5a324.mp3",
+                      "duration": 5,
+                      "description": "Short introductory sound"
+                    }
+                  ],
+                  "hints": {
+                    "replay": "Listen again carefully",
+                    "visualClue": "Look at the pattern in the sound",
+                    "modelAnswer": "The correct answer is Option A",
+                    "sentenceStarter": "The sound indicates..."
+                  },
+                  "options": [
+                    "Rainy",
+                    "Sunny"
+                  ],
+                  "question": "What is the weather at the beginning?",
+                  "correctAnswer": 1
+                }
+              },
+              {
+                "id": "block-1789023731092-077fr4krk",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "1137.3333333333333px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Look at the picture. Tell me what you can see.”",
+                  "minWords": 50,
+                  "placeholder": "Start writing here..."
+                }
+              },
+              {
+                "id": "block-1789023790071-e52t876wg",
+                "type": "image",
+                "styles": {
+                  "top": "353.33333333333326px",
+                  "left": "0px",
+                  "minHeight": "774px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "url": "/media/media_library/623e37286c084a559928ae92a8c2f3c3.png",
+                  "caption": "",
+                  "media_id": 184,
+                  "media_type": "IMAGE"
+                }
+              }
+            ],
+            "media_id": 184,
+            "alignment": "Center",
+            "media_url": "/media/media_library/623e37286c084a559928ae92a8c2f3c3.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/623e37286c084a559928ae92a8c2f3c3.png",
+            "audio": "assets/audio/cbc11b91986f4e4daac0519683a5a324.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 184,
+              "type": "IMAGE",
+              "url": "assets/images/623e37286c084a559928ae92a8c2f3c3.png",
+              "missing": false
+            },
+            {
+              "media_id": 183,
+              "type": "AUDIO",
+              "url": "assets/audio/cbc11b91986f4e4daac0519683a5a324.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 184,
+              "type": "IMAGE",
+              "url": "assets/images/623e37286c084a559928ae92a8c2f3c3.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

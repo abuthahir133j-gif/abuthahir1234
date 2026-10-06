@@ -1,0 +1,41 @@
+{
+  "package_name": "lets-go-shopping",
+  "experience_id": 50,
+  "experience_title": "Let’s Go Shopping!",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:27:54.558805+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 13241,
+      "checksum": "9befc1c04fcc09fff18e0479440cd8dbbb21eb3ebbf07e52ed8431e12392cd55"
+    },
+    {
+      "path": "metadata.json",
+      "size": 195,
+      "checksum": "f224544a71fa7caefa4445a69986d8b0a8983ff23f4956d0a4a9ece17053cc0a"
+    },
+    {
+      "path": "assets/audio/da9b42b9dfcc4dc9bbba52f9b53b1205.mp3",
+      "size": 396154,
+      "checksum": "f9f6076a1f857b279f00fd438380a613e28314c5580ffaf93519a03f00972bd4"
+    },
+    {
+      "path": "assets/images/535ca712c0f64fd9a79ccf120a582d31.png",
+      "size": 1820011,
+      "checksum": "1721ebb89469bb8d9a3776b6169d39d29340037aafe1e39807399bc2c0b190fe"
+    },
+    {
+      "path": "assets/images/f74d5afe270d4632a9caf9ceaa817a0d.png",
+      "size": 2145672,
+      "checksum": "01381049ff54b5418fd5fa4c3de770d69f8b6d32e773136b04fd1486ad29d7f0"
+    }
+  ],
+  "checksums": {
+    "experience_json": "9befc1c04fcc09fff18e0479440cd8dbbb21eb3ebbf07e52ed8431e12392cd55",
+    "metadata_json": "f224544a71fa7caefa4445a69986d8b0a8983ff23f4956d0a4a9ece17053cc0a"
+  }
+}

@@ -1,22 +1,91 @@
 {
-  "name": "language-lab",
+  "name": "english-adventure",
   "version": "1.0.0",
-  "description": "",
+  "description": "English Adventure",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "electron ."
+    "test": "electron .",
+    "build:engine": "npm --prefix \"LMS Engine\" run build",
+    "build:exe": "npm run build:engine && electron-builder --win",
+    "build:clean-exe": "rimraf release && npm run build:engine && electron-builder --win"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "electron": "^43.3.0"
+    "electron": "^43.3.0",
+    "electron-builder": "^26.15.3"
   },
   "dependencies": {
     "axios": "^1.19.0",
     "better-sqlite3": "^13.0.3",
     "three": "^0.185.1"
+  },
+  "build": {
+    "appId": "com.english.adventure",
+    "productName": "English Adventure",
+    "npmRebuild": false,
+    "directories": {
+      "output": "release"
+    },
+    "icon": "assets/Icon/labIcon.ico",
+    "files": [
+      "main.js",
+      "preload.js",
+      "game.js",
+      "auth.js",
+      "cmsDatabase.js",
+      "cmsServer.js",
+      "index.html",
+      "login.html",
+      "login.css",
+      "style.css",
+      "profile.html",
+      "evolution.html",
+      "notifications.html",
+      "src/**/*",
+      "assets/**/*",
+      "avatars/**/*",
+      "data/**/*",
+      "Level/**/*",
+      "Dashboard/**/*",
+      "Login/**/*",
+      "AI/**/*",
+      "LMS Engine/dist/**/*",
+      "!LMS Engine/node_modules/**/*",
+      "!LMS Engine/src/**/*"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**/*"
+    ],
+    "win": {
+      "icon": "assets/Icon/labIcon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "installerIcon": "assets/Icon/labIcon.ico",
+      "uninstallerIcon": "assets/Icon/labIcon.ico",
+      "installerHeaderIcon": "assets/Icon/labIcon.ico"
+    }
   }
 }

@@ -1,0 +1,453 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "32",
+  "title": "Meet My Friends",
+  "description": "Introduce a friend, ask and answer simple personal questions, and \nuse he/she meaningfully.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "72",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "79",
+          "title": "Meet Alex",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Meet Alex",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788773886546-9aw6bnet6",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/54dec006ee494da6b1a98ddad9d7b8d5.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 129,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788773907719-055t3puju",
+                "type": "quiz",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Football"
+                        },
+                        {
+                          "text": "Drawing"
+                        },
+                        {
+                          "text": "Apples"
+                        },
+                        {
+                          "text": "Carrot"
+                        }
+                      ],
+                      "question": "What does Alex like?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 129,
+            "alignment": "Center",
+            "media_url": "/media/media_library/54dec006ee494da6b1a98ddad9d7b8d5.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/54dec006ee494da6b1a98ddad9d7b8d5.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 129,
+              "type": "AUDIO",
+              "url": "assets/audio/54dec006ee494da6b1a98ddad9d7b8d5.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 129,
+              "type": "AUDIO",
+              "url": "assets/audio/54dec006ee494da6b1a98ddad9d7b8d5.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "73",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 2,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "80",
+          "title": "MY Friend",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "MY Friend",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788774211233-prupn0e0v",
+                "slot": "left",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "You are ordering food at a restaurant",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "Hi! What's your name?",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "My name is",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "What do you like?",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "I like FootBall"
+                    }
+                  ],
+                  "npcCharacter": "friend"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "74",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "81",
+          "title": "Meet Alex",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Meet Alex",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788774347063-oyn9k68tp",
+                "type": "reading_passage",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "title": "",
+                  "passage": "",
+                  "passages": [
+                    {
+                      "title": "Meet Alex.hst",
+                      "passage": "dfjhxcjsdgrdyyyyyyyyyyyyooy",
+                      "question": ""
+                    }
+                  ],
+                  "question": ""
+                }
+              },
+              {
+                "id": "block-1788774414204-809mdd2pi",
+                "type": "match",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "Alex",
+                    "Teacher"
+                  ],
+                  "rightItems": [
+                    "School",
+                    "8 ys old"
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "75",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 3,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "82",
+          "title": "Tell Me About Your Friend",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "name": "Ben",
+                "step": 1,
+                "text": "Hi! What would you like to order?"
+              },
+              {
+                "name": "Anna",
+                "step": 2,
+                "text": "I'd like a cup of coffee, please."
+              }
+            ],
+            "title": "Tell Me About Your Friend",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788774542623-sljggwxl8",
+                "type": "sentence_builder",
+                "styles": {
+                  "top": "20px",
+                  "left": "0px",
+                  "blockWidth": "960.6666666666666px"
+                },
+                "content": {
+                  "sentences": [
+                    {
+                      "words": [
+                        "This",
+                        "is",
+                        "my",
+                        "friend",
+                        "Alex."
+                      ],
+                      "question": "",
+                      "sentence": "This  is  my  friend Alex."
+                    },
+                    {
+                      "words": [
+                        "He",
+                        "likes",
+                        "football."
+                      ],
+                      "question": "",
+                      "sentence": "He  likes  football."
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "block-1788774641651-hubnvry29",
+                "type": "writing_prompt",
+                "styles": {
+                  "top": "274.33333333333337px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Write about your friend.",
+                  "minWords": 39,
+                  "placeholder": "Start writing here..."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

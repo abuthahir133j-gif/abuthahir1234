@@ -1,0 +1,46 @@
+{
+  "package_name": "my-school-world",
+  "experience_id": 46,
+  "experience_title": "My School World",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:32:56.158958+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 9928,
+      "checksum": "0814cb62553780bcb687eecb16b9e29b0dd137363888f50b3cb08c9e5dc6de77"
+    },
+    {
+      "path": "metadata.json",
+      "size": 190,
+      "checksum": "53085539c4682ba2868a4e8ecbfaa2266de8370e30652b46d2026ee9d06e7884"
+    },
+    {
+      "path": "assets/audio/eb0ddccaee2841a2ae19ad4ab14469bb.mp3",
+      "size": 79759,
+      "checksum": "e3e714dbbc4aa67c46ef5ff8fb2a658c65315b8ccb51887c793a4734916fdb8b"
+    },
+    {
+      "path": "assets/audio/4a20bd8f38bb457c9fe20f460d48dce7.mp3",
+      "size": 90208,
+      "checksum": "39145d1c8cea343804bcf5e838d0e0f5ef6b2df5d57b51f4c4f99230ab741607"
+    },
+    {
+      "path": "assets/audio/0bcd3607c5494962a469679228512989.mp3",
+      "size": 122809,
+      "checksum": "af5cbffee4b0765a4b2be5213a6889189f0f99107072f27d105ea76fa6f9dc74"
+    },
+    {
+      "path": "assets/images/6e2a9f1b8f61485f8d1884d288e8029d.png",
+      "size": 2063930,
+      "checksum": "466c82de4f26ffbbe3752f92acb0fb1fe3e9613ad5d8c534efa0d50364bbf137"
+    }
+  ],
+  "checksums": {
+    "experience_json": "0814cb62553780bcb687eecb16b9e29b0dd137363888f50b3cb08c9e5dc6de77",
+    "metadata_json": "53085539c4682ba2868a4e8ecbfaa2266de8370e30652b46d2026ee9d06e7884"
+  }
+}

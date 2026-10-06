@@ -1,0 +1,36 @@
+{
+  "package_name": "my-happy-day",
+  "experience_id": 45,
+  "experience_title": "My Happy Day",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:30:47.865406+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 13810,
+      "checksum": "502235a232c98f5c3911f5a68bfa173f067e41abc9d377df759b077c2ec3b450"
+    },
+    {
+      "path": "metadata.json",
+      "size": 187,
+      "checksum": "a434e6da0c3358bbf2d1612acdb4b6ce983c84d42bd30d45a3f0db239841d11a"
+    },
+    {
+      "path": "assets/audio/7a36f5d975b741749fb76972cd86719c.mp3",
+      "size": 225209,
+      "checksum": "b50a30837e9a6d8479b88cd1b7499ca90c6a9dda781dc061a4c0462facc2d85d"
+    },
+    {
+      "path": "assets/images/2a3221b24f6b4575812a33b1ce7fa1f5.png",
+      "size": 2608901,
+      "checksum": "c3a7b5da04783852224333fad99567a05a5a4b6e59f6f19bb5dd002c5dbf3d35"
+    }
+  ],
+  "checksums": {
+    "experience_json": "502235a232c98f5c3911f5a68bfa173f067e41abc9d377df759b077c2ec3b450",
+    "metadata_json": "a434e6da0c3358bbf2d1612acdb4b6ce983c84d42bd30d45a3f0db239841d11a"
+  }
+}

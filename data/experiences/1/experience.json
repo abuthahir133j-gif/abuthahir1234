@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "1",
+  "title": "Demo English Conversation: At the Market",
+  "description": "A short interactive English conversation experience for a classroom demo.",
+  "language": "English",
+  "grade": "Grade 6",
+  "subject": "English",
+  "estimatedDuration": 20,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "1",
+      "title": "Listening",
+      "description": "Students listen to a short dialogue and answer quick checks.",
+      "sequence": 1,
+      "estimatedDuration": 12,
+      "skills": [
+        "Listening",
+        "Speaking"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "1",
+          "title": "Warm-up Vocabulary",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Warm-up Vocabulary",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "2",
+          "title": "Dialogue Practice",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Dialogue Practice",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        },
+        {
+          "id": "3",
+          "title": "Quick Check",
+          "type": "mcq",
+          "content": {
+            "answer": "The price",
+            "options": [
+              "The price",
+              "The weather",
+              "The school"
+            ],
+            "question": "What does the customer ask about?"
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

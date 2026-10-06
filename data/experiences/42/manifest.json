@@ -1,0 +1,31 @@
+{
+  "package_name": "how-are-you-today",
+  "experience_id": 31,
+  "experience_title": "How Are  You Today?",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:31:00.369907+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 11375,
+      "checksum": "65c45ba0c3a3ded8400e0c6963855c11c44152af83107f57d2223e99bdd066d4"
+    },
+    {
+      "path": "metadata.json",
+      "size": 190,
+      "checksum": "86c3f69a863fd89905ad435fabb0543e0b490a3f83027b63195e77a167022d68"
+    },
+    {
+      "path": "assets/video/0986073c79bc4bdaa756c7347d5d0e66.mp4",
+      "size": 2863801,
+      "checksum": "4362e56575c41da934b7768446f13251259d5a0c883fd29ea5206a8aeaca2ba6"
+    }
+  ],
+  "checksums": {
+    "experience_json": "65c45ba0c3a3ded8400e0c6963855c11c44152af83107f57d2223e99bdd066d4",
+    "metadata_json": "86c3f69a863fd89905ad435fabb0543e0b490a3f83027b63195e77a167022d68"
+  }
+}

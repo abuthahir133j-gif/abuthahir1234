@@ -1,0 +1,31 @@
+{
+  "package_name": "this-is-my-family",
+  "experience_id": 33,
+  "experience_title": "This Is My Family",
+  "version": "7",
+  "build_number": 1,
+  "created_at": "2026-09-08T09:08:22.413021+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 9506,
+      "checksum": "4daddbfd438acc25baa454f75666605325f2effb9052b15d21c3c4a4b624fe92"
+    },
+    {
+      "path": "metadata.json",
+      "size": 192,
+      "checksum": "c531c3c27a3d8cdf9db5e36ceb84450fa6516fc852c85ac25bd0ce819de13c08"
+    },
+    {
+      "path": "assets/video/e4d199a0a0034862ac2ddafd3aa90d6e.mp4",
+      "size": 3704542,
+      "checksum": "8eff1a67c278b95ca155afd34b6f8f46862bd5cb56626abdd8fb26902bed4379"
+    }
+  ],
+  "checksums": {
+    "experience_json": "4daddbfd438acc25baa454f75666605325f2effb9052b15d21c3c4a4b624fe92",
+    "metadata_json": "c531c3c27a3d8cdf9db5e36ceb84450fa6516fc852c85ac25bd0ce819de13c08"
+  }
+}

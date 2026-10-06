@@ -1,0 +1,445 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "50",
+  "title": "Let’s Go Shopping!",
+  "description": "Identify familiar items, ask simple questions, understand quantities and prices at an age-appropriate level, and take part in a simple shopping conversation.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "135",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "143",
+          "title": "At the Little Shop",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "At the Little Shop",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788952744338-y44z9qieg",
+                "slot": "right",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/da9b42b9dfcc4dc9bbba52f9b53b1205.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 167,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788952761656-fh95fxq0o",
+                "slot": "left",
+                "type": "fill_blank",
+                "styles": {
+                  "top": "178px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "text": "Aarav wants two [ ]."
+                    },
+                    {
+                      "id": "item-1788952777790",
+                      "text": "He also wants one bottle of  [ ]."
+                    },
+                    {
+                      "id": "item-1788952792569",
+                      "text": "How much does he pay [ ]."
+                    }
+                  ],
+                  "question": "Complete the sentence by filling in the blanks."
+                }
+              }
+            ],
+            "media_id": 167,
+            "alignment": "Center",
+            "media_url": "/media/media_library/da9b42b9dfcc4dc9bbba52f9b53b1205.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/da9b42b9dfcc4dc9bbba52f9b53b1205.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 167,
+              "type": "AUDIO",
+              "url": "assets/audio/da9b42b9dfcc4dc9bbba52f9b53b1205.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 167,
+              "type": "AUDIO",
+              "url": "assets/audio/da9b42b9dfcc4dc9bbba52f9b53b1205.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "136",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "144",
+          "title": "Shopkeeper & Me",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Shopkeeper & Me",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788952876231-r94wambda",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/535ca712c0f64fd9a79ccf120a582d31.png",
+                  "caption": "",
+                  "media_id": 168,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1788953911616-fi1enojyw",
+                "type": "voice_recorder",
+                "styles": {
+                  "top": "695px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "prompt": "Identify the Items"
+                }
+              }
+            ],
+            "media_id": 168,
+            "alignment": "Center",
+            "media_url": "/media/media_library/535ca712c0f64fd9a79ccf120a582d31.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0,
+            "image": "assets/images/535ca712c0f64fd9a79ccf120a582d31.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 168,
+              "type": "IMAGE",
+              "url": "assets/images/535ca712c0f64fd9a79ccf120a582d31.png",
+              "missing": false
+            },
+            {
+              "media_id": 168,
+              "type": "IMAGE",
+              "url": "assets/images/535ca712c0f64fd9a79ccf120a582d31.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "137",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "145",
+          "title": "The Little Shop",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "The Little Shop",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788954416122-tzr84z7ng",
+                "slot": "right",
+                "type": "image",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/f74d5afe270d4632a9caf9ceaa817a0d.png",
+                  "caption": "",
+                  "media_id": 170,
+                  "media_type": "IMAGE"
+                }
+              },
+              {
+                "id": "block-1788954456325-y1hucse2o",
+                "slot": "left",
+                "type": "quiz",
+                "styles": {
+                  "top": "670px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "₹2"
+                        },
+                        {
+                          "text": "₹3"
+                        },
+                        {
+                          "text": "₹5"
+                        }
+                      ],
+                      "question": "How much is the bread?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Milk"
+                        },
+                        {
+                          "text": "Juice"
+                        },
+                        {
+                          "text": "Banana"
+                        }
+                      ],
+                      "question": "Which item costs ₹6?",
+                      "correctAnswerIndex": 0
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Apple"
+                        },
+                        {
+                          "text": "Bread"
+                        },
+                        {
+                          "text": "Juice"
+                        }
+                      ],
+                      "question": "Which is the cheapest item?",
+                      "correctAnswerIndex": 0
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 170,
+            "alignment": "Center",
+            "media_url": "/media/media_library/f74d5afe270d4632a9caf9ceaa817a0d.png",
+            "media_type": "IMAGE",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "image": "assets/images/f74d5afe270d4632a9caf9ceaa817a0d.png"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 170,
+              "type": "IMAGE",
+              "url": "assets/images/f74d5afe270d4632a9caf9ceaa817a0d.png",
+              "missing": false
+            },
+            {
+              "media_id": 170,
+              "type": "IMAGE",
+              "url": "assets/images/f74d5afe270d4632a9caf9ceaa817a0d.png",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "138",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "146",
+          "title": "My Shopping List",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Shopping List",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788954671810-zlvahpeu6",
+                "type": "sentence_builder",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px",
+                  "minHeight": "240px"
+                },
+                "content": {
+                  "sentences": [
+                    {
+                      "words": [
+                        "I",
+                        "would",
+                        "like",
+                        "two",
+                        "apples."
+                      ],
+                      "question": "Reorder the words to make a correct sentence.",
+                      "sentence": "I would like two apples."
+                    },
+                    {
+                      "words": [
+                        "Can",
+                        "I",
+                        "have",
+                        "one",
+                        "juice,",
+                        "please?"
+                      ],
+                      "question": "",
+                      "sentence": "Can I have one juice, please?"
+                    },
+                    {
+                      "words": [
+                        "I",
+                        "need",
+                        "some",
+                        "bread."
+                      ],
+                      "question": "",
+                      "sentence": "I need some bread."
+                    }
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

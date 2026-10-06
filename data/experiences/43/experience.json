@@ -1,0 +1,481 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "42",
+  "title": "Yummy! What Shall We Eat?",
+  "description": "Name food and drinks, express likes/dislikes, understand simple food-related conversations, and make polite choices.",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "106",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "114",
+          "title": "What's for Lunch?",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "What's for Lunch?",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788931959741-rsva5gf58",
+                "type": "audio",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "url": "/media/media_library/6add02a4cacd4da79032c0669f51d57e.mp3",
+                  "title": "Audio Clip",
+                  "media_id": 143,
+                  "media_type": "AUDIO"
+                }
+              },
+              {
+                "id": "block-1788932021338-b0l640ipi",
+                "type": "quiz",
+                "styles": {
+                  "top": "136px",
+                  "left": "20px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "Rice and juice"
+                        },
+                        {
+                          "text": "Toast and a banana"
+                        },
+                        {
+                          "text": "Eggs and milk"
+                        },
+                        {
+                          "text": "Ntg"
+                        }
+                      ],
+                      "question": "What does Riya want for breakfast?",
+                      "correctAnswerIndex": 1
+                    },
+                    {
+                      "options": [
+                        {
+                          "text": "Juice"
+                        },
+                        {
+                          "text": "Water"
+                        },
+                        {
+                          "text": "Milk"
+                        },
+                        {
+                          "text": "syrup"
+                        }
+                      ],
+                      "question": "What does she drink?",
+                      "correctAnswerIndex": 2
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              }
+            ],
+            "media_id": 143,
+            "alignment": "Center",
+            "media_url": "/media/media_library/6add02a4cacd4da79032c0669f51d57e.mp3",
+            "media_type": "AUDIO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "audio": "assets/audio/6add02a4cacd4da79032c0669f51d57e.mp3"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 143,
+              "type": "AUDIO",
+              "url": "assets/audio/6add02a4cacd4da79032c0669f51d57e.mp3",
+              "missing": false
+            },
+            {
+              "media_id": 143,
+              "type": "AUDIO",
+              "url": "assets/audio/6add02a4cacd4da79032c0669f51d57e.mp3",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "107",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "115",
+          "title": "At the Lunch Table",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "“What do you want to eat?”",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "Respond to the waiter",
+                "speaker": "user",
+                "expectedResponse": "“I want an apple, please.”",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "“Do you like bananas?”",
+                "speaker": "npc",
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "expectedResponse": "Yes, I do."
+              }
+            ],
+            "title": "At the Lunch Table",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788932132255-aobrp8ppn",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "The child is at a school lunch table.",
+                  "userRole": "Child:",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "“What do you want to eat?”",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "Respond to the waiter",
+                      "speaker": "user",
+                      "expectedResponse": "“I want an apple, please.”",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "“Do you like bananas?”",
+                      "speaker": "npc",
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "expectedResponse": "Yes, I do."
+                    }
+                  ],
+                  "npcCharacter": "friend"
+                }
+              },
+              {
+                "id": "block-1788932299789-f932r4klp",
+                "type": "pronunciation",
+                "styles": {
+                  "top": "374px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "items": [
+                    {
+                      "id": "item-1",
+                      "word": "apple",
+                      "phonetic": "/ˈæpəl/"
+                    },
+                    {
+                      "id": "item-1788932312750",
+                      "word": "banana",
+                      "phonetic": "/bəˈnænə/"
+                    },
+                    {
+                      "id": "item-1788932330246",
+                      "word": "milk",
+                      "phonetic": "/mɪlk/"
+                    },
+                    {
+                      "id": "item-1788932330659",
+                      "word": "egg",
+                      "phonetic": "/eɡ/"
+                    }
+                  ],
+                  "question": "Practice pronouncing words correctly"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "108",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 3,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "116",
+          "title": "Today's Menu",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Today's Menu",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788932385544-iidr5xgzq",
+                "slot": "left",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "mcq",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "What is the date on the document?",
+                      "correctAnswer": 0
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "🍽️ TODAY'S MENU\n\nBREAKFAST 🌅\n🍞 Toast\n🍌 Banana\n🥛 Milk\n\nLUNCH ☀️\n🍚 Rice\n🥕 Carrots\n🍎 Apple\n🧃 Juice\n\nSNACK 🍪\n🥪 Sandwich\n🍊 Orange",
+                  "documentType": "text"
+                }
+              },
+              {
+                "id": "block-1788932407370-d8s6xxaws",
+                "slot": "left",
+                "type": "match",
+                "styles": {
+                  "top": "407px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "question": "Match the items in Column A with Column B.",
+                  "leftItems": [
+                    "Breakfast",
+                    "Lunch",
+                    "Snack",
+                    "Fruit"
+                  ],
+                  "rightItems": [
+                    "Toast",
+                    "Rice",
+                    "Sandwich",
+                    "Apple"
+                  ]
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "109",
+      "title": "Writing",
+      "description": "",
+      "sequence": 4,
+      "estimatedDuration": 2,
+      "skills": [
+        "writing"
+      ],
+      "activityType": "WRITING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "117",
+          "title": "My Food Choices",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "My Food Choices",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1788932547812-valm3rore",
+                "type": "drag_drop",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "pairs": [
+                    {
+                      "id": "pair-1",
+                      "source": "i Like ",
+                      "target": ""
+                    },
+                    {
+                      "id": "pair-1788932592970",
+                      "source": "I don't like",
+                      "target": "New Destination"
+                    }
+                  ],
+                  "question": "Drag the correct items to their destinations."
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "id": "54",
+  "title": "I’VE GOT A MESSAGE!",
+  "description": "listen for important details in a short message\nidentify who, what, where, and when\nrepeat and pass on a simple message\nask someone to repeat information politely",
+  "language": "English",
+  "grade": "Grade 3",
+  "subject": "General",
+  "estimatedDuration": 15,
+  "experienceType": "LESSON",
+  "masteryThreshold": 70,
+  "activities": [
+    {
+      "id": "148",
+      "title": "Listening",
+      "description": "",
+      "sequence": 1,
+      "estimatedDuration": 5,
+      "skills": [
+        "Listening"
+      ],
+      "activityType": "LISTENING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "155",
+          "title": "The Phone Message",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "The Phone Message",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789017803516-p3v7fvui1",
+                "type": "quiz",
+                "styles": {
+                  "top": "729px",
+                  "left": "0px",
+                  "blockWidth": "934px"
+                },
+                "content": {
+                  "options": [
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    },
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "question": "Enter question text here...",
+                  "questions": [
+                    {
+                      "options": [
+                        {
+                          "text": "School"
+                        },
+                        {
+                          "text": "Park"
+                        },
+                        {
+                          "text": "Shop"
+                        }
+                      ],
+                      "question": "Where should Riya go?",
+                      "correctAnswerIndex": 1
+                    }
+                  ],
+                  "correctAnswerIndex": 0
+                }
+              },
+              {
+                "id": "block-1789018341092-o6vtfivdc",
+                "type": "video",
+                "styles": {
+                  "top": "0px",
+                  "left": "1px",
+                  "minHeight": "609px",
+                  "blockWidth": "933px"
+                },
+                "content": {
+                  "url": "/media/media_library/e80a5edf3ef94d7e913b99db181d3bdf.mp4",
+                  "media_id": 175,
+                  "media_type": "VIDEO"
+                }
+              }
+            ],
+            "media_id": 175,
+            "alignment": "Center",
+            "media_url": "/media/media_library/e80a5edf3ef94d7e913b99db181d3bdf.mp4",
+            "media_type": "VIDEO",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "Enter question text here...",
+            "quiz_correct_index": 0,
+            "video": "assets/video/e80a5edf3ef94d7e913b99db181d3bdf.mp4"
+          },
+          "resolvedMedia": [
+            {
+              "media_id": 175,
+              "type": "VIDEO",
+              "url": "assets/video/e80a5edf3ef94d7e913b99db181d3bdf.mp4",
+              "missing": false
+            },
+            {
+              "media_id": 175,
+              "type": "VIDEO",
+              "url": "assets/video/e80a5edf3ef94d7e913b99db181d3bdf.mp4",
+              "missing": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "149",
+      "title": "Speaking",
+      "description": "",
+      "sequence": 2,
+      "estimatedDuration": 5,
+      "skills": [
+        "Speaking"
+      ],
+      "activityType": "SPEAKING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "156",
+          "title": "Pass the Message",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [
+              {
+                "text": "Good evening! How can I help you?",
+                "turn": 1,
+                "audio": "",
+                "prompt": "Please tell your friend that we are going to the park at four o’clock.",
+                "speaker": "npc",
+                "expectedStudentResponses": [
+                  {
+                    "hint": "Specify your request",
+                    "text": "I'd like a table for two"
+                  }
+                ]
+              },
+              {
+                "turn": 2,
+                "prompt": "Respond to the waiter",
+                "speaker": "user",
+                "expectedResponse": "We are going to the park at four o’clock",
+                "recordingRequired": true
+              },
+              {
+                "prompt": "Tell your friend to bring a ball",
+                "speaker": "npc",
+                "allowAudioRecord": true,
+                "expectedResponse": ""
+              },
+              {
+                "prompt": "",
+                "speaker": "user",
+                "allowAudioRecord": true,
+                "expectedResponse": "okay"
+              }
+            ],
+            "title": "Pass the Message",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789018926103-pf998ko9u",
+                "type": "roleplay_simulation",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "npcImage": "",
+                  "scenario": "Situation: Give Me a Message",
+                  "userRole": "You",
+                  "objectives": [
+                    "Greet the waiter",
+                    "Place order"
+                  ],
+                  "conversation": [
+                    {
+                      "text": "Good evening! How can I help you?",
+                      "turn": 1,
+                      "audio": "",
+                      "prompt": "Please tell your friend that we are going to the park at four o’clock.",
+                      "speaker": "npc",
+                      "expectedStudentResponses": [
+                        {
+                          "hint": "Specify your request",
+                          "text": "I'd like a table for two"
+                        }
+                      ]
+                    },
+                    {
+                      "turn": 2,
+                      "prompt": "Respond to the waiter",
+                      "speaker": "user",
+                      "expectedResponse": "We are going to the park at four o’clock",
+                      "recordingRequired": true
+                    },
+                    {
+                      "prompt": "Tell your friend to bring a ball",
+                      "speaker": "npc",
+                      "allowAudioRecord": true,
+                      "expectedResponse": ""
+                    },
+                    {
+                      "prompt": "",
+                      "speaker": "user",
+                      "allowAudioRecord": true,
+                      "expectedResponse": "okay"
+                    }
+                  ],
+                  "npcCharacter": "Friend"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    },
+    {
+      "id": "150",
+      "title": "Reading",
+      "description": "",
+      "sequence": 3,
+      "estimatedDuration": 5,
+      "skills": [
+        "reading"
+      ],
+      "activityType": "READING",
+      "masteryThreshold": 80,
+      "screens": [
+        {
+          "id": "157",
+          "title": "Read the Message",
+          "type": "text",
+          "content": {
+            "tag": "H1",
+            "font": "Poppins",
+            "size": 48,
+            "text": "Welcome Screen Text",
+            "color": "#1F2937",
+            "steps": [],
+            "title": "Read the Message",
+            "layout": "1-column",
+            "weight": "Bold",
+            "elements": [
+              {
+                "id": "block-1789019045465-k331rl9ji",
+                "type": "functional_reading",
+                "styles": {
+                  "top": "20px",
+                  "left": "20px"
+                },
+                "content": {
+                  "scenario": "Read the document and answer the questions",
+                  "questions": [
+                    {
+                      "id": "q1",
+                      "type": "text",
+                      "options": [
+                        "Option A",
+                        "Option B"
+                      ],
+                      "question": "Who wrote the message?",
+                      "targetAnswer": "Anya",
+                      "correctAnswer": "Anya"
+                    },
+                    {
+                      "id": "q_1789019072186",
+                      "type": "text",
+                      "question": "When should Tara come?",
+                      "targetAnswer": "Tomorrow",
+                      "correctAnswer": "Tomorrow"
+                    },
+                    {
+                      "id": "q_1789019093756",
+                      "type": "text",
+                      "question": "Where should Tara go?",
+                      "targetAnswer": "Home",
+                      "correctAnswer": "Home"
+                    }
+                  ],
+                  "documentUrl": "",
+                  "documentText": "Hi Tara!\n\nPlease come to my house tomorrow afternoon.\nWe can play a game together.\nPlease bring your favourite game.\n\nSee you!\nAnya",
+                  "documentType": "text"
+                }
+              }
+            ],
+            "media_id": "",
+            "alignment": "Center",
+            "media_url": "",
+            "media_type": "",
+            "columnRatio": "50-50",
+            "quiz_options": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "quiz_question": "",
+            "quiz_correct_index": 0
+          },
+          "resolvedMedia": []
+        }
+      ]
+    }
+  ]
+}

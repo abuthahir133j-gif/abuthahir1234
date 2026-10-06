@@ -1,0 +1,31 @@
+{
+  "package_name": "read-the-world-around-me",
+  "experience_id": 55,
+  "experience_title": "READ THE WORLD AROUND ME",
+  "version": "1",
+  "build_number": 1,
+  "created_at": "2026-09-10T07:25:34.301742+00:00",
+  "published_by": "super_admin",
+  "runtime_version": "1.0.0",
+  "files": [
+    {
+      "path": "experience.json",
+      "size": 7082,
+      "checksum": "23549264baee4857be0f8680809c3986ff8a9279fba72763587463676336279d"
+    },
+    {
+      "path": "metadata.json",
+      "size": 195,
+      "checksum": "cb96ea5188c258f6927c47997002701a3978fa1a3d15cf5e3a38ed946d0cb6f4"
+    },
+    {
+      "path": "assets/images/574c68a574764b3dac45f59d8a7dea2e.png",
+      "size": 2168184,
+      "checksum": "9e8e51f7d6caccd43a81101b2d79408815caea166a6a60f60b9f9039ffe68a80"
+    }
+  ],
+  "checksums": {
+    "experience_json": "23549264baee4857be0f8680809c3986ff8a9279fba72763587463676336279d",
+    "metadata_json": "cb96ea5188c258f6927c47997002701a3978fa1a3d15cf5e3a38ed946d0cb6f4"
+  }
+}
